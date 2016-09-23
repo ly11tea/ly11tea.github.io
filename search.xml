@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+    
+    <entry>
+      <title><![CDATA[算法4 二叉查找树]]></title>
+      <url>https://ly11tea.github.io/2016/09/23/%E7%AE%97%E6%B3%954-%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/</url>
+      <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>世界上有10种人，一种懂二进制，一种不懂</p>
+</blockquote>
+<a id="more"></a> 
+<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><blockquote>
+<p>一根二又查找树 ( BST ) 是一根<strong>二叉树</strong>，其中每个结点都含有一个Comparable 的键(以及相关联的值)且每个结点的键都<strong>大于其左子树</strong>中的任意结点的键而<strong>小子右子树</strong>的任意结点的键。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1></blockquote>
+<h2 id="数据表示"><a href="#数据表示" class="headerlink" title="数据表示"></a>数据表示</h2><p>用嵌套定义的链表实现,每个节点含有一个健、 一个值、一条左链接、一条右链接和一个结点计数器<br>实现的私有方法 size方法 会将空链接的值当作 0 ，这样我们就能保证以下公式对于二叉树中的任意结点 x 总是成立:<br>size(x)  =  size(x .left)  +  size(x. right)  +  1 </p>
+<h2 id="查找方法"><a href="#查找方法" class="headerlink" title="查找方法"></a>查找方法</h2><p>不难想象,搜索树的查找方法是一个递归的算法:</p>
+<ol>
+<li>如果树是空的.则查找立刻命中;</li>
+<li>如果被查找的键和根结点的键相等，查找命中.</li>
+<li>如果被查找的键大于根节点的值,则跳向右节点,如果小于则跳向左节点.</li>
+<li>递归的执行</li>
+</ol>
+<h2 id="主要代码"><a href="#主要代码" class="headerlink" title="主要代码"></a>主要代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> alg;</div><div class="line"><span class="keyword">import</span> edu.princeton.cs.algs4.*;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BST</span>&lt;<span class="title">Key</span> <span class="keyword">extends</span> <span class="title">Comparable</span>&lt;<span class="title">Key</span>&gt;,<span class="title">Value</span>&gt; </span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">private</span> Node root;</div><div class="line">	<span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">private</span> Value value;</div><div class="line">		<span class="keyword">private</span> Key key;</div><div class="line">		<span class="keyword">private</span> Node left;</div><div class="line">		<span class="keyword">private</span> Node right;</div><div class="line">		<span class="keyword">private</span> <span class="keyword">int</span> N;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(Key key,Value value,<span class="keyword">int</span> N)</span></span></div><div class="line">		&#123;</div><div class="line">			<span class="keyword">this</span>.key=key;</div><div class="line">			<span class="keyword">this</span>.value=value;</div><div class="line">			<span class="keyword">this</span>.N=N;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> size(root);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">(Node node)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(node==<span class="keyword">null</span>)</div><div class="line">			<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">		<span class="keyword">return</span> node.N;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line"><span class="comment">/*</span></div><div class="line"> * 公有接口与私有接口需分开:对于用户公有接口,get只需关心键值是什么</div><div class="line"> * 而在私有接口中因为是采用递归的方法查找元素,故需要加入node参数</div><div class="line">*/</div><div class="line">	<span class="function"><span class="keyword">public</span> Value <span class="title">get</span><span class="params">(Key key)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> get(root,key);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> Value <span class="title">get</span><span class="params">(Node node,Key key)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(node==<span class="keyword">null</span>)</div><div class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">int</span> cmp=key.compareTo(node.key);</div><div class="line">		<span class="keyword">if</span>(cmp&lt;<span class="number">0</span>)</div><div class="line">			<span class="keyword">return</span> get(node.left,key);</div><div class="line">		<span class="keyword">if</span>(cmp&gt;<span class="number">0</span>)</div><div class="line">			<span class="keyword">return</span> get(node.right, key);</div><div class="line">		<span class="keyword">return</span> node.value;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(Value value,Key key)</span></span></div><div class="line">	&#123;</div><div class="line">		root=put(root, key,value);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> Node <span class="title">put</span><span class="params">(Node node ,Value value,Key key)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(node==<span class="keyword">null</span>)</div><div class="line">			<span class="keyword">return</span> <span class="keyword">new</span> Node(key, value, <span class="number">1</span>);</div><div class="line">		<span class="keyword">int</span> cmp=key.compareTo(node.key);</div><div class="line">		<span class="keyword">if</span>(cmp&lt;<span class="number">0</span>)</div><div class="line">			node.left=put(node.left, value, key);</div><div class="line">		<span class="keyword">if</span>(cmp&gt;<span class="number">0</span>)</div><div class="line">			node.right=put(node.right, value, key);</div><div class="line">		<span class="keyword">if</span>(cmp==<span class="number">0</span>)</div><div class="line">			node.value=value;</div><div class="line">		node.N=size(node.left)+size(node.right)+<span class="number">1</span>;</div><div class="line">		<span class="keyword">return</span> node;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>使用二叉查找树的算法的运行时间取决于<strong>树的形状</strong>,在最好的情况下，<br>一棵含有 N 个结点的树是完全平衡的.每条空链接和根结点的距离都为~lgN。 在最坏的情况下，搜索路径上可能有 N个结点。<br><img src="/images/condition.png" style="width: 260px;"></p>
+<p>如果假设元素的插入顺序是随机的,二义查找树和快速排序几乎就是双胞胎。 树的根节点就是快速排序巾的第一个切分元素(左侧的键都比这个元素小，右侧的键都比它大).<br>可证明:二叉搜索搜索树寻找到一个元素的平均时间为<strong>2lnn</strong>(1.39 lgn)</p>
+<h1 id="顺序化函数"><a href="#顺序化函数" class="headerlink" title="顺序化函数"></a>顺序化函数</h1><h2 id="floor和ceiling"><a href="#floor和ceiling" class="headerlink" title="floor和ceiling"></a>floor和ceiling</h2><p>floor(向下取整,找到小于等于要求元素的最大值):</p>
+<ol>
+<li>若要求元素小于当前节点,则floor元素在左子树中或者无floor元素(左子树为空);</li>
+<li>若要求的元素大于当前节点且右子树中有小于待求元素的节点时,要求节点在右子树中.否则当前节点就是要求节点</li>
+</ol>
+<p>ceiling(向上取整,找到大于等于要求元素的最小值):</p>
+<ol>
+<li>若要求元素小于当前节点且左子树中还有大于要求元素的节点时,要求节点在左子树中,否则就是当前节点.</li>
+<li>若要求元素大于当前节点时,则ceiling元素在右子树中或者没有(右子树为空)</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">   <span class="function"><span class="keyword">public</span> Node <span class="title">ceiling</span><span class="params">(Key key)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> ceiling(root,key);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">ceiling</span><span class="params">(Node node,Key key)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(node==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">int</span> cmp=key.compareTo(node.key);</div><div class="line">	<span class="keyword">if</span>(cmp&lt;<span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		Node t=ceiling(node.left,key);</div><div class="line">		<span class="keyword">if</span> (t==<span class="keyword">null</span>) </div><div class="line">			<span class="keyword">return</span> node;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">return</span> t;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(cmp&gt;<span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> ceiling(node.right, key);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">		<span class="keyword">return</span> node;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> Node <span class="title">floor</span><span class="params">(Key key)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> floor(root,key);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">floor</span><span class="params">(Node node,Key key)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(node==<span class="keyword">null</span>)</div><div class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">int</span> cmp=key.compareTo(node.key);</div><div class="line">	<span class="keyword">if</span>(cmp==<span class="number">0</span>)</div><div class="line">		<span class="keyword">return</span> node;</div><div class="line">	<span class="keyword">if</span> (cmp&lt;<span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> floor(node.left,key);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>(cmp&gt;<span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		Node t=floor(node.right, key);</div><div class="line">		<span class="keyword">if</span>(t==<span class="keyword">null</span>)</div><div class="line">			<span class="keyword">return</span> node;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">return</span> t;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="rank和select"><a href="#rank和select" class="headerlink" title="rank和select"></a>rank和select</h2><p>select:</p>
+<ol>
+<li>即为访问在数组中次序为K(从0开始)的元素，和查找键值为KEY的元素方法不同</li>
+<li>找到排名为k 的键(即树中恰好有k个小于其的键)。如果左子树的结点数t 大于k，那么我们就继续(递归地)在左子树中查找排名为 k 的键;如果 t 等于k， 我们就返回根结点;如果 t小子k，我们就(递归地)在右子树巾查找排名为 (k-t-1)(-1是因为根节点) 的节点并返回。 </li>
+</ol>
+<p>rank:</p>
+<ol>
+<li>rank是select的逆方法</li>
+<li>如果给定的键根结点的键相等.我们返回左子树中的节点数t;如果给定的健小于根结点.我们会返回<br>该键在左子树子树中的排名(递归计算);如果给定的健大于根结点，我们会返回t+1+该键右子树的排名.</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> Node <span class="title">select</span><span class="params">(<span class="keyword">int</span> i)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> select(i,root);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> Node <span class="title">select</span><span class="params">(<span class="keyword">int</span> i,Node node)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> length=size(node.left);</div><div class="line">		<span class="keyword">if</span> (length==i)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">return</span> node;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (length&gt;i) </div><div class="line">		&#123;</div><div class="line">			<span class="keyword">return</span> select(i, node.left);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span></div><div class="line">		&#123;</div><div class="line">			<span class="keyword">return</span> select(i-length-<span class="number">1</span>, node.right);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rank</span><span class="params">(Key key)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> rank(root,key);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">rank</span><span class="params">(Node node,Key key)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> t=size(node.left);</div><div class="line">		<span class="keyword">int</span> cmp=key.compareTo(node.key);</div><div class="line">		<span class="keyword">if</span>(cmp==<span class="number">0</span>)</div><div class="line">			<span class="keyword">return</span> t;</div><div class="line">		<span class="keyword">if</span>(cmp&lt;<span class="number">0</span>)</div><div class="line">			<span class="keyword">return</span> rank(node.left, key);</div><div class="line">		<span class="keyword">else</span></div><div class="line">			<span class="keyword">return</span> t+<span class="number">1</span>+rank(node.right, key);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h2><p>删除最大键和删除最小键</p>
+<ol>
+<li>从根节点开始不断地(递归)向左子树遍历,直到某个节点左子树为空时(显然这个节点就是最小的节点),返回这个节点的右节点,使这个节点的父节点指向这个节点的右节点.</li>
+</ol>
+<p>删除指定节点,设指向当前节点为x</p>
+<ol>
+<li>将指向即将被删除的节点的链接保存为t;</li>
+<li>将节点链接保存为min(t.right)</li>
+<li>将t.right中的最小节点删除.</li>
+<li>x.left=t.left</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delmin</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	root=delmin(root);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">delmin</span><span class="params">(Node node)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(node==<span class="keyword">null</span>)</div><div class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(node.left==<span class="keyword">null</span>)</div><div class="line">		<span class="keyword">return</span> node.right;</div><div class="line">	<span class="keyword">else</span> </div><div class="line">	&#123;</div><div class="line">		node.left=delmin(node.left);</div><div class="line">		node.N=size(node.left)+size(node.right)+<span class="number">1</span>;</div><div class="line">		<span class="keyword">return</span> node;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">del</span><span class="params">(Key key)</span></span></div><div class="line">&#123;</div><div class="line">	root=del(root,key);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">del</span><span class="params">(Node node,Key key)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span> (node==<span class="keyword">null</span>)</div><div class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">int</span> cmp=key.compareTo(node.key);</div><div class="line">	<span class="keyword">if</span>(cmp&lt;<span class="number">0</span>)</div><div class="line">		node.left=del(node.left, key);</div><div class="line">	<span class="keyword">if</span>(cmp&gt;<span class="number">0</span>)</div><div class="line">		node.right=del(node.right, key);</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(node.left==<span class="keyword">null</span>)</div><div class="line">			<span class="keyword">return</span> node.right;</div><div class="line">		<span class="keyword">if</span>(node.right==<span class="keyword">null</span>)</div><div class="line">			<span class="keyword">return</span> node.left;</div><div class="line">		<span class="keyword">else</span></div><div class="line">		&#123;</div><div class="line">			Node temp=node;</div><div class="line">			node=min(node.right);</div><div class="line">			node.right=delmin(temp.right);</div><div class="line">			node.left=temp.left;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">    node.N=size(node.left)+size(node.right)+<span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> node;	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>要体会递归删除节点的方法:</p>
+<ol>
+<li>使用返回值为节点类型(node)的函数依次向下递归,不需删除的节点,返回<strong>当前递归所在的节点</strong></li>
+<li>需要删除的节点,返回<strong>要删除节点的替代节点</strong>.</li>
+<li>还要注意维护当前节点的<strong>数量值</strong>.</li>
+</ol>
+<h2 id="范围查找"><a href="#范围查找" class="headerlink" title="范围查找"></a>范围查找</h2><ol>
+<li>使用中序遍历的方法,先打印出左子树所有的键,然后向上回溯并打印<strong>最近</strong>的根节点,最后打印右子树</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> Iterable&lt;Key&gt;keys(Key lo,Key hi)</div><div class="line">	&#123;</div><div class="line">		Queue&lt;Key&gt; matchkeys=<span class="keyword">new</span> Queue&lt;Key&gt;() ;</div><div class="line">		keys(matchkeys, root,lo,hi);</div><div class="line">		<span class="keyword">return</span> matchkeys;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">keys</span><span class="params">(Queue&lt;Key&gt;matchkeys,Node node,Key lo,Key hi)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(node==<span class="keyword">null</span>)</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		<span class="keyword">int</span> locmp=lo.compareTo(node.key);</div><div class="line">		<span class="keyword">int</span> hicmp=hi.compareTo(node.key);</div><div class="line">		<span class="keyword">if</span>(locmp&lt;<span class="number">0</span>)</div><div class="line">			keys(matchkeys,node.left,lo,hi);</div><div class="line">		<span class="keyword">if</span>(locmp&lt;=<span class="number">0</span>&amp;&amp;hicmp&gt;=<span class="number">0</span>)</div><div class="line">			matchkeys.enqueue(node.key);</div><div class="line">		<span class="keyword">if</span>(hicmp&gt;<span class="number">0</span>)</div><div class="line">			keys(matchkeys, node.right, lo, hi);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>要注意中序遍历的递归实现的顺序:先使用<strong>递归语句不断遍历左子树</strong>,遍历完成后首先将当前左子节点送入队列,然后送入根节点,这时若条件达成还会遍历右子树.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[一首诗 翻译]]></title>
+      <url>https://ly11tea.github.io/2016/09/20/%E4%B8%80%E9%A6%96%E8%AF%97-%E7%BF%BB%E8%AF%91/</url>
+      <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>Here, though the world explode, these two survive,And it is always eighteen ninety-five.<br><strong>Vincent Starrett</strong></p>
+</blockquote>
+<blockquote>
+<p>Here dwell together still two men of note<br>Who never lived and so can never die:<br>How very near they seem, yet how remote<br>That age before the world went all awry.<br>But still the game’s afoot for those with ears<br>Attuned to catch the distant view-halloo:<br>England is England yet, for all our fears—<br>Only those things the heart believes are true.</p>
+<p>A yellow fog swirls past the window-pane<br>As night descends upon this fabled street:<br>A lonely hansom splashes through the rain,<br>The ghostly gas lamps fail at twenty feet.<br>Here, though the world explode, these two survive,<br>And it is always eighteen ninety-five.<br><a id="more"></a><br>这是著名(好吧其实之前我也没听说过)的福迷Vincent Starrett写的一首诗,这个人几乎与书中的福尔摩斯生活在一个时代,主业是一个美国的记者,但他更为人所知的是写过一本研究福尔摩斯的著作《The Private Life of Sherlock Holmes》(在1933年出版,可见这家伙迷得有多早),还有这首诗.听说神夏4今年寒假会出来,就想着翻译下这首诗酝酿一下感情<br>)))逃</p>
+<p>这住着两个重要的人<br>他们从来没存在过所以也从未死去<br>他们离我们很近却又十分遥远<br>在世界还未崩坏之前<br>但对观众们来说好戏才刚开始<br>就像是远方猎人的呼号:<br>英格兰还是那个令人恐惧的大不列颠–<br>我们相信这是真的.</p>
+<p>硫磺色的烟雾划过窗口<br>当夜幕降临这条虚构的街.<br>孤夜,一架马车穿过雨幕<br>鬼魅的煤气灯孤悬于20英尺外.<br>在这里,世界爆炸,这两个人活下来,<br>永恒的1895年.</p>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[<梦断代码>书摘与笔记]]></title>
+      <url>https://ly11tea.github.io/2016/09/18/%E6%A2%A6%E6%96%AD%E4%BB%A3%E7%A0%81-%E4%B9%A6%E6%91%98%E4%B8%8E%E7%AC%94%E8%AE%B0/</url>
+      <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>“今有程序员五人，代码需时日几何？” “一年。”<br>“吾急需之！若有十人，几何？” “两年。”<br>“百人若何？” “万世。”</p>
+</blockquote>
+<a id="more"></a> 
+<h1 id="软件时间"><a href="#软件时间" class="headerlink" title="软件时间"></a>软件时间</h1><blockquote>
+<p>1.那时我年方十五，正迷恋于一个叫做 Sumer的游戏，在费就申 ，我<br>管理着新月沃土上一座古代城邦。今天的电脑游戏玩家也会嘲笑其在<br>嫩:它在一卷纸上逐行打印出大写字母，报告游戏进程。由远姑且<br>分配食用和留种的谷物，然后程序就会告知城邦每年的发展情况。”汉漠<br>拉比陆下，”程序像一个诚惶诚恐的宰相般报告说，”微臣伏启圣鉴……”</p>
+</blockquote>
+<p>这句话让我想起了2004-05年的时候玩三国志的经历,那时候不知道从哪发现了一个对岸三国游戏爱好者的网站,是一个只有ip地址的网站,从那上面下到了一个dos下的三国游戏,显示游戏地图就是用字符串打印出来的网状图,我想这就是”蛮荒时代”游戏的样子吧.</p>
+<blockquote>
+<p>2.我不在乎干到多晚。 F 线地铁整夜运行， 可以把我带回位于皇后区<br>的家。一定得重新设计游戏中的革命模式!</p>
+</blockquote>
+<p>我们编写或者重构软件时总是雄心勃勃的,其实沉浸在编码的体验与沉迷游戏是一样的,常常埋头实现某个feature或者fix bug,再抬头时窗外天色已经昏暗.从另一个方面来说这个过程又是危险的,同电子游戏一样,这个过程能让你完全失去时间的概念,这就是作者所说的软件时间,可长可短.再没有比他更危险,混沌却又迷人的事情了.</p>
+<blockquote>
+<p>3.关于软件缺陆的话题，只要谈上几分钟，必会有人拍案叹道，”为什<br>么就是不能像造桥那样造软件? .. </p>
+</blockquote>
+<p>虽然我们一直叫软件工程,然而却从来没有其他任何一种工程掺杂进这么多人的因素,软件工程,事实上我们是在和自己战斗.</p>
+<blockquote>
+<p>4.软件错误每年造成美国 595 亿美元的经济损失，三分之二的项目明显延误或超出预算，甚至干脆无疾而终。</p>
+</blockquote>
+<p>延误,延误.可能是每一个项目都要经历的过程,我们永远没有办法准确预估要解决的问题的难度和解决手段的准确性,并且往往显得乐观.所以不要相信程序员的时间表.</p>
+<blockquote>
+<p>5.有些人梦想炸毁今天的整座软件大厦，替以某种全新之物。 有些人<br>则只一昧盼望找到不太顽固、更能响应人类愿望和行为流程的程序员，<br>盼望能得到招之即来、挥之即去的软件，盼望得到足堪依赖的代码。</p>
+</blockquote>
+<p>只要我们无法改变我们自己本身,就只能继续妥协.从面向过程到面向对象,泛型编程,我们尽量让自己妥协的更少.</p>
+<h1 id="死定了"><a href="#死定了" class="headerlink" title="死定了"></a>死定了</h1><blockquote>
+<p>1.不确定因素太多 : 你所需的时间取决于其他人所花的时间。</p>
+</blockquote>
+<p>开发更多的时候是一项团队运动,一个节点上的阻塞,可能会导致全面的阻塞.</p>
+<blockquote>
+<p>2.意见取得一致了:黑洞式的缺陆一一即无法确定修正所需时长的缺<br>陷一一在 Bugzilla 申应该用特别的警示词标记出来。</p>
+</blockquote>
+<p>黑洞式的漏洞看上去会使人感到焦躁,然而真正深入其中会发现他无知无觉,甚至充满诱惑,引诱你用越来越多的时间修复他,也许下一刻就好了呢?,我们在其前的态度越来越像一个赌徒,不过筹码换成了时间,心中也只是单纯希望之前的时间没有白费,但眸然回首,更多的时间消耗于其中.</p>
+<blockquote>
+<p>3.软件项目难以按照进度安排实现，这种情况极为常见，而且为众人所宽窑。在软件开发世界里，进度延误普遍到人们特意生造出一个委婉词来描述它: slippage (失速)<br>当然， 每个领域都存在延误现象。司法诉讼程序蜗行般的进度尽人皆知 ; 建筑承包商要是按期完工， 就会招来怀疑的目光。 然而，软件时间自我扭曲再头尾相撞，如同奠比乌斯环①一般令人费解。 进度忽而突飞猛进，忽而不知何故驻足道中。在你以为大功即将告成之时，却又山穷水尽，花上整半年时间， 一无所得。</p>
+</blockquote>
+<p>软件的时间是非线性的,不确定的.我们很可能因为改掉了一个BUG,加快进度.也可能因为增加一个feature掉入深渊.有没有一种方式如同建筑上的施工进度一样线性的衡量开发进度,还没有答案.</p>
+<blockquote>
+<p>4.布鲁克斯法则就这样产生了 ， 昕起来既是原则也是悖论”<strong>往已延误<br>的项目中补充人力 ， 只会使其继续延误</strong>。”<br>布鲁克斯写道，软件开发者通常都是乐天派，他们认定每个缺陆<br>可以被迅速修正，且修正旧缺陷必能减少新缺陷的数量。布鲁克斯发现，在实际开发中，编码只占项目开发时间的 1/6 ， 有一半时间用于测试和修正缺陷。但只有少数项目经理会真正按照这种思路来安排开发人员的工作时间。</p>
+</blockquote>
+<p>2-8时间在软件开发上一样适用</p>
+<blockquote>
+<p>5.在预估及安排项目进度上的每一份努力,是”危险且具欺骗性的神话”。<br>所谓”人月··，是一种科学管理概念，它假定生产力可被拆分为不连续、无差异、可替换的单元。<br>布鲁克斯观察到，”<strong>只有在任务能分派给许多互相之间无须沟通的工作者</strong>时，人和月才是可互换品。”对于软件而言， 项目各有差异、工具不<br>断升级，每当团队中加入一个新组员，老组员就得放下手边的工作，帮<br>助新组员进入角色，每位组员都要等待重新分派任务，好让新组员有事<br>可做。在你意识到这一切之前，已经远远落后于进度了。<br>在最坏的情况下，这会导致<strong>灾难般的延误循环</strong>，一种”再生性进度灾难”。每次重新安排进度计划，都导致<strong>雇用更多人力，于是又不得不重新安排</strong>进度。布鲁克斯对此心存恐惧:疯狂在兹。”</p>
+</blockquote>
+<p>这算是对人月神话比较经典的概括,十月怀胎,一朝分娩.然而十个孕妇,也无法在一个月里生出孩子.</p>
+<blockquote>
+<p>6.尽管他们采用了诸如邮件列表、blog、缺陆跟踪、源码控制等工具，但和他人保持一致仍然极其困难。</p>
+</blockquote>
+<p>没有银弹.自从人月神话诞生那天起有太多的东西被当做银弹,然而没有一个真正奏效.</p>
+<blockquote>
+<p>7.”开放源代码软件”这种开发方法论在 〈 人月神话〉 的年代尚未出现。与之后其他任何一种开发方式不同，开源让编程世界错以为布鲁克斯法则将成弃履。<br>1985 年，麻省理工怪才斯托曼出于对商业软件产业封闭代码积习的<br>憎恨， 创办了自由软件基金会( Free Software Foundation )。基金会发布<br>了一种特殊的软件许可，依据该许可， 你能够获得全部所需代码、复用<br>这些代码、组合到新产品中一一但利用该代码创建出来的任何产物，也<br>必须采用同样的许可。这种被称作GPL ( GNU Public License )</p>
+</blockquote>
+<p>不管你相信与否这些人,这项运动确实改变了程序开发的方式,现如今,就连GNU当年的针对者,微软也拥抱了开源.</p>
+<blockquote>
+<p>8.”多年来，我一直在宣扬小工具、快速原型和进化式编程的 UNIX 福<br>音。 可我曾相信，存在某种重要的复杂性，需要是集中旦有计划的手法<br>来解决。 我也曾相信，最重要的软件……需要像<strong>建教堂一般，由独立的<br>巫师或一队相互隔离的魔法师精心打造</strong>，在面世之前绝不发布 beta 版本。<br>李纳斯 · 托瓦茨的开发风格一一平发布、多发布、全委托、尽开放一一<br>让我吃惊。 这里不存在<strong>静穆、虔诚的教堂式开发</strong>一一相反，Linux社样看似一个<strong>乱哄哄的大集市</strong>，铺陈了各种日程和手法……要从中得到前后一致和稳定的系统，简直只能指望奇迹再三出现。可事实上<strong>这种集市风格看来行之有效</strong>.</p>
+<p>9.瑞蒙德指出其中的两个要诀:其一，低成本、广泛地接人像互联网那样的网络，让开发者之间能建立迅速、可信的沟通渠道，存储可被开放访问的共享知识和代码池;其二，围绕一种领导方式一一如托瓦茨那样的方式一一形成合作团队的良好风气.<br>“只要<strong>有足够多的 beta 版测试人员和开发者队伍</strong>， 几乎所有问题都<br>很快被发现，而且总有人知道该怎么修复。或者用不太正式的说法，眼<br>球足够多，缺陆无处躲。’我把这叫做 ‘ 李纳斯法则 ‘ “<br>“乐享即能高效”瑞蒙德写道。”愉悦是金。”这些理想化的格言令人振奋,一旦需经实践验证。开放源代码似乎也受困于延误。<br>开源运动的新集市模式在很多方面改变了计算世界，但说到能比大教堂模式更快地让新产品面世，却并无显著建树。</p>
+</blockquote>
+<p>敏捷型开发和开源同样不是银弹,他可能使我们开发出更好的软件,但并不一定以最快的速度.并且软件的质量还有可能出现下降:</p>
+<blockquote>
+<p>现在微软全面拥抱敏捷开发，敏捷开发指的就是快速迭代，第一天提出需求，第二天开发，第三天开发本人做简单局部测试，当天下午上线，根本没时间回归，一切回归测试结果以用户骂娘为准，所以不需要测试职位了<br>以前每个组的dev和tester比例是1:1，现在基本变成每个组只有很少的tester。</p>
+</blockquote>
+<p>win10开始微软尝试以快速迭代的互联网方式进行开发,大幅度减少了测试的工作和岗位,将用户反馈作为实际上的测试,这导致win10的最初几个开发版,bug连连.怪不得当时觉得微软对windows insider.这边的投入很大而且像是要搞出一个社区的样子,原来都是套路….</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[那些年踩过的python坑（一）]]></title>
+      <url>https://ly11tea.github.io/2016/09/16/%E9%82%A3%E4%BA%9B%E5%B9%B4%E8%B8%A9%E8%BF%87%E7%9A%84python%E5%9D%91%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+      <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>格者，正也，正其不正，以归于正也.</p>
+<p><strong>王阳明</strong>, <em>传习录</em></p>
+</blockquote>
+<p>写一些初学python遇到的坑,主要是总结后给自己提个醒,当然如果能够帮助到别人那就更好了.<br><a id="more"></a> </p>
+<h2 id="python的turple-list和dict"><a href="#python的turple-list和dict" class="headerlink" title="python的turple,list和dict"></a>python的turple,list和dict</h2><p>python尽量省略了变量的初始化和定义语句,对于单个变量来说一般情况下完全不需要初始化,直接进行赋值即可.对于数组型数据结构,也仅仅需要在使用前使用纯符号定义类型.这样做好处是加快了编程流程,然而对于新手来说这也增加了混淆的风险.<br>首先先来介绍一下这三种数据结构:</p>
+<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><blockquote>
+<p>列表. list是一种有序的集合，可以随时添加和删除其中的元素.<br>l=[]</p>
+</blockquote>
+<p>list中的数据类型可以是不固定的,所以是一种复合的数据类型.list也可以方便的使用<strong>内建函数</strong>增加或删除某些元素.</p>
+<h3 id="turple"><a href="#turple" class="headerlink" title="turple"></a>turple</h3><blockquote>
+<p>元祖. turple是一种有序的集合，一旦定义完成<strong>不能</strong>添加和删除其中的元素.<br>t=()</p>
+</blockquote>
+<p>list和tuple的性质非常相似，其中最大的区别其实就在于是否为常量。</p>
+<h3 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h3><blockquote>
+<p>字典，dict全称dictionary，在其他语言中也称为map，使用键-值（key-value）存储，具有极快的查找速度。<br>d={}</p>
+</blockquote>
+<p>个人觉得这个就是散列表的一种实现,将散列表直接作为一种常用数据类型,这也体现python现代高级语言的特点.<br>dict与上述两个数据类型最大的不同是其中的element是成对存储的,也就是上面所说的键值对.此外由于是无序的,dict的插入元素也非常方便:你只需要用赋值语句对应的key-value填充字典即可</p>
+<blockquote>
+<p>d[key]=value</p>
+</blockquote>
+<p>所以爱偷懒的人(比如我)或者以前学过C++的人可能会想到,可以使用dict来实现list,只要将其中的index换成key即可,在语言使用习惯上更符合c-style的习惯,并且还不用提前分配空间,比vector好使!…然而这并不是一种好的习惯:</p>
+<ul>
+<li>首先index-&gt;key会改变自身的数据类型,</li>
+<li>且占用了大量内存.</li>
+<li>还无法保证<strong>迭代时的有序性</strong>(这一点我还没有碰到),即迭代的顺序未必是插入时的顺序.</li>
+</ul>
+<p>所以,下面我就碰到了坑:<br>我们都知道python中也有for..in..循环,然而与c-style语言中偏好于下标实现不同python更偏向于迭代器实现,甚至根本不鼓励下标实现.也确实做到了用迭代器实现代码更少更方便(这一点上要明显好于C++).<br>例如:<br>遍历list l中元素:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> l:</div><div class="line">    i....</div><div class="line"><span class="comment">####</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(l)):</div><div class="line">    l[i]....</div><div class="line"><span class="comment">####</span></div><div class="line"><span class="keyword">for</span> i,value <span class="keyword">in</span> enumerate(l):</div><div class="line">    l[i]...</div></pre></td></tr></table></figure>
+<p>上面的三种方法显然第一种使用迭代器的方案最优.然而使用迭代器我们就必须能够明晓迭代器的数据类型.<br>对于list和tuple迭代器的类型就是其中element的类型,而dict默认为<strong>其中的 key</strong> :</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> d:</div><div class="line">    i <span class="comment">##此时的i为int,是key</span></div><div class="line"><span class="comment">####</span></div><div class="line"><span class="keyword">for</span> va <span class="keyword">in</span> d.values():</div><div class="line">    va <span class="comment">##此时va为d中值</span></div><div class="line"><span class="comment">####</span></div><div class="line"><span class="keyword">for</span> i,va <span class="keyword">in</span> d.items():<span class="comment">##还可以遍历键值对</span></div><div class="line">    i,value....</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> d:</div><div class="line">    i <span class="comment">##此时的i为int,是key</span></div><div class="line"><span class="comment">####</span></div><div class="line"><span class="keyword">for</span> va <span class="keyword">in</span> d.values():</div><div class="line">    va <span class="comment">##此时va为d中值</span></div><div class="line"><span class="comment">####</span></div><div class="line"><span class="keyword">for</span> i,va <span class="keyword">in</span> d.items():<span class="comment">##还可以遍历键值对</span></div><div class="line">    i,value....</div></pre></td></tr></table></figure>
+<p>对于赋值语句,这个规律仍然存在:<br>例如<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">std_msgs.msg.Int8MultiArray(data=d)</div><div class="line">t=tuple(d)</div><div class="line">l=list(d)</div></pre></td></tr></table></figure></p>
+<p>这个data参数,tuple函数,list函数只接受一个数据序列,此时复制过去的就是dict的key,若要想复制value,就必须使用<code>d.values()</code></p>
+<h2 id="enumerate"><a href="#enumerate" class="headerlink" title="enumerate"></a>enumerate</h2><p>由于python支持tuple packing 和Sequence unpacking以达到多重赋值,所以赋值时可能出现一些我们不想要的结果然而代码却仍能够执行下去:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> enumerate(l)</div><div class="line">    <span class="comment">###此时每一次循环中i是一个两个元素的一维tuple</span></div><div class="line"><span class="keyword">for</span> i,va <span class="keyword">in</span> enumerate(l)</div><div class="line">    <span class="comment">###此时为两个int,分别为 index和value</span></div></pre></td></tr></table></figure></p>
+<p>相似的语句却产生了完全不同的两种数据类型,且语句中也没有显式的体现,这也是py极少的对于新手不友好的地方.</p>
+<h2 id="bytearrary"><a href="#bytearrary" class="headerlink" title="bytearrary"></a>bytearrary</h2><p>另一个为新手所诟病的python坑,莫过于是python的两个版本,python2和python3了.有偏激的说法说这两个版本实际上已经成为了两种语言,这当然不对.最常见的就是print方法的变化.这里要讨论的是另一种,python2和python3的字符串表示.<br>写这个概念之前,我们先来明确一下字符编码的概念,不同于我们生活中直接可以用字符交流,计算机显然要将字符编为一段二进制码才能进行底层的存储和处理,而用户在进行大多数操作时并不需要过于关心这个编解码的过程,就如同在现实中一样,我们把这样的操作称为<strong>抽象的</strong>.大多数高级编程语言都有string类型,以满足这样的操作:</p>
+<blockquote>
+<p>字符串是文本的抽象表示。字符串由字符组成，字符则是与任何特定二进制表示无关的抽象实体。在操作字符串时，我们生活在幸福的无知之中。我们可以对字符串进行分割和分片，可以拼接和搜索字符串。我们并不关心它们内部是怎么表示的，字符串里的每个字符要用几个字节保存。只有在将字符串编码成字节包（例如，为了在信道上发送它们）或从字节包解码字符串（反向操作）时，我们才会开始关注这点。</p>
+</blockquote>
+<p>上面的话是针对字符串抽象的精妙的描述.</p>
+<h3 id="python-2"><a href="#python-2" class="headerlink" title="python 2"></a>python 2</h3><p>令人遗憾的是,python2中并没有采用这种抽象的做法,Python2中的str实际上是一组字节序列…<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line">l=<span class="string">'好个和'</span></div><div class="line">print(len(l))<span class="comment">##输出为9而非三</span></div></pre></td></tr></table></figure></p>
+<p>正是因为是字节序列,所以python也没有限定其编码方式,如果你的字符编码方式不是unicode,并且输入输出环境选用的又不是你的那种字符编码方式,那么输入输出都会变得混乱无比,因为python事实上只是不做修改的发布了这些字符序列而已.<br>那么摆在程序员面前只有两条路</p>
+<ol>
+<li>确认你的字符编码和输入输出环境的编码一致.</li>
+<li>把你的字符编码decode,到unicode字符串.到此时python会帮你自动转换</li>
+</ol>
+<p>上面谈到的unicode字符串python2中的另一种字符串类型,事实上这才是py2中的真•字符串<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line">l=<span class="string">u'好个和'</span></div><div class="line">print(len(l))<span class="comment">##输出为3而非9</span></div><div class="line"><span class="comment">####</span></div><div class="line">l2=<span class="string">'好个和'</span></div><div class="line">decodedUnicode = l.decode(<span class="string">"UTF-8"</span>);</div></pre></td></tr></table></figure></p>
+<p>使用这个字符串我们又可以当一个幸福的无知者了,上面两种方法都可以得到unicode串.</p>
+<p>事情还没完,对于广大非计类工科狗来说,字节序列并不是一无是处,由于更加接触底层,平时许多甚至大部分工作反而是对这些字节序列操作,然而字节序列又和str搅在了一起……..<br>于是python又提供了一个bytearray类型的数组,见名知义,这是一个字节元素数组,以便于操作二进制.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line">l=<span class="string">'aaa'</span></div><div class="line">b=bytearray(l)</div><div class="line">print(l[<span class="number">0</span>])<span class="comment">##输出a</span></div><div class="line">print(b[<span class="number">0</span>])<span class="comment">##输出97</span></div></pre></td></tr></table></figure></p>
+<h3 id="python3"><a href="#python3" class="headerlink" title="python3"></a>python3</h3><p>在脑残了整个2.X版本后,python3终于做出了改进:</p>
+<blockquote>
+<p>文本总是Unicode，由str类型表示，二进制数据则由bytes类型表示。Python 3不会以任意隐式的方式混用str和bytes，正是这使得两者的区分特别清晰。你不能拼接字符串和字节包，也无法在字节包里搜索字符串（反之亦然），也不能将字符串传入参数为字节包的函数（反之亦然）。这是件好事。</p>
+</blockquote>
+<p>string彻彻底底成为了抽象字符串且指定了编码类型unicode,二进制数据则由bytes类型表示.<br>他们之间的关系是:</p>
+<p><img src="/images/relation.png" style="width: 260px;"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">####in the shell</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'€20'</span>.encode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="string">b'\xe2\x82\xac20'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'\xe2\x82\xac20'</span>.decode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="string">'€20'</span></div><div class="line"><span class="comment">###还可以将string转换为指定格式编码的bytes</span></div><div class="line"><span class="comment">###或者将指定格式编码的bytes转为string</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'€20'</span>.encode(<span class="string">'iso-8859-15'</span>)</div><div class="line"><span class="string">b'\xa420'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'\xa420'</span>.decode(<span class="string">'iso-8859-15'</span>)</div><div class="line"><span class="string">'€20'</span></div></pre></td></tr></table></figure>
+<p>简言之,在py3中py2的unicode变成了string,py2的bytearray变为了bytes</p>
+<h2 id="path"><a href="#path" class="headerlink" title="path"></a>path</h2>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[hexo 命令总结]]></title>
+      <url>https://ly11tea.github.io/2016/09/15/hexo-%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</url>
+      <content type="html"><![CDATA[<p>其实作为一个轻量级的静态blog框架，hexo已经做到我能想到的最简单的实现步骤了。但是为了使用方便还是总结一下命令还有配置当中遇到的一些tricks。<br><a id="more"></a> </p>
+<h2 id="hexo命令"><a href="#hexo命令" class="headerlink" title="hexo命令"></a>hexo命令</h2><h3 id="hexo的初始化"><a href="#hexo的初始化" class="headerlink" title="hexo的初始化"></a>hexo的初始化</h3><blockquote>
+<p>1 hexo init</p>
+</blockquote>
+<p>在<strong>已经建好</strong>的目录下输入以上命令，会产生一个目录。要注意的是这个文件夹下不能已经含有文件或者git。</p>
+<h3 id="hexo的生成"><a href="#hexo的生成" class="headerlink" title="hexo的生成"></a>hexo的生成</h3><blockquote>
+<p>1 hexo generate<br>2 hexo g</p>
+</blockquote>
+<p>hexo实际上是通过在本地文件夹中的一系列的参数配置和md文件生成静态网页的(在public目录下).这个命令就完成了这个过程,下面的命令是上面的简写.</p>
+<h3 id="hexo-在本地架设服务器"><a href="#hexo-在本地架设服务器" class="headerlink" title="hexo 在本地架设服务器"></a>hexo 在本地架设服务器</h3><blockquote>
+<p>1 hexo server<br>2 hexo s</p>
+</blockquote>
+<p>我们可以利用这个命令在本地架设起博客,通常使用这个命令在发布前预览效果.<br>还可以在调试过程中输入<code>hexo s --debug</code>来得到调试信息还可以在不使用<code>hexo g</code>的前提下应用修改.</p>
+<h3 id="hexo-发布到github"><a href="#hexo-发布到github" class="headerlink" title="hexo 发布到github"></a>hexo 发布到github</h3><blockquote>
+<p>1 hexo deploy<br>2 hexo d</p>
+</blockquote>
+<p>在站点配置文件设定好之后,使用这个命令就能将站点发布到github上面.</p>
+<h3 id="hexo-新建文件"><a href="#hexo-新建文件" class="headerlink" title="hexo 新建文件"></a>hexo 新建文件</h3><blockquote>
+<p>1 hexo new [layout]/模板  “标题”</p>
+</blockquote>
+<p>这其中初始的layout(已实现为模板)有三种<code>post(默认),draft,page</code>,你还可以在<code>Scaffold</code>文件家中自定义新的文件模板,在上述三个layout之中.</p>
+<h3 id="hexo-清除缓存"><a href="#hexo-清除缓存" class="headerlink" title="hexo 清除缓存"></a>hexo 清除缓存</h3><blockquote>
+<p>1 hexo clean</p>
+</blockquote>
+<p>有时遇到一些稀奇古怪的问题时,不妨试一试这个命令,事实上就是清除public和deploy文件夹下的所有内容.再使用<code>hexo g</code>生成一遍.</p>
+<h2 id="hexo-部署时的一些tricks"><a href="#hexo-部署时的一些tricks" class="headerlink" title="hexo 部署时的一些tricks"></a>hexo 部署时的一些tricks</h2><h3 id="没有文章时-主页不会生成"><a href="#没有文章时-主页不会生成" class="headerlink" title="没有文章时,主页不会生成"></a>没有文章时,主页不会生成</h3><p>这时访问地址会出现404,现象,其实是配置上并没有错.</p>
+<h3 id="deploy的type名字"><a href="#deploy的type名字" class="headerlink" title="deploy的type名字"></a>deploy的type名字</h3><p>新版本中全站配置文件中type要写成git而不是github.</p>
+<h3 id="首次deploy要安装deployer"><a href="#首次deploy要安装deployer" class="headerlink" title="首次deploy要安装deployer"></a>首次deploy要安装deployer</h3><p>命令为<code>npm install hexo-deployer-git --save</code></p>
+<h3 id="站点配置文件中的url参数需要修改"><a href="#站点配置文件中的url参数需要修改" class="headerlink" title="站点配置文件中的url参数需要修改"></a>站点配置文件中的url参数需要修改</h3><p>在next中的localsearch就要用到这个参数生成目标连接。</p>
+<h3 id="yaml文件键值后的冒号一定要留空格"><a href="#yaml文件键值后的冒号一定要留空格" class="headerlink" title="yaml文件键值后的冒号一定要留空格"></a>yaml文件键值后的冒号一定要留空格</h3><p>不留空格事实上值并没有赋给键</p>
+<h2 id="一些参考"><a href="#一些参考" class="headerlink" title="一些参考"></a>一些参考</h2><p>网上也有许多hexo的文档和教程：</p>
+<ul>
+<li>hexo的 <a href="https://hexo.io/" target="_blank" rel="external">官方文档</a>.</li>
+<li>next的<a href="http://theme-next.iissnan.com/" target="_blank" rel="external">官方文档</a></li>
+<li>hexo<a href="http://www.zipperary.com/2013/05/28/hexo-guide-1/" target="_blank" rel="external">系列教程</a></li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[new]]></title>
+      <url>https://ly11tea.github.io/2016/09/14/new/</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ss]]></title>
+      <url>https://ly11tea.github.io/2016/09/13/ss/</url>
+      <content type="html"></content>
+    </entry>
+    
+  
+  
+</search>
