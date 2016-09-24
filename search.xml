@@ -4,6 +4,204 @@
   
     
     <entry>
+      <title><![CDATA[python的格式化字符串与转义字符]]></title>
+      <url>https://ly11tea.github.io/2016/09/24/python%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/</url>
+      <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>Give therefore to the emperor the things that are the emperor’s;and to God the things that are God’s.</p>
+<p> <em>Gospel of Matthew</em></p>
+</blockquote>
+<p>其实python的格式化字符串与C的printf函数相当类似,但用法显得更为灵活,所以还是稍微总结一下.<br><a id="more"></a> </p>
+<h1 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h1><p>先看一下python字符串的格式,格式化字符串时，Python使用一个字符串作为模板。模板中有格式符，这些格式符为真实值预留位置，并说明真实数值应该呈现的格式。Python用一个tuple将多个值传递给模板，每个值对应一个格式符。</p>
+<blockquote>
+<p>模板%(value1,value2,…)</p>
+</blockquote>
+<p>其中模板格式为:</p>
+<blockquote>
+<p>[(name)][flags][width].[precision]typecode</p>
+</blockquote>
+<p>下面来一一介绍其中的元素含义:</p>
+<h2 id="flags和width-precision"><a href="#flags和width-precision" class="headerlink" title="flags和width precision"></a>flags和width precision</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">作用 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">定义宽度或者小数点精度 </td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">用做左对齐 </td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">在正数前面显示加号( + ) </td>
+</tr>
+<tr>
+<td style="text-align:center">(空格键)</td>
+<td style="text-align:center">在正数前面显示空格 </td>
+</tr>
+<tr>
+<td style="text-align:center">#</td>
+<td style="text-align:center">在八进制数前面显示零(‘0’)，在十六进制前面显示’0x’或者’0X’(取决于用的是’x’还是’X’) </td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">显示的数字前面填充‘0’而不是默认的空格 </td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:center">‘%%’输出一个单一的’%’ </td>
+</tr>
+<tr>
+<td style="text-align:center">(var)</td>
+<td style="text-align:center">映射变量(字典参数) </td>
+</tr>
+<tr>
+<td style="text-align:center">m.n</td>
+<td style="text-align:center">m 是显示的最小总宽度,n是小数点后的位数(如果可用的话) </td>
+</tr>
+</tbody>
+</table>
+<h2 id="typecode"><a href="#typecode" class="headerlink" title="typecode"></a>typecode</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">格式化字符</th>
+<th style="text-align:center">转换方式 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%c</td>
+<td style="text-align:center">转换成字符(ASCII 码值，或者长度为一的字符串) </td>
+</tr>
+<tr>
+<td style="text-align:center">%r</td>
+<td style="text-align:center">优先用 repr()函数进行字符串转换 </td>
+</tr>
+<tr>
+<td style="text-align:center">%s</td>
+<td style="text-align:center">优先用 str()函数进行字符串转换 </td>
+</tr>
+<tr>
+<td style="text-align:center">%d / %i</td>
+<td style="text-align:center">转成有符号十进制数 </td>
+</tr>
+<tr>
+<td style="text-align:center">%u</td>
+<td style="text-align:center">转成无符号十进制数 </td>
+</tr>
+<tr>
+<td style="text-align:center">%o</td>
+<td style="text-align:center">转成无符号八进制数 </td>
+</tr>
+<tr>
+<td style="text-align:center">%x/%X</td>
+<td style="text-align:center">(Unsigned)转成无符号十六进制数(x/X代表转换后的十六进制字符的大小写) </td>
+</tr>
+<tr>
+<td style="text-align:center">%e/%E</td>
+<td style="text-align:center">转成科学计数法(e/E 控制输出 e/E) </td>
+</tr>
+<tr>
+<td style="text-align:center">%f/%F</td>
+<td style="text-align:center">转成浮点数(小数部分自然截断) </td>
+</tr>
+<tr>
+<td style="text-align:center">%g/%G</td>
+<td style="text-align:center">%e 和%f/%E 和%F 的简写 </td>
+</tr>
+<tr>
+<td style="text-align:center">%%</td>
+<td style="text-align:center">输出% </td>
+</tr>
+</tbody>
+</table>
+<p>其中比较有用的可能是m.n,即设置浮点数和整数的总宽度和浮点数的小数精度.<br>基本的一些例子:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%x"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'6c'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%X"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'6C'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%#X"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'0X6C'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%#x"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'0x6c'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%f'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.567890'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%.2f'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.57'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%E'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1.234568E+03'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%e'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1.234568e+03'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%g'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.57'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%G'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.57'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%e"</span> % (<span class="number">1111111111111111111111L</span>) </div><div class="line"><span class="string">'1.111111e+21'</span></div><div class="line"><span class="comment">#科学计数法表示同样也可以适用m.n,</span></div><div class="line">&gt;&gt;&gt;print(<span class="string">"%66.10e"</span> % (<span class="number">1111111111111111111111</span>))</div><div class="line"></div><div class="line">                                                  <span class="number">1.1111111111e+21</span></div></pre></td></tr></table></figure></p>
+<p>值得一提的是格式化字符<em>,它能够用后面tuple中相应的值代入width和precision<br>例如 :`print(“%.</em>f” % (4, 1.2))`<br>还有利用name参数,我们可以使用预先定义的格式化字符串生成字符串:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">formatter = <span class="string">"%r %r %r %r"</span></div><div class="line"><span class="keyword">print</span> formatter % (<span class="keyword">True</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">True</span>)</div></pre></td></tr></table></figure></p>
+<p>当然我们可以看到python的格式化字符串指令不依赖于函数,只是一个返回字符串的运算符.所以我们既可以用来输出字符串,也可以用来定义字符串..等等其他用途.</p>
+<h1 id="python的三引号"><a href="#python的三引号" class="headerlink" title="python的三引号"></a>python的三引号</h1><p>三引号’’’ ‘’’,在print中用来输出多行字符串,直接使用三引号还可以用来进行多行注释.</p>
+<h1 id="python的转义字符"><a href="#python的转义字符" class="headerlink" title="python的转义字符"></a>python的转义字符</h1><p>python的转义字符同C中是一样的.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">转义字符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">(在行尾时)</td>
+<td style="text-align:center">续行符</td>
+</tr>
+<tr>
+<td style="text-align:center">\</td>
+<td style="text-align:center">反斜杠符号</td>
+</tr>
+<tr>
+<td style="text-align:center">\’</td>
+<td style="text-align:center">单引号</td>
+</tr>
+<tr>
+<td style="text-align:center">\”</td>
+<td style="text-align:center">双引号</td>
+</tr>
+<tr>
+<td style="text-align:center">\a</td>
+<td style="text-align:center">响铃</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">退格(Backspace)</td>
+</tr>
+<tr>
+<td style="text-align:center">\e</td>
+<td style="text-align:center">转义</td>
+</tr>
+<tr>
+<td style="text-align:center">\000</td>
+<td style="text-align:center">空</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td style="text-align:center">换行</td>
+</tr>
+<tr>
+<td style="text-align:center">\v</td>
+<td style="text-align:center">纵向制表符</td>
+</tr>
+<tr>
+<td style="text-align:center">\t</td>
+<td style="text-align:center">横向制表符</td>
+</tr>
+<tr>
+<td style="text-align:center">\r</td>
+<td style="text-align:center">回车</td>
+</tr>
+<tr>
+<td style="text-align:center">\f</td>
+<td style="text-align:center">换页</td>
+</tr>
+<tr>
+<td style="text-align:center">\oyy</td>
+<td style="text-align:center">八进制数yy代表的字符，例如：\o12代表换行</td>
+</tr>
+<tr>
+<td style="text-align:center">\xyy</td>
+<td style="text-align:center">十进制数yy代表的字符，例如：\x0a代表换行</td>
+</tr>
+<tr>
+<td style="text-align:center">\other</td>
+<td style="text-align:center">其它的字符以普通格式输出</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[算法4 二叉查找树]]></title>
       <url>https://ly11tea.github.io/2016/09/23/%E7%AE%97%E6%B3%954-%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/</url>
       <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>世界上有10种人，一种懂二进制，一种不懂</p>

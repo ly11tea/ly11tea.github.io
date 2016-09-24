@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="软件工程,读书笔记," />
+  <meta name="keywords" content="python,代码," />
 
 
 
@@ -84,16 +84,25 @@
 
 
 
-<meta name="description" content="“今有程序员五人，代码需时日几何？” “一年。”“吾急需之！若有十人，几何？” “两年。”“百人若何？” “万世。”">
+<meta name="description" content="Give therefore to the emperor the things that are the emperor’s;and to God the things that are God’s.
+ Gospel of Matthew
+
+其实python的格式化字符串与C的printf函数相当类似,但用法显得更为灵活,所以还是稍微总结一下.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="<梦断代码>书摘与笔记">
-<meta property="og:url" content="https://ly11tea.github.io/2016/09/18/梦断代码-书摘与笔记/index.html">
+<meta property="og:title" content="python的格式化字符串与转义字符">
+<meta property="og:url" content="https://ly11tea.github.io/2016/09/24/python的格式化字符串与转义字符/index.html">
 <meta property="og:site_name" content="Luo's blog">
-<meta property="og:description" content="“今有程序员五人，代码需时日几何？” “一年。”“吾急需之！若有十人，几何？” “两年。”“百人若何？” “万世。”">
-<meta property="og:updated_time" content="2016-09-23T16:14:09.306Z">
+<meta property="og:description" content="Give therefore to the emperor the things that are the emperor’s;and to God the things that are God’s.
+ Gospel of Matthew
+
+其实python的格式化字符串与C的printf函数相当类似,但用法显得更为灵活,所以还是稍微总结一下.">
+<meta property="og:updated_time" content="2016-09-24T04:04:50.253Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="<梦断代码>书摘与笔记">
-<meta name="twitter:description" content="“今有程序员五人，代码需时日几何？” “一年。”“吾急需之！若有十人，几何？” “两年。”“百人若何？” “万世。”">
+<meta name="twitter:title" content="python的格式化字符串与转义字符">
+<meta name="twitter:description" content="Give therefore to the emperor the things that are the emperor’s;and to God the things that are God’s.
+ Gospel of Matthew
+
+其实python的格式化字符串与C的printf函数相当类似,但用法显得更为灵活,所以还是稍微总结一下.">
 
 
 
@@ -114,9 +123,9 @@
 
 
 
-  <link rel="canonical" href="https://ly11tea.github.io/2016/09/18/梦断代码-书摘与笔记/"/>
+  <link rel="canonical" href="https://ly11tea.github.io/2016/09/24/python的格式化字符串与转义字符/"/>
 
-  <title> <梦断代码>书摘与笔记 | Luo's blog </title>
+  <title> python的格式化字符串与转义字符 | Luo's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -279,7 +288,7 @@
             
             
               
-                <梦断代码>书摘与笔记
+                python的格式化字符串与转义字符
               
             
           </h1>
@@ -291,38 +300,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-18T22:35:46+08:00" content="2016-09-18">
-              2016-09-18
+            <time itemprop="dateCreated" datetime="2016-09-24T11:51:17+08:00" content="2016-09-24">
+              2016-09-24
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/it人文/" itemprop="url" rel="index">
-                    <span itemprop="name">it人文</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/18/梦断代码-书摘与笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/18/梦断代码-书摘与笔记/" itemprop="commentsCount"></span>
+                <a href="/2016/09/24/python的格式化字符串与转义字符/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/24/python的格式化字符串与转义字符/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -345,66 +335,198 @@
       
 
       
-        <blockquote class="blockquote-center"><p>“今有程序员五人，代码需时日几何？” “一年。”<br>“吾急需之！若有十人，几何？” “两年。”<br>“百人若何？” “万世。”</p>
+        <blockquote class="blockquote-center"><p>Give therefore to the emperor the things that are the emperor’s;and to God the things that are God’s.</p>
+<p> <em>Gospel of Matthew</em></p>
 </blockquote>
-<a id="more"></a> 
-<h1 id="软件时间"><a href="#软件时间" class="headerlink" title="软件时间"></a>软件时间</h1><blockquote>
-<p>1.那时我年方十五，正迷恋于一个叫做 Sumer的游戏，在费就申 ，我<br>管理着新月沃土上一座古代城邦。今天的电脑游戏玩家也会嘲笑其在<br>嫩:它在一卷纸上逐行打印出大写字母，报告游戏进程。由远姑且<br>分配食用和留种的谷物，然后程序就会告知城邦每年的发展情况。”汉漠<br>拉比陆下，”程序像一个诚惶诚恐的宰相般报告说，”微臣伏启圣鉴……”</p>
-</blockquote>
-<p>这句话让我想起了2004-05年的时候玩三国志的经历,那时候不知道从哪发现了一个对岸三国游戏爱好者的网站,是一个只有ip地址的网站,从那上面下到了一个dos下的三国游戏,显示游戏地图就是用字符串打印出来的网状图,我想这就是”蛮荒时代”游戏的样子吧.</p>
+<p>其实python的格式化字符串与C的printf函数相当类似,但用法显得更为灵活,所以还是稍微总结一下.<br><a id="more"></a> </p>
+<h1 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h1><p>先看一下python字符串的格式,格式化字符串时，Python使用一个字符串作为模板。模板中有格式符，这些格式符为真实值预留位置，并说明真实数值应该呈现的格式。Python用一个tuple将多个值传递给模板，每个值对应一个格式符。</p>
 <blockquote>
-<p>2.我不在乎干到多晚。 F 线地铁整夜运行， 可以把我带回位于皇后区<br>的家。一定得重新设计游戏中的革命模式!</p>
+<p>模板%(value1,value2,…)</p>
 </blockquote>
-<p>我们编写或者重构软件时总是雄心勃勃的,其实沉浸在编码的体验与沉迷游戏是一样的,常常埋头实现某个feature或者fix bug,再抬头时窗外天色已经昏暗.从另一个方面来说这个过程又是危险的,同电子游戏一样,这个过程能让你完全失去时间的概念,这就是作者所说的软件时间,可长可短.再没有比他更危险,混沌却又迷人的事情了.</p>
+<p>其中模板格式为:</p>
 <blockquote>
-<p>3.关于软件缺陆的话题，只要谈上几分钟，必会有人拍案叹道，”为什<br>么就是不能像造桥那样造软件? .. </p>
+<p>[(name)][flags][width].[precision]typecode</p>
 </blockquote>
-<p>虽然我们一直叫软件工程,然而却从来没有其他任何一种工程掺杂进这么多人的因素,软件工程,事实上我们是在和自己战斗.</p>
-<blockquote>
-<p>4.软件错误每年造成美国 595 亿美元的经济损失，三分之二的项目明显延误或超出预算，甚至干脆无疾而终。</p>
-</blockquote>
-<p>延误,延误.可能是每一个项目都要经历的过程,我们永远没有办法准确预估要解决的问题的难度和解决手段的准确性,并且往往显得乐观.所以不要相信程序员的时间表.</p>
-<blockquote>
-<p>5.有些人梦想炸毁今天的整座软件大厦，替以某种全新之物。 有些人<br>则只一昧盼望找到不太顽固、更能响应人类愿望和行为流程的程序员，<br>盼望能得到招之即来、挥之即去的软件，盼望得到足堪依赖的代码。</p>
-</blockquote>
-<p>只要我们无法改变我们自己本身,就只能继续妥协.从面向过程到面向对象,泛型编程,我们尽量让自己妥协的更少.</p>
-<h1 id="死定了"><a href="#死定了" class="headerlink" title="死定了"></a>死定了</h1><blockquote>
-<p>1.不确定因素太多 : 你所需的时间取决于其他人所花的时间。</p>
-</blockquote>
-<p>开发更多的时候是一项团队运动,一个节点上的阻塞,可能会导致全面的阻塞.</p>
-<blockquote>
-<p>2.意见取得一致了:黑洞式的缺陆一一即无法确定修正所需时长的缺<br>陷一一在 Bugzilla 申应该用特别的警示词标记出来。</p>
-</blockquote>
-<p>黑洞式的漏洞看上去会使人感到焦躁,然而真正深入其中会发现他无知无觉,甚至充满诱惑,引诱你用越来越多的时间修复他,也许下一刻就好了呢?,我们在其前的态度越来越像一个赌徒,不过筹码换成了时间,心中也只是单纯希望之前的时间没有白费,但眸然回首,更多的时间消耗于其中.</p>
-<blockquote>
-<p>3.软件项目难以按照进度安排实现，这种情况极为常见，而且为众人所宽窑。在软件开发世界里，进度延误普遍到人们特意生造出一个委婉词来描述它: slippage (失速)<br>当然， 每个领域都存在延误现象。司法诉讼程序蜗行般的进度尽人皆知 ; 建筑承包商要是按期完工， 就会招来怀疑的目光。 然而，软件时间自我扭曲再头尾相撞，如同奠比乌斯环①一般令人费解。 进度忽而突飞猛进，忽而不知何故驻足道中。在你以为大功即将告成之时，却又山穷水尽，花上整半年时间， 一无所得。</p>
-</blockquote>
-<p>软件的时间是非线性的,不确定的.我们很可能因为改掉了一个BUG,加快进度.也可能因为增加一个feature掉入深渊.有没有一种方式如同建筑上的施工进度一样线性的衡量开发进度,还没有答案.</p>
-<blockquote>
-<p>4.布鲁克斯法则就这样产生了 ， 昕起来既是原则也是悖论”<strong>往已延误<br>的项目中补充人力 ， 只会使其继续延误</strong>。”<br>布鲁克斯写道，软件开发者通常都是乐天派，他们认定每个缺陆<br>可以被迅速修正，且修正旧缺陷必能减少新缺陷的数量。布鲁克斯发现，在实际开发中，编码只占项目开发时间的 1/6 ， 有一半时间用于测试和修正缺陷。但只有少数项目经理会真正按照这种思路来安排开发人员的工作时间。</p>
-</blockquote>
-<p>2-8时间在软件开发上一样适用</p>
-<blockquote>
-<p>5.在预估及安排项目进度上的每一份努力,是”危险且具欺骗性的神话”。<br>所谓”人月··，是一种科学管理概念，它假定生产力可被拆分为不连续、无差异、可替换的单元。<br>布鲁克斯观察到，”<strong>只有在任务能分派给许多互相之间无须沟通的工作者</strong>时，人和月才是可互换品。”对于软件而言， 项目各有差异、工具不<br>断升级，每当团队中加入一个新组员，老组员就得放下手边的工作，帮<br>助新组员进入角色，每位组员都要等待重新分派任务，好让新组员有事<br>可做。在你意识到这一切之前，已经远远落后于进度了。<br>在最坏的情况下，这会导致<strong>灾难般的延误循环</strong>，一种”再生性进度灾难”。每次重新安排进度计划，都导致<strong>雇用更多人力，于是又不得不重新安排</strong>进度。布鲁克斯对此心存恐惧:疯狂在兹。”</p>
-</blockquote>
-<p>这算是对人月神话比较经典的概括,十月怀胎,一朝分娩.然而十个孕妇,也无法在一个月里生出孩子.</p>
-<blockquote>
-<p>6.尽管他们采用了诸如邮件列表、blog、缺陆跟踪、源码控制等工具，但和他人保持一致仍然极其困难。</p>
-</blockquote>
-<p>没有银弹.自从人月神话诞生那天起有太多的东西被当做银弹,然而没有一个真正奏效.</p>
-<blockquote>
-<p>7.”开放源代码软件”这种开发方法论在 〈 人月神话〉 的年代尚未出现。与之后其他任何一种开发方式不同，开源让编程世界错以为布鲁克斯法则将成弃履。<br>1985 年，麻省理工怪才斯托曼出于对商业软件产业封闭代码积习的<br>憎恨， 创办了自由软件基金会( Free Software Foundation )。基金会发布<br>了一种特殊的软件许可，依据该许可， 你能够获得全部所需代码、复用<br>这些代码、组合到新产品中一一但利用该代码创建出来的任何产物，也<br>必须采用同样的许可。这种被称作GPL ( GNU Public License )</p>
-</blockquote>
-<p>不管你相信与否这些人,这项运动确实改变了程序开发的方式,现如今,就连GNU当年的针对者,微软也拥抱了开源.</p>
-<blockquote>
-<p>8.”多年来，我一直在宣扬小工具、快速原型和进化式编程的 UNIX 福<br>音。 可我曾相信，存在某种重要的复杂性，需要是集中旦有计划的手法<br>来解决。 我也曾相信，最重要的软件……需要像<strong>建教堂一般，由独立的<br>巫师或一队相互隔离的魔法师精心打造</strong>，在面世之前绝不发布 beta 版本。<br>李纳斯 · 托瓦茨的开发风格一一平发布、多发布、全委托、尽开放一一<br>让我吃惊。 这里不存在<strong>静穆、虔诚的教堂式开发</strong>一一相反，Linux社样看似一个<strong>乱哄哄的大集市</strong>，铺陈了各种日程和手法……要从中得到前后一致和稳定的系统，简直只能指望奇迹再三出现。可事实上<strong>这种集市风格看来行之有效</strong>.</p>
-<p>9.瑞蒙德指出其中的两个要诀:其一，低成本、广泛地接人像互联网那样的网络，让开发者之间能建立迅速、可信的沟通渠道，存储可被开放访问的共享知识和代码池;其二，围绕一种领导方式一一如托瓦茨那样的方式一一形成合作团队的良好风气.<br>“只要<strong>有足够多的 beta 版测试人员和开发者队伍</strong>， 几乎所有问题都<br>很快被发现，而且总有人知道该怎么修复。或者用不太正式的说法，眼<br>球足够多，缺陆无处躲。’我把这叫做 ‘ 李纳斯法则 ‘ “<br>“乐享即能高效”瑞蒙德写道。”愉悦是金。”这些理想化的格言令人振奋,一旦需经实践验证。开放源代码似乎也受困于延误。<br>开源运动的新集市模式在很多方面改变了计算世界，但说到能比大教堂模式更快地让新产品面世，却并无显著建树。</p>
-</blockquote>
-<p>敏捷型开发和开源同样不是银弹,他可能使我们开发出更好的软件,但并不一定以最快的速度.并且软件的质量还有可能出现下降:</p>
-<blockquote>
-<p>现在微软全面拥抱敏捷开发，敏捷开发指的就是快速迭代，第一天提出需求，第二天开发，第三天开发本人做简单局部测试，当天下午上线，根本没时间回归，一切回归测试结果以用户骂娘为准，所以不需要测试职位了<br>以前每个组的dev和tester比例是1:1，现在基本变成每个组只有很少的tester。</p>
-</blockquote>
-<p>win10开始微软尝试以快速迭代的互联网方式进行开发,大幅度减少了测试的工作和岗位,将用户反馈作为实际上的测试,这导致win10的最初几个开发版,bug连连.怪不得当时觉得微软对windows insider.这边的投入很大而且像是要搞出一个社区的样子,原来都是套路….</p>
+<p>下面来一一介绍其中的元素含义:</p>
+<h2 id="flags和width-precision"><a href="#flags和width-precision" class="headerlink" title="flags和width precision"></a>flags和width precision</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">作用 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">定义宽度或者小数点精度 </td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">用做左对齐 </td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">在正数前面显示加号( + ) </td>
+</tr>
+<tr>
+<td style="text-align:center">(空格键)</td>
+<td style="text-align:center">在正数前面显示空格 </td>
+</tr>
+<tr>
+<td style="text-align:center">#</td>
+<td style="text-align:center">在八进制数前面显示零(‘0’)，在十六进制前面显示’0x’或者’0X’(取决于用的是’x’还是’X’) </td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">显示的数字前面填充‘0’而不是默认的空格 </td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:center">‘%%’输出一个单一的’%’ </td>
+</tr>
+<tr>
+<td style="text-align:center">(var)</td>
+<td style="text-align:center">映射变量(字典参数) </td>
+</tr>
+<tr>
+<td style="text-align:center">m.n</td>
+<td style="text-align:center">m 是显示的最小总宽度,n是小数点后的位数(如果可用的话) </td>
+</tr>
+</tbody>
+</table>
+<h2 id="typecode"><a href="#typecode" class="headerlink" title="typecode"></a>typecode</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">格式化字符</th>
+<th style="text-align:center">转换方式 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%c</td>
+<td style="text-align:center">转换成字符(ASCII 码值，或者长度为一的字符串) </td>
+</tr>
+<tr>
+<td style="text-align:center">%r</td>
+<td style="text-align:center">优先用 repr()函数进行字符串转换 </td>
+</tr>
+<tr>
+<td style="text-align:center">%s</td>
+<td style="text-align:center">优先用 str()函数进行字符串转换 </td>
+</tr>
+<tr>
+<td style="text-align:center">%d / %i</td>
+<td style="text-align:center">转成有符号十进制数 </td>
+</tr>
+<tr>
+<td style="text-align:center">%u</td>
+<td style="text-align:center">转成无符号十进制数 </td>
+</tr>
+<tr>
+<td style="text-align:center">%o</td>
+<td style="text-align:center">转成无符号八进制数 </td>
+</tr>
+<tr>
+<td style="text-align:center">%x/%X</td>
+<td style="text-align:center">(Unsigned)转成无符号十六进制数(x/X代表转换后的十六进制字符的大小写) </td>
+</tr>
+<tr>
+<td style="text-align:center">%e/%E</td>
+<td style="text-align:center">转成科学计数法(e/E 控制输出 e/E) </td>
+</tr>
+<tr>
+<td style="text-align:center">%f/%F</td>
+<td style="text-align:center">转成浮点数(小数部分自然截断) </td>
+</tr>
+<tr>
+<td style="text-align:center">%g/%G</td>
+<td style="text-align:center">%e 和%f/%E 和%F 的简写 </td>
+</tr>
+<tr>
+<td style="text-align:center">%%</td>
+<td style="text-align:center">输出% </td>
+</tr>
+</tbody>
+</table>
+<p>其中比较有用的可能是m.n,即设置浮点数和整数的总宽度和浮点数的小数精度.<br>基本的一些例子:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%x"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'6c'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%X"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'6C'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%#X"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'0X6C'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%#x"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'0x6c'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%f'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.567890'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%.2f'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.57'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%E'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1.234568E+03'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%e'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1.234568e+03'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%g'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.57'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%G'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.57'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%e"</span> % (<span class="number">1111111111111111111111L</span>) </div><div class="line"><span class="string">'1.111111e+21'</span></div><div class="line"><span class="comment">#科学计数法表示同样也可以适用m.n,</span></div><div class="line">&gt;&gt;&gt;print(<span class="string">"%66.10e"</span> % (<span class="number">1111111111111111111111</span>))</div><div class="line"></div><div class="line">                                                  <span class="number">1.1111111111e+21</span></div></pre></td></tr></table></figure></p>
+<p>值得一提的是格式化字符<em>,它能够用后面tuple中相应的值代入width和precision<br>例如 :`print(“%.</em>f” % (4, 1.2))`<br>还有利用name参数,我们可以使用预先定义的格式化字符串生成字符串:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">formatter = <span class="string">"%r %r %r %r"</span></div><div class="line"><span class="keyword">print</span> formatter % (<span class="keyword">True</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">True</span>)</div></pre></td></tr></table></figure></p>
+<p>当然我们可以看到python的格式化字符串指令不依赖于函数,只是一个返回字符串的运算符.所以我们既可以用来输出字符串,也可以用来定义字符串..等等其他用途.</p>
+<h1 id="python的三引号"><a href="#python的三引号" class="headerlink" title="python的三引号"></a>python的三引号</h1><p>三引号’’’ ‘’’,在print中用来输出多行字符串,直接使用三引号还可以用来进行多行注释.</p>
+<h1 id="python的转义字符"><a href="#python的转义字符" class="headerlink" title="python的转义字符"></a>python的转义字符</h1><p>python的转义字符同C中是一样的.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">转义字符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">(在行尾时)</td>
+<td style="text-align:center">续行符</td>
+</tr>
+<tr>
+<td style="text-align:center">\</td>
+<td style="text-align:center">反斜杠符号</td>
+</tr>
+<tr>
+<td style="text-align:center">\’</td>
+<td style="text-align:center">单引号</td>
+</tr>
+<tr>
+<td style="text-align:center">\”</td>
+<td style="text-align:center">双引号</td>
+</tr>
+<tr>
+<td style="text-align:center">\a</td>
+<td style="text-align:center">响铃</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">退格(Backspace)</td>
+</tr>
+<tr>
+<td style="text-align:center">\e</td>
+<td style="text-align:center">转义</td>
+</tr>
+<tr>
+<td style="text-align:center">\000</td>
+<td style="text-align:center">空</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td style="text-align:center">换行</td>
+</tr>
+<tr>
+<td style="text-align:center">\v</td>
+<td style="text-align:center">纵向制表符</td>
+</tr>
+<tr>
+<td style="text-align:center">\t</td>
+<td style="text-align:center">横向制表符</td>
+</tr>
+<tr>
+<td style="text-align:center">\r</td>
+<td style="text-align:center">回车</td>
+</tr>
+<tr>
+<td style="text-align:center">\f</td>
+<td style="text-align:center">换页</td>
+</tr>
+<tr>
+<td style="text-align:center">\oyy</td>
+<td style="text-align:center">八进制数yy代表的字符，例如：\o12代表换行</td>
+</tr>
+<tr>
+<td style="text-align:center">\xyy</td>
+<td style="text-align:center">十进制数yy代表的字符，例如：\x0a代表换行</td>
+</tr>
+<tr>
+<td style="text-align:center">\other</td>
+<td style="text-align:center">其它的字符以普通格式输出</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -427,9 +549,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/软件工程/" rel="tag">#软件工程</a>
+            <a href="/tags/python/" rel="tag">#python</a>
           
-            <a href="/tags/读书笔记/" rel="tag">#读书笔记</a>
+            <a href="/tags/代码/" rel="tag">#代码</a>
           
         </div>
       
@@ -438,17 +560,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/16/那些年踩过的python坑（一）/" rel="next" title="那些年踩过的python坑（一）">
-                <i class="fa fa-chevron-left"></i> 那些年踩过的python坑（一）
+              <a href="/2016/09/23/算法4-二叉查找树/" rel="next" title="算法4 二叉查找树">
+                <i class="fa fa-chevron-left"></i> 算法4 二叉查找树
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/20/一首诗-翻译/" rel="prev" title="一首诗 翻译">
-                一首诗 翻译 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -497,8 +615,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/18/梦断代码-书摘与笔记/"
-           data-title="<梦断代码>书摘与笔记" data-url="https://ly11tea.github.io/2016/09/18/梦断代码-书摘与笔记/">
+      <div class="ds-thread" data-thread-key="2016/09/24/python的格式化字符串与转义字符/"
+           data-title="python的格式化字符串与转义字符" data-url="https://ly11tea.github.io/2016/09/24/python的格式化字符串与转义字符/">
       </div>
     
   </div>
@@ -609,7 +727,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#软件时间"><span class="nav-number">1.</span> <span class="nav-text">软件时间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#死定了"><span class="nav-number">2.</span> <span class="nav-text">死定了</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#格式"><span class="nav-number">1.</span> <span class="nav-text">格式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#flags和width-precision"><span class="nav-number">1.1.</span> <span class="nav-text">flags和width precision</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#typecode"><span class="nav-number">1.2.</span> <span class="nav-text">typecode</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python的三引号"><span class="nav-number">2.</span> <span class="nav-text">python的三引号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python的转义字符"><span class="nav-number">3.</span> <span class="nav-text">python的转义字符</span></a></li></ol></div>
             
           </div>
         </section>
