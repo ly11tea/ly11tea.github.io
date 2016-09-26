@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python,代码," />
+  <meta name="keywords" content="总结,python," />
 
 
 
@@ -84,25 +84,28 @@
 
 
 
-<meta name="description" content="Give therefore to the emperor the things that are the emperor’s;and to God the things that are God’s.
- Gospel of Matthew
+<meta name="description" content="file-like Object要想操纵一个文件你必须要使用open函数打开文件,open函数返回一个类文件对象,这就是这个文件在python中的抽象表示.
+初始化
+open(file[, mode][, buffering][, encoding][, errors][, newline][, closefd=True])方括号里的内容均可以省略.
 
-其实python的格式化字符串与C的printf函数相当类似,但用法显得更为灵活,所以还是稍微总结一下.">
+其中file： 要打开的文件名，需加路径(除">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python的格式化字符串与转义字符">
-<meta property="og:url" content="https://ly11tea.github.io/2016/09/24/python的格式化字符串与转义字符/index.html">
+<meta property="og:title" content="python 的文件读写和file-like Object">
+<meta property="og:url" content="https://ly11tea.github.io/2016/09/26/python-的文件读写和file-like-Object/index.html">
 <meta property="og:site_name" content="Luo's blog">
-<meta property="og:description" content="Give therefore to the emperor the things that are the emperor’s;and to God the things that are God’s.
- Gospel of Matthew
+<meta property="og:description" content="file-like Object要想操纵一个文件你必须要使用open函数打开文件,open函数返回一个类文件对象,这就是这个文件在python中的抽象表示.
+初始化
+open(file[, mode][, buffering][, encoding][, errors][, newline][, closefd=True])方括号里的内容均可以省略.
 
-其实python的格式化字符串与C的printf函数相当类似,但用法显得更为灵活,所以还是稍微总结一下.">
-<meta property="og:updated_time" content="2016-09-26T06:16:23.177Z">
+其中file： 要打开的文件名，需加路径(除">
+<meta property="og:updated_time" content="2016-09-26T15:44:06.601Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python的格式化字符串与转义字符">
-<meta name="twitter:description" content="Give therefore to the emperor the things that are the emperor’s;and to God the things that are God’s.
- Gospel of Matthew
+<meta name="twitter:title" content="python 的文件读写和file-like Object">
+<meta name="twitter:description" content="file-like Object要想操纵一个文件你必须要使用open函数打开文件,open函数返回一个类文件对象,这就是这个文件在python中的抽象表示.
+初始化
+open(file[, mode][, buffering][, encoding][, errors][, newline][, closefd=True])方括号里的内容均可以省略.
 
-其实python的格式化字符串与C的printf函数相当类似,但用法显得更为灵活,所以还是稍微总结一下.">
+其中file： 要打开的文件名，需加路径(除">
 
 
 
@@ -123,9 +126,9 @@
 
 
 
-  <link rel="canonical" href="https://ly11tea.github.io/2016/09/24/python的格式化字符串与转义字符/"/>
+  <link rel="canonical" href="https://ly11tea.github.io/2016/09/26/python-的文件读写和file-like-Object/"/>
 
-  <title> python的格式化字符串与转义字符 | Luo's blog </title>
+  <title> python 的文件读写和file-like Object | Luo's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -288,7 +291,7 @@
             
             
               
-                python的格式化字符串与转义字符
+                python 的文件读写和file-like Object
               
             
           </h1>
@@ -300,8 +303,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-24T11:51:17+08:00" content="2016-09-24">
-              2016-09-24
+            <time itemprop="dateCreated" datetime="2016-09-26T23:43:19+08:00" content="2016-09-26">
+              2016-09-26
             </time>
           </span>
 
@@ -311,8 +314,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/24/python的格式化字符串与转义字符/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/24/python的格式化字符串与转义字符/" itemprop="commentsCount"></span>
+                <a href="/2016/09/26/python-的文件读写和file-like-Object/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/26/python-的文件读写和file-like-Object/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -335,197 +338,23 @@
       
 
       
-        <blockquote class="blockquote-center"><p>Give therefore to the emperor the things that are the emperor’s;and to God the things that are God’s.</p>
-<p> <em>Gospel of Matthew</em></p>
+        <h1 id="file-like-Object"><a href="#file-like-Object" class="headerlink" title="file-like Object"></a>file-like Object</h1><p>要想操纵一个文件你必须要使用open函数打开文件,open函数返回一个类文件对象,这就是这个文件在python中的抽象表示.</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><blockquote>
+<p>open(file[, mode][, buffering][, encoding][, errors][, newline][, closefd=True])<br>方括号里的内容均可以省略.</p>
 </blockquote>
-<p>其实python的格式化字符串与C的printf函数相当类似,但用法显得更为灵活,所以还是稍微总结一下.<br><a id="more"></a> </p>
-<h1 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h1><p>先看一下python字符串的格式,格式化字符串时，Python使用一个字符串作为模板。模板中有格式符，这些格式符为真实值预留位置，并说明真实数值应该呈现的格式。Python用一个tuple将多个值传递给模板，每个值对应一个格式符。</p>
-<blockquote>
-<p>模板%(value1,value2,…)</p>
-</blockquote>
-<p>其中模板格式为:</p>
-<blockquote>
-<p>[(name)][flags][width].[precision]typecode</p>
-</blockquote>
-<p>下面来一一介绍其中的元素含义:</p>
-<h2 id="flags和width-precision"><a href="#flags和width-precision" class="headerlink" title="flags和width precision"></a>flags和width precision</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">符号</th>
-<th style="text-align:center">作用 </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">*</td>
-<td style="text-align:center">定义宽度或者小数点精度 </td>
-</tr>
-<tr>
-<td style="text-align:center">-</td>
-<td style="text-align:center">用做左对齐 </td>
-</tr>
-<tr>
-<td style="text-align:center">+</td>
-<td style="text-align:center">在正数前面显示加号( + ) </td>
-</tr>
-<tr>
-<td style="text-align:center">(空格键)</td>
-<td style="text-align:center">在正数前面显示空格 </td>
-</tr>
-<tr>
-<td style="text-align:center">#</td>
-<td style="text-align:center">在八进制数前面显示零(‘0’)，在十六进制前面显示’0x’或者’0X’(取决于用的是’x’还是’X’) </td>
-</tr>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">显示的数字前面填充‘0’而不是默认的空格 </td>
-</tr>
-<tr>
-<td style="text-align:center">%</td>
-<td style="text-align:center">‘%%’输出一个单一的’%’ </td>
-</tr>
-<tr>
-<td style="text-align:center">(var)</td>
-<td style="text-align:center">映射变量(字典参数) </td>
-</tr>
-<tr>
-<td style="text-align:center">m.n</td>
-<td style="text-align:center">m 是显示的最小总宽度,n是小数点后的位数(如果可用的话) </td>
-</tr>
-</tbody>
-</table>
-<h2 id="typecode"><a href="#typecode" class="headerlink" title="typecode"></a>typecode</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">格式化字符</th>
-<th style="text-align:center">转换方式 </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">%c</td>
-<td style="text-align:center">转换成字符(ASCII 码值，或者长度为一的字符串) </td>
-</tr>
-<tr>
-<td style="text-align:center">%r</td>
-<td style="text-align:center">优先用 repr()函数进行字符串转换 </td>
-</tr>
-<tr>
-<td style="text-align:center">%s</td>
-<td style="text-align:center">优先用 str()函数进行字符串转换 </td>
-</tr>
-<tr>
-<td style="text-align:center">%d / %i</td>
-<td style="text-align:center">转成有符号十进制数 </td>
-</tr>
-<tr>
-<td style="text-align:center">%u</td>
-<td style="text-align:center">转成无符号十进制数 </td>
-</tr>
-<tr>
-<td style="text-align:center">%o</td>
-<td style="text-align:center">转成无符号八进制数 </td>
-</tr>
-<tr>
-<td style="text-align:center">%x/%X</td>
-<td style="text-align:center">(Unsigned)转成无符号十六进制数(x/X代表转换后的十六进制字符的大小写) </td>
-</tr>
-<tr>
-<td style="text-align:center">%e/%E</td>
-<td style="text-align:center">转成科学计数法(e/E 控制输出 e/E) </td>
-</tr>
-<tr>
-<td style="text-align:center">%f/%F</td>
-<td style="text-align:center">转成浮点数(小数部分自然截断) </td>
-</tr>
-<tr>
-<td style="text-align:center">%g/%G</td>
-<td style="text-align:center">%e 和%f/%E 和%F 的简写 </td>
-</tr>
-<tr>
-<td style="text-align:center">%%</td>
-<td style="text-align:center">输出% </td>
-</tr>
-</tbody>
-</table>
-<p>其中比较有用的可能是m.n,即设置浮点数和整数的总宽度和浮点数的小数精度.<br>基本的一些例子:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%x"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'6c'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%X"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'6C'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%#X"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'0X6C'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%#x"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'0x6c'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%f'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.567890'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%.2f'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.57'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%E'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1.234568E+03'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%e'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1.234568e+03'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%g'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.57'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%G'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.57'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%e"</span> % (<span class="number">1111111111111111111111L</span>) </div><div class="line"><span class="string">'1.111111e+21'</span></div><div class="line"><span class="comment">#科学计数法表示同样也可以适用m.n,</span></div><div class="line">&gt;&gt;&gt;print(<span class="string">"%66.10e"</span> % (<span class="number">1111111111111111111111</span>))</div><div class="line"></div><div class="line">                                                  <span class="number">1.1111111111e+21</span></div></pre></td></tr></table></figure></p>
-<p>值得一提的是格式化字符<em>,它能够用后面tuple中相应的值代入width和precision<br>例如 :`print(“%.</em>f” % (4, 1.2))`<br>还有利用name参数,我们可以使用预先定义的格式化字符串生成字符串:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">formatter = <span class="string">"%r %r %r %r"</span></div><div class="line"><span class="keyword">print</span> formatter % (<span class="keyword">True</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">True</span>)</div></pre></td></tr></table></figure></p>
-<p>当然我们可以看到python的格式化字符串指令不依赖于函数,只是一个返回字符串的运算符.所以我们既可以用来输出字符串,也可以用来定义字符串..等等其他用途.</p>
-<h1 id="python的三引号"><a href="#python的三引号" class="headerlink" title="python的三引号"></a>python的三引号</h1><p>三引号’’’ ‘’’,在print中用来输出多行字符串,直接使用三引号还可以用来进行多行注释.</p>
-<h1 id="python的转义字符"><a href="#python的转义字符" class="headerlink" title="python的转义字符"></a>python的转义字符</h1><table>
-<thead>
-<tr>
-<th style="text-align:center">转义字符</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">(在行尾时)</td>
-<td style="text-align:center">续行符</td>
-</tr>
-<tr>
-<td style="text-align:center">\</td>
-<td style="text-align:center">反斜杠符号</td>
-</tr>
-<tr>
-<td style="text-align:center">\’</td>
-<td style="text-align:center">单引号</td>
-</tr>
-<tr>
-<td style="text-align:center">\”</td>
-<td style="text-align:center">双引号</td>
-</tr>
-<tr>
-<td style="text-align:center">\a</td>
-<td style="text-align:center">响铃</td>
-</tr>
-<tr>
-<td style="text-align:center">\b</td>
-<td style="text-align:center">退格(Backspace)</td>
-</tr>
-<tr>
-<td style="text-align:center">\e</td>
-<td style="text-align:center">转义</td>
-</tr>
-<tr>
-<td style="text-align:center">\000</td>
-<td style="text-align:center">空</td>
-</tr>
-<tr>
-<td style="text-align:center">\n</td>
-<td style="text-align:center">换行</td>
-</tr>
-<tr>
-<td style="text-align:center">\v</td>
-<td style="text-align:center">纵向制表符</td>
-</tr>
-<tr>
-<td style="text-align:center">\t</td>
-<td style="text-align:center">横向制表符</td>
-</tr>
-<tr>
-<td style="text-align:center">\r</td>
-<td style="text-align:center">回车</td>
-</tr>
-<tr>
-<td style="text-align:center">\f</td>
-<td style="text-align:center">换页</td>
-</tr>
-<tr>
-<td style="text-align:center">\oyy</td>
-<td style="text-align:center">八进制数yy代表的字符，例如：\o12代表换行</td>
-</tr>
-<tr>
-<td style="text-align:center">\xyy</td>
-<td style="text-align:center">十进制数yy代表的字符，例如：\x0a代表换行</td>
-</tr>
-<tr>
-<td style="text-align:center">\other</td>
-<td style="text-align:center">其它的字符以普通格式输出</td>
-</tr>
-</tbody>
-</table>
+<p>其中<br>file： 要打开的文件名，需加路径(除非是在当前目录)。唯一强制参数<br>mode： 文件打开的模式<br>buffering： 设置buffer（取值为0,1,&gt;1）<br>　0： 代表buffer关闭（只适用于二进制模式）<br>　1： 代表line buffer（只适用于文本模式）<br>encoding： 返回数据的编码（一般为UTF8或GBK）<br>errors： 报错级别（一般为strict，ignore）<br>　strict： 字符编码出现问题时会报错<br>　ignore： 字符编码出现问题时程序会忽略而过，继续执行下面的程序<br>newline： 用于区分换行符(只对文本模式有效，可以取的值有None,’\n’,’\r’,”,’\r\n’)<br>closefd： 传入的file参数类型（缺省为True）<br>　True： 传入的file参数为文件的文件名<br>　False： 传入的file参数只能是文件描述符<br>　Ps： 文件描述符，就是一个非负整数，在Unix内核的系统中，打开一个文件，便会返回一个文件描述符。<br>　<br>常用的参数有mode,encoding,buffering:</p>
+<h3 id="mode"><a href="#mode" class="headerlink" title="mode"></a>mode</h3><p>mode：文件打开的模式。有如下几种模式<br>‘r’： 以只读模式打开（缺省模式）（必须保证文件存在）<br>‘w’：以只写模式打开。若文件存在，则会<strong>自动清空文件</strong>，然后重新创建；若文件不存在，则新建文件。使用这个模式必须要保证文件所在目录存在，文件可以不存在。<br>‘a’：以追加模式打开。若文件存在，则会追加到文件的末尾；若文件不存在，则新建文件。</p>
+<p>要注意上面的<code>a</code>,<code>w</code>模式如果不用下面的<code>+</code>修饰是不能使用read…类的的函数的</p>
+<p>下面四个模式要和上面的模式组合使用<br>‘b’：以二进制模式打开<br>‘t’： 以文本模式打开（缺省模式）<br>‘+’：以读写模式打开<br>‘U’：以通用换行符模式打开</p>
+<p>所以加起来的组合有下面几种:<br>|模式    |描述<br>| :——–:             | :——|<br>|r    |以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。<br>|rb    |以二进制格式打开一个文件用于只读。文件指针将会放在文件的开头。这是默认模式。<br>|r+    |打开一个文件用于读写。文件指针将会放在文件的开头。<br>|rb+ |以二进制格式打开一个文件用于读写。文件指针将会放在文件的开头。<br>|w    |打开一个文件只用于写入。如果该文件已存在则将其覆盖。如果该文件不存在，创建新文件。<br>|wb |以二进制格式打开一个文件只用于写入。如果该文件已存在则将其覆盖。如果该文件不存在，创建新文件。<br>|w+    |打开一个文件用于读写。如果该文件已存在则将其覆盖。如果该文件不存在，创建新文件。<br>|wb+    |以二进制格式打开一个文件用于读写。如果该文件已存在则将其覆盖。如果该文件不存在，创建新文件。<br>|a    |打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。<br>|ab    |以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。<br>|a+    |打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。<br>|ab+    |以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。如果该文件不存在，创建新文件用于读写。</p>
+<h2 id="文件读写的方法"><a href="#文件读写的方法" class="headerlink" title="文件读写的方法"></a>文件读写的方法</h2><h3 id="close-方法"><a href="#close-方法" class="headerlink" title="close()方法"></a>close()方法</h3><p>File 对象的 close（）方法刷新缓冲区里任何还没写入的信息，并关闭该文件，这之后便不能再进行写入。为了防止可能的<strong>写入丢失</strong>,应该在每次关闭时都使用close()方法<br>语法：<br><code>fileObject.close();</code></p>
+<h3 id="write-方法"><a href="#write-方法" class="headerlink" title="write()方法"></a>write()方法</h3><p>write()方法可将任何<strong>字符串</strong>写入一个打开的文件。需要重点注意的是，Python字符串可以是二进制数据，而不是仅仅是文字。<br>write()方法<strong>不会自动</strong>在字符串的结尾添加换行符(‘\n’)：<br>语法：<br><code>fileObject.write(string);</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fo = open(<span class="string">"a.txt"</span>, <span class="string">"wb"</span>)</div><div class="line">fo.write( <span class="string">"l\n"</span>);</div></pre></td></tr></table></figure>
+<h3 id="read-方法"><a href="#read-方法" class="headerlink" title="read()方法"></a>read()方法</h3><p>read（）方法从一个打开的文件中读取一个字符串。需要重点注意的是，Python字符串可以是二进制数据，而不是仅仅是文字。<br>语法：<br>fileObject.read([count]);<br>在这里，被传递的参数是要从已打开文件中读取的字节计数。该方法从文件的开头开始读入，如果没有传入count，它会尝试尽可能多地读取更多的内容，很可能是<strong>直到文件的末尾</strong>。</p>
+<h2 id="文件定位的方法"><a href="#文件定位的方法" class="headerlink" title="文件定位的方法"></a>文件定位的方法</h2><h3 id="tell-方法"><a href="#tell-方法" class="headerlink" title="tell()方法"></a>tell()方法</h3><p>告诉你file-like Object在文件内的当前位置；换句话说，下一次的读写会发生在文件开头这么多字节之后。<br>语法：<br>fileObject.tell();</p>
+<h3 id="seek-方法"><a href="#seek-方法" class="headerlink" title="seek()方法"></a>seek()方法</h3><p>语法:<br>fileObject.seek（offset [,from]）<br>方法改变当前文件的位置。Offset变量表示要移动的字节数。From变量指定开始移动字节的参考位置(默认为0)<br>如果from被设为0，这意味着将文件的开头作为移动字节的参考位置。如果设为1，则使用当前的位置作为参考位置。如果它被设为2，那么该文件的末尾将作为参考位置。</p>
+<h2 id="文件迭代"><a href="#文件迭代" class="headerlink" title="文件迭代"></a>文件迭代</h2><p>在Python中，文件不仅仅是一个对象，而且是一个可迭代对象！,我们可以<strong>按行</strong>迭代它.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> line <span class="keyword">in</span> file:</div><div class="line">	print(line)</div></pre></td></tr></table></figure></p>
+<p>由上面的文件定位方法,我们可以看出file_like object指向的文件位置是可以变动.所以要注意file like object的指向位置</p>
 
       
     </div>
@@ -548,9 +377,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag">#python</a>
+            <a href="/tags/总结/" rel="tag">#总结</a>
           
-            <a href="/tags/代码/" rel="tag">#代码</a>
+            <a href="/tags/python/" rel="tag">#python</a>
           
         </div>
       
@@ -559,17 +388,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/23/算法4-二叉查找树/" rel="next" title="算法4 二叉查找树">
-                <i class="fa fa-chevron-left"></i> 算法4 二叉查找树
+              <a href="/2016/09/26/python函数的参数/" rel="next" title="python函数的参数">
+                <i class="fa fa-chevron-left"></i> python函数的参数
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/25/算法4-平衡查找树/" rel="prev" title="算法4 平衡查找树">
-                算法4 平衡查找树 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -618,8 +443,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/24/python的格式化字符串与转义字符/"
-           data-title="python的格式化字符串与转义字符" data-url="https://ly11tea.github.io/2016/09/24/python的格式化字符串与转义字符/">
+      <div class="ds-thread" data-thread-key="2016/09/26/python-的文件读写和file-like-Object/"
+           data-title="python 的文件读写和file-like Object" data-url="https://ly11tea.github.io/2016/09/26/python-的文件读写和file-like-Object/">
       </div>
     
   </div>
@@ -730,7 +555,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#格式"><span class="nav-number">1.</span> <span class="nav-text">格式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#flags和width-precision"><span class="nav-number">1.1.</span> <span class="nav-text">flags和width precision</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#typecode"><span class="nav-number">1.2.</span> <span class="nav-text">typecode</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python的三引号"><span class="nav-number">2.</span> <span class="nav-text">python的三引号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python的转义字符"><span class="nav-number">3.</span> <span class="nav-text">python的转义字符</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#file-like-Object"><span class="nav-number">1.</span> <span class="nav-text">file-like Object</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">1.1.</span> <span class="nav-text">初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mode"><span class="nav-number">1.1.1.</span> <span class="nav-text">mode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件读写的方法"><span class="nav-number">1.2.</span> <span class="nav-text">文件读写的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#close-方法"><span class="nav-number">1.2.1.</span> <span class="nav-text">close()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#write-方法"><span class="nav-number">1.2.2.</span> <span class="nav-text">write()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#read-方法"><span class="nav-number">1.2.3.</span> <span class="nav-text">read()方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件定位的方法"><span class="nav-number">1.3.</span> <span class="nav-text">文件定位的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tell-方法"><span class="nav-number">1.3.1.</span> <span class="nav-text">tell()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#seek-方法"><span class="nav-number">1.3.2.</span> <span class="nav-text">seek()方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件迭代"><span class="nav-number">1.4.</span> <span class="nav-text">文件迭代</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

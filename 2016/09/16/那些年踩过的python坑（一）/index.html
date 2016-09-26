@@ -97,7 +97,7 @@
 
 写一些初学python遇到的坑,主要是总结后给自己提个醒,当然如果能够帮助到别人那就更好了.">
 <meta property="og:image" content="https://ly11tea.github.io/images/relation.png">
-<meta property="og:updated_time" content="2016-09-16T09:42:36.751Z">
+<meta property="og:updated_time" content="2016-09-26T15:45:17.457Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="那些年踩过的python坑（一）">
 <meta name="twitter:description" content="格者，正也，正其不正，以归于正也.
@@ -413,7 +413,11 @@
 <p><img src="/images/relation.png" style="width: 260px;"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">####in the shell</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'€20'</span>.encode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="string">b'\xe2\x82\xac20'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'\xe2\x82\xac20'</span>.decode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="string">'€20'</span></div><div class="line"><span class="comment">###还可以将string转换为指定格式编码的bytes</span></div><div class="line"><span class="comment">###或者将指定格式编码的bytes转为string</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'€20'</span>.encode(<span class="string">'iso-8859-15'</span>)</div><div class="line"><span class="string">b'\xa420'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'\xa420'</span>.decode(<span class="string">'iso-8859-15'</span>)</div><div class="line"><span class="string">'€20'</span></div></pre></td></tr></table></figure>
 <p>简言之,在py3中py2的unicode变成了string,py2的bytearray变为了bytes</p>
-<h2 id="path"><a href="#path" class="headerlink" title="path"></a>path</h2>
+<h2 id="path"><a href="#path" class="headerlink" title="path"></a>path</h2><pre><code>## print 不换行输出
+</code></pre><p>这又是一个python2与python3的不同之处了<br>在python2中希望用一条print函数输出并不换行的方法是在末尾加一个逗号.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> a,</div></pre></td></tr></table></figure></p>
+<p>而在python3中,方法为是将print函数中的end参数置为空,默认为\n<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(a,...,end=<span class="string">''</span>)</div></pre></td></tr></table></figure></p>
+<h2 id="argv的第一个参数为脚本名"><a href="#argv的第一个参数为脚本名" class="headerlink" title="argv的第一个参数为脚本名"></a>argv的第一个参数为脚本名</h2><p>如题<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> argv</div><div class="line">scriptname,a,...=argv</div></pre></td></tr></table></figure></p>
+
       
     </div>
 
@@ -551,7 +555,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -617,7 +621,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python的turple-list和dict"><span class="nav-number">1.</span> <span class="nav-text">python的turple,list和dict</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#list"><span class="nav-number">1.1.</span> <span class="nav-text">list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#turple"><span class="nav-number">1.2.</span> <span class="nav-text">turple</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dict"><span class="nav-number">1.3.</span> <span class="nav-text">dict</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#enumerate"><span class="nav-number">2.</span> <span class="nav-text">enumerate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bytearrary"><span class="nav-number">3.</span> <span class="nav-text">bytearrary</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#python-2"><span class="nav-number">3.1.</span> <span class="nav-text">python 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python3"><span class="nav-number">3.2.</span> <span class="nav-text">python3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#path"><span class="nav-number">4.</span> <span class="nav-text">path</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python的turple-list和dict"><span class="nav-number">1.</span> <span class="nav-text">python的turple,list和dict</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#list"><span class="nav-number">1.1.</span> <span class="nav-text">list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#turple"><span class="nav-number">1.2.</span> <span class="nav-text">turple</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dict"><span class="nav-number">1.3.</span> <span class="nav-text">dict</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#enumerate"><span class="nav-number">2.</span> <span class="nav-text">enumerate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bytearrary"><span class="nav-number">3.</span> <span class="nav-text">bytearrary</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#python-2"><span class="nav-number">3.1.</span> <span class="nav-text">python 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python3"><span class="nav-number">3.2.</span> <span class="nav-text">python3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#path"><span class="nav-number">4.</span> <span class="nav-text">path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#argv的第一个参数为脚本名"><span class="nav-number">5.</span> <span class="nav-text">argv的第一个参数为脚本名</span></a></li></ol></div>
             
           </div>
         </section>
