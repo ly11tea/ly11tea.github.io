@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="读书笔记,算法4," />
 
 
 
@@ -84,13 +84,21 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="https://ly11tea.github.io/tags/index.html">
+<meta name="description" content="定义
+通过算术操作将键转化为数组的索引以将键值对存储在数组中或来访问数组中的键值对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法4 散列表">
+<meta property="og:url" content="https://ly11tea.github.io/2016/09/26/算法4-散列表/index.html">
 <meta property="og:site_name" content="Luo's blog">
-<meta property="og:updated_time" content="2016-09-14T03:10:58.275Z">
+<meta property="og:description" content="定义
+通过算术操作将键转化为数组的索引以将键值对存储在数组中或来访问数组中的键值对">
+<meta property="og:image" content="https://ly11tea.github.io/images/lalianbiao.png">
+<meta property="og:updated_time" content="2016-09-26T15:26:18.538Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="算法4 散列表">
+<meta name="twitter:description" content="定义
+通过算术操作将键转化为数组的索引以将键值对存储在数组中或来访问数组中的键值对">
+<meta name="twitter:image" content="https://ly11tea.github.io/images/lalianbiao.png">
 
 
 
@@ -111,15 +119,9 @@
 
 
 
-  <link rel="canonical" href="https://ly11tea.github.io/tags/"/>
+  <link rel="canonical" href="https://ly11tea.github.io/2016/09/26/算法4-散列表/"/>
 
-  <title>
-  
-
-  
-    标签 | Luo's blog
-  
-</title>
+  <title> 算法4 散列表 | Luo's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -140,7 +142,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -263,16 +265,187 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
     
-      <div class="tag-cloud">
-        <div class="tag-cloud-title">
-            目前共计 10 个标签
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                算法4 散列表
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-26T23:08:28+08:00" content="2016-09-26">
+              2016-09-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/算法4/" itemprop="url" rel="index">
+                    <span itemprop="name">算法4</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/26/算法4-散列表/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/26/算法4-散列表/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
         </div>
-        <div class="tag-cloud-tags">
-          <a href="/tags/hexo/" style="font-size: 12px; color: #ccc">hexo</a> <a href="/tags/python/" style="font-size: 30px; color: #111">python</a> <a href="/tags/代码/" style="font-size: 12px; color: #ccc">代码</a> <a href="/tags/总结/" style="font-size: 30px; color: #111">总结</a> <a href="/tags/神夏/" style="font-size: 12px; color: #ccc">神夏</a> <a href="/tags/算法4/" style="font-size: 21px; color: #6f6f6f">算法4</a> <a href="/tags/算法4-读书笔记/" style="font-size: 12px; color: #ccc">算法4 读书笔记</a> <a href="/tags/翻译/" style="font-size: 12px; color: #ccc">翻译</a> <a href="/tags/读书笔记/" style="font-size: 30px; color: #111">读书笔记</a> <a href="/tags/软件工程/" style="font-size: 12px; color: #ccc">软件工程</a>
-        </div>
-      </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><blockquote>
+<p>通过算术操作将键转化为数组的索引以将键值对存储在数组中或来访问数组中的键值对<br><a id="more"></a> </p>
+<h1 id="散列函数"><a href="#散列函数" class="headerlink" title="散列函数"></a>散列函数</h1><p>如果我们有一个能够保存M个键值对的数组，那么我们就需要一个能够将任意的键值转化为该数组范围内的索引( [0, M-1 ]范围内的整数)的散列函数。我们要找的散列函敛应该易于计算并且能够均匀分布所有的键，即对于任意键，0到m-1之间的每个整数都有<strong>相等</strong>的可能性与之对应(与健无关) 。<br>每一种类型都可能要对应于一种散列函数,例如对于整数,我们常用的是<strong>除留余数法</strong></p>
+</blockquote>
+<p>总的来说好的散列方法需要满足下列性质:<br>等价性一一等价的键一定产生一样的散到值;<br>高效性一一计算简便;<br>均匀性一一均匀地散列到数组下标范围内</p>
+<p>设计散列函数是计算机科学家的事情,但我们在使用时要确认:<br>我们使用的散列岳数能够均匀并独立地将所有的键散布于0到 M-l 之间</p>
+<h1 id="基于拉链法实现的散列表"><a href="#基于拉链法实现的散列表" class="headerlink" title="基于拉链法实现的散列表"></a>基于拉链法实现的散列表</h1><p>将大小为 M的数组中的每个元素指向一条链表.每条链表中都存储着散列值为这个元素的键值对,这种方法被称为拉链法.<br><img src="/images/lalianbiao.png" style="width: 260px;"></p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ol>
+<li>我们为数组内部的M个元素分别构造符号表</li>
+<li>先在散列表的put,get方法中使用散列函数计算是哪一个符号表元素,再用符号表的put,get方法插入或提取元素</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> alg;</div><div class="line"></div><div class="line"><span class="keyword">import</span> edu.princeton.cs.algs4.SequentialSearchST;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SeparatechainingHashST</span> &lt;<span class="title">Key</span>,<span class="title">Value</span>&gt;</span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> m;<span class="comment">//hash表的数量</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> n;<span class="comment">//元素总的数量</span></div><div class="line">	SequentialSearchST&lt;Key, Value&gt;[] st;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">SeparatechainingHashST</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">this</span>(<span class="number">997</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">SeparatechainingHashST</span><span class="params">(<span class="keyword">int</span> number)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">this</span>.m=number;</div><div class="line">		st= (SequentialSearchST&lt;Key, Value&gt;[]) <span class="keyword">new</span> SequentialSearchST[number];<span class="comment">//java不支持数组的泛型定义,故只能使用类型转换的方法</span></div><div class="line">		<span class="keyword">this</span>.n=<span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</div><div class="line">			st[i]=<span class="keyword">new</span> SequentialSearchST&lt;Key,Value&gt;();</div><div class="line">	&#125;</div><div class="line">  </div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Key key)</span><span class="comment">//生成对应的数组下标</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> (key.hashCode()&amp;<span class="number">0x7fffffff</span>)%m;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> Value <span class="title">get</span> <span class="params">(Key key)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> st[hash(key)].get(key);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span> <span class="params">(Key key,Value value)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(!st[hash(key)].contains(key))</div><div class="line">			n++;</div><div class="line">		st[hash(key)].put(key, value);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(Key key)</span></span></div><div class="line">	&#123;</div><div class="line">		st[hash(key)].delete(key);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h2><p>在一张含有 M条链表和 N个键的的散列表中未命中查我和插入操作所需要的比较次数为 ~N/M<br>使用拉链法的一个好处就是这在N和M的选取上不需要太多的斟酌:<br>M偏小,N偏大时时间只会稍稍变长<br>而M偏大时,虽然浪费了空间但速度很快,甚至能够达到常数级别</p>
+<h2 id="有序操作"><a href="#有序操作" class="headerlink" title="有序操作"></a>有序操作</h2><p>因为散列函数需要将键值分散,故已经失去了有序信息,所以在要使用到有序操作的地方,<strong>散列表不是一个好选择</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/读书笔记/" rel="tag">#读书笔记</a>
+          
+            <a href="/tags/算法4/" rel="tag">#算法4</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/25/算法4-平衡查找树/" rel="next" title="算法4 平衡查找树">
+                <i class="fa fa-chevron-left"></i> 算法4 平衡查找树
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/26/python函数的参数/" rel="prev" title="python函数的参数">
+                python函数的参数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
   </div>
 
 
@@ -283,8 +456,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="tags/index.html"
-           data-title="tags" data-url="https://ly11tea.github.io/tags/index.html">
+      <div class="ds-thread" data-thread-key="2016/09/26/算法4-散列表/"
+           data-title="算法4 散列表" data-url="https://ly11tea.github.io/2016/09/26/算法4-散列表/">
       </div>
     
   </div>
@@ -308,8 +481,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -379,6 +561,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#散列函数"><span class="nav-number">2.</span> <span class="nav-text">散列函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于拉链法实现的散列表"><span class="nav-number">3.</span> <span class="nav-text">基于拉链法实现的散列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">3.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能分析"><span class="nav-number">3.2.</span> <span class="nav-text">性能分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有序操作"><span class="nav-number">3.3.</span> <span class="nav-text">有序操作</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -482,6 +675,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

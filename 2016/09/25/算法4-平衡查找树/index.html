@@ -1,0 +1,923 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法4 读书笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="天之道,损有余而补不足.道德经
+
+目的:寻找一种数据结构,这种结构无论在任何插入情况下都能保证对数级别的运行时间.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法4 平衡查找树">
+<meta property="og:url" content="https://ly11tea.github.io/2016/09/25/算法4-平衡查找树/index.html">
+<meta property="og:site_name" content="Luo's blog">
+<meta property="og:description" content="天之道,损有余而补不足.道德经
+
+目的:寻找一种数据结构,这种结构无论在任何插入情况下都能保证对数级别的运行时间.">
+<meta property="og:image" content="https://ly11tea.github.io/images\black_red_tree\2_3tree.png">
+<meta property="og:image" content="https://ly11tea.github.io/images\black_red_tree\1.png">
+<meta property="og:image" content="https://ly11tea.github.io/images\black_red_tree\2.png">
+<meta property="og:image" content="https://ly11tea.github.io/images\black_red_tree\3.png">
+<meta property="og:image" content="https://ly11tea.github.io/images\black_red_tree\4.png">
+<meta property="og:image" content="https://ly11tea.github.io/images\black_red_tree\5.png">
+<meta property="og:updated_time" content="2016-09-26T15:36:25.461Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法4 平衡查找树">
+<meta name="twitter:description" content="天之道,损有余而补不足.道德经
+
+目的:寻找一种数据结构,这种结构无论在任何插入情况下都能保证对数级别的运行时间.">
+<meta name="twitter:image" content="https://ly11tea.github.io/images\black_red_tree\2_3tree.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ly11tea.github.io/2016/09/25/算法4-平衡查找树/"/>
+
+  <title> 算法4 平衡查找树 | Luo's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Luo's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-episode">
+          <a href="/categories/短/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-comment-o"></i> <br />
+            
+            短
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                算法4 平衡查找树
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-25T23:01:05+08:00" content="2016-09-25">
+              2016-09-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/算法4/" itemprop="url" rel="index">
+                    <span itemprop="name">算法4</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/25/算法4-平衡查找树/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/25/算法4-平衡查找树/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote class="blockquote-center"><p>天之道,损有余而补不足.<br><em>道德经</em></p>
+</blockquote>
+<p>目的:寻找一种数据结构,这种结构无论在任何插入情况下都能保证对数级别的运行时间.<br><a id="more"></a> </p>
+<h1 id="2-3查找树"><a href="#2-3查找树" class="headerlink" title="2-3查找树"></a>2-3查找树</h1><p>我们将一棵标准的二叉查找树小的结点称为 2- 结点(含有一个键和两条链接), 而现在我们引人 3- 结点，它含有两个键和三条链接。</p>
+<blockquote>
+<p>定义:一棵2-3 查找树或为一棵空树，或由以下两种结点组成:<br>2- 结点，含有一个键(及其对应的值)和两条链接，左链接指向的 2-3 树中的键都<strong>小子</strong>该结点，右链接指向的 2-3 树中的键都<strong>大于</strong>该给点。<br>3- 结点，含有两个键(及其对应的值)和三条链接，左链接指向的 2-3 树中的键都<strong>小于</strong>该结点，中链接指向的2-3树中的键都位于该结点的两个键<strong>之间</strong>，右链接指向的 2-3树中的键都<strong>大于</strong>该给点。</p>
+</blockquote>
+<p><img src="images\black_red_tree\2_3tree.png" style="width: 260px;"></p>
+<p>下面来重点谈谈2-3查找树的插入过程:</p>
+<ol>
+<li>向 2- 结点中插入新键:如果要在一个2-节点上插入新键,只需要将这个2-节点改为3-节点即可.<br><img src="images\black_red_tree\1.png" style="width: 260px;"></li>
+<li>向只有一个3-节点的树中插入新键:直接向新键插入3-节点中,于是当前节点拥有三个键,四个连接,所以可以分解为三个二叉搜索树的节点,中间节点作为根节点,左节点为最小节点,右节点为最大节点.<br><img src="images\black_red_tree\2.png" style="width: 260px;"></li>
+<li>向一个父节点为2-节点的3-节点插入新键:直接将新键插入当前节点中,于是当前节点拥有三个键,四个连接,但此时我们把中间键上浮至2-父节点.使父节点变为3-节点.<br><img src="images\black_red_tree\3.png" style="width: 260px;"></li>
+<li><p>向一个父结点为 3- 结点的 3- 结点中插入新键:我们仍然将新键插入当前节点中,再次分解为三个2-节点,但此时上浮的根节点,会将其父节点也变为4-节点,所以我们再次重复,直到找到2-节点为止.<br><img src="images\black_red_tree\4.png" style="width: 260px;"></p>
+</li>
+<li><p>分解根节点:如果一个新插入键值路途上的所有节点都是3-节点,那么根节点也就变成了4-节点,此时我们套用情况2,将4-节点化为3个2-节点,树高+1<br><img src="images\black_red_tree\5.png" style="width: 260px;"></p>
+</li>
+</ol>
+<p>特点:</p>
+<ul>
+<li>2-3查找树的每次插入都是局部性的,即对全局没有影响.</li>
+<li>和标准的二叉态钱树由上向下生长不同. 2-3 树的生长是由下向上的。</li>
+<li>性能:<strong>查找和插入操作访问的结点必然不超过 lgN个</strong></li>
+</ul>
+<h1 id="红黑二叉查找树"><a href="#红黑二叉查找树" class="headerlink" title="红黑二叉查找树"></a>红黑二叉查找树</h1><p>2-3查找树虽然带来了显著的性能改善,但是也增加了数据结构的复杂度和编码的难度,如果采用不当的编码方式,有可能造成性能低于二叉树;所以我们采用红黑树的方法,在二叉树的基础上实现了2-3查找树<br>我们们将树的链接分为两种类型:</p>
+<ol>
+<li>红链接将2个2-结点连接起来构成一个 3- 结点.</li>
+<li>黑链接则是2-3查找树上的普通连接<br>确切地说,我们将 3- 结点表示为一条左斜的红色链接相连的2个2-节点<br>图</li>
+</ol>
+<blockquote>
+<p>定义:一种带有红黑链接的二叉查找树:</p>
+<ol>
+<li>红链接均为左链接;</li>
+<li>没有任何一个结点问时和两条红链接相连:</li>
+<li>该树是完美黑色平衡的(任意空连接到根节点的黑色链接的数量是相同的)</li>
+</ol>
+</blockquote>
+<p>一棵红黑树的红链接拉平.那么所有的空链接到根结点的距离都是相同的。 如果将所有由红链接相应的点结合,得到的就是一棵 2-3 树。<br>图</p>
+<h2 id="颜色表示"><a href="#颜色表示" class="headerlink" title="颜色表示"></a>颜色表示</h2><p>我们在节点中表示链接的颜色(除根节点外.每个节点都有且仅有一条指向自己的链接).<br>约定:</p>
+<ol>
+<li>一个结点的颜色,指的是<strong>指向该结点的链接的颜色</strong></li>
+<li>颜色变量类型为bool值,true代表红色,false代表黑色.</li>
+<li>空节点颜色为黑色</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BlackRedTree</span> &lt;<span class="title">Key</span> <span class="keyword">extends</span> <span class="title">Comparable</span>&lt;<span class="title">Key</span>&gt;,<span class="title">Value</span>&gt; </span></div><div class="line">&#123;</div><div class="line">	Node root;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> Red=<span class="keyword">true</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> Black=<span class="keyword">true</span>;</div><div class="line">	<span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span></div><div class="line">	&#123;</div><div class="line">		Key key;</div><div class="line">		Value value;</div><div class="line">		Node left,right;</div><div class="line">		<span class="keyword">int</span> N;</div><div class="line">		<span class="keyword">boolean</span> colour;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(Key key,Value value,<span class="keyword">int</span> N,<span class="keyword">boolean</span> colour)</span></span></div><div class="line">		&#123;</div><div class="line">			<span class="keyword">this</span>.key=key;</div><div class="line">			<span class="keyword">this</span>.value=value;</div><div class="line">			<span class="keyword">this</span>.colour=colour;</div><div class="line">			<span class="keyword">this</span>.N=N;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isRed</span><span class="params">(Node node)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(node==<span class="keyword">null</span>)</div><div class="line">			<span class="keyword">return</span> Black;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">return</span> node.colour==Red;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="旋转操作"><a href="#旋转操作" class="headerlink" title="旋转操作"></a>旋转操作</h2><p>在插入新的键时我们可以使用旋转保证2-3树和红黑树之间的一一对应关系，因为旋转操作可以保持红黑树的两个重要性质:<strong>有序性和完美平衡性</strong>。<br>特点:</p>
+<ol>
+<li>旋转都是把两节点中较小点作为根节点变为将较大点变为根节点,并调换红节点</li>
+<li>使用递归的方式进行旋转,每次返回经过旋转的当前节点值.</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">rotateleft</span><span class="params">(Node node)</span></span></div><div class="line">	&#123;</div><div class="line">		Node temp=node.right;</div><div class="line">		node.right=temp.left; <span class="comment">//注意:本行与下面一行不可颠倒</span></div><div class="line">		temp.left=node;</div><div class="line">		temp.colour=node.colour;</div><div class="line">		node.colour=Red;</div><div class="line">		temp.N=node.N;</div><div class="line">		node.N=size(node.left)+size(node.right)+<span class="number">1</span>;</div><div class="line">		<span class="keyword">return</span> temp;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> Node <span class="title">rotateright</span><span class="params">(Node node)</span></span></div><div class="line">	&#123;</div><div class="line">		Node temp=node.left;</div><div class="line">		node.left=temp.right;</div><div class="line">		temp.right=node;</div><div class="line">		temp.colour=node.colour;</div><div class="line">		node.colour=Red;</div><div class="line">		temp.N=node.N;</div><div class="line">		node.N=size(node.left)+size(node.right)+<span class="number">1</span>;</div><div class="line">		<span class="keyword">return</span> temp;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h2 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h2><p>情况:</p>
+<ol>
+<li>向 2- 结点中插入新键:如果新键小于老键,我们只需将新键插入老键左链接并作为红节点.若大于,则需要将新键插入老键右链接,并进行左旋.</li>
+<li>向树底的 2- 结点插入新键:与情况1相同<br><em>以上两种情况同2-3查找树中的插入情况1相类似.</em></li>
+</ol>
+<p>3.一棵双键树 〈 即一个 3- 结点〉 中插入新键:<br>a. 新键大于原树中的两个键:这种情况新键作为紅节点插入到双键树的右侧,那么就出现了两个红链接的现象,此时将两个红链接都置黑,得到3个2-树<br>对应于2-3查找树的情况2<br>b. 如果新键小于原树中的两个键,那么新键会被放置进当前左子树的左子树中,这样就出现了两条连续的红链接,此时将根节点右旋即可得到情况a.<br>c. 如果新键小于原树中的一个键大于另外一个,那么也会出现两个连续红链接的现象,一个为左链接一个下一层的右链接.,此时将右链接左旋即可得到情况b.</p>
+<p>其中情况a的变换颜色,我们需要把子节点的链接由红置黑,同时将父节点由黑置红.值得注意的是:根节点始终应当是黑的.</p>
+<p>4.树底部3-节点插入新键<br>与情况4相同</p>
+<p>整个插入过程使用递归实现,事实上就是一个红链接不断向上移动的过程</p>
+<p>总的来说,对于红黑树的操作为:</p>
+<ol>
+<li>如果右子结点是红色的而左子结点是黑色的.当前节点进行左旋转;</li>
+<li>如果左子结点是红色的且它的左子结点也是红色,当前节点进行右旋转</li>
+<li>如果左右子结点均为红色进行颜色转换。<br>需要在插入时按次序执行上述语句.<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">flipcolour</span><span class="params">(Node node)</span></span></div><div class="line">&#123;</div><div class="line">	node.right.colour=Black;</div><div class="line">	node.left.colour=Black;</div><div class="line">	node.colour=Red;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(Key key,Value value)</span></span></div><div class="line">&#123;</div><div class="line">	root=put(root,key, value);</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">changecolour</span><span class="params">(Node node)</span></span></div><div class="line">&#123;</div><div class="line">	node.left.colour=node.right.colour==Black;</div><div class="line">	node.colour=Red;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">private</span> Node <span class="title">put</span><span class="params">(Node node,Key key,Value value)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(node==<span class="keyword">null</span>)</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Node(key, value, <span class="number">1</span>, Red);</div><div class="line">	<span class="keyword">int</span> cmp=key.compareTo(node.key);</div><div class="line">	<span class="keyword">if</span>(cmp&lt;<span class="number">0</span>) node=put(node.left, key, value);</div><div class="line">	<span class="keyword">if</span>(cmp&gt;<span class="number">0</span>) node=put(node.right, key, value);</div><div class="line">	<span class="keyword">if</span>(cmp==<span class="number">0</span>) node.value=value;</div><div class="line">	<span class="keyword">if</span>(node.right.colour==Red&amp;&amp;node.left.colour!=Red)</div><div class="line">		node=rotateleft(node);</div><div class="line">	<span class="keyword">if</span>(node.left.colour==Red&amp;&amp;node.left.left.colour==Red)</div><div class="line">		node=rotateright(node);</div><div class="line">	<span class="keyword">if</span>(node.left.colour==Red&amp;&amp;node.right.colour==Red)</div><div class="line">		changecolour(node);</div><div class="line">	node.N=size(node.left)+size(node.right)+<span class="number">1</span>;</div><div class="line">	<span class="keyword">return</span> node;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h2><ol>
+<li>所有基于红黑树的符号表实现都能保证操作的运行时间为<strong>对数</strong>级别</li>
+<li>一棵大小为 N 的红黑树的高度不会超过 2lgn,事实上在大多数情况下比较次数为lgn-0.5</li>
+<li>相比较于二叉查找树的1.39lgn提升了40%</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法4-读书笔记/" rel="tag">#算法4 读书笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/24/python的格式化字符串与转义字符/" rel="next" title="python的格式化字符串与转义字符">
+                <i class="fa fa-chevron-left"></i> python的格式化字符串与转义字符
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/26/算法4-散列表/" rel="prev" title="算法4 散列表">
+                算法4 散列表 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/25/算法4-平衡查找树/"
+           data-title="算法4 平衡查找树" data-url="https://ly11tea.github.io/2016/09/25/算法4-平衡查找树/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Luo" />
+          <p class="site-author-name" itemprop="name">Luo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ly11tea" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/your-user-name" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-question-circle"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-3查找树"><span class="nav-number">1.</span> <span class="nav-text">2-3查找树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#红黑二叉查找树"><span class="nav-number">2.</span> <span class="nav-text">红黑二叉查找树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#颜色表示"><span class="nav-number">2.1.</span> <span class="nav-text">颜色表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#旋转操作"><span class="nav-number">2.2.</span> <span class="nav-text">旋转操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入操作"><span class="nav-number">2.3.</span> <span class="nav-text">插入操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能分析"><span class="nav-number">2.4.</span> <span class="nav-text">性能分析</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ly11tea"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

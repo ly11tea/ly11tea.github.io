@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="总结,python," />
 
 
 
@@ -84,13 +84,16 @@
 
 
 
+<meta name="description" content="All roads lead to Rome.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ss">
-<meta property="og:url" content="https://ly11tea.github.io/2016/09/13/ss/index.html">
+<meta property="og:title" content="python函数的参数">
+<meta property="og:url" content="https://ly11tea.github.io/2016/09/26/python函数的参数/index.html">
 <meta property="og:site_name" content="Luo's blog">
-<meta property="og:updated_time" content="2016-09-13T12:38:41.812Z">
+<meta property="og:description" content="All roads lead to Rome.">
+<meta property="og:updated_time" content="2016-09-26T15:38:19.756Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ss">
+<meta name="twitter:title" content="python函数的参数">
+<meta name="twitter:description" content="All roads lead to Rome.">
 
 
 
@@ -111,9 +114,9 @@
 
 
 
-  <link rel="canonical" href="https://ly11tea.github.io/2016/09/13/ss/"/>
+  <link rel="canonical" href="https://ly11tea.github.io/2016/09/26/python函数的参数/"/>
 
-  <title> ss | Luo's blog </title>
+  <title> python函数的参数 | Luo's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -276,7 +279,7 @@
             
             
               
-                ss
+                python函数的参数
               
             
           </h1>
@@ -288,8 +291,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-13T20:38:41+08:00" content="2016-09-13">
-              2016-09-13
+            <time itemprop="dateCreated" datetime="2016-09-26T23:17:45+08:00" content="2016-09-26">
+              2016-09-26
             </time>
           </span>
 
@@ -299,8 +302,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/13/ss/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/13/ss/" itemprop="commentsCount"></span>
+                <a href="/2016/09/26/python函数的参数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/26/python函数的参数/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -323,7 +326,34 @@
       
 
       
-        
+        <blockquote class="blockquote-center"><p>All roads lead to Rome.</p>
+</blockquote>
+<a id="more"></a> 
+<p>python函数的参数使用非常灵活,有位置参数,默认参数,和多种的可变参数.其中可变参数的使用相较其他语言更加的便捷.现总结如下:</p>
+<h1 id="位置参数"><a href="#位置参数" class="headerlink" title="位置参数"></a>位置参数</h1><p>位置参数是最常见的标准化参数。位置参数必须以在被调用函数中定义的<strong>准确顺序</strong>来传递。另外，没有任何默认参数）的话，传入函数（调用）的参数的精确的<strong>数目</strong>必须和声明的数字一致。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">def power(a,b)</div><div class="line"></div><div class="line">power(1,2)#少了一个参数都会出现错误</div></pre></td></tr></table></figure></p>
+<h1 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h1><p>对于默认参数如果在函数调用时没有为参数提供值则使用预先定义的的默认值。这些定义在函数声明的标题行中给出。c++也支持默认参数，和 python 有同样的语法：参数名等号默认值。<br>值得注意的是,同c++也一样,<strong>所有的位置参数必须出现在任何一个默认参数之前</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">abs</span><span class="params">(a,b=<span class="number">12</span>)</span></span></div></pre></td></tr></table></figure></p>
+<p>同时还要注意的是,如果使用python中的<strong>可变对象</strong>作为默认参数,可能会继承上一次调用函数的结果,出现不想要的现象.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">myadd</span><span class="params">(a,b=[])</span>:</span></div><div class="line">	b.append(a)</div><div class="line">	<span class="keyword">return</span> b</div><div class="line">	</div><div class="line">print(myadd(<span class="number">2</span>))</div><div class="line">print(myadd(<span class="number">3</span>))</div></pre></td></tr></table></figure></p>
+<p>输出的结果是<br>[2]<br>[2, 3]<br>而非<br>[2]<br>[3]</p>
+<h1 id="非关键字可变长参数（元组）"><a href="#非关键字可变长参数（元组）" class="headerlink" title="非关键字可变长参数（元组）"></a>非关键字可变长参数（元组）</h1><p>当函数被调用的时候，所有的形参（必须的和默认的）都将值赋给了在函数声明中相对应的局部变量。<strong>剩下</strong>的非关键字参数按顺序插入到一个<strong>元组</strong>中便于访问<br>同样的,可变长的参数元组必须在位置参数和默认参数之后:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">var</span><span class="params">(*a)</span>:</span></div><div class="line">	print(type(a))</div><div class="line">	<span class="keyword">for</span> ele <span class="keyword">in</span> a:</div><div class="line">		<span class="keyword">print</span> (ele)</div><div class="line">	</div><div class="line">var(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)</div></pre></td></tr></table></figure></p>
+<p>输出为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;class &apos;tuple&apos;&gt;</div><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td></tr></table></figure></p>
+<h1 id="关键字变量参数-dict"><a href="#关键字变量参数-dict" class="headerlink" title="关键字变量参数(dict)"></a>关键字变量参数(dict)</h1><p>在我们有不定数目的或者额外集合的关键字的情况中，参数被放入一个字典中，字典中键为参数名，值为相应的参数值。为什么一定要是字典呢?因为为每个参数-参数的名字和参数值–都是成对给出—用字典来保存这些参数自然就最适合不过了。 </p>
+<p>为了区分关键字参数和非关键字非正式参数，使用了双星号（**）标识符,同样的关键字参数必须位于<strong>位置参数,默认参数和非关键字可变长参数</strong>之后</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">vardict</span><span class="params">(**a)</span>:</span></div><div class="line">	print(type(a))</div><div class="line">	<span class="keyword">for</span> ele <span class="keyword">in</span> a.keys():</div><div class="line">		<span class="keyword">print</span> (ele,a[ele])</div><div class="line">vardict(city=<span class="string">'Beijing'</span>,job=<span class="string">'Engineer'</span>)</div></pre></td></tr></table></figure>
+<p>输出为:<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;class 'dict'&gt;</div><div class="line">job Engineer</div><div class="line">city Beijing</div></pre></td></tr></table></figure></p>
+<h1 id="命名关键字参数"><a href="#命名关键字参数" class="headerlink" title="命名关键字参数"></a>命名关键字参数</h1><p>对于关键字参数，函数的调用者可以传入任意不受限制的关键字参数。至于到底传入了哪些，就需要在函数内部通过kw检查。<br>如果要限制关键字参数的名字，就可以用命名关键字参数,语法如下:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">person</span><span class="params">(name, age, *, city, job)</span>:</span></div><div class="line">    print(name, age, city, job)</div><div class="line"><span class="comment">#命名关键字参数需要一个特殊分隔符*，*后面的参数被视为命名关键字参数</span></div><div class="line"><span class="comment">#如果函数定义中已经有了一个可变参数，后面跟着的命名关键字参数就不再需要一个特殊分隔符*了</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">person</span><span class="params">(name, age, *args, city, job)</span>:</span></div><div class="line">    print(name, age, args, city, job)</div><div class="line">    </div><div class="line"><span class="comment">#调用时要加上参数名</span></div><div class="line">person(<span class="string">'bert'</span>,<span class="number">22</span>,<span class="number">2</span>,<span class="number">3.</span>..,city=<span class="string">'sh'</span>,job=<span class="string">'tea'</span>)</div></pre></td></tr></table></figure></p>
+<p>例子:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">vardict</span><span class="params">(a,b,*,c,d)</span>:</span></div><div class="line">	print(type(c))</div><div class="line">	print(a,b,c,d)</div><div class="line">vardict(<span class="number">1</span>,<span class="number">2</span>,c=<span class="number">3</span>,d=<span class="number">4</span>)</div></pre></td></tr></table></figure></p>
+<p>输出为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;class &apos;int&apos;&gt;</div><div class="line">1 2 3 4</div></pre></td></tr></table></figure></p>
+<p>值得注意的是:在使用这些参数类型时,要遵循的顺序是:<br><strong>必选参数、默认参数、可变参数、命名关键字参数和关键字参数</strong></p>
+<h1 id="基于调用函数的参数概念"><a href="#基于调用函数的参数概念" class="headerlink" title="基于调用函数的参数概念"></a>基于调用函数的参数概念</h1><p>上面的概念都是相对于定义函数参数而言的,下面的两个概念与调用函数相关</p>
+<h2 id="参数组"><a href="#参数组" class="headerlink" title="参数组"></a>参数组</h2><p>通过一个把元组（非关键字 参数）或字典（关键字参数）作为参数组传递给函数。</p>
+<blockquote>
+<p>func(<em>tuple_grp_nonkw_args, *</em>dict_grp_kw_args)</p>
+</blockquote>
+<p>tuple_grp_nonkw_args对应于非关键字参数,dict_grp_kw_args对应于关键字参数.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">vardict</span><span class="params">(a,b)</span>:</span></div><div class="line">	print(type(a))</div><div class="line">	print(a,b)</div><div class="line"></div><div class="line">a=(<span class="number">1</span>,<span class="number">2</span>)</div><div class="line">vardict(*a)</div></pre></td></tr></table></figure></p>
+<p>输出为:<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;class 'int'&gt;</div><div class="line">1 2</div></pre></td></tr></table></figure></p>
+<h2 id="关键字调用参数"><a href="#关键字调用参数" class="headerlink" title="关键字调用参数"></a>关键字调用参数</h2><p>让调用者通过函数调用中的参数名字来区分参数。这样规范允许参数缺失或者不按顺序,因为解释器能通过给出的关键字来匹配参数的值。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">vardict</span><span class="params">(a,b)</span>:</span></div><div class="line">	print(type(a))</div><div class="line">	print(a,b)</div><div class="line"></div><div class="line">a=(<span class="number">1</span>,<span class="number">2</span>)</div><div class="line">vardict(b=<span class="number">5</span>,a=<span class="number">2</span>)</div></pre></td></tr></table></figure></p>
+<p>输出结果为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;class &apos;int&apos;&gt;</div><div class="line">2 5</div></pre></td></tr></table></figure></p>
+
       
     </div>
 
@@ -343,18 +373,26 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/总结/" rel="tag">#总结</a>
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/09/26/算法4-散列表/" rel="next" title="算法4 散列表">
+                <i class="fa fa-chevron-left"></i> 算法4 散列表
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/14/new/" rel="prev" title="new">
-                new <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -403,8 +441,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/13/ss/"
-           data-title="ss" data-url="https://ly11tea.github.io/2016/09/13/ss/">
+      <div class="ds-thread" data-thread-key="2016/09/26/python函数的参数/"
+           data-title="python函数的参数" data-url="https://ly11tea.github.io/2016/09/26/python函数的参数/">
       </div>
     
   </div>
@@ -515,7 +553,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#位置参数"><span class="nav-number">1.</span> <span class="nav-text">位置参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#默认参数"><span class="nav-number">2.</span> <span class="nav-text">默认参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#非关键字可变长参数（元组）"><span class="nav-number">3.</span> <span class="nav-text">非关键字可变长参数（元组）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关键字变量参数-dict"><span class="nav-number">4.</span> <span class="nav-text">关键字变量参数(dict)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#命名关键字参数"><span class="nav-number">5.</span> <span class="nav-text">命名关键字参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于调用函数的参数概念"><span class="nav-number">6.</span> <span class="nav-text">基于调用函数的参数概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参数组"><span class="nav-number">6.1.</span> <span class="nav-text">参数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键字调用参数"><span class="nav-number">6.2.</span> <span class="nav-text">关键字调用参数</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
