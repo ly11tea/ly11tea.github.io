@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="python,总结," />
 
 
 
@@ -84,12 +84,16 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Luo's blog">
-<meta property="og:url" content="https://ly11tea.github.io/tags/代码/index.html">
+<meta name="description" content="一尺之捶,日取其半,万世不竭庄子">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python的迭代器和生成器">
+<meta property="og:url" content="https://ly11tea.github.io/2016/10/05/python的迭代器和生成器/index.html">
 <meta property="og:site_name" content="Luo's blog">
+<meta property="og:description" content="一尺之捶,日取其半,万世不竭庄子">
+<meta property="og:updated_time" content="2016-10-05T15:14:48.830Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Luo's blog">
+<meta name="twitter:title" content="python的迭代器和生成器">
+<meta name="twitter:description" content="一尺之捶,日取其半,万世不竭庄子">
 
 
 
@@ -110,9 +114,9 @@
 
 
 
-  <link rel="canonical" href="https://ly11tea.github.io/tags/代码/"/>
+  <link rel="canonical" href="https://ly11tea.github.io/2016/10/05/python的迭代器和生成器/"/>
 
-  <title> 标签: 代码 | Luo's blog </title>
+  <title> python的迭代器和生成器 | Luo's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -143,7 +147,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -264,46 +268,169 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        代码
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                python的迭代器和生成器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-05T23:10:59+08:00" content="2016-10-05">
+              2016-10-05
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/05/python的迭代器和生成器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/05/python的迭代器和生成器/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <blockquote class="blockquote-center"><p>一尺之捶,日取其半,万世不竭<br><em>庄子</em></p>
+</blockquote>
+<a id="more"></a> 
+<h1 id="python的生成器"><a href="#python的生成器" class="headerlink" title="python的生成器"></a>python的生成器</h1><p>如果从迭代的视角来说,生成器给了我们一种简易的方法制作出一种可迭代对象.从关系上来时,我们可以称生成器是迭代器的真子集.<br>最简单的一种定义生成器的语法是定义一个列表生成式,这个生成式以()包围,这种语法返回的的就是一个惰性列表,所谓惰性列表,就是其中保存的只是得出列表中下一个元素的数学关系,直到需要下一个元素时才进行计算.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">l=(x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>))</div><div class="line">print(l)</div><div class="line">print(next(l))</div></pre></td></tr></table></figure></p>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;generator object &lt;genexpr&gt; at 0x01FFE510&gt;</div><div class="line">0</div></pre></td></tr></table></figure></p>
+<p>更为常用的方法是将函数改写为一个生成器,将函数中的return语句改为yield语句,这样我们就得到了一个可以定义生成器对象的函数,生成的生成器对象,在每次调用时候执行，遇到yield语句返回，再次执行时<strong>从上次返回的yield语句处继续执行。</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">yanghui</span><span class="params">()</span>:</span></div><div class="line">	l=[<span class="number">1</span>]</div><div class="line">	<span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">		<span class="keyword">yield</span> l</div><div class="line">		l.append(<span class="number">0</span>)</div><div class="line">		l=[l[i]+l[i<span class="number">-1</span>] <span class="keyword">for</span> i <span class="keyword">in</span> range(len(l))]</div><div class="line">l=yanghui()</div><div class="line">print(next(l))</div><div class="line">print(next(l))</div><div class="line">print(next(l))</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[1]</div><div class="line">[1, 1]</div><div class="line">[1, 2, 1]</div></pre></td></tr></table></figure>
+<p>我们可以看到在这个输出杨辉三角的小程序中,上一次计算的结果都被继承.当然我们还可以像其他可迭代对象一样使用它<br><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> l:</div><div class="line">    <span class="keyword">print</span> i</div><div class="line">    n=n+<span class="number">1</span></div><div class="line">    <span class="keyword">if</span> n==<span class="number">10</span>:</div><div class="line">        <span class="keyword">break</span></div></pre></td></tr></table></figure></p>
+<h1 id="python的迭代器"><a href="#python的迭代器" class="headerlink" title="python的迭代器"></a>python的迭代器</h1><p>我们把python中能够向下迭代的对象都叫做iterable对象,例如list,tuple,dict,生成器等等<br>而在这其中生成器<strong>在使用时不能预知其长度,知道需要下一个值时才进行计算</strong>,我们在python中称为iterator,iterator可以使用next函数得出下一刻的值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">l=[1,2,8,3]</div><div class="line">next(l)</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Traceback (most recent call last):</div><div class="line">  File &quot;C:\Users\ly\Desktop\test2.py&quot;, line 127, in &lt;module&gt;</div><div class="line">    next(l)</div><div class="line">TypeError: &apos;list&apos; object is not an iterator</div></pre></td></tr></table></figure>
+<p>由上面的例子也可以看出,列表虽然iterable,但并不是iterator,利用迭代器与生成器我们可以很便捷的完成一些数学操作,例如:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_odd_generator</span><span class="params">()</span>:</span></div><div class="line">	n=<span class="number">1</span></div><div class="line">	<span class="keyword">while</span>(<span class="keyword">True</span>):</div><div class="line">		n=n+<span class="number">2</span></div><div class="line">		<span class="keyword">yield</span> n</div><div class="line">		</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_notdivisable</span><span class="params">(n)</span>:</span></div><div class="line">	<span class="keyword">return</span> <span class="keyword">lambda</span> x:x%n&gt;<span class="number">0</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">primes</span><span class="params">()</span>:</span></div><div class="line">	<span class="keyword">yield</span> <span class="number">2</span></div><div class="line">	it=_odd_generator()<span class="comment">#第一次使用奇数生成器相当于剔除了能被2整除的数</span></div><div class="line">	<span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">		n=next(it)</div><div class="line">		<span class="keyword">yield</span> n</div><div class="line">		it=filter(_notdivisable(n),it)<span class="comment">#给惰性队列加入新的剔除条件,并更新it</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> primes():</div><div class="line">	<span class="keyword">if</span>(i&lt;<span class="number">10</span>):</div><div class="line">		print(i)</div><div class="line">	<span class="keyword">else</span>:</div><div class="line">		<span class="keyword">break</span></div></pre></td></tr></table></figure></p>
+<p>这段代码不但用到了generator还用到了filter,他们都用来生成iterator对象(惰性队列),这段代码使用埃氏筛法计算队列,原理是生成一个从二开始的数列,2是是素数紧接着剔除2以后所有能被2整除的数,然后在新得到的数列中向后移一位(到3),这个数也是素数并提出这个数以后所有能被其整除的数,以此类推…<br>而如果我们使用py的iterator,就可以不必要计算出一定长度的数列,而是在每次计算中利用filter加入下一个数的整除剔除条件到iterator,产生新的iterator,这样使用iterator得出的素数每次都符合条件</p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/09/24/python的格式化字符串与转义字符/" itemprop="url">
-              
-                <span itemprop="name">python的格式化字符串与转义字符</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-24T11:51:17+08:00"
-              content="2016-09-24" >
-          09-24
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+            <a href="/tags/总结/" rel="tag">#总结</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/26/python-的文件读写和file-like-Object/" rel="next" title="python 的文件读写和file-like Object">
+                <i class="fa fa-chevron-left"></i> python 的文件读写和file-like Object
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/05/python的装饰器/" rel="prev" title="python的装饰器">
+                python的装饰器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -311,6 +438,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/05/python的迭代器和生成器/"
+           data-title="python的迭代器和生成器" data-url="https://ly11tea.github.io/2016/10/05/python的迭代器和生成器/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -330,8 +465,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -401,6 +545,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python的生成器"><span class="nav-number">1.</span> <span class="nav-text">python的生成器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python的迭代器"><span class="nav-number">2.</span> <span class="nav-text">python的迭代器</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -504,6 +659,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
