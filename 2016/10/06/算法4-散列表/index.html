@@ -84,19 +84,25 @@
 
 
 
-<meta name="description" content="定义
+<meta name="description" content="All roads lead to Rome.
+
+定义
 通过算术操作将键转化为数组的索引以将键值对存储在数组中或来访问数组中的键值对">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法4 散列表">
 <meta property="og:url" content="https://ly11tea.github.io/2016/10/06/算法4-散列表/index.html">
 <meta property="og:site_name" content="Luo's blog">
-<meta property="og:description" content="定义
+<meta property="og:description" content="All roads lead to Rome.
+
+定义
 通过算术操作将键转化为数组的索引以将键值对存储在数组中或来访问数组中的键值对">
 <meta property="og:image" content="https://ly11tea.github.io/images/lalianbiao.png">
-<meta property="og:updated_time" content="2016-10-06T14:01:39.159Z">
+<meta property="og:updated_time" content="2016-10-06T14:16:22.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法4 散列表">
-<meta name="twitter:description" content="定义
+<meta name="twitter:description" content="All roads lead to Rome.
+
+定义
 通过算术操作将键转化为数组的索引以将键值对存储在数组中或来访问数组中的键值对">
 <meta name="twitter:image" content="https://ly11tea.github.io/images/lalianbiao.png">
 
@@ -360,7 +366,9 @@
       
 
       
-        <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><blockquote>
+        <blockquote class="blockquote-center"><p>All roads lead to Rome.</p>
+</blockquote>
+<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><blockquote>
 <p>通过算术操作将键转化为数组的索引以将键值对存储在数组中或来访问数组中的键值对</p>
 </blockquote>
 <a id="more"></a> 
@@ -382,7 +390,8 @@
 <li>这个下表的键同要插入的键相同,则更新对应的值<br>这样的方法叫做线性探测法<br>在代码实现上我们使用两个平行数组,分别存贮键和值.<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinarProbingHashST</span>&lt;<span class="title">Key</span>,<span class="title">Value</span>&gt;</span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> m;<span class="comment">//总容量</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> n;<span class="comment">//当前容量</span></div><div class="line">	Key[] keys;</div><div class="line">	Value[] values;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">LinarProbingHashST</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		keys=(Key[])<span class="keyword">new</span> Object[m];</div><div class="line">		values=(Value[])<span class="keyword">new</span> Object[m];</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">LinarProbingHashST</span><span class="params">(<span class="keyword">int</span> cap)</span></span></div><div class="line">	&#123;</div><div class="line">		m=cap;</div><div class="line">		keys=(Key[])<span class="keyword">new</span> Object[m];</div><div class="line">		values=(Value[])<span class="keyword">new</span> Object[m];</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(Key key,Value val)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(n&gt;=m/<span class="number">2</span>)</div><div class="line">			resize(m*<span class="number">2</span>);</div><div class="line">		<span class="keyword">if</span>(key==<span class="keyword">null</span>) <span class="keyword">return</span>;</div><div class="line">		<span class="keyword">int</span> i;</div><div class="line">		<span class="keyword">for</span>(i=hash(key);keys[i]!=<span class="keyword">null</span>;i=(i+<span class="number">1</span>)%m)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span>(keys[i]==key)</div><div class="line">			&#123;</div><div class="line">				values[i]=val;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		keys[i]=key;</div><div class="line">		values[i]=val;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Key key)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> (key.hashCode()&amp;<span class="number">0x7fffffff</span>)%m;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> Value <span class="title">get</span><span class="params">(Key key)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(key==<span class="keyword">null</span>)</div><div class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">int</span> i;</div><div class="line">		<span class="keyword">for</span>(i=hash(key);keys[i]!=<span class="keyword">null</span>;i=(i+<span class="number">1</span>)%m)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span>(keys[i]==key)</div><div class="line">				<span class="keyword">return</span> values[i];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Key key)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span>(get(key)!=<span class="keyword">null</span>);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>需要注意的是这里的下标处理方式,使用取余的方法使得下标不越界,并循环往复<br>当然我们可以看到get方法是在查找键时若遇到空键则证明无此键,返回未命中.<br>由上述代码我们可以发现,键值中的null十分重要,他标志着一次搜索的终结,因此在删除符号表内容时,我们不能简单的只将对应的键值对置null还必须将其后直到null边界的键值对重新插入.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(Key key)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(!contains(key))</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		<span class="keyword">int</span> i=hash(key);</div><div class="line">		<span class="keyword">while</span>(keys[i]!=key)</div><div class="line">			i=(i+<span class="number">1</span>)%m;</div><div class="line">		keys[i]=<span class="keyword">null</span>;</div><div class="line">		values[i]=<span class="keyword">null</span>;</div><div class="line">		i=(i+<span class="number">1</span>)%m;</div><div class="line">		<span class="keyword">while</span>(keys[i]!=<span class="keyword">null</span>)</div><div class="line">		&#123;</div><div class="line">			Key keysave=keys[i];</div><div class="line">			Value valsave=values[i];</div><div class="line">			keys[i]=<span class="keyword">null</span>;</div><div class="line">			values[i]=<span class="keyword">null</span>;</div><div class="line">			n--;</div><div class="line">			put(keysave, valsave);</div><div class="line">			i=(i+<span class="number">1</span>)%m;</div><div class="line">		&#125;</div><div class="line">		n--;</div><div class="line">		<span class="keyword">if</span>(n&gt;<span class="number">1</span>&amp;&amp;n&lt;m/<span class="number">8</span>)</div><div class="line">			resize(m/<span class="number">2</span>);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>需要注意的是这里的下标处理方式,使用取余的方法使得下标不越界,并循环往复<br>当然我们可以看到get方法是在查找键时若遇到空键则证明无此键,返回未命中.<br>由上述代码我们可以发现,键值中的null十分重要,他标志着一次搜索的终结,因此在删除符号表内容时,我们不能简单的只将对应的键值对置null还必须将其后直到null边界的键值对重新插入.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(Key key)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(!contains(key))</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		<span class="keyword">int</span> i=hash(key);</div><div class="line">		<span class="keyword">while</span>(keys[i]!=key)</div><div class="line">			i=(i+<span class="number">1</span>)%m;</div><div class="line">		keys[i]=<span class="keyword">null</span>;</div><div class="line">		values[i]=<span class="keyword">null</span>;</div><div class="line">		i=(i+<span class="number">1</span>)%m;</div><div class="line">		<span class="keyword">while</span>(keys[i]!=<span class="keyword">null</span>)</div><div class="line">		&#123;</div><div class="line">			Key keysave=keys[i];</div><div class="line">			Value valsave=values[i];</div><div class="line">			keys[i]=<span class="keyword">null</span>;</div><div class="line">			values[i]=<span class="keyword">null</span>;</div><div class="line">			n--;</div><div class="line">			put(keysave, valsave);</div><div class="line">			i=(i+<span class="number">1</span>)%m;</div><div class="line">		&#125;</div><div class="line">		n--;</div><div class="line">		<span class="keyword">if</span>(n&gt;<span class="number">1</span>&amp;&amp;n&lt;m/<span class="number">8</span>)</div><div class="line">			resize(m/<span class="number">2</span>);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
 <p>数组的大小对于基于线性探测法的散列表也十分重要:</p>
 <ol>
 <li>全满的数组是<strong>不可以</strong>的,因为这将失去null元素,不能命中的查找会变成死循环.</li>
@@ -430,6 +439,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/08/符号表的应用/" rel="prev" title="符号表的应用">
+                符号表的应用 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -524,7 +537,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
