@@ -90,7 +90,7 @@
 <meta property="og:url" content="https://ly11tea.github.io/2016/10/17/在ubuntu下使用SS并给gnome-terminal-git加上代理/index.html">
 <meta property="og:site_name" content="Luo's blog">
 <meta property="og:description" content="因为要编译google的slam库cartographer,所以要挂代理在google的git上下载一些源码,配置过程如下:">
-<meta property="og:updated_time" content="2016-10-18T15:40:28.049Z">
+<meta property="og:updated_time" content="2016-10-18T15:41:53.065Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在ubuntu下使用SS并给gnome,terminal,git加上代理">
 <meta name="twitter:description" content="因为要编译google的slam库cartographer,所以要挂代理在google的git上下载一些源码,配置过程如下:">
@@ -336,7 +336,8 @@
       
 
       
-        <p>因为要编译google的slam库cartographer,所以要挂代理在google的git上下载一些源码,配置过程如下:<br><a id="more"></a> </p>
+        <p>因为要编译google的slam库cartographer,所以要挂代理在google的git上下载一些源码,配置过程如下:</p>
+<a id="more"></a> 
 <h1 id="下载ss-qt5-gui"><a href="#下载ss-qt5-gui" class="headerlink" title="下载ss-qt5 gui"></a>下载ss-qt5 gui</h1><p>其实也可以使用命令行的ss,为了方便还是使用图形版的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:hzwhuang/ss-qt5</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install shadowsocks-qt5</div></pre></td></tr></table></figure></p>
 <p>这里补充一下,如果使用apt由于包冲突不能够安装,可以选择aptitude,它能够详细分析包的依赖性,并提供多种安装方案:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install aptitude</div><div class="line">sudo aptitude update</div><div class="line">sudo aptitude  install XXX</div></pre></td></tr></table></figure></p>
 <p>下载完成后,界面和windows版几乎一致,连接到ss服务器后,将在本地转发的服务器类型设为http(s).ubuntu下并不会帮你在系统内设置全局代理,接下来还需要自己配置</p>
