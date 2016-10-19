@@ -4,6 +4,43 @@
   
     
     <entry>
+      <title><![CDATA[摄像头成像原理]]></title>
+      <url>https://ly11tea.github.io/2016/10/19/%E6%91%84%E5%83%8F%E5%A4%B4%E6%88%90%E5%83%8F%E5%8E%9F%E7%90%86/</url>
+      <content type="html"><![CDATA[<a id="more"></a> 
+<h1 id="三个坐标系"><a href="#三个坐标系" class="headerlink" title="三个坐标系"></a>三个坐标系</h1><h2 id="1-图像坐标系"><a href="#1-图像坐标系" class="headerlink" title="1.图像坐标系:"></a>1.图像坐标系:</h2><p>在计算机系统中，描述图像的大小是像素，比如图像分辨率是1240*768.也就就是以为图像具矩阵rows是1024，cols是768.那原始图像的原点是在图像的左上角。<br><img src="/images/slam/1.png" style="width: 400px;"></p>
+<p>图像坐标系实际上有<strong>两个</strong>,一个是像素为单位的直接坐标系u-v,一个是物理坐标系x,y<br>以图像左上角为原点建立以像素为单位的直接坐标系u-v。像素的横坐标u与纵坐标v分别是在其图像数组中所在的列数与所在行数。这是像素坐标，而不是物理坐标，为了后续的模型转换，有必要建立图像坐标系。<br>图像坐标系是以<strong>图像中心</strong>为原点，X轴和u轴平行，Y轴和v轴平行。dx和dy标示图像中每个像素在X轴和Y轴的物理尺寸，其实就是换算比例。比如图像大小是1024<em>768，图像坐标系x-y中大小为19</em>17.那么dx就是19/1024.<br>则图像中的每个像素在u-v坐标系中的坐标和在x-y坐标系中的坐标之间都存在如下的关系：<br><img src="/images/slam/2.png" style="width: 400px;"></p>
+<p>(上述公式中我们假设物理坐标系中的<strong>单位为毫米，那么dx的的单位为:毫米/像素</strong>。那么x/dx的单位就是像素了，即和u的单位一样都是像素）<br>比如我们知道图像分辨率是1024<em>768，此时像素为（100,50），图像坐标系为是19</em>17mm。那么在图像坐标系是多少<br>根据转化和平移关系，知道<strong>$U_0=1024/2 = 512$，$v_0=768/2 = 384$.代入公式为$x= (100-512)*19/1024$.</strong>实际中图像坐标系还是比较容易获取。这是需要初始化，就能获取到的参数。<br>为了使用方便，可将上式用齐次坐标与矩阵形式表示为：<br><img src="/images/slam/3.png" style="width: 400px;"><br>其逆关系可表示为：<br><img src="/images/slam/4.png" style="width: 400px;"></p>
+<h2 id="2、相机坐标系"><a href="#2、相机坐标系" class="headerlink" title="2、相机坐标系"></a>2、相机坐标系</h2><p><img src="/images/slam/5.png" style="width: 400px;"><br>相机成像的几何关系可由图2.2表示。其中O点为摄像机光心（投影中心），<strong>Xc轴和Yc轴与成像平面坐标系的x轴和y轴平行，Zc轴为摄像机的光轴</strong>，和图像平面垂直。光轴与图像平面的交点为图像的主点O1,由点<strong>O与Xc,Yc,Zc轴组成的直角坐标系称为摄像机的坐标系。OO1为摄像机的焦距。</strong></p>
+<h2 id="3-世界坐标系（Xw-Yw-Zw）"><a href="#3-世界坐标系（Xw-Yw-Zw）" class="headerlink" title="3.世界坐标系（Xw Yw Zw）"></a>3.世界坐标系（Xw Yw Zw）</h2><p>用户定义的空间三维坐标系，用来描述三维空间中的物体和相机之间的坐标位置，满足右手法则</p>
+<h1 id="三个坐标系间的相互关系"><a href="#三个坐标系间的相互关系" class="headerlink" title="三个坐标系间的相互关系"></a>三个坐标系间的相互关系</h1><h2 id="1、图像坐标系和相机坐标系之间的关系"><a href="#1、图像坐标系和相机坐标系之间的关系" class="headerlink" title="1、图像坐标系和相机坐标系之间的关系"></a>1、图像坐标系和相机坐标系之间的关系</h2><p><img src="/images/slam/6.png" style="width: 400px;"><br>如上图，图像平面实在的平面坐标系就是图像坐标系，由投影中心以及i,j,k(X,Y,Z)组成相机<br>坐标系。<br>1、在实际中主点不一定在成像仪（图像平面）的中心，为了对光轴可能存在的偏移<br>进行建模，我们引入两个新的参数：cx和cy。</p>
+<p>2、在实际中，由于单个像素的在低价的成像仪上是矩形而不是正方形，我们引入了<br>两个不同的焦距参数：fx和fy。（这里的焦距是以像素为单位）则，我们假定物体在<br>相机坐标系统中的点Q,其坐标为(X,Y,Z),以某些偏移的方式投影为点<br>q(xsrceen,yscrreen)，其中srceen为下表，坐标关系如下：</p>
+<p><img src="/images/slam/7.png" style="width: 400px;"></p>
+<p>fx,fy和物理焦距F之间的关系为：fx=Fsx和fy=Fsy。其中sx表示x方向上的1毫米长度<br>所代表像素值，即单位像素/每毫秒，fx,fy是在相机标定中整体计算的，而不是通过该公式计算的。<br>在许多场合为了方便讨论,我们会把<strong>cx和cy略去f只考虑一个</strong>,那么式子就变为:</p>
+<p><img src="/images/slam/8.png" style="width: 200px;"></p>
+<p>化成矩阵形式:</p>
+<p><img src="/images/slam/9.png" style="width: 200px;"></p>
+<h2 id="2-刚体变换-从世界坐标系到相机坐标系"><a href="#2-刚体变换-从世界坐标系到相机坐标系" class="headerlink" title="2.刚体变换(从世界坐标系到相机坐标系)"></a>2.刚体变换(从世界坐标系到相机坐标系)</h2><p><img src="/images/slam/10.png" style="width: 400px;"></p>
+<p>世界坐标系是为了描述相机的位置而被引入的，如图2.2中坐标系OwXwYwZw即为世界坐标系。平移向量t和旋转矩阵R可以用来表示相机坐标系与世界坐标系的关系。所以，假设空间点P在世界坐标系下的齐次坐标是(Xw,Yw,Zw,1)T，（这里T是上标转置），在相机坐标下的齐次坐标是(Xc,Yc,Zc,1)T,则存在如下的关系：</p>
+<p><img src="/images/slam/11.png" style="width: 400px;"></p>
+<p>化成齐次矩阵的形式就有</p>
+<p><img src="/images/slam/12.png" style="width: 400px;"></p>
+<p>上式中R是3×3的正交单位矩阵（也成为旋转矩阵），t是三维的平移向量。矢量0=(0,0,0),M1是4×4矩阵。<br>在实验中，比如我们设定经纬坐标是（48,42,15）的为世界坐标系的原点，X方向指向正北。但是在试验场中点(46,40,5)是相机坐标的系的原点，方向是正东。那么两者之间就存在一个转换关系。</p>
+<h3 id="1、旋转矩阵R"><a href="#1、旋转矩阵R" class="headerlink" title="1、旋转矩阵R:"></a>1、旋转矩阵R:</h3><p>通常，任何维的旋转可以表示为坐标向量与合适尺寸的方阵的乘积。最终一个旋转等价于在另一个不同坐标系下对点位置的重新表述。坐标系旋转角度θ，则等同于目标点绕坐标原点反方向旋转同样的角度θ。图11-8显示了矩阵乘法对二维旋转的描述。在三维空间中，旋转可以分解为绕各自坐标轴的二维旋转（例如图11-8就是绕z轴旋转），其中旋转的轴线的度量保存不变(这就是为什么旋转矩阵为正交矩阵的缘由)。如果依次绕x,y,z轴旋转角度ψ，φ和θ，那么总的旋转矩阵R是三个矩阵Rx(ψ),Ry(φ),Rz(θ)的乘积，其中：</p>
+<p><img src="/images/slam/13.png" style="width: 400px;"></p>
+<p><img src="/images/slam/14.png" style="width: 400px;"></p>
+<p>因此R=Rx(ψ),Ry(φ),Rz(θ).在绕X轴旋转时，<strong>到YZ的平面距离没有变化，所以X坐标没有变化，只是YZ坐标需要诚意旋转系数，其他矩阵同理。这个需要记住即可</strong><br><img src="/images/slam/15.png" style="width: 400px;"></p>
+<h3 id="平移向量T"><a href="#平移向量T" class="headerlink" title="平移向量T:"></a>平移向量T:</h3><p><strong>平移向量用来表示怎么样将一个坐标系的原点移动到另外一个坐标系的原点，或者说平移向量是第一个坐标系原点与第二个坐标系原点的偏移量。</strong>因此，从以目标中心为原点的坐标系移动到以摄像机为中心的原点的另外一个坐标系，相应的平移向量为T=目标原点—摄像机原点。那么点在世界坐标系的中的坐标Po到在摄像机坐标系中Pc:<br>Pc=R(Po-T)<br>故，<strong>用三个角度ψ，φ和θ表示三维旋转，用三个参数(x,y,z)表示三维平移，共6个参数</strong>，对摄像机而言<strong>，OpenCV内参数矩阵有4个参数：fx,fy,cx,cy。故对于每一个视场的解需要10个参数。我们知道一个四边形的4个点可以提供8个方程，故至少需要两个视角才能解出全部几何参数</strong>。8*2=6+6+4。</p>
+<h2 id="3-世界坐标系到图像坐标系的转换"><a href="#3-世界坐标系到图像坐标系的转换" class="headerlink" title="3.世界坐标系到图像坐标系的转换"></a>3.世界坐标系到图像坐标系的转换</h2><p>综上可知:<br>由原始图像与图像坐标的关系:<br><img src="/images/slam/16.png" style="width: 400px;"></p>
+<p>由世界坐标系到相机坐标系的刚体变换:<br><img src="/images/slam/17.png" style="width: 400px;"></p>
+<p>代入图像坐标系与相机坐标系的转换矩阵中:<br><img src="/images/slam/18.png" style="width: 400px;"></p>
+<p>得到:<br><img src="/images/slam/19.png" style="width: 400px;"></p>
+<p><img src="/images/slam/20.png" style="width: 400px;"></p>
+<p>说明：上述公式中完成了从世界坐标系到图像坐标系的转变，中间经过了相机坐标系的过度，Xw中的w表示world世界，单位为毫米(主要取决于其中dx,dy的单位)，而u,v是的 单位为像素，即完成了从毫米——像素的转换。）<br>其中ax=f/dx,ay=f/dy；M是3×4的矩阵—投影矩阵，<strong>M1完全由相机的内参数ax,ay,u0,v0决定，(u0,v0)为主点坐标，ax,ay分别表示图像u轴和v轴上的尺度因子，M2则完全由相机的外部参数决定。而相机标定就是确定相机的内外参数。</strong><br>由式(2.7)可知，若已知相机的内外参数，则相当于已知投影矩阵M.当已知M和空间点P的坐标：矢量Xw=(Xw,Yw,Zw,1)T，（矢量Xw上面有一个矢量标识杠，T表示矢量的转置）。<strong>式(2.7)可以给出三个方程，消去Zc就可以得到其投影点p的坐标(u,v)（其实也就是我用一个相机就可以拍摄一个物体的图片了）</strong>。但是由于M为3×4不可逆矩阵，当 点P的投影坐标(u,v)和投影矩阵M为已知时，我们只能得到关于Xw,Yw,Zw的两个线性方程，即射线OP的方程，由上一篇图2.2我们可以看出，位于<strong>射线OP上的所有空间点的投影点（即图像点）都是p点。所以不能唯一确定空间点P的世界坐标矢量Xw.</strong><br>而深度摄像机得到了Zc,<br>故可以确定.</p>
+<p><img src="/images/slam/21.png" style="width: 1500px;"></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[在ubuntu下使用SS并给gnome,terminal,git加上代理]]></title>
       <url>https://ly11tea.github.io/2016/10/17/%E5%9C%A8ubuntu%E4%B8%8B%E4%BD%BF%E7%94%A8SS%E5%B9%B6%E7%BB%99gnome-terminal-git%E5%8A%A0%E4%B8%8A%E4%BB%A3%E7%90%86/</url>
       <content type="html"><![CDATA[<p>因为要编译google的slam库cartographer,所以要挂代理在google的git上下载一些源码,配置过程如下:</p>
