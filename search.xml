@@ -136,7 +136,42 @@
 <p>浏览器发送的请求消息中，就会包含Host请求报头域，如下：</p>
 <p>Host：<a href="http://www.guet.edu.cn" target="_blank" rel="external">http://www.guet.edu.cn</a></p>
 <p>此处使用缺省端口号80，若指定了端口号，则变成：Host：指定端口号</p>
-<h1 id="http的reponse消息结构"><a href="#http的reponse消息结构" class="headerlink" title="http的reponse消息结构"></a>http的reponse消息结构</h1><p>分为三部分,第一部分叫Response line, 第二部分叫Response header，第三部分是body<br>|reponse line        | Response header   |  body  |<br>| :——– :  | —– | :—-:  |<br>|HTTP/version-number|Cache头域:Date,Expires,Vary|<br>|status-code|Cookie/Login 头域:P3P,Set-Cookie<br>|message|Entity头域:ETag,Last-Modified,Content-Type,Content-Length,Content-Encoding,Content-Language<br>||Miscellaneous 头域:Server,X-AspNet-Version,X-Powered-By:<br>||Transport头域:Connection<br>||Location头域:Location</p>
+<h1 id="http的reponse消息结构"><a href="#http的reponse消息结构" class="headerlink" title="http的reponse消息结构"></a>http的reponse消息结构</h1><p>分为三部分,第一部分叫Response line, 第二部分叫Response header，第三部分是body</p>
+<table>
+<thead>
+<tr>
+<th>reponse line</th>
+<th>Response header</th>
+<th style="text-align:center">body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTTP/version-number</td>
+<td>Cache头域:Date,Expires,Vary</td>
+</tr>
+<tr>
+<td>status-code</td>
+<td>Cookie/Login 头域:P3P,Set-Cookie</td>
+</tr>
+<tr>
+<td>message</td>
+<td>Entity头域:ETag,Last-Modified,Content-Type,Content-Length,Content-Encoding,Content-Language</td>
+</tr>
+<tr>
+<td></td>
+<td>Miscellaneous 头域:Server,X-AspNet-Version,X-Powered-By:</td>
+</tr>
+<tr>
+<td></td>
+<td>Transport头域:Connection</td>
+</tr>
+<tr>
+<td></td>
+<td>Location头域:Location</td>
+</tr>
+</tbody>
+</table>
 <h2 id="reponse-line"><a href="#reponse-line" class="headerlink" title="reponse line"></a>reponse line</h2><p>HTTP/version-number表示HTTP协议的版本号，  status-code 和message分别是状态代码和状态信息</p>
 <h2 id="Response-header"><a href="#Response-header" class="headerlink" title="Response header"></a>Response header</h2><h3 id="Cache头域"><a href="#Cache头域" class="headerlink" title="Cache头域"></a>Cache头域</h3><h4 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h4><p>作用:  生成消息的具体时间和日期</p>
 <p>例如：　Date: Sat, 11 Feb 2012 11:35:14 GMT </p>
