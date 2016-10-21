@@ -9,7 +9,7 @@
       <content type="html"><![CDATA[<h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><blockquote>
 <p>超文本传输协议(HTTP)是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器.<br><a id="more"></a> </p>
 </blockquote>
-<p>例如,最简单的一个页面的浏览过程:<br>我们输入URL后，我们的浏览器给Web服务器发送了一个Request, Web服务器接到Request后进行处理，生成相应的Response，然后发送给浏览器， 浏览器解析Response中的HTML,这样我们就看到了网页.<br><img src="/images/http_protcool/1.png" style="width: 300px;"></p>
+<p>例如,最简单的一个页面的浏览过程:<br>我们输入URL后，我们的浏览器给Web服务器发送了一个Request, Web服务器接到Request后进行处理，生成相应的Response，然后发送给浏览器， 浏览器解析Response中的HTML,这样我们就看到了网页.<br><img src="/images/http_protcool/1.PNG" style="width: 300px;"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Client-&gt;Server: Request(get)</div><div class="line"></div><div class="line">Server--&gt;Client:Response(body中为html网页)</div></pre></td></tr></table></figure>
 <h1 id="URL格式"><a href="#URL格式" class="headerlink" title="URL格式"></a>URL格式</h1><blockquote>
 <p>schema://host[:port#]/path/…/[?query-string][#anchor]</p>
@@ -209,9 +209,9 @@
 <li><p>Web服务器收到Request，将服务器的<strong>文档修改时间（Last-Modified）: 跟request header 中的，If-Modified-Since相比较，</strong> 如果时间是一样的， 说明缓存还是最新的， Web服务器将发送<strong>304 Not Modified给浏览器客户端，</strong> 告诉客户端直接使用缓存里的版本。如下图。</p>
 </li>
 </ol>
-<p><img src="/images/http_protcool/2.png" style="width: 300px;"></p>
+<p><img src="/images/http_protcool/2.PNG" style="width: 300px;"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Client-&gt;Cache:</div><div class="line">Cache-&gt;Server:</div><div class="line">Note right of Server: 检查新鲜度</div><div class="line">Server--&gt;Cache:缓存已是最新</div><div class="line">Cache--&gt;Client:使用缓存</div></pre></td></tr></table></figure>
-<p><img src="/images/http_protcool/3.png" style="width: 300px;"></p>
+<p><img src="/images/http_protcool/3.PNG" style="width: 300px;"></p>
 <p>3.假如该文档已经被更新了。Web服务器将发送该文档的最新版本给浏览器客户端， 如下图。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Client-&gt;Cache:</div><div class="line">Cache-&gt;Server:</div><div class="line">Note right of Server: 检查新鲜度</div><div class="line">Server--&gt;Cache:缓存不是最新,发送最新内容</div><div class="line">Cache--&gt;Client:使用最新内容</div></pre></td></tr></table></figure></p>
 <h3 id="ETag判断"><a href="#ETag判断" class="headerlink" title="ETag判断"></a>ETag判断</h3><p>ETag是实体标签（Entity Tag）的缩写， 根据实体内容生成的一段hash字符串（类似于MD5或者SHA1之后的结果），可以标识资源的状态。 当资源发送改变时，ETag也随之发生变化。<br><strong>ETag是Web服务端产生的，然后发给浏览器客户端。</strong>浏览器客户端是不用关心Etag是如何产生的。</p>
 <p>为什么使用ETag呢？ 主要是为了解决Last-Modified 无法解决的一些问题。</p>
@@ -228,11 +228,11 @@
 <h2 id="缓存命中"><a href="#缓存命中" class="headerlink" title="缓存命中"></a>缓存命中</h2><p>按F5刷新浏览器和在地址栏里输入网址然后回车。 这两个行为是不一样的。</p>
 <p>按F5刷新浏览器， <strong>浏览器会去Web服务器验证缓存</strong>。</p>
 <p>如果是在地址栏输入网址然后回车，<strong>浏览器会”直接使用有效的缓存”, 而不会发http request</strong> 去服务器验证缓存，这种情况叫做<strong>缓存命中</strong>，如下图:</p>
-<p><img src="/images/http_protcool/4.png" style="width: 300px;"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Client-&gt;Cache:</div><div class="line">Note right of Server:与服务器无关 </div><div class="line">Cache--&gt;Client:使用缓存</div></pre></td></tr></table></figure></p>
+<p><img src="/images/http_protcool/4.PNG" style="width: 300px;"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Client-&gt;Cache:</div><div class="line">Note right of Server:与服务器无关 </div><div class="line">Cache--&gt;Client:使用缓存</div></pre></td></tr></table></figure></p>
 <p>如果使用ctrl+f5则会不使用缓存</p>
 <h2 id="公有缓存和私有缓存的区别"><a href="#公有缓存和私有缓存的区别" class="headerlink" title="公有缓存和私有缓存的区别"></a>公有缓存和私有缓存的区别</h2><p>Cache-Control: public 指可以公有缓存，可以是数千名用户共享的。</p>
 <p>Cache-Control: private 指只支持私有缓存，私有缓存是单个用户专用的。</p>
-<h1 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h1><p>Web代理（proxy）服务器是网络的中间实体。代理位于Web客户端和Web服务器之间，扮演“中间人”的角色。代理既是服务器,又是客户端<br><img src="/images/http_protcool/5.png" style="width: 300px;"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Client-&gt;Proxy:Request</div><div class="line">Proxy-&gt;Client:Response</div><div class="line">Proxy-&gt;Server:Request</div><div class="line">Server-&gt;Proxy:Response</div></pre></td></tr></table></figure></p>
+<h1 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h1><p>Web代理（proxy）服务器是网络的中间实体。代理位于Web客户端和Web服务器之间，扮演“中间人”的角色。代理既是服务器,又是客户端<br><img src="/images/http_protcool/5.PNG" style="width: 300px;"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Client-&gt;Proxy:Request</div><div class="line">Proxy-&gt;Client:Response</div><div class="line">Proxy-&gt;Server:Request</div><div class="line">Server-&gt;Proxy:Response</div></pre></td></tr></table></figure></p>
 <h2 id="使用PAC配置代理"><a href="#使用PAC配置代理" class="headerlink" title="使用PAC配置代理"></a>使用PAC配置代理</h2><p>PAC（Proxy Auto Config）文件是一个小型的JavaScript程序的文本文件，后缀为.dat。<br>当浏览器访问网络的时候，会根据PAC文件中的JavaScript函数来选择恰当的代理服务器。</p>
 <h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><p>代理服务器可以获取用户的http Request的内容,因此我们应当注意使用HTTPS协议传输</p>
 <h1 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h1><p>HTTP状态码的作用是：Web服务器用来告诉客户端，发生了什么事。</p>
