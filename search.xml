@@ -4,8 +4,8 @@
   
     
     <entry>
-      <title><![CDATA[http 协议笔记]]></title>
-      <url>https://ly11tea.github.io/2016/10/21/http-%E5%8D%8F%E8%AE%AE%E7%AC%94%E8%AE%B0/</url>
+      <title><![CDATA[http 初探笔记]]></title>
+      <url>https://ly11tea.github.io/2016/10/21/http-%E5%88%9D%E6%8E%A2%E7%AC%94%E8%AE%B0/</url>
       <content type="html"><![CDATA[<h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><blockquote>
 <p>超文本传输协议(HTTP)是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器.<br><a id="more"></a> </p>
 </blockquote>
@@ -302,6 +302,14 @@
 </tr>
 </tbody>
 </table>
+<h1 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h1><h2 id="Cookie的分类"><a href="#Cookie的分类" class="headerlink" title="Cookie的分类"></a>Cookie的分类</h2><p>可以大致把Cookie分为2类： 回话cookie和持久cookie<br>会话cookie: 是一种临时的cookie，它记录了用户访问站点时的设置和偏好，关闭浏览器，会话cookie就被删除了<br>持久cookie: 存储在硬盘上，（不管浏览器退出，或者电脑重启，持久cookie都存在）， 持久cookie有过期时间</p>
+<h2 id="cookie的位置"><a href="#cookie的位置" class="headerlink" title="cookie的位置"></a>cookie的位置</h2><p>cookie被存储在硬盘中,但不同的浏览器的cookie存储位置一般不同</p>
+<h2 id="利用cookie自动登录的过程"><a href="#利用cookie自动登录的过程" class="headerlink" title="利用cookie自动登录的过程"></a>利用cookie自动登录的过程</h2><ol>
+<li>浏览器访问某网站</li>
+<li>浏览器将网站中已存在的cookie发往服务器</li>
+<li>服务器判断这个cookie是否能够用作自动登录凭据,如有效则自动登录</li>
+</ol>
+<h2 id="cookie安全"><a href="#cookie安全" class="headerlink" title="cookie安全"></a>cookie安全</h2><p>cookie同样也可以用于跟踪你的行为和浏览轨迹,例如在数个网页上都拥有某个广告商的框架,他们会检测用户的cookie,若用户为老用户则向他们的数据库中写入当前的行为或者直接写入用户的cookie中.若为新用户则发送一段带有ID的cookie,那么第二次访问时新用户也成为了老用户.<br>在广告展示页面,通过读取cookie辨识用户推广相关的广告.</p>
 ]]></content>
     </entry>
     
