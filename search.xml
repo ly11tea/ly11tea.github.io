@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[有向图]]></title>
-      <url>https://ly11tea.github.io/2016/11/18/%E6%9C%89%E5%90%91%E5%9B%BE/</url>
+      <url>https://ly11tea.github.io/2016/11/22/%E6%9C%89%E5%90%91%E5%9B%BE/</url>
       <content type="html"><![CDATA[<h1 id="有向图的概念"><a href="#有向图的概念" class="headerlink" title="有向图的概念"></a>有向图的概念</h1><p>有向图的一个突出特点，<strong>边是单向</strong>的:每条边所连接的<strong>两个顶点都是一个有序对</strong>.它们的<strong>邻接性是单向</strong>的<br>下面给出有向图的定义:</p>
 <blockquote>
 <p>一幅有方向性的图(或有向图)是由一组顶点和一组有方向的边组成的，每条有方向的边都连接着有序的一对顶点</p>
