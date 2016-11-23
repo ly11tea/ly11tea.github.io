@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python,代码," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,25 +84,40 @@
 
 
 
-<meta name="description" content="Give therefore to the emperor the things that are the emperor’s;and to God the things that are God’s.
- Gospel of Matthew
+<meta name="description" content="定义要了解最小生成树,我们先来了解一下加权图的概念
 
-其实python的格式化字符串与C的printf函数相当类似,但用法显得更为灵活,所以还是稍微总结一下.">
+加权图是一种为每条边关联一个权位或是成本的图模型
+
+在加权无向图的基础上,我们给出生成树和最小生成树的定义:
+
+图的生成树是它的一棵含有其所有顶点的无环连通子图一幅加权无向图的最小生成树( MST ) 是它的一棵权值(树中所有边的权值之和)最小的生成树
+
+显然可以从定义处得出只有连通图才有最小生成树,如果这个图是非连通图,那么我们只能得出其连通">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python的格式化字符串与转义字符">
-<meta property="og:url" content="https://ly11tea.github.io/2016/09/24/python的格式化字符串与转义字符/index.html">
+<meta property="og:title" content="最小生成树">
+<meta property="og:url" content="https://ly11tea.github.io/2016/11/23/最小生成树/index.html">
 <meta property="og:site_name" content="Luo's blog">
-<meta property="og:description" content="Give therefore to the emperor the things that are the emperor’s;and to God the things that are God’s.
- Gospel of Matthew
+<meta property="og:description" content="定义要了解最小生成树,我们先来了解一下加权图的概念
 
-其实python的格式化字符串与C的printf函数相当类似,但用法显得更为灵活,所以还是稍微总结一下.">
-<meta property="og:updated_time" content="2016-09-26T06:16:23.177Z">
+加权图是一种为每条边关联一个权位或是成本的图模型
+
+在加权无向图的基础上,我们给出生成树和最小生成树的定义:
+
+图的生成树是它的一棵含有其所有顶点的无环连通子图一幅加权无向图的最小生成树( MST ) 是它的一棵权值(树中所有边的权值之和)最小的生成树
+
+显然可以从定义处得出只有连通图才有最小生成树,如果这个图是非连通图,那么我们只能得出其连通">
+<meta property="og:updated_time" content="2016-11-23T15:51:00.770Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python的格式化字符串与转义字符">
-<meta name="twitter:description" content="Give therefore to the emperor the things that are the emperor’s;and to God the things that are God’s.
- Gospel of Matthew
+<meta name="twitter:title" content="最小生成树">
+<meta name="twitter:description" content="定义要了解最小生成树,我们先来了解一下加权图的概念
 
-其实python的格式化字符串与C的printf函数相当类似,但用法显得更为灵活,所以还是稍微总结一下.">
+加权图是一种为每条边关联一个权位或是成本的图模型
+
+在加权无向图的基础上,我们给出生成树和最小生成树的定义:
+
+图的生成树是它的一棵含有其所有顶点的无环连通子图一幅加权无向图的最小生成树( MST ) 是它的一棵权值(树中所有边的权值之和)最小的生成树
+
+显然可以从定义处得出只有连通图才有最小生成树,如果这个图是非连通图,那么我们只能得出其连通">
 
 
 
@@ -123,9 +138,9 @@
 
 
 
-  <link rel="canonical" href="https://ly11tea.github.io/2016/09/24/python的格式化字符串与转义字符/"/>
+  <link rel="canonical" href="https://ly11tea.github.io/2016/11/23/最小生成树/"/>
 
-  <title> python的格式化字符串与转义字符 | Luo's blog </title>
+  <title> 最小生成树 | Luo's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -298,7 +313,7 @@
             
             
               
-                python的格式化字符串与转义字符
+                最小生成树
               
             
           </h1>
@@ -310,19 +325,38 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-24T11:51:17+08:00" content="2016-09-24">
-              2016-09-24
+            <time itemprop="dateCreated" datetime="2016-11-23T23:48:22+08:00" content="2016-11-23">
+              2016-11-23
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/算法4/" itemprop="url" rel="index">
+                    <span itemprop="name">算法4</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/24/python的格式化字符串与转义字符/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/24/python的格式化字符串与转义字符/" itemprop="commentsCount"></span>
+                <a href="/2016/11/23/最小生成树/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/23/最小生成树/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -345,197 +379,29 @@
       
 
       
-        <blockquote class="blockquote-center"><p>Give therefore to the emperor the things that are the emperor’s;and to God the things that are God’s.</p>
-<p> <em>Gospel of Matthew</em></p>
-</blockquote>
-<p>其实python的格式化字符串与C的printf函数相当类似,但用法显得更为灵活,所以还是稍微总结一下.<br><a id="more"></a> </p>
-<h1 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h1><p>先看一下python字符串的格式,格式化字符串时，Python使用一个字符串作为模板。模板中有格式符，这些格式符为真实值预留位置，并说明真实数值应该呈现的格式。Python用一个tuple将多个值传递给模板，每个值对应一个格式符。</p>
+        <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>要了解最小生成树,我们先来了解一下加权图的概念</p>
 <blockquote>
-<p>模板%(value1,value2,…)</p>
+<p>加权图是一种为每条边关联一个权位或是成本的图模型</p>
 </blockquote>
-<p>其中模板格式为:</p>
+<p>在加权无向图的基础上,我们给出生成树和最小生成树的定义:</p>
 <blockquote>
-<p>[(name)][flags][width].[precision]typecode</p>
+<p>图的生成树是它的一棵含有其所有顶点的无环连通子图<br>一幅加权无向图的最小生成树( MST ) 是它的一棵权值(树中所有边的权值之和)最小的生成树</p>
 </blockquote>
-<p>下面来一一介绍其中的元素含义:</p>
-<h2 id="flags和width-precision"><a href="#flags和width-precision" class="headerlink" title="flags和width precision"></a>flags和width precision</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">符号</th>
-<th style="text-align:center">作用 </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">*</td>
-<td style="text-align:center">定义宽度或者小数点精度 </td>
-</tr>
-<tr>
-<td style="text-align:center">-</td>
-<td style="text-align:center">用做左对齐 </td>
-</tr>
-<tr>
-<td style="text-align:center">+</td>
-<td style="text-align:center">在正数前面显示加号( + ) </td>
-</tr>
-<tr>
-<td style="text-align:center">(空格键)</td>
-<td style="text-align:center">在正数前面显示空格 </td>
-</tr>
-<tr>
-<td style="text-align:center">#</td>
-<td style="text-align:center">在八进制数前面显示零(‘0’)，在十六进制前面显示’0x’或者’0X’(取决于用的是’x’还是’X’) </td>
-</tr>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">显示的数字前面填充‘0’而不是默认的空格 </td>
-</tr>
-<tr>
-<td style="text-align:center">%</td>
-<td style="text-align:center">‘%%’输出一个单一的’%’ </td>
-</tr>
-<tr>
-<td style="text-align:center">(var)</td>
-<td style="text-align:center">映射变量(字典参数) </td>
-</tr>
-<tr>
-<td style="text-align:center">m.n</td>
-<td style="text-align:center">m 是显示的最小总宽度,n是小数点后的位数(如果可用的话) </td>
-</tr>
-</tbody>
-</table>
-<h2 id="typecode"><a href="#typecode" class="headerlink" title="typecode"></a>typecode</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">格式化字符</th>
-<th style="text-align:center">转换方式 </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">%c</td>
-<td style="text-align:center">转换成字符(ASCII 码值，或者长度为一的字符串) </td>
-</tr>
-<tr>
-<td style="text-align:center">%r</td>
-<td style="text-align:center">优先用 repr()函数进行字符串转换 </td>
-</tr>
-<tr>
-<td style="text-align:center">%s</td>
-<td style="text-align:center">优先用 str()函数进行字符串转换 </td>
-</tr>
-<tr>
-<td style="text-align:center">%d / %i</td>
-<td style="text-align:center">转成有符号十进制数 </td>
-</tr>
-<tr>
-<td style="text-align:center">%u</td>
-<td style="text-align:center">转成无符号十进制数 </td>
-</tr>
-<tr>
-<td style="text-align:center">%o</td>
-<td style="text-align:center">转成无符号八进制数 </td>
-</tr>
-<tr>
-<td style="text-align:center">%x/%X</td>
-<td style="text-align:center">(Unsigned)转成无符号十六进制数(x/X代表转换后的十六进制字符的大小写) </td>
-</tr>
-<tr>
-<td style="text-align:center">%e/%E</td>
-<td style="text-align:center">转成科学计数法(e/E 控制输出 e/E) </td>
-</tr>
-<tr>
-<td style="text-align:center">%f/%F</td>
-<td style="text-align:center">转成浮点数(小数部分自然截断) </td>
-</tr>
-<tr>
-<td style="text-align:center">%g/%G</td>
-<td style="text-align:center">%e 和%f/%E 和%F 的简写 </td>
-</tr>
-<tr>
-<td style="text-align:center">%%</td>
-<td style="text-align:center">输出% </td>
-</tr>
-</tbody>
-</table>
-<p>其中比较有用的可能是m.n,即设置浮点数和整数的总宽度和浮点数的小数精度.<br>基本的一些例子:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%x"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'6c'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%X"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'6C'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%#X"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'0X6C'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%#x"</span> % <span class="number">108</span> </div><div class="line"><span class="string">'0x6c'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%f'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.567890'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%.2f'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.57'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%E'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1.234568E+03'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%e'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1.234568e+03'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%g'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.57'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'%G'</span> % <span class="number">1234.567890</span> </div><div class="line"><span class="string">'1234.57'</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"%e"</span> % (<span class="number">1111111111111111111111L</span>) </div><div class="line"><span class="string">'1.111111e+21'</span></div><div class="line"><span class="comment">#科学计数法表示同样也可以适用m.n,</span></div><div class="line">&gt;&gt;&gt;print(<span class="string">"%66.10e"</span> % (<span class="number">1111111111111111111111</span>))</div><div class="line"></div><div class="line">                                                  <span class="number">1.1111111111e+21</span></div></pre></td></tr></table></figure></p>
-<p>值得一提的是格式化字符<em>,它能够用后面tuple中相应的值代入width和precision<br>例如 :`print(“%.</em>f” % (4, 1.2))`<br>还有利用name参数,我们可以使用预先定义的格式化字符串生成字符串:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">formatter = <span class="string">"%r %r %r %r"</span></div><div class="line"><span class="keyword">print</span> formatter % (<span class="keyword">True</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">True</span>)</div></pre></td></tr></table></figure></p>
-<p>当然我们可以看到python的格式化字符串指令不依赖于函数,只是一个返回字符串的运算符.所以我们既可以用来输出字符串,也可以用来定义字符串..等等其他用途.</p>
-<h1 id="python的三引号"><a href="#python的三引号" class="headerlink" title="python的三引号"></a>python的三引号</h1><p>三引号’’’ ‘’’,在print中用来输出多行字符串,直接使用三引号还可以用来进行多行注释.</p>
-<h1 id="python的转义字符"><a href="#python的转义字符" class="headerlink" title="python的转义字符"></a>python的转义字符</h1><table>
-<thead>
-<tr>
-<th style="text-align:center">转义字符</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">(在行尾时)</td>
-<td style="text-align:center">续行符</td>
-</tr>
-<tr>
-<td style="text-align:center">\</td>
-<td style="text-align:center">反斜杠符号</td>
-</tr>
-<tr>
-<td style="text-align:center">\’</td>
-<td style="text-align:center">单引号</td>
-</tr>
-<tr>
-<td style="text-align:center">\”</td>
-<td style="text-align:center">双引号</td>
-</tr>
-<tr>
-<td style="text-align:center">\a</td>
-<td style="text-align:center">响铃</td>
-</tr>
-<tr>
-<td style="text-align:center">\b</td>
-<td style="text-align:center">退格(Backspace)</td>
-</tr>
-<tr>
-<td style="text-align:center">\e</td>
-<td style="text-align:center">转义</td>
-</tr>
-<tr>
-<td style="text-align:center">\000</td>
-<td style="text-align:center">空</td>
-</tr>
-<tr>
-<td style="text-align:center">\n</td>
-<td style="text-align:center">换行</td>
-</tr>
-<tr>
-<td style="text-align:center">\v</td>
-<td style="text-align:center">纵向制表符</td>
-</tr>
-<tr>
-<td style="text-align:center">\t</td>
-<td style="text-align:center">横向制表符</td>
-</tr>
-<tr>
-<td style="text-align:center">\r</td>
-<td style="text-align:center">回车</td>
-</tr>
-<tr>
-<td style="text-align:center">\f</td>
-<td style="text-align:center">换页</td>
-</tr>
-<tr>
-<td style="text-align:center">\oyy</td>
-<td style="text-align:center">八进制数yy代表的字符，例如：\o12代表换行</td>
-</tr>
-<tr>
-<td style="text-align:center">\xyy</td>
-<td style="text-align:center">十进制数yy代表的字符，例如：\x0a代表换行</td>
-</tr>
-<tr>
-<td style="text-align:center">\other</td>
-<td style="text-align:center">其它的字符以普通格式输出</td>
-</tr>
-</tbody>
-</table>
+<p>显然可以从定义处得出只有<strong>连通图</strong>才有<strong>最小生成树</strong>,如果这个图是非连通图,那么我们只能得出其<strong>连通分量</strong>的最小生成树,以组成最小生成森林.</p>
+<p>同时为了讨论的简便,我们假设加权图的每条边的权值互不相同.</p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>为了找出最小生成树我们需要定义一种特殊的切分图的方式:</p>
+<blockquote>
+<p>图的一种<strong>切分</strong>是将图的所有顶点分为两个非空且不重复的两个集合。 </p>
+</blockquote>
+<p>定义加权图中一条连接两个属于不同集合的顶点的<strong>边</strong>是<strong>横切边</strong>。</p>
+<p>由此我们给出定理:在一幅加权图中，给定任意的切分，它的横切边中的<strong>权重最小</strong>者必然属于图的最小生成树。</p>
+<p>由上面的定理我们自然能够想到,我们可以通过对加权无向图的不断切分找出最小生成树,由这中思想我们导出一种生成最小生成树的贪心算法.</p>
+<blockquote>
+<p>下面这种方法会将含有 V个顶点的任意加权连通图中属于最小生成树的边标记为黑色:初始状态下所有边均为灰色，找到<strong>一种切分</strong>，它产生的横切边均不为<br><strong>黑色</strong>。将它<strong>权重最小的横切边标记为黑色</strong>。反复，直到标记了 V-l 条黑色边为止。</p>
+</blockquote>
+<p>下面证明上面的结论:先假设所有边的权重不相同,根据切分定理首先按照上面方法标黑的所有边都在最小生成树中,但只要这种边的数量小于V-1,那么就必然还存在着不产生黑色横切边的切分(因为图是连通的,所以必然存在着一个最小生成树,所以必然还存在着未被标记出来的最小横切边,所以必然存在着不为最小横切边的切分),只要找到了这V-1条切分,就找到了最小生成树</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>首先要更新的必然是边的数据结构,要在每一条边上引入权重的表示方法.<br>为此我们使用一种新的实现方式,定义一种表示边的对象Edge;<br>为了便于以后的权重比较操作,我们在Edge上面实现了Comparable接口并定义了CompareTo方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Edge</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Edge</span>&gt;</span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">private</span>  <span class="keyword">int</span> v;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> w;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">double</span> weight;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Edge</span><span class="params">(<span class="keyword">int</span> v,<span class="keyword">int</span> w,<span class="keyword">double</span> weight)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">this</span>.v=v;</div><div class="line">		<span class="keyword">this</span>.w=w;</div><div class="line">		<span class="keyword">this</span>.weight=weight;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">weight</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.weight;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">either</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.v;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">other</span><span class="params">(<span class="keyword">int</span> number)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(v==number) <span class="keyword">return</span> w;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(w==number) <span class="keyword">return</span> v;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"inconsisten edge"</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Edge that)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.weight&gt;that.weight)</div><div class="line">			<span class="keyword">return</span> +<span class="number">1</span>;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.weight&lt;that.weight)</div><div class="line">			<span class="keyword">return</span> +<span class="number">1</span>;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">tostring</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> String.format(<span class="string">"%d-%d : .2%f"</span>, <span class="keyword">this</span>.v,<span class="keyword">this</span>.w,<span class="keyword">this</span>.weight);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在这个边的定义的基础上我们实现带权重的无向图的实现,总的来说和无向图的实现并没有太大不同,但这一次邻接表的数据类型变为了背包型的数组,这是为了在其中存储Edge对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EdgeWeightedGraph</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> V;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> E;</div><div class="line">	<span class="keyword">private</span> Bag&lt;Edge&gt;[] adj;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">EdgeWeightedGraph</span><span class="params">(<span class="keyword">int</span> V,<span class="keyword">int</span> E)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">this</span>.V=V;</div><div class="line">		<span class="keyword">this</span>.E=E;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;V;i++)</div><div class="line">		&#123;</div><div class="line">			adj[i]=(Bag&lt;Edge&gt;)<span class="keyword">new</span> Bag();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">v</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> V;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">e</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> E;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addedge</span><span class="params">(Edge edge)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> v=edge.either();</div><div class="line">		<span class="keyword">int</span> w=edge.other(v);</div><div class="line">		adj[v].add(edge);</div><div class="line">		adj[w].add(edge);</div><div class="line">		E++;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> Iterable&lt;Edge&gt; <span class="title">adj</span><span class="params">(<span class="keyword">int</span> v)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> adj(v);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> Iterable&lt;Edge&gt; <span class="title">edges</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		Bag&lt;Edge&gt;edges=<span class="keyword">new</span> Bag&lt;Edge&gt;();</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> v=<span class="number">0</span>;v&lt;V;v++)</div><div class="line">			<span class="keyword">for</span>(Edge e:adj[v])</div><div class="line">				<span class="keyword">if</span>(e.other(v)&gt;v)</div><div class="line">					edges.add(e);</div><div class="line">		<span class="keyword">return</span> edges;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -556,30 +422,18 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/python/" rel="tag">#python</a>
-          
-            <a href="/tags/代码/" rel="tag">#代码</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/23/算法4-二叉查找树/" rel="next" title="算法4 二叉查找树">
-                <i class="fa fa-chevron-left"></i> 算法4 二叉查找树
+              <a href="/2016/11/22/有向图/" rel="next" title="有向图">
+                <i class="fa fa-chevron-left"></i> 有向图
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/25/算法4-平衡查找树/" rel="prev" title="算法4 平衡查找树">
-                算法4 平衡查找树 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -628,8 +482,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/24/python的格式化字符串与转义字符/"
-           data-title="python的格式化字符串与转义字符" data-url="https://ly11tea.github.io/2016/09/24/python的格式化字符串与转义字符/">
+      <div class="ds-thread" data-thread-key="2016/11/23/最小生成树/"
+           data-title="最小生成树" data-url="https://ly11tea.github.io/2016/11/23/最小生成树/">
       </div>
     
   </div>
@@ -740,7 +594,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#格式"><span class="nav-number">1.</span> <span class="nav-text">格式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#flags和width-precision"><span class="nav-number">1.1.</span> <span class="nav-text">flags和width precision</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#typecode"><span class="nav-number">1.2.</span> <span class="nav-text">typecode</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python的三引号"><span class="nav-number">2.</span> <span class="nav-text">python的三引号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python的转义字符"><span class="nav-number">3.</span> <span class="nav-text">python的转义字符</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a></li></ol></div>
             
           </div>
         </section>
