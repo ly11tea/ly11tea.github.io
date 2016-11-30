@@ -4,6 +4,14 @@
   
     
     <entry>
+      <title><![CDATA[flask-images]]></title>
+      <url>https://ly11tea.github.io/2016/11/30/flask-images/</url>
+      <content type="html"><![CDATA[<p>flask-image 是一个基于python pillow库的插件.它能够提供一个特定名称的路由和一个函数,能够接受一个指向url的图像链接,或者本地图像文件,将其转换为图像格式.<br>函数原型:<br>resized_img_src(filename, **kw)<br>在模板文件中可以直接使用,在python文件中需要在首部添加<code>from flask_images import resized_img_src</code><br>具体的参数主要是用来调用相对应的Pillow的接口,链接如下:<a href="https://mikeboers.github.io/Flask-Images/#usage" target="_blank" rel="external">usage</a></p>
+<p> 还可以使用images路由并向其传参得到同样的结果<br>值得注意的是,当使用本地图像时必须要设置IMAGES_PATH参数,这是一个字符串list,所以可以包括不止一个路径,如果不设置的话,就算填完整地路径插件也找不到图片进行处理<br>一般来说可以设置为:IMAGES_PATH = [‘static/‘]</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[关于HTTP的POST的两种Conten-type]]></title>
       <url>https://ly11tea.github.io/2016/11/28/%E5%85%B3%E4%BA%8EHTTP%E7%9A%84POST%E7%9A%84%E4%B8%A4%E7%A7%8DConten-type/</url>
       <content type="html"><![CDATA[<p>在给一个flask博客的表单加filefield,以实现上传自定义头像的功能的时候,发现一旦上传文件时会出现:</p>

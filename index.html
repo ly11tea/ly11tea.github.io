@@ -288,6 +288,108 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/30/flask-images/" itemprop="url">
+                  flask-images
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-30T23:24:45+08:00" content="2016-11-30">
+              2016-11-30
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/30/flask-images/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/30/flask-images/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>flask-image 是一个基于python pillow库的插件.它能够提供一个特定名称的路由和一个函数,能够接受一个指向url的图像链接,或者本地图像文件,将其转换为图像格式.<br>函数原型:<br>resized_img_src(filename, **kw)<br>在模板文件中可以直接使用,在python文件中需要在首部添加<code>from flask_images import resized_img_src</code><br>具体的参数主要是用来调用相对应的Pillow的接口,链接如下:<a href="https://mikeboers.github.io/Flask-Images/#usage" target="_blank" rel="external">usage</a></p>
+<p> 还可以使用images路由并向其传参得到同样的结果<br>值得注意的是,当使用本地图像时必须要设置IMAGES_PATH参数,这是一个字符串list,所以可以包括不止一个路径,如果不设置的话,就算填完整地路径插件也找不到图片进行处理<br>一般来说可以设置为:IMAGES_PATH = [‘static/‘]</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/28/关于HTTP的POST的两种Conten-type/" itemprop="url">
                   关于HTTP的POST的两种Conten-type
                 </a>
@@ -1323,110 +1425,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/05/python的装饰器/" itemprop="url">
-                  python的装饰器
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-05T23:15:33+08:00" content="2016-10-05">
-              2016-10-05
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/05/python的装饰器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/05/python的装饰器/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote class="blockquote-center"><p>有些面具戴得太久,就摘不下来了。<br><em>盗墓笔记</em></p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/05/python的装饰器/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1472,7 +1470,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-count">23</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
