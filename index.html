@@ -288,6 +288,117 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/01/最短路径/" itemprop="url">
+                  最短路径
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-01T23:07:27+08:00" content="2016-12-01">
+              2016-12-01
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/01/最短路径/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/01/最短路径/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一种最为形象的最短路径问题,就是地图导航问题在这个问题中顶点对应于交叉路口,边对应为公路,边的权重对应于过这条公路的成本,那么最短路径就是从一个顶点到另一个顶点的最低成本的路径.</p>
+<p>为了尽可能广泛的描述问题,我们采用加权有向图作为模型,那么一条路径的权重就是,这条路径上所有边的权重和,问题就归结于找到从一个顶点到另一个顶点的最小权重有向路径.在这节我们致力于寻找出这条路径.</p>
+<h1 id="最短路径的性质"><a href="#最短路径的性质" class="headerlink" title="最短路径的性质"></a>最短路径的性质</h1><ol>
+<li>路径是有向的,很显然我们使用加权有向图作为模型</li>
+<li>权重不一定等价于距离</li>
+<li>两个顶点之间不一定是可达的</li>
+<li>最短的路径不一定是唯一的</li>
+</ol>
+<p>在这里我们把要求的单点路径问题具体为给出一个顶点s,得到一个最短路径树,这个树中包含着s和其他所有节点,这条树中的每一条路径都是s到这个顶点的最短路径.</p>
+<h1 id="加权有向图的数据结构"><a href="#加权有向图的数据结构" class="headerlink" title="加权有向图的数据结构"></a>加权有向图的数据结构</h1><p>我们先来定义加权有向边的数据结构,他和加权无向边大体类似只不过拥有了方向,所以不必再实现either和other方法,边的权重仍然使用double<br>数据类型定义<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DirectedEdge</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> v;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> w;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">double</span> weight;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">DirectedEdge</span><span class="params">(<span class="keyword">int</span> v,<span class="keyword">int</span> w,<span class="keyword">double</span> weight)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">this</span>.v=v;</div><div class="line">		<span class="keyword">this</span>.w=w;</div><div class="line">		<span class="keyword">this</span>.weight=weight;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">from</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> v;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">to</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> w;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">weight</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> weight;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">tostring</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> String.format(<span class="string">"%d-%d:%.2f"</span>, v,w,weight);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们再来看加权有向图,与加权无向图类似我们也使用edge型的bag数据结构来表示邻接表,不同的边只在邻接表中出现一次.我们同时仍然假设图的节点是不会变动的.我们只在其中添加边:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EdgeweightedDigraph</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> V;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> E;</div><div class="line">	<span class="keyword">private</span> Bag&lt;DirectedEdge&gt;[] adj;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">EdgeweightedDigraph</span><span class="params">(<span class="keyword">int</span> v,<span class="keyword">int</span> e)</span></span></div><div class="line">	&#123;</div><div class="line">		V=v;</div><div class="line">		E=e;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;V;i++)</div><div class="line">			adj[i]=<span class="keyword">new</span> Bag&lt;DirectedEdge&gt;();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(DirectedEdge directedEdge)</span></span></div><div class="line">	&#123;</div><div class="line">		adj[directedEdge.from()].add(directedEdge);</div><div class="line">		E++;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">V</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> V;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">E</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> E;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> Iterable&lt;DirectedEdge&gt; <span class="title">adj</span><span class="params">(<span class="keyword">int</span> v)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> adj[v];</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> Iterable&lt; DirectedEdge&gt;edges(<span class="keyword">int</span> v)</div><div class="line">	&#123;</div><div class="line">		Bag&lt;DirectedEdge&gt;edges=<span class="keyword">new</span> Bag&lt;DirectedEdge&gt;();</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;V;i++)</div><div class="line">			<span class="keyword">for</span>(DirectedEdge directedEdge:adj[i])</div><div class="line">				edges.add(directedEdge);</div><div class="line">		<span class="keyword">return</span> edges;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/30/flask-images/" itemprop="url">
                   flask-images
                 </a>
@@ -1299,132 +1410,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/06/算法4-散列表/" itemprop="url">
-                  算法4 散列表
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-06T23:08:28+08:00" content="2016-10-06">
-              2016-10-06
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/算法4/" itemprop="url" rel="index">
-                    <span itemprop="name">算法4</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/06/算法4-散列表/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/06/算法4-散列表/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote class="blockquote-center"><p>All roads lead to Rome.</p>
-</blockquote>
-<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><blockquote>
-<p>通过算术操作将键转化为数组的索引以将键值对存储在数组中或来访问数组中的键值对</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/06/算法4-散列表/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1470,7 +1455,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
