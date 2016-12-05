@@ -1,0 +1,847 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="一种最为形象的最短路径问题,就是地图导航问题在这个问题中顶点对应于交叉路口,边对应为公路,边的权重对应于过这条公路的成本,那么最短路径就是从一个顶点到另一个顶点的最低成本的路径.
+为了尽可能广泛的描述问题,我们采用加权有向图作为模型,那么一条路径的权重就是,这条路径上所有边的权重和,问题就归结于找到从一个顶点到另一个顶点的最小权重有向路径.在这节我们致力于寻找出这条路径.
+最短路径的性质
+路径是有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最短路径">
+<meta property="og:url" content="https://ly11tea.github.io/2016/12/05/最短路径/index.html">
+<meta property="og:site_name" content="Luo's blog">
+<meta property="og:description" content="一种最为形象的最短路径问题,就是地图导航问题在这个问题中顶点对应于交叉路口,边对应为公路,边的权重对应于过这条公路的成本,那么最短路径就是从一个顶点到另一个顶点的最低成本的路径.
+为了尽可能广泛的描述问题,我们采用加权有向图作为模型,那么一条路径的权重就是,这条路径上所有边的权重和,问题就归结于找到从一个顶点到另一个顶点的最小权重有向路径.在这节我们致力于寻找出这条路径.
+最短路径的性质
+路径是有">
+<meta property="og:updated_time" content="2016-12-05T15:31:33.429Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="最短路径">
+<meta name="twitter:description" content="一种最为形象的最短路径问题,就是地图导航问题在这个问题中顶点对应于交叉路口,边对应为公路,边的权重对应于过这条公路的成本,那么最短路径就是从一个顶点到另一个顶点的最低成本的路径.
+为了尽可能广泛的描述问题,我们采用加权有向图作为模型,那么一条路径的权重就是,这条路径上所有边的权重和,问题就归结于找到从一个顶点到另一个顶点的最小权重有向路径.在这节我们致力于寻找出这条路径.
+最短路径的性质
+路径是有">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ly11tea.github.io/2016/12/05/最短路径/"/>
+
+  <title> 最短路径 | Luo's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ee6095b761314f862c509f6d3d27dad6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Luo's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-episode">
+          <a href="/categories/短/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-comment-o"></i> <br />
+            
+            短
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                最短路径
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-05T23:07:27+08:00" content="2016-12-05">
+              2016-12-05
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/05/最短路径/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/05/最短路径/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一种最为形象的最短路径问题,就是地图导航问题在这个问题中顶点对应于交叉路口,边对应为公路,边的权重对应于过这条公路的成本,那么最短路径就是从一个顶点到另一个顶点的最低成本的路径.</p>
+<p>为了尽可能广泛的描述问题,我们采用加权有向图作为模型,那么一条路径的权重就是,这条路径上所有边的权重和,问题就归结于找到从一个顶点到另一个顶点的最小权重有向路径.在这节我们致力于寻找出这条路径.</p>
+<h1 id="最短路径的性质"><a href="#最短路径的性质" class="headerlink" title="最短路径的性质"></a>最短路径的性质</h1><ol>
+<li>路径是有向的,很显然我们使用加权有向图作为模型</li>
+<li>权重不一定等价于距离</li>
+<li>两个顶点之间不一定是可达的</li>
+<li>最短的路径不一定是唯一的</li>
+</ol>
+<p>在这里我们把要求的单点路径问题具体为给出一个顶点s,得到一个最短路径树,这个树中包含着s和其他所有节点,这条树中的每一条路径都是s到这个顶点的最短路径.</p>
+<h1 id="加权有向图的数据结构"><a href="#加权有向图的数据结构" class="headerlink" title="加权有向图的数据结构"></a>加权有向图的数据结构</h1><p>我们先来定义加权有向边的数据结构,他和加权无向边大体类似只不过拥有了方向,所以不必再实现either和other方法,边的权重仍然使用double<br>数据类型定义<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DirectedEdge</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> v;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> w;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">double</span> weight;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">DirectedEdge</span><span class="params">(<span class="keyword">int</span> v,<span class="keyword">int</span> w,<span class="keyword">double</span> weight)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">this</span>.v=v;</div><div class="line">		<span class="keyword">this</span>.w=w;</div><div class="line">		<span class="keyword">this</span>.weight=weight;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">from</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> v;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">to</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> w;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">weight</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> weight;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">tostring</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> String.format(<span class="string">"%d-%d:%.2f"</span>, v,w,weight);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们再来看加权有向图,与加权无向图类似我们也使用edge型的bag数据结构来表示邻接表,不同的边只在邻接表中出现一次.我们同时仍然假设图的节点是不会变动的.我们只在其中添加边:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EdgeweightedDigraph</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> V;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> E;</div><div class="line">	<span class="keyword">private</span> Bag&lt;DirectedEdge&gt;[] adj;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">EdgeweightedDigraph</span><span class="params">(<span class="keyword">int</span> v,<span class="keyword">int</span> e)</span></span></div><div class="line">	&#123;</div><div class="line">		V=v;</div><div class="line">		E=e;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;V;i++)</div><div class="line">			adj[i]=<span class="keyword">new</span> Bag&lt;DirectedEdge&gt;();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(DirectedEdge directedEdge)</span></span></div><div class="line">	&#123;</div><div class="line">		adj[directedEdge.from()].add(directedEdge);</div><div class="line">		E++;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">V</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> V;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">E</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> E;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> Iterable&lt;DirectedEdge&gt; <span class="title">adj</span><span class="params">(<span class="keyword">int</span> v)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> adj[v];</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> Iterable&lt; DirectedEdge&gt;edges(<span class="keyword">int</span> v)</div><div class="line">	&#123;</div><div class="line">		Bag&lt;DirectedEdge&gt;edges=<span class="keyword">new</span> Bag&lt;DirectedEdge&gt;();</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;V;i++)</div><div class="line">			<span class="keyword">for</span>(DirectedEdge directedEdge:adj[i])</div><div class="line">				edges.add(directedEdge);</div><div class="line">		<span class="keyword">return</span> edges;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="最短路径的数据结构"><a href="#最短路径的数据结构" class="headerlink" title="最短路径的数据结构"></a>最短路径的数据结构</h1><p>我们先来看实现最短路径算法所需要的数据结构,先讨论单个起点s的情况我们首先需要一个directededge类型的edgeto数组,它存储最短路径树中着<strong>指向</strong>对应索引编号节点的边,我们还需要一个存储权重double型的distto[]数组,他存储着从给定起点到对应索引编号节点的路径的权重和,如果不连通则定义为无穷大<br>此外我们定义edgeto[s]=null,distto[s]=0<br>根据上面的结构我们可以很快的实现一些查询类的方法,比如haspathto(),通过查询distto[]的值实现.pathto则返回一个堆栈,相当于反序输出edgeto[]中的值,这在以前已经用过多次了.</p>
+<h1 id="最短路径的算法"><a href="#最短路径的算法" class="headerlink" title="最短路径的算法"></a>最短路径的算法</h1><p>首先一开始我们将disto[s]=0,其他节点都设为无穷,随着算法执行他不断地将目前已知的最短路径加入edgeto[]数组和distto[]数组.我们在其中最常用的是边的松弛操作:当我们遇到一条边e:v-&gt;w时,比较若distto[w]&gt;distto[v]+e.weight的时候我们就更新边,这种情况叫做松弛成功,若不是就将当前遍历到的边设为失效.<br>值得一提的是在算法中我们要松弛一个顶点指出的所有边.</p>
+<p>要实现算法我们还要一些理论基础:<br>我们首先要明确判断最短路径时的全局条件同松弛一条边时的条件是等价的.</p>
+<blockquote>
+<p>最短路径的最优性条件:G 为一幅为加权有向图,从 v 到 w 的任意一条边 e. 这些值都满足 distTo[w] &lt;=distTo[v]+e.weight()时,他们是<strong>最短路径的长度</strong>.</p>
+</blockquote>
+<p>通过这个条件我们立马可以想到一种找出最短路径的通用方法:放松g中的任意边直到不存在有效边为止.</p>
+<h2 id="dijkstra算法"><a href="#dijkstra算法" class="headerlink" title="dijkstra算法"></a>dijkstra算法</h2><p>dijkstra算法就使用了上面的方法,找到一个图中的最短路径,它将distto[s]的值初始化为0,其他顶点为正无穷,它将树中distto[]最小的非树顶点指出的所有边放松,并加入树中,如此循环往复.<br>由上面的方法可知我们需要一个最小优先队列,这应当是一个带索引的最小优先队列,我们每次在其中distto[]最小的顶点,并返回其索引<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> alg;</div><div class="line"><span class="keyword">import</span> edu.princeton.cs.algs4.*;</div><div class="line"><span class="keyword">import</span> edu.princeton.cs.algs4.MinPQ;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DijkstraSP</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">double</span> [ ] distto;</div><div class="line">	<span class="keyword">private</span> DirectedEdge[] edgeto;</div><div class="line">	<span class="keyword">private</span> IndexMinPQ&lt;Double&gt;pq;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">DijkstraSP</span><span class="params">(EdgeweightedDigraph digraph,<span class="keyword">int</span> s)</span></span></div><div class="line">	&#123;</div><div class="line">		distto=<span class="keyword">new</span> <span class="keyword">double</span>[digraph.V()];</div><div class="line">		edgeto=<span class="keyword">new</span> DirectedEdge[digraph.V()];</div><div class="line">		pq=<span class="keyword">new</span> IndexMinPQ&lt;&gt;(digraph.V());</div><div class="line">		</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;digraph.V();i++)</div><div class="line">		&#123;</div><div class="line">			distto[i]=Double.POSITIVE_INFINITY;</div><div class="line">		&#125;</div><div class="line">		distto[s]=<span class="number">0</span>;</div><div class="line">		edgeto[s]=<span class="keyword">null</span>;</div><div class="line">		pq.insert(s, <span class="number">0.0</span>);</div><div class="line">		<span class="keyword">while</span>(!pq.isEmpty())</div><div class="line">		&#123;</div><div class="line">			relax(digraph,pq.delMin());</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">relax</span><span class="params">(EdgeweightedDigraph digraph,<span class="keyword">int</span> v)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(DirectedEdge edge:digraph.adj(v))</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">int</span> w=edge.to();</div><div class="line">			<span class="keyword">if</span>(distto[w]&gt;distto[v]+edge.weight())</div><div class="line">			&#123;</div><div class="line">				distto[w]=distto[v]+edge.weight();</div><div class="line">				edgeto[w]=edge;</div><div class="line">				<span class="keyword">if</span>(pq.contains(w))</div><div class="line">					pq.changeKey( w,distto[w]);</div><div class="line">				<span class="keyword">else</span> </div><div class="line">					pq.insert(w, distto[w]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">distto</span><span class="params">(<span class="keyword">int</span> v)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">return</span> distto(v);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">haspathto</span><span class="params">(<span class="keyword">int</span> v)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(!(distto[v] == Double.POSITIVE_INFINITY))</div><div class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> Iterable&lt;DirectedEdge&gt;pathto(<span class="keyword">int</span> w)</div><div class="line">	&#123;</div><div class="line">		Stack&lt;DirectedEdge&gt;edge=<span class="keyword">new</span> Stack&lt;DirectedEdge&gt;();</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=w;edgeto[i]!=<span class="keyword">null</span>;i=edgeto[i].from())</div><div class="line">		&#123;</div><div class="line">			edge.push(edgeto[i]);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> edge;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/30/flask-images/" rel="next" title="flask-images">
+                <i class="fa fa-chevron-left"></i> flask-images
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/05/最短路径/"
+           data-title="最短路径" data-url="https://ly11tea.github.io/2016/12/05/最短路径/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Luo" />
+          <p class="site-author-name" itemprop="name">Luo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ly11tea" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-luo-99" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-question-circle"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#最短路径的性质"><span class="nav-number">1.</span> <span class="nav-text">最短路径的性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#加权有向图的数据结构"><span class="nav-number">2.</span> <span class="nav-text">加权有向图的数据结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最短路径的数据结构"><span class="nav-number">3.</span> <span class="nav-text">最短路径的数据结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最短路径的算法"><span class="nav-number">4.</span> <span class="nav-text">最短路径的算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dijkstra算法"><span class="nav-number">4.1.</span> <span class="nav-text">dijkstra算法</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ly11tea"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
