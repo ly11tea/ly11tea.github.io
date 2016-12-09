@@ -1,0 +1,923 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="总结,python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="格者，正也，正其不正，以归于正也.
+王阳明, 传习录
+
+写一些初学python遇到的坑,主要是总结后给自己提个醒,当然如果能够帮助到别人那就更好了.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="那些年踩过的python坑（一）">
+<meta property="og:url" content="https://ly11tea.github.io/2016/12/09/那些年踩过的python坑（一）/index.html">
+<meta property="og:site_name" content="Luo's blog">
+<meta property="og:description" content="格者，正也，正其不正，以归于正也.
+王阳明, 传习录
+
+写一些初学python遇到的坑,主要是总结后给自己提个醒,当然如果能够帮助到别人那就更好了.">
+<meta property="og:image" content="https://ly11tea.github.io/images/relation1.jpg">
+<meta property="og:image" content="https://ly11tea.github.io/images/relation.png">
+<meta property="og:updated_time" content="2016-12-09T15:46:55.611Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="那些年踩过的python坑（一）">
+<meta name="twitter:description" content="格者，正也，正其不正，以归于正也.
+王阳明, 传习录
+
+写一些初学python遇到的坑,主要是总结后给自己提个醒,当然如果能够帮助到别人那就更好了.">
+<meta name="twitter:image" content="https://ly11tea.github.io/images/relation1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ly11tea.github.io/2016/12/09/那些年踩过的python坑（一）/"/>
+
+  <title> 那些年踩过的python坑（一） | Luo's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ee6095b761314f862c509f6d3d27dad6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Luo's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-episode">
+          <a href="/categories/短/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-comment-o"></i> <br />
+            
+            短
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                那些年踩过的python坑（一）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-09T14:40:33+08:00" content="2016-12-09">
+              2016-12-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/那些年踩过的python坑/" itemprop="url" rel="index">
+                    <span itemprop="name">那些年踩过的python坑</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/09/那些年踩过的python坑（一）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/09/那些年踩过的python坑（一）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote class="blockquote-center"><p>格者，正也，正其不正，以归于正也.</p>
+<p><strong>王阳明</strong>, <em>传习录</em></p>
+</blockquote>
+<p>写一些初学python遇到的坑,主要是总结后给自己提个醒,当然如果能够帮助到别人那就更好了.<br><a id="more"></a> </p>
+<h2 id="python的turple-list和dict"><a href="#python的turple-list和dict" class="headerlink" title="python的turple,list和dict"></a>python的turple,list和dict</h2><p>python尽量省略了变量的初始化和定义语句,对于单个变量来说一般情况下完全不需要初始化,直接进行赋值即可.对于数组型数据结构,也仅仅需要在使用前使用纯符号定义类型.这样做好处是加快了编程流程,然而对于新手来说这也增加了混淆的风险.<br>首先先来介绍一下这三种数据结构:</p>
+<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><blockquote>
+<p>列表. list是一种有序的集合，可以随时添加和删除其中的元素.<br>l=[]</p>
+</blockquote>
+<p>list中的数据类型可以是不固定的,所以是一种复合的数据类型.list也可以方便的使用<strong>内建函数</strong>增加或删除某些元素.</p>
+<h3 id="turple"><a href="#turple" class="headerlink" title="turple"></a>turple</h3><blockquote>
+<p>元祖. turple是一种有序的集合，一旦定义完成<strong>不能</strong>添加和删除其中的元素.<br>t=()</p>
+</blockquote>
+<p>list和tuple的性质非常相似，其中最大的区别其实就在于是否为常量。</p>
+<h3 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h3><blockquote>
+<p>字典，dict全称dictionary，在其他语言中也称为map，使用键-值（key-value）存储，具有极快的查找速度。<br>d={}</p>
+</blockquote>
+<p>个人觉得这个就是散列表的一种实现,将散列表直接作为一种常用数据类型,这也体现python现代高级语言的特点.<br>dict与上述两个数据类型最大的不同是其中的element是成对存储的,也就是上面所说的键值对.此外由于是无序的,dict的插入元素也非常方便:你只需要用赋值语句对应的key-value填充字典即可</p>
+<blockquote>
+<p>d[key]=value</p>
+</blockquote>
+<p>所以爱偷懒的人(比如我)或者以前学过C++的人可能会想到,可以使用dict来实现list,只要将其中的index换成key即可,在语言使用习惯上更符合c-style的习惯,并且还不用提前分配空间,比vector好使!…然而这并不是一种好的习惯:</p>
+<ul>
+<li>首先index-&gt;key会改变自身的数据类型,</li>
+<li>且占用了大量内存.</li>
+<li>还无法保证<strong>迭代时的有序性</strong>(这一点我还没有碰到),即迭代的顺序未必是插入时的顺序.</li>
+</ul>
+<p>所以,下面我就碰到了坑:<br>我们都知道python中也有for..in..循环,然而与c-style语言中偏好于下标实现不同python更偏向于迭代器实现,甚至根本不鼓励下标实现.也确实做到了用迭代器实现代码更少更方便(这一点上要明显好于C++).<br>例如:<br>遍历list l中元素:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> l:</div><div class="line">    i....</div><div class="line"><span class="comment">####</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(l)):</div><div class="line">    l[i]....</div><div class="line"><span class="comment">####</span></div><div class="line"><span class="keyword">for</span> i,value <span class="keyword">in</span> enumerate(l):</div><div class="line">    l[i]...</div></pre></td></tr></table></figure>
+<p>上面的三种方法显然第一种使用迭代器的方案最优.然而使用迭代器我们就必须能够明晓迭代器的数据类型.<br>对于list和tuple迭代器的类型就是其中element的类型,而dict默认为<strong>其中的 key</strong> :</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> d:</div><div class="line">    i <span class="comment">##此时的i为int,是key</span></div><div class="line"><span class="comment">####</span></div><div class="line"><span class="keyword">for</span> va <span class="keyword">in</span> d.values():</div><div class="line">    va <span class="comment">##此时va为d中值</span></div><div class="line"><span class="comment">####</span></div><div class="line"><span class="keyword">for</span> i,va <span class="keyword">in</span> d.items():<span class="comment">##还可以遍历键值对</span></div><div class="line">    i,value....</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> d:</div><div class="line">    i <span class="comment">##此时的i为int,是key</span></div><div class="line"><span class="comment">####</span></div><div class="line"><span class="keyword">for</span> va <span class="keyword">in</span> d.values():</div><div class="line">    va <span class="comment">##此时va为d中值</span></div><div class="line"><span class="comment">####</span></div><div class="line"><span class="keyword">for</span> i,va <span class="keyword">in</span> d.items():<span class="comment">##还可以遍历键值对</span></div><div class="line">    i,value....</div></pre></td></tr></table></figure>
+<p>对于赋值语句,这个规律仍然存在:<br>例如<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">std_msgs.msg.Int8MultiArray(data=d)</div><div class="line">t=tuple(d)</div><div class="line">l=list(d)</div></pre></td></tr></table></figure></p>
+<p>这个data参数,tuple函数,list函数只接受一个数据序列,此时复制过去的就是dict的key,若要想复制value,就必须使用<code>d.values()</code></p>
+<h2 id="enumerate"><a href="#enumerate" class="headerlink" title="enumerate"></a>enumerate</h2><p>由于python支持tuple packing 和Sequence unpacking以达到多重赋值,所以赋值时可能出现一些我们不想要的结果然而代码却仍能够执行下去:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> enumerate(l)</div><div class="line">    <span class="comment">###此时每一次循环中i是一个两个元素的一维tuple</span></div><div class="line"><span class="keyword">for</span> i,va <span class="keyword">in</span> enumerate(l)</div><div class="line">    <span class="comment">###此时为两个int,分别为 index和value</span></div></pre></td></tr></table></figure></p>
+<p>相似的语句却产生了完全不同的两种数据类型,且语句中也没有显式的体现,这也是py极少的对于新手不友好的地方.</p>
+<h2 id="bytearrary"><a href="#bytearrary" class="headerlink" title="bytearrary"></a>bytearrary</h2><p>另一个为新手所诟病的python坑,莫过于是python的两个版本,python2和python3了.有偏激的说法说这两个版本实际上已经成为了两种语言,这当然不对.最常见的就是print方法的变化.这里要讨论的是另一种,python2和python3的字符串表示.<br>写这个概念之前,我们先来明确一下字符编码的概念,不同于我们生活中直接可以用字符交流,计算机显然要将字符编为一段二进制码才能进行底层的存储和处理,而用户在进行大多数操作时并不需要过于关心这个编解码的过程,就如同在现实中一样,我们把这样的操作称为<strong>抽象的</strong>.大多数高级编程语言都有string类型,以满足这样的操作:</p>
+<blockquote>
+<p>字符串是文本的抽象表示。字符串由字符组成，字符则是与任何特定二进制表示无关的抽象实体。在操作字符串时，我们生活在幸福的无知之中。我们可以对字符串进行分割和分片，可以拼接和搜索字符串。我们并不关心它们内部是怎么表示的，字符串里的每个字符要用几个字节保存。只有在将字符串编码成字节包（例如，为了在信道上发送它们）或从字节包解码字符串（反向操作）时，我们才会开始关注这点。</p>
+</blockquote>
+<p>上面的话是针对字符串抽象的精妙的描述.</p>
+<h3 id="python-2"><a href="#python-2" class="headerlink" title="python 2"></a>python 2</h3><p>令人遗憾的是,python2中并没有采用这种抽象的做法,Python2中的str实际上是一组字节序列…<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line">l=<span class="string">'好个和'</span></div><div class="line">print(len(l))<span class="comment">##输出为9而非三</span></div></pre></td></tr></table></figure></p>
+<p>正是因为是字节序列,所以<strong>python也没有限定其编码方式</strong>,如果你的字符编码方式不是ascii(python的默认编码，defaultencoding是ascii),并且输入输出环境选用的又不是你的那种字符编码方式,或者输入输出环境编码方式不同,那么输入输出都会变得混乱无比,因为python事实上只是<strong>不做修改的发布了这些字符序列并用制定的或者默认的编码方式</strong>解释了而已.<br>他们的之间的关系如下:</p>
+<p><img src="/images/relation1.jpg" style="width: 260px;"></p>
+<p>值得说明的是,其实str也有encode方法,这里python就自动完成了两个步骤:将str 以默认的编码形式(一般为ascii)decode成unicode字符串,将unicode字符串用上面指定的编码形式encode成str</p>
+<p>那么摆在程序员面前只有两条路</p>
+<ol>
+<li>确认你的字符编码和输入输出环境的编码一致也与你编程文件中的默认编码一致.</li>
+<li>把你的字符编码decode,到unicode类型字符串.到此时python会帮你自动转换</li>
+</ol>
+<p>第一种方式<br>例如在文件首部加入# -<em>- coding: utf-8 -</em>-形式,那么在文件中定义的所有字符串都将使用utf-8编码</p>
+<p>上面谈到的unicode字符串python2中的另一种字符串类型,事实上这才是py2中的真•字符串<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line">l=<span class="string">u'好个和'</span></div><div class="line">print(len(l))<span class="comment">##输出为3而非9</span></div><div class="line"><span class="comment">####</span></div><div class="line">l2=<span class="string">'好个和'</span></div><div class="line">decodedUnicode = l2.decode(<span class="string">"UTF-8"</span>);</div></pre></td></tr></table></figure></p>
+<p>使用这个字符串我们又可以当一个幸福的无知者了,上面两种方法都可以得到unicode串.</p>
+<p>事情还没完,对于广大非计类工科狗来说,字节序列并不是一无是处,由于更加接触底层,平时许多甚至大部分工作反而是对这些字节序列操作,然而字节序列又和str搅在了一起……..<br>于是python又提供了一个bytearray类型的数组,见名知义,这是一个字节元素数组,以便于操作二进制.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line">l=<span class="string">'aaa'</span></div><div class="line">b=bytearray(l)</div><div class="line">print(l[<span class="number">0</span>])<span class="comment">##输出a</span></div><div class="line">print(b[<span class="number">0</span>])<span class="comment">##输出97</span></div></pre></td></tr></table></figure></p>
+<h3 id="python3"><a href="#python3" class="headerlink" title="python3"></a>python3</h3><p>在脑残了整个2.X版本后,python3终于做出了改进:</p>
+<blockquote>
+<p>文本总是Unicode，由str类型表示，二进制数据则由bytes类型表示。Python 3不会以任和隐式的方式混用str和bytes，正是这使得两者的区分特别清晰。你不能拼接字符串和字节包，也无法在字节包里搜索字符串（反之亦然），也不能将字符串传入参数为字节包的函数（反之亦然）。这是件好事。</p>
+</blockquote>
+<p>string彻彻底底成为了抽象字符串且指定了编码类型unicode,二进制数据则由bytes类型表示.<br>他们之间的关系是:</p>
+<p><img src="/images/relation.png" style="width: 260px;"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">####in the shell</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'€20'</span>.encode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="string">b'\xe2\x82\xac20'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'\xe2\x82\xac20'</span>.decode(<span class="string">'utf-8'</span>)</div><div class="line"><span class="string">'€20'</span></div><div class="line"><span class="comment">###还可以将string转换为指定格式编码的bytes</span></div><div class="line"><span class="comment">###或者将指定格式编码的bytes转为string</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'€20'</span>.encode(<span class="string">'iso-8859-15'</span>)</div><div class="line"><span class="string">b'\xa420'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">b'\xa420'</span>.decode(<span class="string">'iso-8859-15'</span>)</div><div class="line"><span class="string">'€20'</span></div></pre></td></tr></table></figure>
+<p>简言之,在py3中py2的unicode变成了string,py2的bytearray变为了bytes</p>
+<h2 id="path"><a href="#path" class="headerlink" title="path"></a>path</h2><pre><code>## print 不换行输出
+</code></pre><p>这又是一个python2与python3的不同之处了<br>在python2中希望用一条print函数输出并不换行的方法是在末尾加一个逗号.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> a,</div></pre></td></tr></table></figure></p>
+<p>而在python3中,方法为是将print函数中的end参数置为空,默认为\n<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(a,...,end=<span class="string">''</span>)</div></pre></td></tr></table></figure></p>
+<h2 id="argv的第一个参数为脚本名"><a href="#argv的第一个参数为脚本名" class="headerlink" title="argv的第一个参数为脚本名"></a>argv的第一个参数为脚本名</h2><p>如题<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> argv</div><div class="line">scriptname,a,...=argv</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/总结/" rel="tag">#总结</a>
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/07/使用Flask-WhooshAlchemy/" rel="next" title="使用Flask-WhooshAlchemy">
+                <i class="fa fa-chevron-left"></i> 使用Flask-WhooshAlchemy
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/09/那些年踩过的python坑（一）/"
+           data-title="那些年踩过的python坑（一）" data-url="https://ly11tea.github.io/2016/12/09/那些年踩过的python坑（一）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Luo" />
+          <p class="site-author-name" itemprop="name">Luo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ly11tea" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-luo-99" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-question-circle"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python的turple-list和dict"><span class="nav-number">1.</span> <span class="nav-text">python的turple,list和dict</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#list"><span class="nav-number">1.1.</span> <span class="nav-text">list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#turple"><span class="nav-number">1.2.</span> <span class="nav-text">turple</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dict"><span class="nav-number">1.3.</span> <span class="nav-text">dict</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#enumerate"><span class="nav-number">2.</span> <span class="nav-text">enumerate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bytearrary"><span class="nav-number">3.</span> <span class="nav-text">bytearrary</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#python-2"><span class="nav-number">3.1.</span> <span class="nav-text">python 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python3"><span class="nav-number">3.2.</span> <span class="nav-text">python3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#path"><span class="nav-number">4.</span> <span class="nav-text">path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#argv的第一个参数为脚本名"><span class="nav-number">5.</span> <span class="nav-text">argv的第一个参数为脚本名</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ly11tea"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
