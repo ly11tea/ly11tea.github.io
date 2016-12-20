@@ -4,6 +4,14 @@
   
     
     <entry>
+      <title><![CDATA[postgresql 使用小结]]></title>
+      <url>https://ly11tea.github.io/2016/12/20/postgresql-%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/</url>
+      <content type="html"><![CDATA[<p>postgresql在数据类型的定义方面与其他sql型数据库差别不大,主要是在登录环节略有不同.<br>总的来说,postgresql进行通信有两种方式,<br>一种是local,这时候客户端和服务器在一个操作系统上,通过websocket连接,这时候postgresql的默认验证方式是peer,相当于把验证工作甩给了操作系统,如果操作系统用户名同数据库中的某个用户名相同,那就以那个用户名登录,安装postgresql,数据库中默认添加一个名为postgres用户，密码随机,操作系统中也会添加一个名为postgres用户，密码随机.所以进行初次配置时我们一般要使用<br><code>sudo -u postgres psql</code><br>登入postgresql,然后再添加用户和数据库</p>
+<p>另一种方式是host,这时候客户端和服务器不一定在一个操作系统上,这个时候postgresql的默认验证方式是MD5,即MD5加密的密码验证,此时orm的url应该写成<code>&#39;postgresql://user:pass@ip:port/mydatabase&#39;</code>的形式,如果嫌麻烦也可以在pg_hba.conf文件中将localhost的链接改为trust这样在本地发起的tcp连接可以访问任意用户的任意数据库,值得注意的是这种方法只能在开发时用,正式场合使用将非常危险.<br>你也可以将url写成<code>&#39;postgresql:///mydatabase&#39;</code>的形式这样仍然是使用websocket连接</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[那些年踩过的python坑（一）]]></title>
       <url>https://ly11tea.github.io/2016/12/09/%E9%82%A3%E4%BA%9B%E5%B9%B4%E8%B8%A9%E8%BF%87%E7%9A%84python%E5%9D%91%EF%BC%88%E4%B8%80%EF%BC%89/</url>
       <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>格者，正也，正其不正，以归于正也.</p>

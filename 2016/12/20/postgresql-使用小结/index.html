@@ -84,13 +84,16 @@
 
 
 
+<meta name="description" content="postgresql在数据类型的定义方面与其他sql型数据库差别不大,主要是在登录环节略有不同.总的来说,postgresql进行通信有两种方式,一种是local,这时候客户端和服务器在一个操作系统上,通过websocket连接,这时候postgresql的默认验证方式是peer,相当于把验证工作甩给了操作系统,如果操作系统用户名同数据库中的某个用户名相同,那就以那个用户名登录,安装postgre">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ss">
-<meta property="og:url" content="https://ly11tea.github.io/2016/09/13/ss/index.html">
+<meta property="og:title" content="postgresql 使用小结">
+<meta property="og:url" content="https://ly11tea.github.io/2016/12/20/postgresql-使用小结/index.html">
 <meta property="og:site_name" content="Luo's blog">
-<meta property="og:updated_time" content="2016-09-13T12:38:41.812Z">
+<meta property="og:description" content="postgresql在数据类型的定义方面与其他sql型数据库差别不大,主要是在登录环节略有不同.总的来说,postgresql进行通信有两种方式,一种是local,这时候客户端和服务器在一个操作系统上,通过websocket连接,这时候postgresql的默认验证方式是peer,相当于把验证工作甩给了操作系统,如果操作系统用户名同数据库中的某个用户名相同,那就以那个用户名登录,安装postgre">
+<meta property="og:updated_time" content="2016-12-20T15:52:19.830Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ss">
+<meta name="twitter:title" content="postgresql 使用小结">
+<meta name="twitter:description" content="postgresql在数据类型的定义方面与其他sql型数据库差别不大,主要是在登录环节略有不同.总的来说,postgresql进行通信有两种方式,一种是local,这时候客户端和服务器在一个操作系统上,通过websocket连接,这时候postgresql的默认验证方式是peer,相当于把验证工作甩给了操作系统,如果操作系统用户名同数据库中的某个用户名相同,那就以那个用户名登录,安装postgre">
 
 
 
@@ -111,9 +114,9 @@
 
 
 
-  <link rel="canonical" href="https://ly11tea.github.io/2016/09/13/ss/"/>
+  <link rel="canonical" href="https://ly11tea.github.io/2016/12/20/postgresql-使用小结/"/>
 
-  <title> ss | Luo's blog </title>
+  <title> postgresql 使用小结 | Luo's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -286,7 +289,7 @@
             
             
               
-                ss
+                postgresql 使用小结
               
             
           </h1>
@@ -298,8 +301,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-13T20:38:41+08:00" content="2016-09-13">
-              2016-09-13
+            <time itemprop="dateCreated" datetime="2016-12-20T23:52:01+08:00" content="2016-12-20">
+              2016-12-20
             </time>
           </span>
 
@@ -309,8 +312,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/13/ss/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/13/ss/" itemprop="commentsCount"></span>
+                <a href="/2016/12/20/postgresql-使用小结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/20/postgresql-使用小结/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -333,7 +336,9 @@
       
 
       
-        
+        <p>postgresql在数据类型的定义方面与其他sql型数据库差别不大,主要是在登录环节略有不同.<br>总的来说,postgresql进行通信有两种方式,<br>一种是local,这时候客户端和服务器在一个操作系统上,通过websocket连接,这时候postgresql的默认验证方式是peer,相当于把验证工作甩给了操作系统,如果操作系统用户名同数据库中的某个用户名相同,那就以那个用户名登录,安装postgresql,数据库中默认添加一个名为postgres用户，密码随机,操作系统中也会添加一个名为postgres用户，密码随机.所以进行初次配置时我们一般要使用<br><code>sudo -u postgres psql</code><br>登入postgresql,然后再添加用户和数据库</p>
+<p>另一种方式是host,这时候客户端和服务器不一定在一个操作系统上,这个时候postgresql的默认验证方式是MD5,即MD5加密的密码验证,此时orm的url应该写成<code>&#39;postgresql://user:pass@ip:port/mydatabase&#39;</code>的形式,如果嫌麻烦也可以在pg_hba.conf文件中将localhost的链接改为trust这样在本地发起的tcp连接可以访问任意用户的任意数据库,值得注意的是这种方法只能在开发时用,正式场合使用将非常危险.<br>你也可以将url写成<code>&#39;postgresql:///mydatabase&#39;</code>的形式这样仍然是使用websocket连接</p>
+
       
     </div>
 
@@ -358,13 +363,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/12/09/那些年踩过的python坑（一）/" rel="next" title="那些年踩过的python坑（一）">
+                <i class="fa fa-chevron-left"></i> 那些年踩过的python坑（一）
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/14/new/" rel="prev" title="new">
-                new <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -413,8 +418,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/13/ss/"
-           data-title="ss" data-url="https://ly11tea.github.io/2016/09/13/ss/">
+      <div class="ds-thread" data-thread-key="2016/12/20/postgresql-使用小结/"
+           data-title="postgresql 使用小结" data-url="https://ly11tea.github.io/2016/12/20/postgresql-使用小结/">
       </div>
     
   </div>
