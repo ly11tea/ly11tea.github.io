@@ -288,6 +288,143 @@
             
               
                 
+                <a class="post-title-link" href="/2017/01/13/FLASK-at-Scale-笔记/" itemprop="url">
+                  FLASK at Scale 笔记(未完)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-13T00:03:11+08:00" content="2017-01-13">
+              2017-01-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/13/FLASK-at-Scale-笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/13/FLASK-at-Scale-笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Flack-At-Scale-笔记"><a href="#Flack-At-Scale-笔记" class="headerlink" title="Flack At Scale 笔记"></a>Flack At Scale 笔记</h1><p>标签（空格分隔）： 未分类</p>
+<hr>
+<p>Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenlet等技术的应用,将异步非阻塞,并行的结构应用到项目上,改善高并发环境下的项目性能.</p>
+<h1 id="v0-1"><a href="#v0-1" class="headerlink" title="v0.1"></a>v0.1</h1><p>作者在演讲的一开始给出了V0.1的文件,首先它是一个完全可用的工程,一个简易的的在线聊天室,提供markdown语言的支持,然而它又十分的丑陋:</p>
+<ul>
+<li>所有的后端程序文件都集中在一个app当中,在里面寻找,修改代码的体验都是一场灾难.</li>
+<li>由于配置没有和程序本身剥离,所以很难进行完整地测试,也无法区分开发环境和生产环境.<br>在生产部署方面:</li>
+<li>没有用到一些生产部署方面常用的框架.Nginx,uwsgi等等</li>
+<li>客户端单线程并且同步的执行文本渲染等其他操作,在高并发环境下阻塞甚至根本不可用</li>
+<li>客户端和服务器之间完全使用REST架构,在这种聊天应用中使用rest意味着要不停的向服务器轮询资源才能得到实时地感觉,这非常消耗服务器和带宽资源</li>
+</ul>
+<h1 id="V0-2"><a href="#V0-2" class="headerlink" title="V0.2"></a>V0.2</h1><p>v0.2主要是将一些辅助性的并且与用户的其他编码没有相关性的函数移动到其他Moudle中,在文件结构上就是移动到其他py文件中.<br>这些函数因为相互关联性较少,没有互相import的问题,所以操作起来也比较简单.</p>
+<h1 id="v0-3"><a href="#v0-3" class="headerlink" title="v0.3"></a>v0.3</h1><p>在0.3中我们将数据模型的类剥离出来形成一个单独的模块(model.py),在这里我们遇到了第一个头疼的问题–python的循环import:<br>在这个版本中,orm sqlalchemy的实例db被初始化在flack.py中,而在model.py中定义模型时必须要用到db实例,又,在flack.py要使用model.py中定义的模型User,Message,这样逻辑上就产生了一个无限循环的相互import<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">--flack.py--</div><div class="line">from models import User</div><div class="line">db = SQLAlchemy(app)</div><div class="line">def new_user():</div><div class="line">    u = User()</div><div class="line"></div><div class="line">--models.py--</div><div class="line">from flack import db</div><div class="line">class User(db.Model):</div><div class="line">    pass</div></pre></td></tr></table></figure></p>
+<p>循环import的根本原因在于项目,逻辑的层次组织的不对,一般来说被引用的文件不应该包含可直接执行的代码,而应该是函数,类等结构.<br>我们可以看出,<strong>在这里不符合要求的是flack.py</strong>,事实上在<strong>稍后</strong>的几个版本中我们正是继续修改flack.py,继续分离代码，彻底的解决问题。</p>
+<p>在这里我们使用‘标’的方法，import<code>__main__</code>这种固定的命名空间解决,当然为了普适性,这里还加入了抛出异常并处理的语句,以解决运行的入口文件不是flack的情况:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">models.py</div><div class="line">try:</div><div class="line">    from __main__ import db</div><div class="line">except ImportError:</div><div class="line">    from flack import db</div><div class="line">class User(db.Model):</div><div class="line">    pass</div></pre></td></tr></table></figure></p>
+<p> <code>__main__</code>是py中的一个命名空间,它指示的是被直接运行的脚本的命名空间,当python进行import的时候,在<code>sys.modules</code>中寻找要导入的模块是否已经载入,<code>__main__</code>第一个运行,显然已经载入,所以此时就会将要导入的目标直接加入当前模块(models.py)的当前命名空间中,之后就可以直接拿来使用了.<br>其中<code>sys.modules</code>模块存储已经导入的模块的名字,但是直接运行的脚本的名字一律是<code>__main__</code>,这就意味着我们之前在使用<code>from flack import db</code>时,系统并未在<code>sys.modules</code>中找到flack,而是又去import 了一遍flack.py,并创建了一个flack的命名空间结构存储在<code>sys.modules</code>中,在这个过程中flack.py第一层级(缩进区分)的代码都被执行,造成了相互import.<br>当然如果在被import的文件中,所有执行性的语句和类的继承,都和import无关,那么你可以将 import 放到这些所有语句的下面,但在这里<strong>行不通,</strong>因为定义数据模型需要继承db.model<br>如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">--flack.py--</div><div class="line">db = SQLAlchemy(app)</div><div class="line">from models import User</div><div class="line"></div><div class="line">def new_user():</div><div class="line">    u = User()</div><div class="line"></div><div class="line"></div><div class="line">--models.py--</div><div class="line"></div><div class="line">class User(db.Model):</div><div class="line">    pass</div><div class="line">.....</div><div class="line"></div><div class="line"></div><div class="line">from flack import db</div></pre></td></tr></table></figure>
+<p>一个可以实现的范例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">---a.py---</div><div class="line">from b import action_b </div><div class="line">def action_a():                               </div><div class="line">    print(action_b.__name__)</div><div class="line">print(&apos;a&apos;)               </div><div class="line"></div><div class="line">---b.py---</div><div class="line">def action_b():</div><div class="line">    print(action_a.__name__)</div><div class="line">print(&apos;b&apos;)</div><div class="line">from a import action_a</div></pre></td></tr></table></figure></p>
+<p>此时python a.py 是可以执行的<br>总结一下,解决循环import的最好的方法应该是,<strong>尽量避免相互import,避免import执行性的脚本</strong>.这个道理其实很多地方都成立,如果实现一个功能特别费劲,那么很可能你的practice就有问题.例如.直接在包中执行脚本等等。</p>
+<h1 id="V0-4"><a href="#V0-4" class="headerlink" title="V0.4"></a>V0.4</h1><p>如上面结束时所说，不要在一个包中直接执行文件，否则的话会在后期项目架构组织上带来许多的麻烦。因此在0.4中就将网站应用放到一个包中，<br>这个包中的层次有：</p>
+<ul>
+<li>/static 放置静态的图片和js文件</li>
+<li>/template 放置用于渲染的网页模板</li>
+<li>包中的一些模块,主模块,数据库模型定义模块,辅助函数模块等等<br>在包的外部放置虚拟环境和测试文件等等.<br>将这整个网站的应用部分做成一个包的另一个好处是可以将启动置于包的外部,可以灵活的配置一些启动选项和方式,这里我们使用flask-script 包,将flask初始化的app实例,使用flask-script的manager实例封装后,可以使用命令行参数制定不同的启动选项,包括专用的shell环境,创建数据库等等</li>
+</ul>
+<h1 id="V0-5"><a href="#V0-5" class="headerlink" title="V0.5"></a>V0.5</h1><p>许多路由都需要用到验证函数,且这些函数在逻辑上又有紧密的关系,是一个整体.将它们放在一个模块中并调用,有利于进一步理清项目之间的逻辑关系,同时也容易维护</p>
+<h1 id="V0-6"><a href="#V0-6" class="headerlink" title="V0.6"></a>V0.6</h1><p>测试作为一个相对独立的模块可以不放在网站应用包中而是移到项目的根目录下,作为一个独立的包,两个包通过项目根目录下的manager.py联系到一起,即为网站再增加一个启动参数.<br>这样做,彻底让网站应用程序包中没有直接执行的入口,所有的启动操作都由启动文件manager.py处理,理顺了整个工程的框架逻辑.<br>在包外做启动也理顺了测试业务逻辑,因为用户总是在外部使用网站的,便于后期增加一些模仿用户操作的可能性.<br>在这里我们也看到在包外使用启动文件启动的好处:可以灵活的增删功能,最大限度的避免import的错误.</p>
+<h1 id="V0-7"><a href="#V0-7" class="headerlink" title="V0.7"></a>V0.7</h1><p>在包的外部使用启动文件启动的另一个好处就是可以方便的配置,同样的网站应用程序需要可能需要在不同的环境下进行,如部署时的生产环境,调试环境,测试环境,不同的环境需要应用不同的配置.<br>这里将不同层次的配置使用类的关系展开:<br>所有环境下通用的配置作为基类,不同环境个性化的配置由继承自基类,再进行增加.<br>如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class config(object):</div><div class="line">    ....</div><div class="line">class debug(config):</div><div class="line">    ....</div></pre></td></tr></table></figure></p>
+<h1 id="V-0-8"><a href="#V-0-8" class="headerlink" title="V 0.8"></a>V 0.8</h1><p>一个网站的路由函数往往有不同的类别,可以将某一类的函数组织在一起,在一个模块中集中定义.在flask中我们将其称为蓝本函数<code>blueprint</code><br>定义完成后只需要将蓝本函数实例在网站app初始化时进行注册即可,需要的话还可以为其在url上统一加上前绰<br>在这个例子中我们将rest api相关的路由函数,封装在一个蓝本内部.<br>这种做法有利于统一管理路由函数.</p>
+<h1 id="v0-9"><a href="#v0-9" class="headerlink" title="v0.9"></a>v0.9</h1><p>这个版本中我们把统计request次数的模块剥离出来形成一个独立的模块,由于这个模块同样相对独立,所以可以像0.2 一样直接移动</p>
+<h1 id="v0-10"><a href="#v0-10" class="headerlink" title="v0.10"></a>v0.10</h1><p>0.10实行了一个较大的改动:建立了一个app工厂函数,在之前的版本中网站程序的启动文件已经定义到了包外,但是网站<strong>app实例的初始化仍然在flack.py</strong>中.这样其实相当于在包内部仍然运行了多条语句,现在把这些语句改写成函数的形式,并且放到包的<code>__init__.py</code>中,在外部的启动脚本中调用这个函数,这样启动的整个过程都在包的外部了,这样做的动机有:</p>
+<ul>
+<li>在生产环境中往往有可能不止运行一个网站app,以适应多并发的情况,只有剥离出app工厂函数才能做到这点</li>
+<li>app的初始化放到外部脚本后,包内的文件把current_app 作为程序的实例使用,current_app是flask中的程序上下文,比直接使用app更加灵活.此外也大幅度减少了包内部各模块之间的相互import<br>此外</li>
+<li><strong>这种实现方法也彻底解决了v0.3引入的循环import的问题</strong>,这个版本开始不会再出现相互import了,由于init.py中不需要使用model中定义的数据模型,所以不会向models.py import,使用数据模型的模块中不进行orm 实例的初始化,所以与之相关的所有import都变成了单向的,从这里可以看出好的设计模式的力量,他可以从根本上解决许多繁琐的问题.</li>
+</ul>
+<h1 id="V0-11"><a href="#V0-11" class="headerlink" title="V0.11"></a>V0.11</h1><p>之前我们已经将api,auth等路由函数分门别类地收纳在蓝本中,但是每一个蓝本中的路由函数也有类别,比如api中有处理信息的,有处理用户的,所以不妨把api写成包的形式,然后其中不同功能的函数分割成各个模块.此外,model.py里的数据模型也能够通过这种方法分割.<br>关于包的内部组织要把原本被<strong>import出去的内容放在<code>__init__.py</code></strong>中,这样可以保证包外部调用包内内容的函数写法保持不变.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/20/postgresql-使用小结/" itemprop="url">
                   postgresql 使用小结
                 </a>
@@ -1353,110 +1490,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/21/http-初探笔记/" itemprop="url">
-                  http 初探笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-21T20:04:42+08:00" content="2016-10-21">
-              2016-10-21
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/21/http-初探笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/http-初探笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><blockquote>
-<p>超文本传输协议(HTTP)是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器.<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/21/http-初探笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1502,7 +1535,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">27</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1576,7 +1609,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -84,38 +84,22 @@
 
 
 
-<meta name="description" content="三个坐标系1.图像坐标系:在计算机系统中，描述图像的大小是像素，比如图像分辨率是1240*768.也就就是以为图像具矩阵rows是1024，cols是768.那原始图像的原点是在图像的左上角。">
+<meta name="description" content="Flack At Scale 笔记标签（空格分隔）： 未分类
+
+Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="摄像头成像原理">
-<meta property="og:url" content="https://ly11tea.github.io/2016/10/19/摄像头成像原理/index.html">
+<meta property="og:title" content="FLASK at Scale 笔记(未完)">
+<meta property="og:url" content="https://ly11tea.github.io/2017/01/13/FLASK-at-Scale-笔记/index.html">
 <meta property="og:site_name" content="Luo's blog">
-<meta property="og:description" content="三个坐标系1.图像坐标系:在计算机系统中，描述图像的大小是像素，比如图像分辨率是1240*768.也就就是以为图像具矩阵rows是1024，cols是768.那原始图像的原点是在图像的左上角。">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/1.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/2.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/3.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/4.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/5.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/6.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/7.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/8.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/9.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/10.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/11.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/12.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/13.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/14.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/15.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/16.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/17.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/18.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/19.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/20.png">
-<meta property="og:image" content="https://ly11tea.github.io/images/slam/21.png">
-<meta property="og:updated_time" content="2016-10-21T15:49:43.525Z">
+<meta property="og:description" content="Flack At Scale 笔记标签（空格分隔）： 未分类
+
+Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenl">
+<meta property="og:updated_time" content="2017-01-13T16:11:22.288Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="摄像头成像原理">
-<meta name="twitter:description" content="三个坐标系1.图像坐标系:在计算机系统中，描述图像的大小是像素，比如图像分辨率是1240*768.也就就是以为图像具矩阵rows是1024，cols是768.那原始图像的原点是在图像的左上角。">
-<meta name="twitter:image" content="https://ly11tea.github.io/images/slam/1.png">
+<meta name="twitter:title" content="FLASK at Scale 笔记(未完)">
+<meta name="twitter:description" content="Flack At Scale 笔记标签（空格分隔）： 未分类
+
+Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenl">
 
 
 
@@ -136,9 +120,9 @@
 
 
 
-  <link rel="canonical" href="https://ly11tea.github.io/2016/10/19/摄像头成像原理/"/>
+  <link rel="canonical" href="https://ly11tea.github.io/2017/01/13/FLASK-at-Scale-笔记/"/>
 
-  <title> 摄像头成像原理 | Luo's blog </title>
+  <title> FLASK at Scale 笔记(未完) | Luo's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -311,7 +295,7 @@
             
             
               
-                摄像头成像原理
+                FLASK at Scale 笔记(未完)
               
             
           </h1>
@@ -323,8 +307,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-19T20:43:11+08:00" content="2016-10-19">
-              2016-10-19
+            <time itemprop="dateCreated" datetime="2017-01-13T00:03:11+08:00" content="2017-01-13">
+              2017-01-13
             </time>
           </span>
 
@@ -334,8 +318,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/19/摄像头成像原理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/19/摄像头成像原理/" itemprop="commentsCount"></span>
+                <a href="/2017/01/13/FLASK-at-Scale-笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/13/FLASK-at-Scale-笔记/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -358,36 +342,43 @@
       
 
       
-        <h1 id="三个坐标系"><a href="#三个坐标系" class="headerlink" title="三个坐标系"></a>三个坐标系</h1><h2 id="1-图像坐标系"><a href="#1-图像坐标系" class="headerlink" title="1.图像坐标系:"></a>1.图像坐标系:</h2><p>在计算机系统中，描述图像的大小是像素，比如图像分辨率是1240*768.也就就是以为图像具矩阵rows是1024，cols是768.那原始图像的原点是在图像的左上角。<br><a id="more"></a><br><img src="/images/slam/1.png" style="width: 400px;"></p>
-<p>图像坐标系实际上有<strong>两个</strong>,一个是像素为单位的直接坐标系u-v,一个是物理坐标系x,y<br>以图像左上角为原点建立以像素为单位的直接坐标系u-v。像素的横坐标u与纵坐标v分别是在其图像数组中所在的列数与所在行数。这是像素坐标，而不是物理坐标，为了后续的模型转换，有必要建立图像坐标系。<br>图像坐标系是以<strong>图像中心</strong>为原点，X轴和u轴平行，Y轴和v轴平行。dx和dy标示图像中每个像素在X轴和Y轴的物理尺寸，其实就是换算比例。比如图像大小是1024<em>768，图像坐标系x-y中大小为19</em>17.那么dx就是19/1024.<br>则图像中的每个像素在u-v坐标系中的坐标和在x-y坐标系中的坐标之间都存在如下的关系：<br><img src="/images/slam/2.png" style="width: 400px;"></p>
-<p>(上述公式中我们假设物理坐标系中的<strong>单位为毫米，那么dx的的单位为:毫米/像素</strong>。那么x/dx的单位就是像素了，即和u的单位一样都是像素）<br>比如我们知道图像分辨率是1024<em>768，此时像素为（100,50），图像坐标系为是19</em>17mm。那么在图像坐标系是多少<br>根据转化和平移关系，知道U<sub>0</sub>为1024/2 = 512，v<sub>0</sub>为768/2 = 384.代入公式为x= (100-512)<em>19/1024.*</em>实际中图像坐标系还是比较容易获取。这是需要初始化，就能获取到的参数。<br>为了使用方便，可将上式用齐次坐标与矩阵形式表示为：<br><img src="/images/slam/3.png" style="width: 400px;"><br>其逆关系可表示为：<br><img src="/images/slam/4.png" style="width: 400px;"></p>
-<h2 id="2、相机坐标系"><a href="#2、相机坐标系" class="headerlink" title="2、相机坐标系"></a>2、相机坐标系</h2><p><img src="/images/slam/5.png" style="width: 400px;"><br>相机成像的几何关系可由图2.2表示。其中O点为摄像机光心（投影中心），<strong>Xc轴和Yc轴与成像平面坐标系的x轴和y轴平行，Zc轴为摄像机的光轴</strong>，和图像平面垂直。光轴与图像平面的交点为图像的主点O1,由点<strong>O与Xc,Yc,Zc轴组成的直角坐标系称为摄像机的坐标系。OO1为摄像机的焦距。</strong></p>
-<h2 id="3-世界坐标系（Xw-Yw-Zw）"><a href="#3-世界坐标系（Xw-Yw-Zw）" class="headerlink" title="3.世界坐标系（Xw Yw Zw）"></a>3.世界坐标系（Xw Yw Zw）</h2><p>用户定义的空间三维坐标系，用来描述三维空间中的物体和相机之间的坐标位置，满足右手法则</p>
-<h1 id="三个坐标系间的相互关系"><a href="#三个坐标系间的相互关系" class="headerlink" title="三个坐标系间的相互关系"></a>三个坐标系间的相互关系</h1><h2 id="1、图像坐标系和相机坐标系之间的关系"><a href="#1、图像坐标系和相机坐标系之间的关系" class="headerlink" title="1、图像坐标系和相机坐标系之间的关系"></a>1、图像坐标系和相机坐标系之间的关系</h2><p><img src="/images/slam/6.png" style="width: 400px;"><br>如上图，图像平面实在的平面坐标系就是图像坐标系，由投影中心以及i,j,k(X,Y,Z)组成相机<br>坐标系。<br>1、在实际中主点不一定在成像仪（图像平面）的中心，为了对光轴可能存在的偏移<br>进行建模，我们引入两个新的参数：cx和cy。</p>
-<p>2、在实际中，由于单个像素的在低价的成像仪上是矩形而不是正方形，我们引入了<br>两个不同的焦距参数：fx和fy。（这里的焦距是以像素为单位）则，我们假定物体在<br>相机坐标系统中的点Q,其坐标为(X,Y,Z),以某些偏移的方式投影为点<br>q(xsrceen,yscrreen)，其中srceen为下表，坐标关系如下：</p>
-<p><img src="/images/slam/7.png" style="width: 400px;"></p>
-<p>fx,fy和物理焦距F之间的关系为：fx=Fsx和fy=Fsy。其中sx表示x方向上的1毫米长度<br>所代表像素值，即单位像素/每毫秒，fx,fy是在相机标定中整体计算的，而不是通过该公式计算的。<br>在许多场合为了方便讨论,我们会把<strong>cx和cy略去f只考虑一个</strong>,那么式子就变为:</p>
-<p><img src="/images/slam/8.png" style="width: 200px;"></p>
-<p>化成矩阵形式:</p>
-<p><img src="/images/slam/9.png" style="width: 200px;"></p>
-<h2 id="2-刚体变换-从世界坐标系到相机坐标系"><a href="#2-刚体变换-从世界坐标系到相机坐标系" class="headerlink" title="2.刚体变换(从世界坐标系到相机坐标系)"></a>2.刚体变换(从世界坐标系到相机坐标系)</h2><p><img src="/images/slam/10.png" style="width: 400px;"></p>
-<p>世界坐标系是为了描述相机的位置而被引入的，如图2.2中坐标系OwXwYwZw即为世界坐标系。平移向量t和旋转矩阵R可以用来表示相机坐标系与世界坐标系的关系。所以，假设空间点P在世界坐标系下的齐次坐标是(Xw,Yw,Zw,1)T，（这里T是上标转置），在相机坐标下的齐次坐标是(Xc,Yc,Zc,1)T,则存在如下的关系：</p>
-<p><img src="/images/slam/11.png" style="width: 400px;"></p>
-<p>化成齐次矩阵的形式就有</p>
-<p><img src="/images/slam/12.png" style="width: 400px;"></p>
-<p>上式中R是3×3的正交单位矩阵（也成为旋转矩阵），t是三维的平移向量。矢量0=(0,0,0),M1是4×4矩阵。<br>在实验中，比如我们设定经纬坐标是（48,42,15）的为世界坐标系的原点，X方向指向正北。但是在试验场中点(46,40,5)是相机坐标的系的原点，方向是正东。那么两者之间就存在一个转换关系。</p>
-<h3 id="1、旋转矩阵R"><a href="#1、旋转矩阵R" class="headerlink" title="1、旋转矩阵R:"></a>1、旋转矩阵R:</h3><p>通常，任何维的旋转可以表示为坐标向量与合适尺寸的方阵的乘积。最终一个旋转等价于在另一个不同坐标系下对点位置的重新表述。坐标系旋转角度θ，则等同于目标点绕坐标原点反方向旋转同样的角度θ。图11-8显示了矩阵乘法对二维旋转的描述。在三维空间中，旋转可以分解为绕各自坐标轴的二维旋转（例如图11-8就是绕z轴旋转），其中旋转的轴线的度量保存不变(这就是为什么旋转矩阵为正交矩阵的缘由)。如果依次绕x,y,z轴旋转角度ψ，φ和θ，那么总的旋转矩阵R是三个矩阵Rx(ψ),Ry(φ),Rz(θ)的乘积，其中：</p>
-<p><img src="/images/slam/13.png" style="width: 400px;"></p>
-<p><img src="/images/slam/14.png" style="width: 400px;"></p>
-<p>因此R=Rx(ψ),Ry(φ),Rz(θ).在绕X轴旋转时，<strong>到YZ的平面距离没有变化，所以X坐标没有变化，只是YZ坐标需要诚意旋转系数，其他矩阵同理。这个需要记住即可</strong><br><img src="/images/slam/15.png" style="width: 400px;"></p>
-<h3 id="平移向量T"><a href="#平移向量T" class="headerlink" title="平移向量T:"></a>平移向量T:</h3><p><strong>平移向量用来表示怎么样将一个坐标系的原点移动到另外一个坐标系的原点，或者说平移向量是第一个坐标系原点与第二个坐标系原点的偏移量。</strong>因此，从以目标中心为原点的坐标系移动到以摄像机为中心的原点的另外一个坐标系，相应的平移向量为T=目标原点—摄像机原点。那么点在世界坐标系的中的坐标Po到在摄像机坐标系中Pc:<br>Pc=R(Po-T)<br>故，<strong>用三个角度ψ，φ和θ表示三维旋转，用三个参数(x,y,z)表示三维平移，共6个参数</strong>，对摄像机而言<strong>，OpenCV内参数矩阵有4个参数：fx,fy,cx,cy。故对于每一个视场的解需要10个参数。我们知道一个四边形的4个点可以提供8个方程，故至少需要两个视角才能解出全部几何参数</strong>。8*2=6+6+4。</p>
-<h2 id="3-世界坐标系到图像坐标系的转换"><a href="#3-世界坐标系到图像坐标系的转换" class="headerlink" title="3.世界坐标系到图像坐标系的转换"></a>3.世界坐标系到图像坐标系的转换</h2><p>综上可知:<br>由原始图像与图像坐标的关系:<br><img src="/images/slam/16.png" style="width: 400px;"></p>
-<p>由世界坐标系到相机坐标系的刚体变换:<br><img src="/images/slam/17.png" style="width: 400px;"></p>
-<p>代入图像坐标系与相机坐标系的转换矩阵中:<br><img src="/images/slam/18.png" style="width: 400px;"></p>
-<p>得到:<br><img src="/images/slam/19.png" style="width: 400px;"></p>
-<p><img src="/images/slam/20.png" style="width: 400px;"></p>
-<p>说明：上述公式中完成了从世界坐标系到图像坐标系的转变，中间经过了相机坐标系的过度，Xw中的w表示world世界，单位为毫米(主要取决于其中dx,dy的单位)，而u,v是的 单位为像素，即完成了从毫米——像素的转换。）<br>其中ax=f/dx,ay=f/dy；M是3×4的矩阵—投影矩阵，<strong>M1完全由相机的内参数ax,ay,u0,v0决定，(u0,v0)为主点坐标，ax,ay分别表示图像u轴和v轴上的尺度因子，M2则完全由相机的外部参数决定。而相机标定就是确定相机的内外参数。</strong><br>由式(2.7)可知，若已知相机的内外参数，则相当于已知投影矩阵M.当已知M和空间点P的坐标：矢量Xw=(Xw,Yw,Zw,1)T，（矢量Xw上面有一个矢量标识杠，T表示矢量的转置）。<strong>式(2.7)可以给出三个方程，消去Zc就可以得到其投影点p的坐标(u,v)（其实也就是我用一个相机就可以拍摄一个物体的图片了）</strong>。但是由于M为3×4不可逆矩阵，当 点P的投影坐标(u,v)和投影矩阵M为已知时，我们只能得到关于Xw,Yw,Zw的两个线性方程，即射线OP的方程，由上一篇图2.2我们可以看出，位于<strong>射线OP上的所有空间点的投影点（即图像点）都是p点。所以不能唯一确定空间点P的世界坐标矢量Xw.</strong><br>而深度摄像机得到了Zc,<br>故可以确定.</p>
-<p><img src="/images/slam/21.png" style="width: 1500px;"></p>
+        <h1 id="Flack-At-Scale-笔记"><a href="#Flack-At-Scale-笔记" class="headerlink" title="Flack At Scale 笔记"></a>Flack At Scale 笔记</h1><p>标签（空格分隔）： 未分类</p>
+<hr>
+<p>Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenlet等技术的应用,将异步非阻塞,并行的结构应用到项目上,改善高并发环境下的项目性能.</p>
+<h1 id="v0-1"><a href="#v0-1" class="headerlink" title="v0.1"></a>v0.1</h1><p>作者在演讲的一开始给出了V0.1的文件,首先它是一个完全可用的工程,一个简易的的在线聊天室,提供markdown语言的支持,然而它又十分的丑陋:</p>
+<ul>
+<li>所有的后端程序文件都集中在一个app当中,在里面寻找,修改代码的体验都是一场灾难.</li>
+<li>由于配置没有和程序本身剥离,所以很难进行完整地测试,也无法区分开发环境和生产环境.<br>在生产部署方面:</li>
+<li>没有用到一些生产部署方面常用的框架.Nginx,uwsgi等等</li>
+<li>客户端单线程并且同步的执行文本渲染等其他操作,在高并发环境下阻塞甚至根本不可用</li>
+<li>客户端和服务器之间完全使用REST架构,在这种聊天应用中使用rest意味着要不停的向服务器轮询资源才能得到实时地感觉,这非常消耗服务器和带宽资源</li>
+</ul>
+<h1 id="V0-2"><a href="#V0-2" class="headerlink" title="V0.2"></a>V0.2</h1><p>v0.2主要是将一些辅助性的并且与用户的其他编码没有相关性的函数移动到其他Moudle中,在文件结构上就是移动到其他py文件中.<br>这些函数因为相互关联性较少,没有互相import的问题,所以操作起来也比较简单.</p>
+<h1 id="v0-3"><a href="#v0-3" class="headerlink" title="v0.3"></a>v0.3</h1><p>在0.3中我们将数据模型的类剥离出来形成一个单独的模块(model.py),在这里我们遇到了第一个头疼的问题–python的循环import:<br>在这个版本中,orm sqlalchemy的实例db被初始化在flack.py中,而在model.py中定义模型时必须要用到db实例,又,在flack.py要使用model.py中定义的模型User,Message,这样逻辑上就产生了一个无限循环的相互import<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">--flack.py--</div><div class="line">from models import User</div><div class="line">db = SQLAlchemy(app)</div><div class="line">def new_user():</div><div class="line">    u = User()</div><div class="line"></div><div class="line">--models.py--</div><div class="line">from flack import db</div><div class="line">class User(db.Model):</div><div class="line">    pass</div></pre></td></tr></table></figure></p>
+<p>循环import的根本原因在于项目,逻辑的层次组织的不对,一般来说被引用的文件不应该包含可直接执行的代码,而应该是函数,类等结构.<br>我们可以看出,<strong>在这里不符合要求的是flack.py</strong>,事实上在<strong>稍后</strong>的几个版本中我们正是继续修改flack.py,继续分离代码，彻底的解决问题。</p>
+<p>在这里我们使用‘标’的方法，import<code>__main__</code>这种固定的命名空间解决,当然为了普适性,这里还加入了抛出异常并处理的语句,以解决运行的入口文件不是flack的情况:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">models.py</div><div class="line">try:</div><div class="line">    from __main__ import db</div><div class="line">except ImportError:</div><div class="line">    from flack import db</div><div class="line">class User(db.Model):</div><div class="line">    pass</div></pre></td></tr></table></figure></p>
+<p> <code>__main__</code>是py中的一个命名空间,它指示的是被直接运行的脚本的命名空间,当python进行import的时候,在<code>sys.modules</code>中寻找要导入的模块是否已经载入,<code>__main__</code>第一个运行,显然已经载入,所以此时就会将要导入的目标直接加入当前模块(models.py)的当前命名空间中,之后就可以直接拿来使用了.<br>其中<code>sys.modules</code>模块存储已经导入的模块的名字,但是直接运行的脚本的名字一律是<code>__main__</code>,这就意味着我们之前在使用<code>from flack import db</code>时,系统并未在<code>sys.modules</code>中找到flack,而是又去import 了一遍flack.py,并创建了一个flack的命名空间结构存储在<code>sys.modules</code>中,在这个过程中flack.py第一层级(缩进区分)的代码都被执行,造成了相互import.<br>当然如果在被import的文件中,所有执行性的语句和类的继承,都和import无关,那么你可以将 import 放到这些所有语句的下面,但在这里<strong>行不通,</strong>因为定义数据模型需要继承db.model<br>如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">--flack.py--</div><div class="line">db = SQLAlchemy(app)</div><div class="line">from models import User</div><div class="line"></div><div class="line">def new_user():</div><div class="line">    u = User()</div><div class="line"></div><div class="line"></div><div class="line">--models.py--</div><div class="line"></div><div class="line">class User(db.Model):</div><div class="line">    pass</div><div class="line">.....</div><div class="line"></div><div class="line"></div><div class="line">from flack import db</div></pre></td></tr></table></figure>
+<p>一个可以实现的范例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">---a.py---</div><div class="line">from b import action_b </div><div class="line">def action_a():                               </div><div class="line">    print(action_b.__name__)</div><div class="line">print(&apos;a&apos;)               </div><div class="line"></div><div class="line">---b.py---</div><div class="line">def action_b():</div><div class="line">    print(action_a.__name__)</div><div class="line">print(&apos;b&apos;)</div><div class="line">from a import action_a</div></pre></td></tr></table></figure></p>
+<p>此时python a.py 是可以执行的<br>总结一下,解决循环import的最好的方法应该是,<strong>尽量避免相互import,避免import执行性的脚本</strong>.这个道理其实很多地方都成立,如果实现一个功能特别费劲,那么很可能你的practice就有问题.例如.直接在包中执行脚本等等。</p>
+<h1 id="V0-4"><a href="#V0-4" class="headerlink" title="V0.4"></a>V0.4</h1><p>如上面结束时所说，不要在一个包中直接执行文件，否则的话会在后期项目架构组织上带来许多的麻烦。因此在0.4中就将网站应用放到一个包中，<br>这个包中的层次有：</p>
+<ul>
+<li>/static 放置静态的图片和js文件</li>
+<li>/template 放置用于渲染的网页模板</li>
+<li>包中的一些模块,主模块,数据库模型定义模块,辅助函数模块等等<br>在包的外部放置虚拟环境和测试文件等等.<br>将这整个网站的应用部分做成一个包的另一个好处是可以将启动置于包的外部,可以灵活的配置一些启动选项和方式,这里我们使用flask-script 包,将flask初始化的app实例,使用flask-script的manager实例封装后,可以使用命令行参数制定不同的启动选项,包括专用的shell环境,创建数据库等等</li>
+</ul>
+<h1 id="V0-5"><a href="#V0-5" class="headerlink" title="V0.5"></a>V0.5</h1><p>许多路由都需要用到验证函数,且这些函数在逻辑上又有紧密的关系,是一个整体.将它们放在一个模块中并调用,有利于进一步理清项目之间的逻辑关系,同时也容易维护</p>
+<h1 id="V0-6"><a href="#V0-6" class="headerlink" title="V0.6"></a>V0.6</h1><p>测试作为一个相对独立的模块可以不放在网站应用包中而是移到项目的根目录下,作为一个独立的包,两个包通过项目根目录下的manager.py联系到一起,即为网站再增加一个启动参数.<br>这样做,彻底让网站应用程序包中没有直接执行的入口,所有的启动操作都由启动文件manager.py处理,理顺了整个工程的框架逻辑.<br>在包外做启动也理顺了测试业务逻辑,因为用户总是在外部使用网站的,便于后期增加一些模仿用户操作的可能性.<br>在这里我们也看到在包外使用启动文件启动的好处:可以灵活的增删功能,最大限度的避免import的错误.</p>
+<h1 id="V0-7"><a href="#V0-7" class="headerlink" title="V0.7"></a>V0.7</h1><p>在包的外部使用启动文件启动的另一个好处就是可以方便的配置,同样的网站应用程序需要可能需要在不同的环境下进行,如部署时的生产环境,调试环境,测试环境,不同的环境需要应用不同的配置.<br>这里将不同层次的配置使用类的关系展开:<br>所有环境下通用的配置作为基类,不同环境个性化的配置由继承自基类,再进行增加.<br>如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class config(object):</div><div class="line">    ....</div><div class="line">class debug(config):</div><div class="line">    ....</div></pre></td></tr></table></figure></p>
+<h1 id="V-0-8"><a href="#V-0-8" class="headerlink" title="V 0.8"></a>V 0.8</h1><p>一个网站的路由函数往往有不同的类别,可以将某一类的函数组织在一起,在一个模块中集中定义.在flask中我们将其称为蓝本函数<code>blueprint</code><br>定义完成后只需要将蓝本函数实例在网站app初始化时进行注册即可,需要的话还可以为其在url上统一加上前绰<br>在这个例子中我们将rest api相关的路由函数,封装在一个蓝本内部.<br>这种做法有利于统一管理路由函数.</p>
+<h1 id="v0-9"><a href="#v0-9" class="headerlink" title="v0.9"></a>v0.9</h1><p>这个版本中我们把统计request次数的模块剥离出来形成一个独立的模块,由于这个模块同样相对独立,所以可以像0.2 一样直接移动</p>
+<h1 id="v0-10"><a href="#v0-10" class="headerlink" title="v0.10"></a>v0.10</h1><p>0.10实行了一个较大的改动:建立了一个app工厂函数,在之前的版本中网站程序的启动文件已经定义到了包外,但是网站<strong>app实例的初始化仍然在flack.py</strong>中.这样其实相当于在包内部仍然运行了多条语句,现在把这些语句改写成函数的形式,并且放到包的<code>__init__.py</code>中,在外部的启动脚本中调用这个函数,这样启动的整个过程都在包的外部了,这样做的动机有:</p>
+<ul>
+<li>在生产环境中往往有可能不止运行一个网站app,以适应多并发的情况,只有剥离出app工厂函数才能做到这点</li>
+<li>app的初始化放到外部脚本后,包内的文件把current_app 作为程序的实例使用,current_app是flask中的程序上下文,比直接使用app更加灵活.此外也大幅度减少了包内部各模块之间的相互import<br>此外</li>
+<li><strong>这种实现方法也彻底解决了v0.3引入的循环import的问题</strong>,这个版本开始不会再出现相互import了,由于init.py中不需要使用model中定义的数据模型,所以不会向models.py import,使用数据模型的模块中不进行orm 实例的初始化,所以与之相关的所有import都变成了单向的,从这里可以看出好的设计模式的力量,他可以从根本上解决许多繁琐的问题.</li>
+</ul>
+<h1 id="V0-11"><a href="#V0-11" class="headerlink" title="V0.11"></a>V0.11</h1><p>之前我们已经将api,auth等路由函数分门别类地收纳在蓝本中,但是每一个蓝本中的路由函数也有类别,比如api中有处理信息的,有处理用户的,所以不妨把api写成包的形式,然后其中不同功能的函数分割成各个模块.此外,model.py里的数据模型也能够通过这种方法分割.<br>关于包的内部组织要把原本被<strong>import出去的内容放在<code>__init__.py</code></strong>中,这样可以保证包外部调用包内内容的函数写法保持不变.</p>
 
       
     </div>
@@ -413,17 +404,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/17/在ubuntu下使用SS并给gnome-terminal-git加上代理/" rel="next" title="在ubuntu下使用SS并给gnome,terminal,git加上代理">
-                <i class="fa fa-chevron-left"></i> 在ubuntu下使用SS并给gnome,terminal,git加上代理
+              <a href="/2016/12/20/postgresql-使用小结/" rel="next" title="postgresql 使用小结">
+                <i class="fa fa-chevron-left"></i> postgresql 使用小结
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/21/http-初探笔记/" rel="prev" title="http 初探笔记">
-                http 初探笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -472,8 +459,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/19/摄像头成像原理/"
-           data-title="摄像头成像原理" data-url="https://ly11tea.github.io/2016/10/19/摄像头成像原理/">
+      <div class="ds-thread" data-thread-key="2017/01/13/FLASK-at-Scale-笔记/"
+           data-title="FLASK at Scale 笔记(未完)" data-url="https://ly11tea.github.io/2017/01/13/FLASK-at-Scale-笔记/">
       </div>
     
   </div>
@@ -584,7 +571,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#三个坐标系"><span class="nav-number">1.</span> <span class="nav-text">三个坐标系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-图像坐标系"><span class="nav-number">1.1.</span> <span class="nav-text">1.图像坐标系:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、相机坐标系"><span class="nav-number">1.2.</span> <span class="nav-text">2、相机坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-世界坐标系（Xw-Yw-Zw）"><span class="nav-number">1.3.</span> <span class="nav-text">3.世界坐标系（Xw Yw Zw）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三个坐标系间的相互关系"><span class="nav-number">2.</span> <span class="nav-text">三个坐标系间的相互关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、图像坐标系和相机坐标系之间的关系"><span class="nav-number">2.1.</span> <span class="nav-text">1、图像坐标系和相机坐标系之间的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-刚体变换-从世界坐标系到相机坐标系"><span class="nav-number">2.2.</span> <span class="nav-text">2.刚体变换(从世界坐标系到相机坐标系)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、旋转矩阵R"><span class="nav-number">2.2.1.</span> <span class="nav-text">1、旋转矩阵R:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平移向量T"><span class="nav-number">2.2.2.</span> <span class="nav-text">平移向量T:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-世界坐标系到图像坐标系的转换"><span class="nav-number">2.3.</span> <span class="nav-text">3.世界坐标系到图像坐标系的转换</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Flack-At-Scale-笔记"><span class="nav-number">1.</span> <span class="nav-text">Flack At Scale 笔记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-1"><span class="nav-number">2.</span> <span class="nav-text">v0.1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-2"><span class="nav-number">3.</span> <span class="nav-text">V0.2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-3"><span class="nav-number">4.</span> <span class="nav-text">v0.3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-4"><span class="nav-number">5.</span> <span class="nav-text">V0.4</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-5"><span class="nav-number">6.</span> <span class="nav-text">V0.5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-6"><span class="nav-number">7.</span> <span class="nav-text">V0.6</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-7"><span class="nav-number">8.</span> <span class="nav-text">V0.7</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V-0-8"><span class="nav-number">9.</span> <span class="nav-text">V 0.8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-9"><span class="nav-number">10.</span> <span class="nav-text">v0.9</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-10"><span class="nav-number">11.</span> <span class="nav-text">v0.10</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-11"><span class="nav-number">12.</span> <span class="nav-text">V0.11</span></a></li></ol></div>
             
           </div>
         </section>
