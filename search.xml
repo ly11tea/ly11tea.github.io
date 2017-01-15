@@ -6,9 +6,7 @@
     <entry>
       <title><![CDATA[FLASK at Scale 笔记(未完)]]></title>
       <url>https://ly11tea.github.io/2017/01/13/FLASK-at-Scale-%E7%AC%94%E8%AE%B0/</url>
-      <content type="html"><![CDATA[<h1 id="Flack-At-Scale-笔记"><a href="#Flack-At-Scale-笔记" class="headerlink" title="Flack At Scale 笔记"></a>Flack At Scale 笔记</h1><p>标签（空格分隔）： 未分类</p>
-<hr>
-<p>Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenlet等技术的应用,将异步非阻塞,并行的结构应用到项目上,改善高并发环境下的项目性能.</p>
+      <content type="html"><![CDATA[<p>Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenlet等技术的应用,将异步非阻塞,并行的结构应用到项目上,改善高并发环境下的项目性能.</p>
 <h1 id="v0-1"><a href="#v0-1" class="headerlink" title="v0.1"></a>v0.1</h1><p>作者在演讲的一开始给出了V0.1的文件,首先它是一个完全可用的工程,一个简易的的在线聊天室,提供markdown语言的支持,然而它又十分的丑陋:</p>
 <ul>
 <li>所有的后端程序文件都集中在一个app当中,在里面寻找,修改代码的体验都是一场灾难.</li>

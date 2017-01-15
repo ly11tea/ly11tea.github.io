@@ -84,22 +84,16 @@
 
 
 
-<meta name="description" content="Flack At Scale 笔记标签（空格分隔）： 未分类
-
-Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenl">
+<meta name="description" content="Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenlet等技术的应用,将异步非阻塞,并行的结构应用到项目上,改善高并">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FLASK at Scale 笔记(未完)">
 <meta property="og:url" content="https://ly11tea.github.io/2017/01/13/FLASK-at-Scale-笔记/index.html">
 <meta property="og:site_name" content="Luo's blog">
-<meta property="og:description" content="Flack At Scale 笔记标签（空格分隔）： 未分类
-
-Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenl">
-<meta property="og:updated_time" content="2017-01-13T16:11:22.288Z">
+<meta property="og:description" content="Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenlet等技术的应用,将异步非阻塞,并行的结构应用到项目上,改善高并">
+<meta property="og:updated_time" content="2017-01-15T15:02:31.767Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FLASK at Scale 笔记(未完)">
-<meta name="twitter:description" content="Flack At Scale 笔记标签（空格分隔）： 未分类
-
-Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenl">
+<meta name="twitter:description" content="Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenlet等技术的应用,将异步非阻塞,并行的结构应用到项目上,改善高并">
 
 
 
@@ -342,9 +336,7 @@ Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目�
       
 
       
-        <h1 id="Flack-At-Scale-笔记"><a href="#Flack-At-Scale-笔记" class="headerlink" title="Flack At Scale 笔记"></a>Flack At Scale 笔记</h1><p>标签（空格分隔）： 未分类</p>
-<hr>
-<p>Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenlet等技术的应用,将异步非阻塞,并行的结构应用到项目上,改善高并发环境下的项目性能.</p>
+        <p>Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenlet等技术的应用,将异步非阻塞,并行的结构应用到项目上,改善高并发环境下的项目性能.</p>
 <h1 id="v0-1"><a href="#v0-1" class="headerlink" title="v0.1"></a>v0.1</h1><p>作者在演讲的一开始给出了V0.1的文件,首先它是一个完全可用的工程,一个简易的的在线聊天室,提供markdown语言的支持,然而它又十分的丑陋:</p>
 <ul>
 <li>所有的后端程序文件都集中在一个app当中,在里面寻找,修改代码的体验都是一场灾难.</li>
@@ -571,7 +563,7 @@ Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Flack-At-Scale-笔记"><span class="nav-number">1.</span> <span class="nav-text">Flack At Scale 笔记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-1"><span class="nav-number">2.</span> <span class="nav-text">v0.1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-2"><span class="nav-number">3.</span> <span class="nav-text">V0.2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-3"><span class="nav-number">4.</span> <span class="nav-text">v0.3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-4"><span class="nav-number">5.</span> <span class="nav-text">V0.4</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-5"><span class="nav-number">6.</span> <span class="nav-text">V0.5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-6"><span class="nav-number">7.</span> <span class="nav-text">V0.6</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-7"><span class="nav-number">8.</span> <span class="nav-text">V0.7</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V-0-8"><span class="nav-number">9.</span> <span class="nav-text">V 0.8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-9"><span class="nav-number">10.</span> <span class="nav-text">v0.9</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-10"><span class="nav-number">11.</span> <span class="nav-text">v0.10</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-11"><span class="nav-number">12.</span> <span class="nav-text">V0.11</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-1"><span class="nav-number">1.</span> <span class="nav-text">v0.1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-2"><span class="nav-number">2.</span> <span class="nav-text">V0.2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-3"><span class="nav-number">3.</span> <span class="nav-text">v0.3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-4"><span class="nav-number">4.</span> <span class="nav-text">V0.4</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-5"><span class="nav-number">5.</span> <span class="nav-text">V0.5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-6"><span class="nav-number">6.</span> <span class="nav-text">V0.6</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-7"><span class="nav-number">7.</span> <span class="nav-text">V0.7</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V-0-8"><span class="nav-number">8.</span> <span class="nav-text">V 0.8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-9"><span class="nav-number">9.</span> <span class="nav-text">v0.9</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-10"><span class="nav-number">10.</span> <span class="nav-text">v0.10</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V0-11"><span class="nav-number">11.</span> <span class="nav-text">V0.11</span></a></li></ol></div>
             
           </div>
         </section>
