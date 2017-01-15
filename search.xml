@@ -4,8 +4,8 @@
   
     
     <entry>
-      <title><![CDATA[flask at scale 笔记]]></title>
-      <url>https://ly11tea.github.io/2017/01/15/flask-at-scale-%E7%AC%94%E8%AE%B0-0/</url>
+      <title><![CDATA[flask at scale 笔记 2]]></title>
+      <url>https://ly11tea.github.io/2017/01/15/flask-at-scale-%E7%AC%94%E8%AE%B02/</url>
       <content type="html"><![CDATA[<h1 id="生产环境"><a href="#生产环境" class="headerlink" title="生产环境"></a>生产环境</h1><h1 id="v0-12"><a href="#v0-12" class="headerlink" title="v0.12"></a>v0.12</h1><h2 id="web-server"><a href="#web-server" class="headerlink" title="web server"></a>web server</h2><p>在Web部署的方案上，有一个方案是目前应用最广泛的：</p>
 <blockquote>
 <p>首先，部署一个Web服务器专门用来处理HTTP协议层面相关的事情，比如如何在一个物理机上提供多个不同的Web服务（单IP多域名，单IP多端口等）这种事情。<br>然后，部署一个用各种语言编写（Java, PHP, Python, Ruby等）的应用程序，这个应用程序会从Web服务器上接收客户端的请求，处理完成后，再返回响应给Web服务器，最后由Web服务器返回给客户端。</p>
