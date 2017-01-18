@@ -288,7 +288,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/01/15/flask-at-scale-笔记2/" itemprop="url">
+                <a class="post-title-link" href="/2017/01/18/flask-at-scale-笔记2/" itemprop="url">
                   flask at scale 笔记 2
                 </a>
               
@@ -302,8 +302,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-15T23:07:14+08:00" content="2017-01-15">
-              2017-01-15
+            <time itemprop="dateCreated" datetime="2017-01-18T23:07:14+08:00" content="2017-01-18">
+              2017-01-18
             </time>
           </span>
 
@@ -313,8 +313,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/01/15/flask-at-scale-笔记2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/15/flask-at-scale-笔记2/" itemprop="commentsCount"></span>
+                <a href="/2017/01/18/flask-at-scale-笔记2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/18/flask-at-scale-笔记2/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -338,52 +338,12 @@
 
       
         
-          
-            <h1 id="生产环境"><a href="#生产环境" class="headerlink" title="生产环境"></a>生产环境</h1><h1 id="v0-12"><a href="#v0-12" class="headerlink" title="v0.12"></a>v0.12</h1><h2 id="web-server"><a href="#web-server" class="headerlink" title="web server"></a>web server</h2><p>在Web部署的方案上，有一个方案是目前应用最广泛的：</p>
-<blockquote>
-<p>首先，部署一个Web服务器专门用来处理HTTP协议层面相关的事情，比如如何在一个物理机上提供多个不同的Web服务（单IP多域名，单IP多端口等）这种事情。<br>然后，部署一个用各种语言编写（Java, PHP, Python, Ruby等）的应用程序，这个应用程序会从Web服务器上接收客户端的请求，处理完成后，再返回响应给Web服务器，最后由Web服务器返回给客户端。</p>
-</blockquote>
-<p>我们之前做的工作是致力于完成网站的业务逻辑,但是对客户端怎么联系我们,以及我们的响应怎样被传送给用户并没有考虑.事实上这个工作就由web server来完成.<br>根据网络工程的基本概念,web server 更准确地说是http server为我们处理了链路层和应用层上协议的解析和处理,例如在socket上侦听等等,之后web server 与网站应用(以后叫app sever)通过特定的协议通信.(中间通常还有中间件)<br>flask 是自带http sever的,否则我们也没有办法在程序调试阶段就能使用浏览器访问我们的网站.但是在生产环境下,自带的http server 还不够健壮.因此我们需要一些能够用于生产环境下的server软件.</p>
-<p>下面再来解释几个名词:</p>
-<p>WSGI:</p>
-<blockquote>
-<p>WSGI的全称是<strong><em>Web Server Gateway,Interface</em></strong>，翻译过来就是Web服务器网关接口.WSGI是一个规范，定义了Web服务器如何与Python应用程序进行交互，使得使用Python写的Web应用程序可以和Web服务器对接起来</p>
-</blockquote>
-<p>这个东西就是上面说的web server 与app server 之间通信的特定协议中的一种.<br>顾名思义,’网关’,’接口’,这个协议将app和server连接到了一起,只要符合这个统一标准的app就都能同符合这个标准的server配合使用</p>
-<p>uWSGI<br>uWSGI是一个Web Server，它实现了WSGI协议、uwsgi、http等协议。我们把它作为接近,app server 的一层服务器.</p>
-<p>Nginx (“engine x”)<br>是一个高性能的HTTP和反向代理服务器,同时还有IMAP/POP3/SMTP服务</p>
-<p>其实上面的<strong>uWSGI和Nginx 任意一个配合app</strong> server就能使得网站顺利运行,但是往往两者会配合使用,并且总是Nginx在外接近用户的那一侧,uWSGI在内接近app server的那一侧<br>因为:<br>使用uWSGI是因为他专为python开发,兼容性更好,把他安排在内侧,在接下来运行多线程,多进程时兼容性更好.<br>使用Nginx是因为:</p>
-<ul>
-<li>本地有多个 web 服务，有 Python、php、java 编写的，都想监听 80 端口，这个时候就必须有一个负责转发的服务了。</li>
-<li>uwsgi 和 gevent 对于静态资源处理的并不是很好，一是性能问题，二是各种 HTTP 请求缓存头，处理的也没有 Nginx 完善。</li>
-<li>Nginx作为久经考验的专业web server 显然安全性更好,并且对HTTPS支持更好,可以让HttpS在Nginx这一层解密为HTTP再发给后面的其他服务器处理<br>Nginx在这里起到反向代理的作用</li>
-</ul>
-<p>0.12 通过配置uwsgi和Nginx,实现了生产环境下 web server的部署</p>
-<h1 id="多线程-多进程与协程"><a href="#多线程-多进程与协程" class="headerlink" title="多线程,多进程与协程"></a>多线程,多进程与协程</h1><p>如果使用单进程进行网页渲染等其他消耗cpu的操作,极有可能造成在一段时间服务器无法响应其他请求,这对于实时性要求较高的聊天室来说是不可接受的</p>
-<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>进程是一个具有独立功能的程序关于某个数据集合的一次运行活动。它可以申请和拥有系统资源，是一个动态的概念，是一个活动的实体。它不只是程序的代码，还包括当前的活动，通过程序计数器的值和处理寄存器的内容来表示。</p>
-<h2 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h2><p>最早的计算机，每次只能执行一个进程， 计算机运算速度提高了，可以多个进程轮流跑,或者有多个cpu可以大家几个同时跑.但是不同的进程交接时,必然要进行上下文切换,这种操作通常由内核完成,多进程的优点是:切换逻辑简单,各进程资源独立不大会出现同步的问题.<br>缺点同样是由资源独立导致的,这使得多线程切换时代价很高,进程一多,大部分系统计算资源反而消耗在了切换上.</p>
-<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p>为了改善这种切换代价过大的情况,引入了线程,实际上是一种轻量级的进程,线程是程序中一个单一的顺序控制流程。进程内一个相对独立的、可调度的执行单元，是系统独立调度和分派CPU的基本单位.</p>
-<p>线程除了栈,状态,优先级,寄存器组独立之外,其他的都与同一个进程下的线程共享,大大提高了切换速度.<br>但正是因为这种资源共享,会引来同一个资源的意外访问问题,所以需要加上一些锁来防止,这样子就使得编程更加繁琐,并且有的时候未必能解决问题.<br>使用线程在python中还有一个特殊的劣势,由于py解释器中GIL全局锁的存在,python事实上无法真的并行,对于多cpu来说是很大的浪费.</p>
-<h2 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h2><p>如果把线程之间切换的权限下放给进程,由各个线程之间自行退出,自行切换,相当于把操作线程的权利交给了用户,我们称它为用户态线程又叫协程,由于架构及其简单,有没有资源锁,所以协程能轻松的做到上千个同时进行,比较适合web场景下IO比较密集的特点</p>
-<p>事实上,下面几个版本将上面的多线程,多进程,协程都实验了一遍.</p>
-<h2 id="同步-异步-阻塞-非阻塞"><a href="#同步-异步-阻塞-非阻塞" class="headerlink" title="同步,异步,阻塞,非阻塞"></a>同步,异步,阻塞,非阻塞</h2><p>先来介绍一下这些名词:<br>同步与异步的主体在客户端,描述的是连接的状态<br>同步:指的是由客户端向服务器发出通信后,如果服务器不返回想要的结果,客户端程序就会一直等待,不作其他任何工作.<br>异步:指的是客户端向服务器发出通信后,立刻返回,客户端通过轮询或通过服务端回调的方法得知处理的状态并取结果</p>
-<p>阻塞与非阻塞着重于描述对线程的处理方式,值得注意的是这时候双方应当在一个内核的调度下<br>阻塞:这种模式下调用函数的线程,若函数没有返回结果时,会一直挂起这个线程,不再让其执行.所以从io的视角来说,就是阻塞的.<br>非阻塞:这种模式下,线程正在调用的函数会返回,线程仍可以做其他的事情.</p>
-<p>生产环境下的性能瓶颈往往可以分为两类:<br>io瓶颈和cpu瓶颈:</p>
-<ul>
-<li>io瓶颈<br>多发生在对服务器的请求数量较高时<br>解决的方法:<br>1.利用多线程提高服务器的并发能力,即同一时刻内能够处理更多的进程.<br>2.利用异步的方式去处理I/O时间长的请求,避免客户端阻塞在这个请求上,导致用户无法输入信息</li>
-<li>cpu瓶颈<br>多放生在cpu渲染任务比较重的时候<br>解决的办法:<br>利用多线程或多进程防止合理的分配cpu时间,不让其占满整个运行时间,造成整体的卡顿</li>
-</ul>
-<h1 id="v0-13"><a href="#v0-13" class="headerlink" title="v0.13"></a>v0.13</h1><p>v0.13 就要具体实现异步处理Request的功能.<br>异步request的工作流程如下:</p>
-<ol>
-<li>客户端发给服务器一个request,如果这个request是容易产生瓶颈的request,我们就采用异步的方式处理</li>
-<li>服务器接受到request后,在后台打开一个线程处理具体的逻辑操作,同时立刻返回一个相应,状态码为202,还有一个能够查询任务状态的url</li>
-<li>上面提到的url实际上指向一个专门的路由,用于查询任务的进行状态,这个路由在要查询的任务还没好的时候返回202,任务完成后返回任务运行的结果.</li>
-<li>客户端每隔一段时间就查询一下任务进度,若完成,则显示结果.</li>
-</ol>
-<p>在具体实现上,采用装饰器的形式,加在想要改变为异步路由的函数上.<br>装饰器内部,则使用python的threading模块手动开一个线程,成功后即返回202,并将路由器函数的具体处理放到线程函数中.线程函数中,我们使用伪装app.context的方法伪造原post request 的环境,以调用原来的路由函数<br>0.13的方法实践上是比较简单的,也没有用到外部的模块.但是实际使用下来却发现非常的不稳定.后台线程处理的结果经常是500 错误,经过调查后发现是在线程函数中无法访问原request中的body导致的,经过uwsgi的封装,这个body是一个bytes i/o,在传递到线程函数的过程中,有很大的概率会被莫名其妙的关闭,导致在进程函数中,无法读取.<br>我在github上开了一个issue向作者提问,他把这个issue标记为了bug,并建议我,直接将request的body数据记录下来,然后直接作为参数传给线程函数,(而不像之前一样,相当于只传递一个指向原bytes io object的指针),然后在线程函数中直接构造一个bytes io object,以规避被意外关闭的风险,事实上,之后的几个版本他也是这样做的.<br><a href="https://github.com/miguelgrinberg/flack/issues/3" target="_blank" rel="external">提问的具体链接</a></p>
-<p>V 0.13的教训是,造轮子的感觉固然爽,但是以一种简陋的方法造出的轮子很有可能不堪用,下一个版本开始,我们把具体的任务调度工作交给celery worker,解决上个版本不稳定的问题.</p>
-
-          
+          <h1 id="生产环境"><a href="#生产环境" class="headerlink" title="生产环境"></a>生产环境</h1><h1 id="v0-12"><a href="#v0-12" class="headerlink" title="v0.12"></a>v0.12</h1>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/18/flask-at-scale-笔记2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -481,44 +441,12 @@
 
       
         
-          
-            <p>Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenlet等技术的应用,将异步非阻塞,并行的结构应用到项目上,改善高并发环境下的项目性能.</p>
-<h1 id="v0-1"><a href="#v0-1" class="headerlink" title="v0.1"></a>v0.1</h1><p>作者在演讲的一开始给出了V0.1的文件,首先它是一个完全可用的工程,一个简易的的在线聊天室,提供markdown语言的支持,然而它又十分的丑陋:</p>
-<ul>
-<li>所有的后端程序文件都集中在一个app当中,在里面寻找,修改代码的体验都是一场灾难.</li>
-<li>由于配置没有和程序本身剥离,所以很难进行完整地测试,也无法区分开发环境和生产环境.<br>在生产部署方面:</li>
-<li>没有用到一些生产部署方面常用的框架.Nginx,uwsgi等等</li>
-<li>客户端单线程并且同步的执行文本渲染等其他操作,在高并发环境下阻塞甚至根本不可用</li>
-<li>客户端和服务器之间完全使用REST架构,在这种聊天应用中使用rest意味着要不停的向服务器轮询资源才能得到实时地感觉,这非常消耗服务器和带宽资源</li>
-</ul>
-<h1 id="V0-2"><a href="#V0-2" class="headerlink" title="V0.2"></a>V0.2</h1><p>v0.2主要是将一些辅助性的并且与用户的其他编码没有相关性的函数移动到其他Moudle中,在文件结构上就是移动到其他py文件中.<br>这些函数因为相互关联性较少,没有互相import的问题,所以操作起来也比较简单.</p>
-<h1 id="v0-3"><a href="#v0-3" class="headerlink" title="v0.3"></a>v0.3</h1><p>在0.3中我们将数据模型的类剥离出来形成一个单独的模块(model.py),在这里我们遇到了第一个头疼的问题–python的循环import:<br>在这个版本中,orm sqlalchemy的实例db被初始化在flack.py中,而在model.py中定义模型时必须要用到db实例,又,在flack.py要使用model.py中定义的模型User,Message,这样逻辑上就产生了一个无限循环的相互import<br><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">--flack.py--</div><div class="line"><span class="keyword">from</span> models <span class="keyword">import</span> User</div><div class="line">db = SQLAlchemy(app)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">new_user</span><span class="params">()</span>:</span></div><div class="line">    u = User()</div><div class="line"></div><div class="line">--models.py--</div><div class="line"><span class="keyword">from</span> flack <span class="keyword">import</span> db</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(db.Model)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div></pre></td></tr></table></figure></p>
-<p>循环import的根本原因在于项目,逻辑的层次组织的不对,一般来说被引用的文件不应该包含可直接执行的代码,而应该是函数,类等结构.<br>我们可以看出,<strong>在这里不符合要求的是flack.py</strong>,事实上在<strong>稍后</strong>的几个版本中我们正是继续修改flack.py,继续分离代码，彻底的解决问题。</p>
-<p>在这里我们使用‘标’的方法，import<code>__main__</code>这种固定的命名空间解决,当然为了普适性,这里还加入了抛出异常并处理的语句,以解决运行的入口文件不是flack的情况:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">models.py</div><div class="line"><span class="keyword">try</span>:</div><div class="line">    <span class="keyword">from</span> __main__ <span class="keyword">import</span> db</div><div class="line"><span class="keyword">except</span> ImportError:</div><div class="line">    <span class="keyword">from</span> flack <span class="keyword">import</span> db</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(db.Model)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div></pre></td></tr></table></figure></p>
-<p> <code>__main__</code>是py中的一个命名空间,它指示的是被直接运行的脚本的命名空间,当python进行import的时候,在<code>sys.modules</code>中寻找要导入的模块是否已经载入,<code>__main__</code>第一个运行,显然已经载入,所以此时就会将要导入的目标直接加入当前模块(models.py)的当前命名空间中,之后就可以直接拿来使用了.<br>其中<code>sys.modules</code>模块存储已经导入的模块的名字,但是直接运行的脚本的名字一律是<code>__main__</code>,这就意味着我们之前在使用<code>from flack import db</code>时,系统并未在<code>sys.modules</code>中找到flack,而是又去import 了一遍flack.py,并创建了一个flack的命名空间结构存储在<code>sys.modules</code>中,在这个过程中flack.py第一层级(缩进区分)的代码都被执行,造成了相互import.<br>当然如果在被import的文件中,所有执行性的语句和类的继承,都和import无关,那么你可以将 import 放到这些所有语句的下面,但在这里<strong>行不通,</strong>因为定义数据模型需要继承db.model<br>如下:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">--flack.py--</div><div class="line">db = SQLAlchemy(app)</div><div class="line"><span class="keyword">from</span> models <span class="keyword">import</span> User</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">new_user</span><span class="params">()</span>:</span></div><div class="line">    u = User()</div><div class="line"></div><div class="line"></div><div class="line">--models.py--</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(db.Model)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line">.....</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">from</span> flack <span class="keyword">import</span> db</div></pre></td></tr></table></figure>
-<p>一个可以实现的范例:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">---a.py---</div><div class="line"><span class="keyword">from</span> b <span class="keyword">import</span> action_b </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">action_a</span><span class="params">()</span>:</span>                               </div><div class="line">    print(action_b.__name__)</div><div class="line">print(<span class="string">'a'</span>)               </div><div class="line"></div><div class="line">---b.py---</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">action_b</span><span class="params">()</span>:</span></div><div class="line">    print(action_a.__name__)</div><div class="line">print(<span class="string">'b'</span>)</div><div class="line"><span class="keyword">from</span> a <span class="keyword">import</span> action_a</div></pre></td></tr></table></figure></p>
-<p>此时python a.py 是可以执行的<br>总结一下,解决循环import的最好的方法应该是,<strong>尽量避免相互import,避免import执行性的脚本</strong>.这个道理其实很多地方都成立,如果实现一个功能特别费劲,那么很可能你的practice就有问题.例如.直接在包中执行脚本等等。</p>
-<h1 id="V0-4"><a href="#V0-4" class="headerlink" title="V0.4"></a>V0.4</h1><p>如上面结束时所说，不要在一个包中直接执行文件，否则的话会在后期项目架构组织上带来许多的麻烦。因此在0.4中就将网站应用放到一个包中，<br>这个包中的层次有：</p>
-<ul>
-<li>/static 放置静态的图片和js文件</li>
-<li>/template 放置用于渲染的网页模板</li>
-<li>包中的一些模块,主模块,数据库模型定义模块,辅助函数模块等等<br>在包的外部放置虚拟环境和测试文件等等.<br>将这整个网站的应用部分做成一个包的另一个好处是可以将启动置于包的外部,可以灵活的配置一些启动选项和方式,这里我们使用flask-script 包,将flask初始化的app实例,使用flask-script的manager实例封装后,可以使用命令行参数制定不同的启动选项,包括专用的shell环境,创建数据库等等</li>
-</ul>
-<h1 id="V0-5"><a href="#V0-5" class="headerlink" title="V0.5"></a>V0.5</h1><p>许多路由都需要用到验证函数,且这些函数在逻辑上又有紧密的关系,是一个整体.将它们放在一个模块中并调用,有利于进一步理清项目之间的逻辑关系,同时也容易维护</p>
-<h1 id="V0-6"><a href="#V0-6" class="headerlink" title="V0.6"></a>V0.6</h1><p>测试作为一个相对独立的模块可以不放在网站应用包中而是移到项目的根目录下,作为一个独立的包,两个包通过项目根目录下的manager.py联系到一起,即为网站再增加一个启动参数.<br>这样做,彻底让网站应用程序包中没有直接执行的入口,所有的启动操作都由启动文件manager.py处理,理顺了整个工程的框架逻辑.<br>在包外做启动也理顺了测试业务逻辑,因为用户总是在外部使用网站的,便于后期增加一些模仿用户操作的可能性.<br>在这里我们也看到在包外使用启动文件启动的好处:可以灵活的增删功能,最大限度的避免import的错误.</p>
-<h1 id="V0-7"><a href="#V0-7" class="headerlink" title="V0.7"></a>V0.7</h1><p>在包的外部使用启动文件启动的另一个好处就是可以方便的配置,同样的网站应用程序需要可能需要在不同的环境下进行,如部署时的生产环境,调试环境,测试环境,不同的环境需要应用不同的配置.<br>这里将不同层次的配置使用类的关系展开:<br>所有环境下通用的配置作为基类,不同环境个性化的配置由继承自基类,再进行增加.<br>如下:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">config</span><span class="params">(object)</span>:</span></div><div class="line">    ....</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">debug</span><span class="params">(config)</span>:</span></div><div class="line">    ....</div></pre></td></tr></table></figure></p>
-<h1 id="V-0-8"><a href="#V-0-8" class="headerlink" title="V 0.8"></a>V 0.8</h1><p>一个网站的路由函数往往有不同的类别,可以将某一类的函数组织在一起,在一个模块中集中定义.在flask中我们将其称为蓝本函数<code>blueprint</code><br>定义完成后只需要将蓝本函数实例在网站app初始化时进行注册即可,需要的话还可以为其在url上统一加上前绰<br>在这个例子中我们将rest api相关的路由函数,封装在一个蓝本内部.<br>这种做法有利于统一管理路由函数.</p>
-<h1 id="v0-9"><a href="#v0-9" class="headerlink" title="v0.9"></a>v0.9</h1><p>这个版本中我们把统计request次数的模块剥离出来形成一个独立的模块,由于这个模块同样相对独立,所以可以像0.2 一样直接移动</p>
-<h1 id="v0-10"><a href="#v0-10" class="headerlink" title="v0.10"></a>v0.10</h1><p>0.10实行了一个较大的改动:建立了一个app工厂函数,在之前的版本中网站程序的启动文件已经定义到了包外,但是网站<strong>app实例的初始化仍然在flack.py</strong>中.这样其实相当于在包内部仍然运行了多条语句,现在把这些语句改写成函数的形式,并且放到包的<code>__init__.py</code>中,在外部的启动脚本中调用这个函数,这样启动的整个过程都在包的外部了,这样做的动机有:</p>
-<ul>
-<li>在生产环境中往往有可能不止运行一个网站app,以适应多并发的情况,只有剥离出app工厂函数才能做到这点</li>
-<li>app的初始化放到外部脚本后,包内的文件把current_app 作为程序的实例使用,current_app是flask中的程序上下文,比直接使用app更加灵活.此外也大幅度减少了包内部各模块之间的相互import<br>此外</li>
-<li><strong>这种实现方法也彻底解决了v0.3引入的循环import的问题</strong>,这个版本开始不会再出现相互import了,由于init.py中不需要使用model中定义的数据模型,所以不会向models.py import,使用数据模型的模块中不进行orm 实例的初始化,所以与之相关的所有import都变成了单向的,从这里可以看出好的设计模式的力量,他可以从根本上解决许多繁琐的问题.</li>
-</ul>
-<h1 id="V0-11"><a href="#V0-11" class="headerlink" title="V0.11"></a>V0.11</h1><p>之前我们已经将api,auth等路由函数分门别类地收纳在蓝本中,但是每一个蓝本中的路由函数也有类别,比如api中有处理信息的,有处理用户的,所以不妨把api写成包的形式,然后其中不同功能的函数分割成各个模块.此外,model.py里的数据模型也能够通过这种方法分割.<br>关于包的内部组织要把原本被<strong>import出去的内容放在<code>__init__.py</code></strong>中,这样可以保证包外部调用包内内容的函数写法保持不变.</p>
-
-          
+          <p>Miguel Grinberg 在 Pycon 16 上做了这个演讲,讲述怎样合理的,项目化,生产化的部署flask应用,前半部分是开发项目结构上的优化,通过分散模块,建立蓝本函数,使用工厂函数等等方法使得代码的组织更加有序,高效.后半部分生产环境部署上的优化,通过Nginx,uwsgi,celery,socket.io,greenlet等技术的应用,将异步非阻塞,并行的结构应用到项目上,改善高并发环境下的项目性能.</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/13/FLASK-at-Scale-笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

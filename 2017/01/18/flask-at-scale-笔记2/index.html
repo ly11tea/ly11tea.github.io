@@ -84,22 +84,16 @@
 
 
 
-<meta name="description" content="生产环境v0.12web server在Web部署的方案上，有一个方案是目前应用最广泛的：
-
-首先，部署一个Web服务器专门用来处理HTTP协议层面相关的事情，比如如何在一个物理机上提供多个不同的Web服务（单IP多域名，单IP多端口等）这种事情。然后，部署一个用各种语言编写（Java, PHP, Python, Ruby等）的应用程序，这个应用程序会从Web服务器上接收客户端的请求，处理完成后，">
+<meta name="description" content="生产环境v0.12">
 <meta property="og:type" content="article">
 <meta property="og:title" content="flask at scale 笔记 2">
-<meta property="og:url" content="https://ly11tea.github.io/2017/01/15/flask-at-scale-笔记2/index.html">
+<meta property="og:url" content="https://ly11tea.github.io/2017/01/18/flask-at-scale-笔记2/index.html">
 <meta property="og:site_name" content="Luo's blog">
-<meta property="og:description" content="生产环境v0.12web server在Web部署的方案上，有一个方案是目前应用最广泛的：
-
-首先，部署一个Web服务器专门用来处理HTTP协议层面相关的事情，比如如何在一个物理机上提供多个不同的Web服务（单IP多域名，单IP多端口等）这种事情。然后，部署一个用各种语言编写（Java, PHP, Python, Ruby等）的应用程序，这个应用程序会从Web服务器上接收客户端的请求，处理完成后，">
-<meta property="og:updated_time" content="2017-01-15T15:09:38.221Z">
+<meta property="og:description" content="生产环境v0.12">
+<meta property="og:updated_time" content="2017-01-18T15:13:39.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="flask at scale 笔记 2">
-<meta name="twitter:description" content="生产环境v0.12web server在Web部署的方案上，有一个方案是目前应用最广泛的：
-
-首先，部署一个Web服务器专门用来处理HTTP协议层面相关的事情，比如如何在一个物理机上提供多个不同的Web服务（单IP多域名，单IP多端口等）这种事情。然后，部署一个用各种语言编写（Java, PHP, Python, Ruby等）的应用程序，这个应用程序会从Web服务器上接收客户端的请求，处理完成后，">
+<meta name="twitter:description" content="生产环境v0.12">
 
 
 
@@ -120,7 +114,7 @@
 
 
 
-  <link rel="canonical" href="https://ly11tea.github.io/2017/01/15/flask-at-scale-笔记2/"/>
+  <link rel="canonical" href="https://ly11tea.github.io/2017/01/18/flask-at-scale-笔记2/"/>
 
   <title> flask at scale 笔记 2 | Luo's blog </title>
 </head>
@@ -307,8 +301,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-15T23:07:14+08:00" content="2017-01-15">
-              2017-01-15
+            <time itemprop="dateCreated" datetime="2017-01-18T23:07:14+08:00" content="2017-01-18">
+              2017-01-18
             </time>
           </span>
 
@@ -318,8 +312,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/01/15/flask-at-scale-笔记2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/15/flask-at-scale-笔记2/" itemprop="commentsCount"></span>
+                <a href="/2017/01/18/flask-at-scale-笔记2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/18/flask-at-scale-笔记2/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -342,7 +336,8 @@
       
 
       
-        <h1 id="生产环境"><a href="#生产环境" class="headerlink" title="生产环境"></a>生产环境</h1><h1 id="v0-12"><a href="#v0-12" class="headerlink" title="v0.12"></a>v0.12</h1><h2 id="web-server"><a href="#web-server" class="headerlink" title="web server"></a>web server</h2><p>在Web部署的方案上，有一个方案是目前应用最广泛的：</p>
+        <h1 id="生产环境"><a href="#生产环境" class="headerlink" title="生产环境"></a>生产环境</h1><h1 id="v0-12"><a href="#v0-12" class="headerlink" title="v0.12"></a>v0.12</h1><a id="more"></a> 
+<h2 id="web-server"><a href="#web-server" class="headerlink" title="web server"></a>web server</h2><p>在Web部署的方案上，有一个方案是目前应用最广泛的：</p>
 <blockquote>
 <p>首先，部署一个Web服务器专门用来处理HTTP协议层面相关的事情，比如如何在一个物理机上提供多个不同的Web服务（单IP多域名，单IP多端口等）这种事情。<br>然后，部署一个用各种语言编写（Java, PHP, Python, Ruby等）的应用程序，这个应用程序会从Web服务器上接收客户端的请求，处理完成后，再返回响应给Web服务器，最后由Web服务器返回给客户端。</p>
 </blockquote>
@@ -385,6 +380,10 @@
 </ol>
 <p>在具体实现上,采用装饰器的形式,加在想要改变为异步路由的函数上.<br>装饰器内部,则使用python的threading模块手动开一个线程,成功后即返回202,并将路由器函数的具体处理放到线程函数中.线程函数中,我们使用伪装app.context的方法伪造原post request 的环境,以调用原来的路由函数<br>0.13的方法实践上是比较简单的,也没有用到外部的模块.但是实际使用下来却发现非常的不稳定.后台线程处理的结果经常是500 错误,经过调查后发现是在线程函数中无法访问原request中的body导致的,经过uwsgi的封装,这个body是一个bytes i/o,在传递到线程函数的过程中,有很大的概率会被莫名其妙的关闭,导致在进程函数中,无法读取.<br>我在github上开了一个issue向作者提问,他把这个issue标记为了bug,并建议我,直接将request的body数据记录下来,然后直接作为参数传给线程函数,(而不像之前一样,相当于只传递一个指向原bytes io object的指针),然后在线程函数中直接构造一个bytes io object,以规避被意外关闭的风险,事实上,之后的几个版本他也是这样做的.<br><a href="https://github.com/miguelgrinberg/flack/issues/3" target="_blank" rel="external">提问的具体链接</a></p>
 <p>V 0.13的教训是,造轮子的感觉固然爽,但是以一种简陋的方法造出的轮子很有可能不堪用,下一个版本开始,我们把具体的任务调度工作交给celery worker,解决上个版本不稳定的问题.</p>
+<h1 id="v0-14"><a href="#v0-14" class="headerlink" title="v0.14"></a>v0.14</h1><p>v0.13 的另一个问题是,由前面的基础知识的介绍我们知道,线程的数目并不是越多越好,过多的线程会导致大量的cpu资源消耗在切换线程上,反而造成整体效率的降低.<br>因此,在0.14中,我们使用celery ,celery是一个异步的任务分配队列,他分为两个部分,前端部分将要做的工作加入任务队列中,任务由函数的形式给出,后端worker部分从任务队列中取任务,完成工作.其中前端添加任务的工作,由我们通过celery的接口完成,后端的任务事先配置好后,由celery自动分配,并均衡负载.<br>在代码上我们仍然使用装饰器的方式实现异步化,在装饰器中将任务添加进入任务队列中,然后返回202,celery也能够查询任务执行的状态,我们用celer提供的接口实现,上一例中实现的状态查询路由的功能.</p>
+<h1 id="v0-15"><a href="#v0-15" class="headerlink" title="v0.15"></a>v0.15</h1><p>前面提到这个聊天室客户端与服务器端通信的方式是rest,这就意味着客户端必须不断地向服务器轮询以获得实时地感觉,这种模式天然的就提高了客户端request的数量,可以说rest模式并不适合这个聊天室的应用,他更加适合weibo,zhihu那种以静态资源为主的客户端.<br>我们自然而然地想到通过切换模式,尽量减少request的数量,常用的有下面几种方案:<br>stream:即串流,具体说来就是客户端向服务器请求数据后,服务器并不一次性把数据发完,而是一点一点的发送给客户端,常常应用于视频中<br>long-polling:长轮询,具体上就是把轮询持续的时间延长,服务器收到request后可能过一段时间才会返回response,客观上讲降低了通信频率<br>上面的两种方法,本质上还是http request-response的思路,即client总是通信的发起方,server总是被动方,这样不能从根本上解决问题.<br>html5 引入了一个新特性 websocket,这是一种能够用来双向通信的协议,服务器和客户端之间首先使用http协议握手,之后边不再使用http,这时候两者之间就如同socket一般可以同时收发.<br>在node.js中又将一系列能够进行双向通信的协议进行了封装,以照顾一些不兼容web socket协议的设备使用,这就是socket.io.他保证了兼容性.这种封装也被介绍到了其他的语言中,python中就有socket.io的包.</p>
+<p>服务器此时可以通过push model的方式把信息主动的发送给客户端,这种事件驱动的方式,最大限度的解决了i/o的瓶颈.<br>websocket的缺点是,服务器和客户端之间必须保持连接,这种连接可能成千上万,因此无论多线程和多进程都无法满足这样的要求,在这里我们使用green event,保持这种连接.</p>
+<h1 id="v0-16"><a href="#v0-16" class="headerlink" title="v0.16"></a>v0.16</h1><p>在0.15中处理信息的原路由函数不再使用,我们转而使用事件驱动的socket.io函数,所以尽管0.15中socket.io能处理较多的连接但是后台的event handler只有一个,这样在cpu负载较重的时候,仍然有可能造成阻塞.<br>socket.io中提供了后台多线程处理的功能,socket.io主线程的event handler在接受到函数后,通过celery将任务发送到message queue中,celery worker完成任务并初始化一个socket.io 子线程,这个线程不直接发送消息给客户端,而是发送信息到msg queue中,由socket.io主线程统一发送消息<br>整个的流程是:<br>socket.io(主)接收到消息-&gt;celery client发布任务到msg queue-&gt;celery worker从msg queue中得到任务并处理-&gt;子线程socket.io发送数据到msg queu-&gt;socket.io从msg.queue得到要发送的数据正式发送.</p>
 
       
     </div>
@@ -465,8 +464,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/01/15/flask-at-scale-笔记2/"
-           data-title="flask at scale 笔记 2" data-url="https://ly11tea.github.io/2017/01/15/flask-at-scale-笔记2/">
+      <div class="ds-thread" data-thread-key="2017/01/18/flask-at-scale-笔记2/"
+           data-title="flask at scale 笔记 2" data-url="https://ly11tea.github.io/2017/01/18/flask-at-scale-笔记2/">
       </div>
     
   </div>
@@ -577,7 +576,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#生产环境"><span class="nav-number">1.</span> <span class="nav-text">生产环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-12"><span class="nav-number">2.</span> <span class="nav-text">v0.12</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web-server"><span class="nav-number">2.1.</span> <span class="nav-text">web server</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多线程-多进程与协程"><span class="nav-number">3.</span> <span class="nav-text">多线程,多进程与协程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程"><span class="nav-number">3.1.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多进程"><span class="nav-number">3.2.</span> <span class="nav-text">多进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">3.3.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协程"><span class="nav-number">3.4.</span> <span class="nav-text">协程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步-异步-阻塞-非阻塞"><span class="nav-number">3.5.</span> <span class="nav-text">同步,异步,阻塞,非阻塞</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-13"><span class="nav-number">4.</span> <span class="nav-text">v0.13</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#生产环境"><span class="nav-number">1.</span> <span class="nav-text">生产环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-12"><span class="nav-number">2.</span> <span class="nav-text">v0.12</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web-server"><span class="nav-number">2.1.</span> <span class="nav-text">web server</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多线程-多进程与协程"><span class="nav-number">3.</span> <span class="nav-text">多线程,多进程与协程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程"><span class="nav-number">3.1.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多进程"><span class="nav-number">3.2.</span> <span class="nav-text">多进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">3.3.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协程"><span class="nav-number">3.4.</span> <span class="nav-text">协程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步-异步-阻塞-非阻塞"><span class="nav-number">3.5.</span> <span class="nav-text">同步,异步,阻塞,非阻塞</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-13"><span class="nav-number">4.</span> <span class="nav-text">v0.13</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-14"><span class="nav-number">5.</span> <span class="nav-text">v0.14</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-15"><span class="nav-number">6.</span> <span class="nav-text">v0.15</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v0-16"><span class="nav-number">7.</span> <span class="nav-text">v0.16</span></a></li></ol></div>
             
           </div>
         </section>
