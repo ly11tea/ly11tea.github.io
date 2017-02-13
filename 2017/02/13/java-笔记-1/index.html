@@ -1,0 +1,900 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="对象与类4.1 类和对象的基本概念4.1.1 类/封装/继承类是构造对象的模板，由类构造对象的过程称为创建类的实例。
+封装：也称为数据隐藏。从形式上看，封装不过是将数据和行为组合在一个包中，并对对象的使用者隐藏了数据的实现方式。优点4.2.3
+实例域：对象中的数据。
+方法：操纵数据的过程。
+对于每个特定的对象都有一组特定的实例域值。这些值的集合就是这个对象的当前状态。
+实现封装的关键在与绝对不能让">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java 笔记 1">
+<meta property="og:url" content="https://ly11tea.github.io/2017/02/13/java-笔记-1/index.html">
+<meta property="og:site_name" content="Luo's blog">
+<meta property="og:description" content="对象与类4.1 类和对象的基本概念4.1.1 类/封装/继承类是构造对象的模板，由类构造对象的过程称为创建类的实例。
+封装：也称为数据隐藏。从形式上看，封装不过是将数据和行为组合在一个包中，并对对象的使用者隐藏了数据的实现方式。优点4.2.3
+实例域：对象中的数据。
+方法：操纵数据的过程。
+对于每个特定的对象都有一组特定的实例域值。这些值的集合就是这个对象的当前状态。
+实现封装的关键在与绝对不能让">
+<meta property="og:updated_time" content="2017-02-13T15:00:32.065Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java 笔记 1">
+<meta name="twitter:description" content="对象与类4.1 类和对象的基本概念4.1.1 类/封装/继承类是构造对象的模板，由类构造对象的过程称为创建类的实例。
+封装：也称为数据隐藏。从形式上看，封装不过是将数据和行为组合在一个包中，并对对象的使用者隐藏了数据的实现方式。优点4.2.3
+实例域：对象中的数据。
+方法：操纵数据的过程。
+对于每个特定的对象都有一组特定的实例域值。这些值的集合就是这个对象的当前状态。
+实现封装的关键在与绝对不能让">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ly11tea.github.io/2017/02/13/java-笔记-1/"/>
+
+  <title> java 笔记 1 | Luo's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ee6095b761314f862c509f6d3d27dad6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Luo's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-episode">
+          <a href="/categories/短/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-comment-o"></i> <br />
+            
+            短
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                java 笔记 1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-13T22:59:35+08:00" content="2017-02-13">
+              2017-02-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/13/java-笔记-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/13/java-笔记-1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="对象与类"><a href="#对象与类" class="headerlink" title="对象与类"></a>对象与类</h1><h1 id="4-1-类和对象的基本概念"><a href="#4-1-类和对象的基本概念" class="headerlink" title="4.1 类和对象的基本概念"></a>4.1 类和对象的基本概念</h1><h2 id="4-1-1-类-封装-继承"><a href="#4-1-1-类-封装-继承" class="headerlink" title="4.1.1 类/封装/继承"></a>4.1.1 类/封装/继承</h2><p>类是<strong>构造对象的模板</strong>，由类构造对象的过程称<strong>为创建类的实例</strong>。</p>
+<p>封装：也称为<strong>数据隐藏</strong>。从形式上看，封装不过是将<strong>数据和行为</strong>组合在一个包中，并对对象的使用者隐藏了数据的实现方式。优点4.2.3</p>
+<p>实例域：<strong>对象中的数据</strong>。</p>
+<p>方法：<strong>操纵数据的过程。</strong></p>
+<p>对于每个特定的对象都有一组特定的实例域值。这些值的集合就是这个对象的当前状态。</p>
+<p>实现封装的关键在与绝对不能让<strong>类中的方法</strong>直接地<strong>访问其他类的实例域</strong>。程序<strong>仅通过对象的方法与对象数据进行交互</strong>。这是提高重用性和可靠性的关键。</p>
+<p>继承：通过扩展一个类来<strong>建立另外一个新的类</strong>。</p>
+<p>在扩展一个已有的类时，这个扩展后的新类<strong>具有所扩展的类的全部属性和方法</strong>。</p>
+<p>Java中一个源文件只能包含<strong>一个公有类</strong>并且文件名必须与<strong>公有类匹</strong>配。</p>
+<h2 id="4-1-2-对象的特性"><a href="#4-1-2-对象的特性" class="headerlink" title="4.1.2 对象的特性"></a>4.1.2 对象的特性</h2><p>对象的行为：对象的方法。同一个类的所有对象实例，具有相同的方法而获得家族式的相似性。</p>
+<p>对象的状态：当使用方法时对象如何响应。对象的状态描述当前对象的特征信息，状态只能通过调用方法来改变（否则说明封装性遭到了破坏）。</p>
+<p>对象标识：对象的状态并不能完全描述一个对象。每个对象都有一个唯一的身份。</p>
+<h2 id="4-1-3-类之间的关系"><a href="#4-1-3-类之间的关系" class="headerlink" title="4.1.3 类之间的关系"></a>4.1.3 类之间的关系</h2><p>依赖：use-a </p>
+<p>聚合：has-a </p>
+<p>继承：is-a </p>
+<h1 id="4-2-使用一个类"><a href="#4-2-使用一个类" class="headerlink" title="4.2 使用一个类"></a>4.2 使用一个类</h1><h2 id="4-2-1-对象与对象变量"><a href="#4-2-1-对象与对象变量" class="headerlink" title="4.2.1 对象与对象变量"></a>4.2.1 对象与对象变量</h2><ol>
+<li>我们使用constructor创建对象</li>
+<li>对象与对象变量是有区别的,对象变量可以引用对象,但他不是一个对象,刚开始定义时也并没有引用一个对象<br>只有在初始化对象变量后,才能让它引用一个对象,对象变量的值<strong>只是对存储在别处某个对象的引用</strong>。new的返回值<strong>也是一个引用</strong></li>
+</ol>
+<p>3.使用final修饰对象引用,可以让这个对象引用在初始化后,不能够改变,永远指向一个对象.</p>
+<h2 id="4-2-2-更改器方法与访问器方法"><a href="#4-2-2-更改器方法与访问器方法" class="headerlink" title="4.2.2 更改器方法与访问器方法"></a>4.2.2 更改器方法与访问器方法</h2><p>实例域做出修改的方法称为更改器方法(通常前绰为get)<br>访问实例域而不进行修改的方法称为访问器方法(通常前绰为set)</p>
+<h1 id="4-3-定义一个类"><a href="#4-3-定义一个类" class="headerlink" title="4.3 定义一个类"></a>4.3 定义一个类</h1><p>可以将多个类放在多个源文件中,java编译时可以将他们自动地连接到一起.</p>
+<h2 id="4-3-1-构造器"><a href="#4-3-1-构造器" class="headerlink" title="4.3.1 构造器"></a>4.3.1 构造器</h2><p>. 构造器与类同名<br>· 每个类可以有一个以上的构造器<br>·构造器可以有 0 个、 1 个或多个参数<br>·构造器没有返回值<br>· 构造器总是伴随着 new 操作一起调用</p>
+<h2 id="4-3-2-方法"><a href="#4-3-2-方法" class="headerlink" title="4.3.2 方法"></a>4.3.2 方法</h2><p>类中的非静态方法总有两种参数,一个是隐式参数即调用这个方法的对象,一种方法处声明的参数.<br>本类中的方法总可以访问所有当前类对象中的<strong>所有域</strong>.</p>
+<h2 id="4-3-3-封装"><a href="#4-3-3-封装" class="headerlink" title="4.3.3 封装"></a>4.3.3 封装</h2><p>要做到数据封装,要做到以下几点:<br>· 一个私有的数据域;<br>· 一个公有的域访问器方法;<br>· 一个公有的域更改器方法。</p>
+<h2 id="4-3-4-final实例域"><a href="#4-3-4-final实例域" class="headerlink" title="4.3.4 final实例域"></a>4.3.4 final实例域</h2><p>如果实例域定义为 final 构建对象时必须对其就进行初始化,也就是说， 在使用构造器时，这个域的就被设置，并且在后面的操作中，不能够再对它进行修改.</p>
+<h2 id="4-4-静态域与静态方法"><a href="#4-4-静态域与静态方法" class="headerlink" title="4.4 静态域与静态方法"></a>4.4 静态域与静态方法</h2><h2 id="4-4-1-静态域"><a href="#4-4-1-静态域" class="headerlink" title="4.4.1 静态域"></a>4.4.1 静态域</h2><p>将域定义为static，则类中只有一个这样的域，每个对象共享静态域，即使没有对象域也会存在，它属于类不属于对象。使用类名访问。<br>常常在静态域中声明静态变量:<br>静态常量：public static final double PI，就算设置为double,静态常量不会被修改.</p>
+<h2 id="4-4-2-静态方法"><a href="#4-4-2-静态方法" class="headerlink" title="4.4.2 静态方法"></a>4.4.2 静态方法</h2><p>1.通过类使用，不能对象使用。静态方法没有this引用</p>
+<p>2.因为静态方法不能操作对象，所以不能在静态方法中访问实例域。但是可以访问类中的静态域。</p>
+<p>3.当一个方法不需要访问对象状态，其参数都通过显示参数提供或只需访问类中的静态域则可设置为静态方法。</p>
+<p>设计模式中的工厂模式常常用到静态方法.<br>main方法是一种特殊的静态方法,在执行当前类的时候运行,可以看做程序入口.</p>
+<h2 id="4-4-3-函数-方法-参数"><a href="#4-4-3-函数-方法-参数" class="headerlink" title="4.4.3 函数(方法)参数"></a>4.4.3 函数(方法)参数</h2><p>java中的方法参数总是值传递.所以:</p>
+<ul>
+<li>一个方法不能修改一个基本数据类型的参数 ( 即数值型和布尔型) 。</li>
+<li>一个方法可以改变一个对象参数(这里的参数是对象变量)的状态。</li>
+<li>一个方法不能让对象参数(这里的参数是对象变量)引用一个新的对象。</li>
+</ul>
+<h1 id="4-4-对象构造"><a href="#4-4-对象构造" class="headerlink" title="4.4 对象构造"></a>4.4 对象构造</h1><h2 id="4-4-1-重载"><a href="#4-4-1-重载" class="headerlink" title="4.4.1 重载"></a>4.4.1 重载</h2><p>多个方法具有相同的名字、不同的参数。<strong>方法名与参数类型</strong>叫做方法的签名。</p>
+<p><strong>返回类型不属于方法签名</strong>，不能有两个名字相同、参数类型相同却返回不同类型值的方法。</p>
+<h2 id="4-4-2-默认域初始化"><a href="#4-4-2-默认域初始化" class="headerlink" title="4.4.2 默认域初始化"></a>4.4.2 默认域初始化</h2><p>如果在构造器中没有显式的给<strong>域</strong>赋初值，会自动为域赋为默认值。<br>数值为 0,布尔值为 false 、对象引用为 null.</p>
+<p>不同的是,<strong>局部变量</strong>必须明确初始化</p>
+<h2 id="4-4-3-无参数的构造器"><a href="#4-4-3-无参数的构造器" class="headerlink" title="4.4.3 无参数的构造器"></a>4.4.3 无参数的构造器</h2><p>对象由无参数构造器创建时，状态会设置为适当的默认值。</p>
+<p>只有类中<strong>没有提供任何构造器</strong>的时候，系统才会提供一个默认的构造器。也就是说如果提供了一个带参数的构造器而未提供不带参数的，系统不会自动提供不带参数的构造器，在使用不带参数的构造器时会报错。</p>
+<h2 id="4-4-4-显示定义实例域"><a href="#4-4-4-显示定义实例域" class="headerlink" title="4.4.4 显示定义实例域"></a>4.4.4 显示定义实例域</h2><p>可以在定义数据域时就给其一定的初值,尤其是这个数据域在每个构造器中参数都一致时.</p>
+<h2 id="4-4-5-在构造器中引用另一个构造器"><a href="#4-4-5-在构造器中引用另一个构造器" class="headerlink" title="4.4.5 在构造器中引用另一个构造器"></a>4.4.5 在构造器中引用另一个构造器</h2><p>构造器的第一个语句形如 this(…)，这个构造器将<strong>调用同一个类的另一个构造器</strong>，括号内为参数列表，根据参数选择是哪一个构造器。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Employee</span><span class="params">(<span class="keyword">double</span> s)</span></span></div><div class="line">&#123; </div><div class="line">　　<span class="comment">//calls Employee(String,double)...</span></div><div class="line">　　<span class="keyword">this</span>(<span class="string">"Employee "</span>,s);</div><div class="line">　　...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="4-4-6-初始化块"><a href="#4-4-6-初始化块" class="headerlink" title="4.4.6 初始化块"></a>4.4.6 初始化块</h2><p>在一个类的声明中，可以包含多个代码块，只要构造类的对象，这些块就会被执行。如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Class Employee</div><div class="line">&#123;</div><div class="line">　　<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> nextID;</div><div class="line">　　<span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line">　　<span class="keyword">private</span> String name;</div><div class="line">　　&#123;id=nextID&#125; <span class="comment">//初始化块</span></div><div class="line">　　<span class="function"><span class="keyword">public</span> <span class="title">Employee</span><span class="params">()</span>...</span></div><div class="line">　　<span class="keyword">public</span> <span class="title">Employee</span><span class="params">(String s,<span class="keyword">int</span> i)</span>..</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>无论执行哪个构造器，都会先执行 id=nextID代码块</p>
+<h2 id="4-4-7-类的构造器运行的一般步骤"><a href="#4-4-7-类的构造器运行的一般步骤" class="headerlink" title="4.4.7 类的构造器运行的一般步骤"></a>4.4.7 类的构造器运行的一般步骤</h2><p>4.4.7 构造器的处理步骤</p>
+<p>基于上述多个途径下的步骤：</p>
+<p>1：所有数据域被初始化为默认值。</p>
+<p>2：按照在类声明中出现的次序，依次指向所有域初始化语句和初始化块。</p>
+<p>3：如果构造器第一行调用了第二个构造器，则执行第二个构造器主体。</p>
+<p>4：执行这个构造器的主体。</p>
+<h1 id="4-5-包"><a href="#4-5-包" class="headerlink" title="4.5 包"></a>4.5 包</h1><p>包能够尽量保证类名的唯一性又不失灵活性,</p>
+<h2 id="4-5-1-包的导入"><a href="#4-5-1-包的导入" class="headerlink" title="4.5.1 包的导入"></a>4.5.1 包的导入</h2><p>一个类可以访问,所属包中的所有类，以及其他包中的公有类.<br>访问其他包中的公有类有两种方法.</p>
+<ol>
+<li>第一种方式是在每个类名之前添加完整的包名。<br><code>java.util.Date  today =  new  java.util.Date();</code></li>
+</ol>
+<p>2.使用 import 语句。 import 语句是一种引用包含在包中的类的简明描述。 一旦使用了 import 语句，在使用类时，就不必写出包的全名了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line">Date today=<span class="keyword">new</span> Date();</div></pre></td></tr></table></figure></p>
+<p>还可以导入静态方法和静态域<br>如 <code>import static java.lang.System.*;</code> 则可直接使用out.println(…);</p>
+<h2 id="4-5-2-将类放入包中"><a href="#4-5-2-将类放入包中" class="headerlink" title="4.5.2 将类放入包中"></a>4.5.2 将类放入包中</h2><p>在源文件的开头，写上  package  包名 ;</p>
+<h2 id="4-5-3-包的访问权限"><a href="#4-5-3-包的访问权限" class="headerlink" title="4.5.3 包的访问权限"></a>4.5.3 包的访问权限</h2><p>一个类中的数据域变量应当设置为private的,否则同一个包中其他任何类都可以访问并修改它</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/18/flask-at-scale-笔记2/" rel="next" title="flask at scale 笔记 2">
+                <i class="fa fa-chevron-left"></i> flask at scale 笔记 2
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/13/java-笔记-2/" rel="prev" title="java 笔记 2">
+                java 笔记 2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/13/java-笔记-1/"
+           data-title="java 笔记 1" data-url="https://ly11tea.github.io/2017/02/13/java-笔记-1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Luo" />
+          <p class="site-author-name" itemprop="name">Luo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ly11tea" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-luo-99" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-question-circle"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#对象与类"><span class="nav-number">1.</span> <span class="nav-text">对象与类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-1-类和对象的基本概念"><span class="nav-number">2.</span> <span class="nav-text">4.1 类和对象的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-1-类-封装-继承"><span class="nav-number">2.1.</span> <span class="nav-text">4.1.1 类/封装/继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-2-对象的特性"><span class="nav-number">2.2.</span> <span class="nav-text">4.1.2 对象的特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-3-类之间的关系"><span class="nav-number">2.3.</span> <span class="nav-text">4.1.3 类之间的关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-2-使用一个类"><span class="nav-number">3.</span> <span class="nav-text">4.2 使用一个类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-1-对象与对象变量"><span class="nav-number">3.1.</span> <span class="nav-text">4.2.1 对象与对象变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-2-更改器方法与访问器方法"><span class="nav-number">3.2.</span> <span class="nav-text">4.2.2 更改器方法与访问器方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-3-定义一个类"><span class="nav-number">4.</span> <span class="nav-text">4.3 定义一个类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-1-构造器"><span class="nav-number">4.1.</span> <span class="nav-text">4.3.1 构造器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-2-方法"><span class="nav-number">4.2.</span> <span class="nav-text">4.3.2 方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-3-封装"><span class="nav-number">4.3.</span> <span class="nav-text">4.3.3 封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-4-final实例域"><span class="nav-number">4.4.</span> <span class="nav-text">4.3.4 final实例域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-静态域与静态方法"><span class="nav-number">4.5.</span> <span class="nav-text">4.4 静态域与静态方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-1-静态域"><span class="nav-number">4.6.</span> <span class="nav-text">4.4.1 静态域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-2-静态方法"><span class="nav-number">4.7.</span> <span class="nav-text">4.4.2 静态方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-3-函数-方法-参数"><span class="nav-number">4.8.</span> <span class="nav-text">4.4.3 函数(方法)参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-4-对象构造"><span class="nav-number">5.</span> <span class="nav-text">4.4 对象构造</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-1-重载"><span class="nav-number">5.1.</span> <span class="nav-text">4.4.1 重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-2-默认域初始化"><span class="nav-number">5.2.</span> <span class="nav-text">4.4.2 默认域初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-3-无参数的构造器"><span class="nav-number">5.3.</span> <span class="nav-text">4.4.3 无参数的构造器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-4-显示定义实例域"><span class="nav-number">5.4.</span> <span class="nav-text">4.4.4 显示定义实例域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-5-在构造器中引用另一个构造器"><span class="nav-number">5.5.</span> <span class="nav-text">4.4.5 在构造器中引用另一个构造器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-6-初始化块"><span class="nav-number">5.6.</span> <span class="nav-text">4.4.6 初始化块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-7-类的构造器运行的一般步骤"><span class="nav-number">5.7.</span> <span class="nav-text">4.4.7 类的构造器运行的一般步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-5-包"><span class="nav-number">6.</span> <span class="nav-text">4.5 包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-1-包的导入"><span class="nav-number">6.1.</span> <span class="nav-text">4.5.1 包的导入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-2-将类放入包中"><span class="nav-number">6.2.</span> <span class="nav-text">4.5.2 将类放入包中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-3-包的访问权限"><span class="nav-number">6.3.</span> <span class="nav-text">4.5.3 包的访问权限</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ly11tea"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

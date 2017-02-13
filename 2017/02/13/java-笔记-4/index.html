@@ -1,0 +1,871 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="12 泛型程序设计泛型程序设计 ( Generic programming )意味着编写的代码可以被很多不同类型的对象所重用。
+泛型提供了 类型参数( type parameters ),泛型类有一个或多个参数来指示元素类型.ArrayList&amp;lt;String&amp;gt; a= new Arraylist&amp;lt;String&amp;gt;();这种参数既增加了代码的可读性,也使得编译器能够对类型进行检查">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java 笔记 4">
+<meta property="og:url" content="https://ly11tea.github.io/2017/02/13/java-笔记-4/index.html">
+<meta property="og:site_name" content="Luo's blog">
+<meta property="og:description" content="12 泛型程序设计泛型程序设计 ( Generic programming )意味着编写的代码可以被很多不同类型的对象所重用。
+泛型提供了 类型参数( type parameters ),泛型类有一个或多个参数来指示元素类型.ArrayList&amp;lt;String&amp;gt; a= new Arraylist&amp;lt;String&amp;gt;();这种参数既增加了代码的可读性,也使得编译器能够对类型进行检查">
+<meta property="og:updated_time" content="2017-02-13T15:04:38.999Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java 笔记 4">
+<meta name="twitter:description" content="12 泛型程序设计泛型程序设计 ( Generic programming )意味着编写的代码可以被很多不同类型的对象所重用。
+泛型提供了 类型参数( type parameters ),泛型类有一个或多个参数来指示元素类型.ArrayList&amp;lt;String&amp;gt; a= new Arraylist&amp;lt;String&amp;gt;();这种参数既增加了代码的可读性,也使得编译器能够对类型进行检查">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ly11tea.github.io/2017/02/13/java-笔记-4/"/>
+
+  <title> java 笔记 4 | Luo's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ee6095b761314f862c509f6d3d27dad6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Luo's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-episode">
+          <a href="/categories/短/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-comment-o"></i> <br />
+            
+            短
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                java 笔记 4
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-13T23:04:05+08:00" content="2017-02-13">
+              2017-02-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/13/java-笔记-4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/13/java-笔记-4/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="12-泛型程序设计"><a href="#12-泛型程序设计" class="headerlink" title="12 泛型程序设计"></a>12 泛型程序设计</h1><p>泛型程序设计 ( Generic programming )意味着编写的代码可以被很多不同类型的对象所重用。</p>
+<p>泛型提供了 类型参数( type parameters ),泛型类有一个或多个参数来指示元素类型.<br><code>ArrayList&lt;String&gt; a= new Arraylist&lt;String&gt;();</code><br>这种参数既增加了代码的可读性,也使得编译器能够对类型进行检查,减少错误.</p>
+<h2 id="12-1-定义一个泛型类"><a href="#12-1-定义一个泛型类" class="headerlink" title="12.1 定义一个泛型类"></a>12.1 定义一个泛型类</h2><p>泛型类( generic class) 就是具有一个或多个类型变量的类。<br>1.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Public <span class="class"><span class="keyword">class</span> <span class="title">a</span>&lt;<span class="title">T</span>&gt;</span>&#123;</div><div class="line">    <span class="keyword">private</span> T object1;</div><div class="line">    <span class="keyword">private</span> T object2;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">func1</span><span class="params">(T param1)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> param1;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上述类就将了一个类型变量 T ，用尖括号(&lt;&gt;)括起来,并放在类名的后面。在类中我们就可以把类型变量当做类型名一样使用.</p>
+<ol>
+<li>类型变量一般使用大写形式，且比较短.在 Java 库中，使用变量 E 表示集合的元素类型， K 和 V 分别表示表的关键字与值的类型。 T (需要时还可以用临近的字母 U 和 S) 表示”任意类型” 。</li>
+</ol>
+<h2 id="12-2-定义一个泛型方法"><a href="#12-2-定义一个泛型方法" class="headerlink" title="12.2 定义一个泛型方法"></a>12.2 定义一个泛型方法</h2><p>可以在普通类或是泛型类中定义泛型方法</p>
+<ol>
+<li>类型变量放在修饰符(例如 public static) 的后面，返回类型的前面。</li>
+</ol>
+<p>当调用一个泛型方法时， 在方法名前的尖括号中放入具体的类型:</p>
+<p>示例:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(T[] array, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>;</div><div class="line">Arrays.&lt;String&gt;swap(friends,<span class="number">0</span>,<span class="number">1</span>);</div></pre></td></tr></table></figure></p>
+<p>许多时候能从调用的信息看出泛型变量的类型,调用时一般无需使用尖括号.例如上面能从函数参数friends是String数组.看出类型变量一定是String.</p>
+<h2 id="12-3-类型变量限定"><a href="#12-3-类型变量限定" class="headerlink" title="12.3 类型变量限定"></a>12.3 类型变量限定</h2><p>理论上定义了类型变量,则任意的类型都可以使用泛型.但往往对泛型有一定的要求,将其限定在某个范围内.</p>
+<ol>
+<li>可以用 extends 定义上限,即对类型变量最少也要求继承自一定的类,实现自一定的接口.以便于代码使用一些特定的方法.<br>或者说T 应该是extends后元素的子类型<br><code>public  static  &lt;T  extends  Comparable&gt; T min(T a)</code><br>若使用上面的代码,类型变量没有实现comparable接口,则不会编译通过.</li>
+</ol>
+<h2 id="12-4-使用通配符类型"><a href="#12-4-使用通配符类型" class="headerlink" title="12.4 使用通配符类型"></a>12.4 使用通配符类型</h2><p>使用泛型类定义引用变量时,类型变量也可以有灵活性,<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Pair&lt;? extends Employee&gt; pair1;</div></pre></td></tr></table></figure></p>
+<p>以上定义的pair1,不止可以用来引用<code>pair&lt;Employee&gt;</code>的对象,还可以引用<code>pair&lt;Manager&gt;</code>的对象,以及Employee的任意子类.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Pair&lt;Manager&gt;  managerBuddies  =  <span class="keyword">new</span>  Pair&lt;&gt;(ceo ,  cfo); </div><div class="line">Pair&lt;?  extends  Employee&gt;  wildcardBuddies  =  manage rBuddies ;  <span class="comment">//可用</span></div><div class="line">wildαrdBuddies.setFirst(lowlyEmployee);  <span class="comment">// 使用某个更改器方法时会出现编译错误</span></div></pre></td></tr></table></figure>
+<p>因为此时编译器并不知道更改器方法参数的具体类型,只知道是Employee的子类,所以无法设置.<br>使用访问器完全可行,因为可以直接使用Employee类的引用.</p>
+<h1 id="13-集合"><a href="#13-集合" class="headerlink" title="13 集合"></a>13 集合</h1><p>java的集合与数学意义上的集合类似,指的是一类对象组织到一起,不同的组合形式就是不同的数据结构,不同操作方法产生了不同的算法.</p>
+<h2 id="13-1-接口与实现分离"><a href="#13-1-接口与实现分离" class="headerlink" title="13.1 接口与实现分离"></a>13.1 接口与实现分离</h2><ol>
+<li>Java集合类将接口（interface）与实现（impementation）分离开来,接口中只描述这种集合的性质,没有实现部分.把这一部分交给实现类去完成.<br>对于使用者来说,集合的实现无关紧要,所以可以使用接口定义引用变量,去引用实现类定义的实例<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Queue&lt; Customer&gt;  expressLane  =  <span class="keyword">new</span> CircularArrayQueue&lt;&gt;(<span class="number">100</span>);</div><div class="line">Queue&lt;Customer&gt;  expressLane  =  <span class="keyword">new</span> LinkedListQueue&lt;&gt;();</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>Queue究竟是用链表实现还是用循环数组实现对使用者来说无关紧要,都可以进行队列操作</p>
+<h2 id="13-2-迭代器"><a href="#13-2-迭代器" class="headerlink" title="13.2 迭代器"></a>13.2 迭代器</h2><p>java中将实现了iterator接口的类叫做迭代器<br>iterator接口的定义为:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span> &lt;<span class="title">E</span>&gt;</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">E <span class="title">next</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>next 方法返回泛型定义的元素</strong>，调用它可以逐个访问集合中的每个元素.<br>hasNext可以检测是否还有可供迭代的元素<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Collection&lt;String&gt; c = ...;</div><div class="line">Iterator&lt;String&gt; iter = c.iterator();<span class="comment">//定义一个对应类型的迭代器</span></div><div class="line"><span class="keyword">while</span> (iter.hasNext()) &#123;</div><div class="line">  String element = iter.next();<span class="comment">//获得这一次迭代对应的元素</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果一个类实现了<strong>Iterable接口</strong>,那么还可以写成<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (String element : c) &#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Itrable 接口的定义为:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span>  <span class="class"><span class="keyword">interface</span>  <span class="title">Iterable</span>&lt;<span class="title">E</span>&gt;</span>&#123;</div><div class="line">Iterator&lt; E &gt; iterator(); </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>即返回对应元素迭代器变量的方法.</p>
+<p>remove 方法,删除上次调用 next 方法时返回的元素,删除指定位置上的元素,需要越过这个元素,ext 方法和 remove 方法的调用具有互相依赖性。 <strong>如果调用 remove 之前<br>没有调用 next 将是不合法的</strong></p>
+<h2 id="13-3-Collection接口"><a href="#13-3-Collection接口" class="headerlink" title="13.3 Collection接口"></a>13.3 Collection接口</h2><p>1.在java中,集合类公有接口时Collection接口,一个集合代表了一组对象，这组对象被称为集合的元素。<br>一些集合允许重复的元素而其他不允许；一些是有序的而一些是无序的。<br>Java类库中并未提供任何对这个接口的直接实现，而是提供了对于它的更具体的子接口的实现（比如Set接口和List接口）。</p>
+<p>2.接口内定义的方法有:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> <span class="comment">//向集合中添加一个元素，若添加元素后集合发生了变化就返回true，若没有发生变化，就返回false。(optional operation).</span></span></div><div class="line"><span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(Collection&lt;? extends E&gt; c)</span> <span class="comment">//添加给定集合c中的所有元素到该集合中(optional operation).</span></div><div class="line"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> <span class="comment">//(optional operation).</span></div><div class="line"><span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span> <span class="comment">//判断该集合中是否包含指定对象</span></div><div class="line"><span class="keyword">boolean</span> <span class="title">containsAll</span><span class="params">(Collection&lt;?&gt; c)</span></div><div class="line"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span></div><div class="line"><span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></div><div class="line"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></div><div class="line">Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span></div><div class="line"><span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span> <span class="comment">//移除给定对象的一个实例（有的具体集合类型允许重复元素） (optional operation).</span></div><div class="line"><span class="keyword">boolean</span> <span class="title">removeAll</span><span class="params">(Collection&lt;?&gt; c)</span> <span class="comment">//(optional operation).</span></div><div class="line"><span class="keyword">boolean</span> <span class="title">retainAll</span><span class="params">(Collection&lt;?&gt; c)</span> <span class="comment">//仅保留给定集合c中的元素(optional operation).</span></div><div class="line"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></div><div class="line">Object[] <span class="title">toArray</span><span class="params">()</span></div><div class="line">&lt;T&gt; T[] <span class="title">toArray</span><span class="params">(T[] a)</span></div></pre></td></tr></table></figure></p>
+<p>可以看到Collection接口也实现了Iterator<e> iterator()方法,事实上Collection接口实现了Comparable接口,所以每一种实现Collection接口的数据结构都可以使用for..each的方法迭代</e></p>
+<p>3.Collection 与 Iterator都是泛型接口，可以编写操作任何集合类型的实用方法.这些方法与元素具体类型无关,所以java将这些方法定义到一个抽象类AbstractCollection中，以减少类实现Collection接口要定义的方法数量.</p>
+<h2 id="13-4-一些集合实例"><a href="#13-4-一些集合实例" class="headerlink" title="13.4 一些集合实例"></a>13.4 一些集合实例</h2><h3 id="13-4-1-链表"><a href="#13-4-1-链表" class="headerlink" title="13.4.1 链表"></a>13.4.1 链表</h3><p>1.在java中,所有链表实际上都是双向链接的 ( doubly linked)<br>2.链表是一个有序集合( ordered collection) ，LinkedList. add 方法将对象添加到链表的尾部,插入任意位置的add方法由迭代器提供.<br>3.因为是双向的,所以链表迭代器还有向前遍历的方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">hasPrevious</span><span class="params">()</span></span>;</div><div class="line"><span class="function">E <span class="title">previous</span><span class="params">()</span></span>;</div></pre></td></tr></table></figure></p>
+<p>4.还可以使用迭代器set方法修改当前元素</p>
+<h3 id="13-4-2-数组列表"><a href="#13-4-2-数组列表" class="headerlink" title="13.4.2 数组列表"></a>13.4.2 数组列表</h3><p>和链表一样同属于List接口,不同于链表,可以使用set()和get()方法实现任意位置的读取</p>
+<h3 id="13-4-3-散列集"><a href="#13-4-3-散列集" class="headerlink" title="13.4.3 散列集"></a>13.4.3 散列集</h3><p>散列集实现了Set接口,很显然由其性质可得,其中不可能有相同的元素,故实现Set接口<br>它能够快速的监测某个元素是否在集合中及其位置</p>
+<h3 id="13-4-4-树集"><a href="#13-4-4-树集" class="headerlink" title="13.4.4 树集"></a>13.4.4 树集</h3><p>树集也能够快速的监测某个元素是否在集合中及其位置,相较于散列表它是一个有序的集合<br>要使用,元素必须实现Comparable接口</p>
+<h3 id="13-4-5-优先级队列"><a href="#13-4-5-优先级队列" class="headerlink" title="13.4.5 优先级队列"></a>13.4.5 优先级队列</h3><p>根据性质可以保证每次出队列的元素都是优先级最高的</p>
+<h3 id="13-4-6-映射表"><a href="#13-4-6-映射表" class="headerlink" title="13.4.6 映射表"></a>13.4.6 映射表</h3><p>Map接口用于存储键值对,已知键的信息可以提取到值,表有两种实现:hashmap,treemap.其区别与散列集与树集区别类似</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/13/java-笔记-3/" rel="next" title="java 笔记 3">
+                <i class="fa fa-chevron-left"></i> java 笔记 3
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/13/java-笔记-5/" rel="prev" title="java 笔记 5">
+                java 笔记 5 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/13/java-笔记-4/"
+           data-title="java 笔记 4" data-url="https://ly11tea.github.io/2017/02/13/java-笔记-4/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Luo" />
+          <p class="site-author-name" itemprop="name">Luo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ly11tea" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-luo-99" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-question-circle"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#12-泛型程序设计"><span class="nav-number">1.</span> <span class="nav-text">12 泛型程序设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#12-1-定义一个泛型类"><span class="nav-number">1.1.</span> <span class="nav-text">12.1 定义一个泛型类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-2-定义一个泛型方法"><span class="nav-number">1.2.</span> <span class="nav-text">12.2 定义一个泛型方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-3-类型变量限定"><span class="nav-number">1.3.</span> <span class="nav-text">12.3 类型变量限定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-4-使用通配符类型"><span class="nav-number">1.4.</span> <span class="nav-text">12.4 使用通配符类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-集合"><span class="nav-number">2.</span> <span class="nav-text">13 集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#13-1-接口与实现分离"><span class="nav-number">2.1.</span> <span class="nav-text">13.1 接口与实现分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-2-迭代器"><span class="nav-number">2.2.</span> <span class="nav-text">13.2 迭代器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-3-Collection接口"><span class="nav-number">2.3.</span> <span class="nav-text">13.3 Collection接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-4-一些集合实例"><span class="nav-number">2.4.</span> <span class="nav-text">13.4 一些集合实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#13-4-1-链表"><span class="nav-number">2.4.1.</span> <span class="nav-text">13.4.1 链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-4-2-数组列表"><span class="nav-number">2.4.2.</span> <span class="nav-text">13.4.2 数组列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-4-3-散列集"><span class="nav-number">2.4.3.</span> <span class="nav-text">13.4.3 散列集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-4-4-树集"><span class="nav-number">2.4.4.</span> <span class="nav-text">13.4.4 树集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-4-5-优先级队列"><span class="nav-number">2.4.5.</span> <span class="nav-text">13.4.5 优先级队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-4-6-映射表"><span class="nav-number">2.4.6.</span> <span class="nav-text">13.4.6 映射表</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ly11tea"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

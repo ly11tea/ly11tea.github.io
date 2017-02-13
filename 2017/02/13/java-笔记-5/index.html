@@ -1,0 +1,911 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="流与文件1. 流的定义与其基本抽象方法1.java中从其中读入一个字节序列的对象称做输入流,向其中写入一个字节序列的对象称做输出流
+抽象类 InputStream 和 OutputStream 构成了输入/输出类层次结构的基础
+为了便于处理字符数据,抽象类 Reader 和 Writer 中继承出来了一个专门用于处理 Unicode 字符的单独的类层次结构
+2.InputStream 类有一个抽象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java 笔记 5">
+<meta property="og:url" content="https://ly11tea.github.io/2017/02/13/java-笔记-5/index.html">
+<meta property="og:site_name" content="Luo's blog">
+<meta property="og:description" content="流与文件1. 流的定义与其基本抽象方法1.java中从其中读入一个字节序列的对象称做输入流,向其中写入一个字节序列的对象称做输出流
+抽象类 InputStream 和 OutputStream 构成了输入/输出类层次结构的基础
+为了便于处理字符数据,抽象类 Reader 和 Writer 中继承出来了一个专门用于处理 Unicode 字符的单独的类层次结构
+2.InputStream 类有一个抽象">
+<meta property="og:updated_time" content="2017-02-13T15:05:25.702Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java 笔记 5">
+<meta name="twitter:description" content="流与文件1. 流的定义与其基本抽象方法1.java中从其中读入一个字节序列的对象称做输入流,向其中写入一个字节序列的对象称做输出流
+抽象类 InputStream 和 OutputStream 构成了输入/输出类层次结构的基础
+为了便于处理字符数据,抽象类 Reader 和 Writer 中继承出来了一个专门用于处理 Unicode 字符的单独的类层次结构
+2.InputStream 类有一个抽象">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://ly11tea.github.io/2017/02/13/java-笔记-5/"/>
+
+  <title> java 笔记 5 | Luo's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ee6095b761314f862c509f6d3d27dad6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Luo's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-episode">
+          <a href="/categories/短/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-comment-o"></i> <br />
+            
+            短
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                java 笔记 5
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-13T23:05:01+08:00" content="2017-02-13">
+              2017-02-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/13/java-笔记-5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/13/java-笔记-5/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="流与文件"><a href="#流与文件" class="headerlink" title="流与文件"></a>流与文件</h1><h2 id="1-流的定义与其基本抽象方法"><a href="#1-流的定义与其基本抽象方法" class="headerlink" title="1. 流的定义与其基本抽象方法"></a>1. 流的定义与其基本抽象方法</h2><p>1.java中从其中读入一个字节序列的对象称做输入流,向其中写入一个字节序列的对象称做输出流</p>
+<p>抽象类 InputStream 和 OutputStream 构成了输入/输出类层次结构的基础</p>
+<p>为了便于处理字符数据,抽象类 Reader 和 Writer 中继承出来了一个专门用<br>于处理 Unicode 字符的单独的类层次结构</p>
+<p>2.InputStream 类有一个抽象方法:<br><code>abstract int read()</code><br>读入一个字节，并返回读入的字节，或者在遇到输入源结尾时返回一1.<br>具体的输入流类,必须覆盖这个方法提供不同的功能</p>
+<p>3.Outputstream类有一个抽象方法:<br><code>abstract  void write (int  b)</code><br>它可以向某个输出位置写出一个字节</p>
+<p>4.read 和 write 方法在执行时都将阻塞， 直至字节确实被读入或写出.</p>
+<h2 id="2-完整的流家族"><a href="#2-完整的流家族" class="headerlink" title="2.完整的流家族"></a>2.完整的流家族</h2><p>按照使用方法来进行划分，流就形成了处理字节和字符的两个单独的层次结构.</p>
+<p>1.inputStream 和 outputStream 类可以读写单个字节或字节数组,他们是处理字节层次的基础.</p>
+<p>InputStream:</p>
+<ul>
+<li>|— FileInputStream：从文件系统中的某个文件中获得输入字节。哪些文件可用取决于主机<br>环境。FileInputStream 用于读取诸如图像数据之类的原始字节流。要读取字符流，请考虑使用<br>FileReader。</li>
+<li>|— FilterInputStream：包含其他一些输入流，它将这些流用作其基本数据源，它可以直接传输数据或提供一些额外的功能。<ul>
+<li>|— BufferedInputStream：该类实现缓冲的输入流。</li>
+<li>|— Stream：</li>
+</ul>
+</li>
+<li>|— ObjectInputStream：</li>
+<li>|— PipedInputStream：</li>
+</ul>
+<p>OutputStream:</p>
+<ul>
+<li>|— FileOutputStream：文件输出流是用于将数据写入 File 或 FileDescriptor 的输出流。</li>
+<li>|— FilterOutputStream：此类是过滤输出流的所有类的超类。<ul>
+<li>|— BufferedOutputStream：该类实现缓冲的输出流。</li>
+<li>|— PrintStream：</li>
+<li>|— DataOutputStream：</li>
+</ul>
+</li>
+<li>|— ObjectOutputStream：</li>
+<li>|— PipedOutputStream：</li>
+</ul>
+<p>2.对于 Unicode 文本，可以使用抽象类 Reader 和 Writer 的子类</p>
+<p>Reader：用于读取字符流的抽象类。子类必须实现的方法只有 read(char[], int, int) 和 close()。</p>
+<ul>
+<li>|—BufferedReader：从字符输入流中读取文本，缓冲各个字符，从而实现字符、数组和行的高效读取。可以指定缓冲区的大小，或者可使用默认的大小。大多数情况下，默认值就足够大了。</li>
+<li>|—LineNumberReader： 跟踪行号的缓冲字符输入流。此类定义了方法 setLineNumber(int) 和getLineNumber()，它们可分别用于设置和获取当前行号。</li>
+<li>|—InputStreamReader：是字节流通向字符流的桥梁：它使用指定的 charset 读取字节并将其解码为字符。它使用的字符集可以由名称指定或显式给定，或者可以接受平台默认的字符集。</li>
+<li>|—FileReader：用来读取字符文件的便捷类。此类的构造方法假定默认字符编码和默认字节缓冲区大小都是适当的。要自己指定这些值，可以先在 FileInputStream 上构造一个InputStreamReader。</li>
+<li>|—CharArrayReader：</li>
+<li>|—StringReader：</li>
+</ul>
+<p>Writer：写入字符流的抽象类。子类必须实现的方法仅有 write(char[], int, int)、flush() 和 close()。</p>
+<ul>
+<li>|—BufferedWriter：将文本写入字符输出流，缓冲各个字符，从而提供单个字符、数组和字符串的高效写入。</li>
+<li>|—OutputStreamWriter：是字符流通向字节流的桥梁：可使用指定的 charset 将要写入流中的字符编码成字节。它使用的字符集可以由名称指定或显式给定，否则将接受平台默认的字符集。</li>
+<li>|—FileWriter：用来写入字符文件的便捷类。此类的构造方法假定默认字符编码和默认字节缓冲区大小都是可接受的。要自己指定这些值，可以先在 FileOutputStream 上构造一个OutputStreamWriter。</li>
+<li>|—PrintWriter：</li>
+<li>|—CharArrayWriter：</li>
+<li>|—StringWriter：</li>
+</ul>
+<p>3.还有四个比较重要的接口:</p>
+<p>Closeable  :实现关闭流,四大抽象类都继承了</p>
+<ul>
+<li>InputStream</li>
+<li>OutputStream </li>
+<li>Reader </li>
+<li>Writer</li>
+</ul>
+<p>Flushable　　声明void flush()方法,把缓存区全部写入</p>
+<ul>
+<li>OutputStream</li>
+<li>Writer</li>
+</ul>
+<p>接口 Readable　　声明int read(CharBuffer cb)方法,可以实现任意读写</p>
+<ul>
+<li>Reader</li>
+<li>CharBuffer</li>
+</ul>
+<p>接口 Appendable　　声明Appendable append(xxx)方法,可以添加单个字符,或字符序列</p>
+<ul>
+<li>Writer</li>
+</ul>
+<h2 id="3-多个流的包装嵌套"><a href="#3-多个流的包装嵌套" class="headerlink" title="3.多个流的包装嵌套"></a>3.多个流的包装嵌套</h2><p>java中把流类在用途方面又分为了两类:<br>某些流(例如 FilelnputStream 和由URI类的 openstream 方法返回的输入流)可以从文件和其他位置上获取字节.<br>其他的流(例如 DatalnputStream 和 PrintWriter ) 可以将字节组装到更有用的数据类.<br>简单地来说就是一内一外,一个负责从外面取,一个负责包装这些数据</p>
+<p>java可以使用嵌套定义的方法,各取所长.<br>例如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">DatalnputStream  din  =  <span class="keyword">new</span>  Datalnput5tream(<span class="keyword">new</span>  FilelnputStream(<span class="string">"employee.dat"</span>);); </div><div class="line"><span class="keyword">double</span>  s  = din.readDouble();</div></pre></td></tr></table></figure></p>
+<p>FilelnputStream与DatalnputStream配合向文件中读数字<br>将DatalnputStream放在外部,希望使用DatalnputStream 的方法，并且希望它们能够使用带缓冲机制的 read 方法。</p>
+<p>如果希望用到多个流的方法,则可以分两行嵌套,把要用到的流放在外层<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">PushbackInputStream  pbin  = <span class="keyword">new</span>  PushbackInputStream( </div><div class="line">    <span class="keyword">new</span>  BufferedInputStream(</div><div class="line">    <span class="keyword">new</span>  FileInputStream(<span class="string">"employee.dat"</span>))); </div><div class="line">DataInputStream din  =  <span class="keyword">new</span>  DataInputStream(pbin);</div></pre></td></tr></table></figure></p>
+<p>这样对同一个流,就既可以使用pbin进行预读,也可以使用din实现读取数字.</p>
+<h2 id="4-文本的输入与输出"><a href="#4-文本的输入与输出" class="headerlink" title="4.文本的输入与输出"></a>4.文本的输入与输出</h2><p>存储文本字符串时，需要考虑字符编码<br>OutputstreamWriter 类会把 Unicode 字符流,以一定的字符编码方式转换为字节流.<br>InputStreamReader类将包含字节(用某种字符编码方式表示的字符)的输入流转换为可以产生 Unicode 码元的读入器。<br>其中转换所依照的字符编码可以由用户指定,若未指定则为系统的默认编码方式.<br>1.文本输出<br>文本输出，可以使用 PrintWriter,但单单只使用PrintWriter并未指定输出目标,要其他指示输出目标的类包装嵌套使用.如FileWriter类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PrintWriter pw=<span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> FileWriter(<span class="string">"test.txt"</span>), <span class="keyword">true</span>);   <span class="comment">//第2个参数表示是否自动冲刷缓冲区，默认为false。 </span></div><div class="line">PrintWriter pw1=<span class="keyword">new</span> PrintWriter(<span class="string">"test.txt"</span>);<span class="comment">//上述写法的快捷方式,等价.</span></div></pre></td></tr></table></figure></p>
+<p>PrintWriter可以使用print(),println,printf()等常见方法.打印数字(int、 short 、 long 、 float 、 double ) 、字符,boolean 值、字符串和对象到文件或其他位置。</p>
+<p>设置为自动冲刷模式，那么只要 <strong>println被调用，缓冲区中的所有字符都会被发送到它们的目的地</strong>.</p>
+<p>2.文本输入<br>按照对应关系,这里应该有一个Reader大类的类用于文本输入,但是基于便利性的考虑,一般使用Scanner类.</p>
+<h2 id="读写二进制数据"><a href="#读写二进制数据" class="headerlink" title="读写二进制数据"></a>读写二进制数据</h2><p>对于二进制数据流,使用者最大的需求就是将其读入到java中,包装成java的数据类型,或者反之.<br>DataOutput和DataInPut接口就完成了这项工作<br>1.DataOutput 接口用于将数据从任意 Java 基本类型转换为一系列字节<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span>	<span class="title">writeBoolean</span><span class="params">(<span class="keyword">boolean</span> v)</span> </span></div><div class="line">         <span class="comment">//将一个 boolean 值写入输出流。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeByte</span><span class="params">(<span class="keyword">int</span> v)</span> </div><div class="line">         <span class="comment">//将参数 v 的八个低位写入输出流。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeBytes</span><span class="params">(String s)</span> </div><div class="line">         <span class="comment">//将一个字符串写入输出流。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeChar</span><span class="params">(<span class="keyword">int</span> v)</span> </div><div class="line">        <span class="comment">// 将一个 char 值写入输出流，该值由两个字节组成。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeChars</span><span class="params">(String s)</span> </div><div class="line">        <span class="comment">// 将字符串 s中的所有字符按顺序写入输出流，每个字符用两个字节表示。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeDouble</span><span class="params">(<span class="keyword">double</span> v)</span> </div><div class="line">         <span class="comment">//将一个 double 值写入输出流，该值由八个字节组成。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeFloat</span><span class="params">(<span class="keyword">float</span> v)</span> </div><div class="line">         <span class="comment">//将一个 float 值写入输出流，该值由四个字节组成。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeInt</span><span class="params">(<span class="keyword">int</span> v)</span> </div><div class="line">         <span class="comment">//将一个 int 值写入输出流，该值由四个字节组成。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeLong</span><span class="params">(<span class="keyword">long</span> v)</span> </div><div class="line">         <span class="comment">//将一个 long 值写入输出流，该值由八个字节组成。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeShort</span><span class="params">(<span class="keyword">int</span> v)</span> </div><div class="line">         <span class="comment">//将两个字节写入输出流，用它们表示参数值。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeUTF</span><span class="params">(String s)</span> </div><div class="line">         <span class="comment">//将表示长度信息的两个字节写入输出流，后跟字符串 s 中每个字符的 UTF-8 修改版表示形式。</span></div></pre></td></tr></table></figure></p>
+<p>2.DataInput<br>DataInput接口正好相反,用于从二进制流中读取字节，并根据所有 Java 基本类型数据进行重构。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">boolean</span>	<span class="title">readBoolean</span><span class="params">()</span>                                                   <span class="comment">//读取一个输入字节，如果该字节不是零，则返回true，如果是零，则返回 false。</span></span></div><div class="line"> <span class="keyword">byte</span>	<span class="title">readByte</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取并返回一个输入字节。</span></div><div class="line"> <span class="keyword">char</span>	<span class="title">readChar</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取两个输入字节并返回一个 char 值。</span></div><div class="line"> <span class="keyword">double</span>	<span class="title">readDouble</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取八个输入字节并返回一个 double 值。</span></div><div class="line"> <span class="keyword">float</span>	<span class="title">readFloat</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取四个输入字节并返回一个 float 值。</span></div><div class="line"> <span class="keyword">void</span>	<span class="title">readFully</span><span class="params">(<span class="keyword">byte</span>[] b)</span> </div><div class="line">          <span class="comment">//从输入流中读取一些字节，并将它们存储在缓冲区数组 b 中。</span></div><div class="line"> <span class="keyword">void</span>	<span class="title">readFully</span><span class="params">(<span class="keyword">byte</span>[] b, <span class="keyword">int</span> off, <span class="keyword">int</span> len)</span> </div><div class="line">          <span class="comment">//从输入流中读取 len 个字节。</span></div><div class="line"> <span class="keyword">int</span>	<span class="title">readInt</span><span class="params">()</span> </div><div class="line">         <span class="comment">// 读取四个输入字节并返回一个 int 值。</span></div><div class="line"> String	<span class="title">readLine</span><span class="params">()</span> </div><div class="line">          <span class="comment">//从输入流中读取下一文本行。</span></div><div class="line"> <span class="keyword">long</span>	<span class="title">readLong</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取八个输入字节并返回一个 long 值。</span></div><div class="line"> <span class="keyword">short</span>	<span class="title">readShort</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取两个输入字节并返回一个 short 值。</span></div><div class="line"> <span class="keyword">int</span>	<span class="title">readUnsignedByte</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取一个输入字节，将它左侧补零 (zero-extend) 转变为 int 类型，并返回结果，所以结果的范围是 0 到 255。</span></div><div class="line"> <span class="keyword">int</span>	<span class="title">readUnsignedShort</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取两个输入字节，并返回 0 到 65535 范围内的一个 int 值。</span></div><div class="line"> String	<span class="title">readUTF</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读入一个已使用 UTF-8 修改版格式编码的字符串。</span></div><div class="line"> <span class="keyword">int</span>	<span class="title">skipBytes</span><span class="params">(<span class="keyword">int</span> n)</span> </div><div class="line">          <span class="comment">//试图在输入流中跳过数据的 n 个字节，并丢弃跳过的字节。</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/13/java-笔记-4/" rel="next" title="java 笔记 4">
+                <i class="fa fa-chevron-left"></i> java 笔记 4
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/13/java-笔记-5/"
+           data-title="java 笔记 5" data-url="https://ly11tea.github.io/2017/02/13/java-笔记-5/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Luo" />
+          <p class="site-author-name" itemprop="name">Luo</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ly11tea" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-luo-99" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-question-circle"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#流与文件"><span class="nav-number">1.</span> <span class="nav-text">流与文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-流的定义与其基本抽象方法"><span class="nav-number">1.1.</span> <span class="nav-text">1. 流的定义与其基本抽象方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-完整的流家族"><span class="nav-number">1.2.</span> <span class="nav-text">2.完整的流家族</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-多个流的包装嵌套"><span class="nav-number">1.3.</span> <span class="nav-text">3.多个流的包装嵌套</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-文本的输入与输出"><span class="nav-number">1.4.</span> <span class="nav-text">4.文本的输入与输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读写二进制数据"><span class="nav-number">1.5.</span> <span class="nav-text">读写二进制数据</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ly11tea"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
