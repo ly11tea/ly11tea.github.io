@@ -338,92 +338,12 @@
 
       
         
-          
-            <h1 id="流与文件"><a href="#流与文件" class="headerlink" title="流与文件"></a>流与文件</h1><h2 id="1-流的定义与其基本抽象方法"><a href="#1-流的定义与其基本抽象方法" class="headerlink" title="1. 流的定义与其基本抽象方法"></a>1. 流的定义与其基本抽象方法</h2><p>1.java中从其中读入一个字节序列的对象称做输入流,向其中写入一个字节序列的对象称做输出流</p>
-<p>抽象类 InputStream 和 OutputStream 构成了输入/输出类层次结构的基础</p>
-<p>为了便于处理字符数据,抽象类 Reader 和 Writer 中继承出来了一个专门用<br>于处理 Unicode 字符的单独的类层次结构</p>
-<p>2.InputStream 类有一个抽象方法:<br><code>abstract int read()</code><br>读入一个字节，并返回读入的字节，或者在遇到输入源结尾时返回一1.<br>具体的输入流类,必须覆盖这个方法提供不同的功能</p>
-<p>3.Outputstream类有一个抽象方法:<br><code>abstract  void write (int  b)</code><br>它可以向某个输出位置写出一个字节</p>
-<p>4.read 和 write 方法在执行时都将阻塞， 直至字节确实被读入或写出.</p>
-<h2 id="2-完整的流家族"><a href="#2-完整的流家族" class="headerlink" title="2.完整的流家族"></a>2.完整的流家族</h2><p>按照使用方法来进行划分，流就形成了处理字节和字符的两个单独的层次结构.</p>
-<p>1.inputStream 和 outputStream 类可以读写单个字节或字节数组,他们是处理字节层次的基础.</p>
-<p>InputStream:</p>
-<ul>
-<li>|— FileInputStream：从文件系统中的某个文件中获得输入字节。哪些文件可用取决于主机<br>环境。FileInputStream 用于读取诸如图像数据之类的原始字节流。要读取字符流，请考虑使用<br>FileReader。</li>
-<li>|— FilterInputStream：包含其他一些输入流，它将这些流用作其基本数据源，它可以直接传输数据或提供一些额外的功能。<ul>
-<li>|— BufferedInputStream：该类实现缓冲的输入流。</li>
-<li>|— Stream：</li>
-</ul>
-</li>
-<li>|— ObjectInputStream：</li>
-<li>|— PipedInputStream：</li>
-</ul>
-<p>OutputStream:</p>
-<ul>
-<li>|— FileOutputStream：文件输出流是用于将数据写入 File 或 FileDescriptor 的输出流。</li>
-<li>|— FilterOutputStream：此类是过滤输出流的所有类的超类。<ul>
-<li>|— BufferedOutputStream：该类实现缓冲的输出流。</li>
-<li>|— PrintStream：</li>
-<li>|— DataOutputStream：</li>
-</ul>
-</li>
-<li>|— ObjectOutputStream：</li>
-<li>|— PipedOutputStream：</li>
-</ul>
-<p>2.对于 Unicode 文本，可以使用抽象类 Reader 和 Writer 的子类</p>
-<p>Reader：用于读取字符流的抽象类。子类必须实现的方法只有 read(char[], int, int) 和 close()。</p>
-<ul>
-<li>|—BufferedReader：从字符输入流中读取文本，缓冲各个字符，从而实现字符、数组和行的高效读取。可以指定缓冲区的大小，或者可使用默认的大小。大多数情况下，默认值就足够大了。</li>
-<li>|—LineNumberReader： 跟踪行号的缓冲字符输入流。此类定义了方法 setLineNumber(int) 和getLineNumber()，它们可分别用于设置和获取当前行号。</li>
-<li>|—InputStreamReader：是字节流通向字符流的桥梁：它使用指定的 charset 读取字节并将其解码为字符。它使用的字符集可以由名称指定或显式给定，或者可以接受平台默认的字符集。</li>
-<li>|—FileReader：用来读取字符文件的便捷类。此类的构造方法假定默认字符编码和默认字节缓冲区大小都是适当的。要自己指定这些值，可以先在 FileInputStream 上构造一个InputStreamReader。</li>
-<li>|—CharArrayReader：</li>
-<li>|—StringReader：</li>
-</ul>
-<p>Writer：写入字符流的抽象类。子类必须实现的方法仅有 write(char[], int, int)、flush() 和 close()。</p>
-<ul>
-<li>|—BufferedWriter：将文本写入字符输出流，缓冲各个字符，从而提供单个字符、数组和字符串的高效写入。</li>
-<li>|—OutputStreamWriter：是字符流通向字节流的桥梁：可使用指定的 charset 将要写入流中的字符编码成字节。它使用的字符集可以由名称指定或显式给定，否则将接受平台默认的字符集。</li>
-<li>|—FileWriter：用来写入字符文件的便捷类。此类的构造方法假定默认字符编码和默认字节缓冲区大小都是可接受的。要自己指定这些值，可以先在 FileOutputStream 上构造一个OutputStreamWriter。</li>
-<li>|—PrintWriter：</li>
-<li>|—CharArrayWriter：</li>
-<li>|—StringWriter：</li>
-</ul>
-<p>3.还有四个比较重要的接口:</p>
-<p>Closeable  :实现关闭流,四大抽象类都继承了</p>
-<ul>
-<li>InputStream</li>
-<li>OutputStream </li>
-<li>Reader </li>
-<li>Writer</li>
-</ul>
-<p>Flushable　　声明void flush()方法,把缓存区全部写入</p>
-<ul>
-<li>OutputStream</li>
-<li>Writer</li>
-</ul>
-<p>接口 Readable　　声明int read(CharBuffer cb)方法,可以实现任意读写</p>
-<ul>
-<li>Reader</li>
-<li>CharBuffer</li>
-</ul>
-<p>接口 Appendable　　声明Appendable append(xxx)方法,可以添加单个字符,或字符序列</p>
-<ul>
-<li>Writer</li>
-</ul>
-<h2 id="3-多个流的包装嵌套"><a href="#3-多个流的包装嵌套" class="headerlink" title="3.多个流的包装嵌套"></a>3.多个流的包装嵌套</h2><p>java中把流类在用途方面又分为了两类:<br>某些流(例如 FilelnputStream 和由URI类的 openstream 方法返回的输入流)可以从文件和其他位置上获取字节.<br>其他的流(例如 DatalnputStream 和 PrintWriter ) 可以将字节组装到更有用的数据类.<br>简单地来说就是一内一外,一个负责从外面取,一个负责包装这些数据</p>
-<p>java可以使用嵌套定义的方法,各取所长.<br>例如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">DatalnputStream  din  =  <span class="keyword">new</span>  Datalnput5tream(<span class="keyword">new</span>  FilelnputStream(<span class="string">"employee.dat"</span>);); </div><div class="line"><span class="keyword">double</span>  s  = din.readDouble();</div></pre></td></tr></table></figure></p>
-<p>FilelnputStream与DatalnputStream配合向文件中读数字<br>将DatalnputStream放在外部,希望使用DatalnputStream 的方法，并且希望它们能够使用带缓冲机制的 read 方法。</p>
-<p>如果希望用到多个流的方法,则可以分两行嵌套,把要用到的流放在外层<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">PushbackInputStream  pbin  = <span class="keyword">new</span>  PushbackInputStream( </div><div class="line">    <span class="keyword">new</span>  BufferedInputStream(</div><div class="line">    <span class="keyword">new</span>  FileInputStream(<span class="string">"employee.dat"</span>))); </div><div class="line">DataInputStream din  =  <span class="keyword">new</span>  DataInputStream(pbin);</div></pre></td></tr></table></figure></p>
-<p>这样对同一个流,就既可以使用pbin进行预读,也可以使用din实现读取数字.</p>
-<h2 id="4-文本的输入与输出"><a href="#4-文本的输入与输出" class="headerlink" title="4.文本的输入与输出"></a>4.文本的输入与输出</h2><p>存储文本字符串时，需要考虑字符编码<br>OutputstreamWriter 类会把 Unicode 字符流,以一定的字符编码方式转换为字节流.<br>InputStreamReader类将包含字节(用某种字符编码方式表示的字符)的输入流转换为可以产生 Unicode 码元的读入器。<br>其中转换所依照的字符编码可以由用户指定,若未指定则为系统的默认编码方式.<br>1.文本输出<br>文本输出，可以使用 PrintWriter,但单单只使用PrintWriter并未指定输出目标,要其他指示输出目标的类包装嵌套使用.如FileWriter类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PrintWriter pw=<span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> FileWriter(<span class="string">"test.txt"</span>), <span class="keyword">true</span>);   <span class="comment">//第2个参数表示是否自动冲刷缓冲区，默认为false。 </span></div><div class="line">PrintWriter pw1=<span class="keyword">new</span> PrintWriter(<span class="string">"test.txt"</span>);<span class="comment">//上述写法的快捷方式,等价.</span></div></pre></td></tr></table></figure></p>
-<p>PrintWriter可以使用print(),println,printf()等常见方法.打印数字(int、 short 、 long 、 float 、 double ) 、字符,boolean 值、字符串和对象到文件或其他位置。</p>
-<p>设置为自动冲刷模式，那么只要 <strong>println被调用，缓冲区中的所有字符都会被发送到它们的目的地</strong>.</p>
-<p>2.文本输入<br>按照对应关系,这里应该有一个Reader大类的类用于文本输入,但是基于便利性的考虑,一般使用Scanner类.</p>
-<h2 id="读写二进制数据"><a href="#读写二进制数据" class="headerlink" title="读写二进制数据"></a>读写二进制数据</h2><p>对于二进制数据流,使用者最大的需求就是将其读入到java中,包装成java的数据类型,或者反之.<br>DataOutput和DataInPut接口就完成了这项工作<br>1.DataOutput 接口用于将数据从任意 Java 基本类型转换为一系列字节<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span>	<span class="title">writeBoolean</span><span class="params">(<span class="keyword">boolean</span> v)</span> </span></div><div class="line">         <span class="comment">//将一个 boolean 值写入输出流。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeByte</span><span class="params">(<span class="keyword">int</span> v)</span> </div><div class="line">         <span class="comment">//将参数 v 的八个低位写入输出流。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeBytes</span><span class="params">(String s)</span> </div><div class="line">         <span class="comment">//将一个字符串写入输出流。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeChar</span><span class="params">(<span class="keyword">int</span> v)</span> </div><div class="line">        <span class="comment">// 将一个 char 值写入输出流，该值由两个字节组成。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeChars</span><span class="params">(String s)</span> </div><div class="line">        <span class="comment">// 将字符串 s中的所有字符按顺序写入输出流，每个字符用两个字节表示。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeDouble</span><span class="params">(<span class="keyword">double</span> v)</span> </div><div class="line">         <span class="comment">//将一个 double 值写入输出流，该值由八个字节组成。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeFloat</span><span class="params">(<span class="keyword">float</span> v)</span> </div><div class="line">         <span class="comment">//将一个 float 值写入输出流，该值由四个字节组成。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeInt</span><span class="params">(<span class="keyword">int</span> v)</span> </div><div class="line">         <span class="comment">//将一个 int 值写入输出流，该值由四个字节组成。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeLong</span><span class="params">(<span class="keyword">long</span> v)</span> </div><div class="line">         <span class="comment">//将一个 long 值写入输出流，该值由八个字节组成。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeShort</span><span class="params">(<span class="keyword">int</span> v)</span> </div><div class="line">         <span class="comment">//将两个字节写入输出流，用它们表示参数值。</span></div><div class="line"><span class="keyword">void</span>	<span class="title">writeUTF</span><span class="params">(String s)</span> </div><div class="line">         <span class="comment">//将表示长度信息的两个字节写入输出流，后跟字符串 s 中每个字符的 UTF-8 修改版表示形式。</span></div></pre></td></tr></table></figure></p>
-<p>2.DataInput<br>DataInput接口正好相反,用于从二进制流中读取字节，并根据所有 Java 基本类型数据进行重构。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">boolean</span>	<span class="title">readBoolean</span><span class="params">()</span>                                                   <span class="comment">//读取一个输入字节，如果该字节不是零，则返回true，如果是零，则返回 false。</span></span></div><div class="line"> <span class="keyword">byte</span>	<span class="title">readByte</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取并返回一个输入字节。</span></div><div class="line"> <span class="keyword">char</span>	<span class="title">readChar</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取两个输入字节并返回一个 char 值。</span></div><div class="line"> <span class="keyword">double</span>	<span class="title">readDouble</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取八个输入字节并返回一个 double 值。</span></div><div class="line"> <span class="keyword">float</span>	<span class="title">readFloat</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取四个输入字节并返回一个 float 值。</span></div><div class="line"> <span class="keyword">void</span>	<span class="title">readFully</span><span class="params">(<span class="keyword">byte</span>[] b)</span> </div><div class="line">          <span class="comment">//从输入流中读取一些字节，并将它们存储在缓冲区数组 b 中。</span></div><div class="line"> <span class="keyword">void</span>	<span class="title">readFully</span><span class="params">(<span class="keyword">byte</span>[] b, <span class="keyword">int</span> off, <span class="keyword">int</span> len)</span> </div><div class="line">          <span class="comment">//从输入流中读取 len 个字节。</span></div><div class="line"> <span class="keyword">int</span>	<span class="title">readInt</span><span class="params">()</span> </div><div class="line">         <span class="comment">// 读取四个输入字节并返回一个 int 值。</span></div><div class="line"> String	<span class="title">readLine</span><span class="params">()</span> </div><div class="line">          <span class="comment">//从输入流中读取下一文本行。</span></div><div class="line"> <span class="keyword">long</span>	<span class="title">readLong</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取八个输入字节并返回一个 long 值。</span></div><div class="line"> <span class="keyword">short</span>	<span class="title">readShort</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取两个输入字节并返回一个 short 值。</span></div><div class="line"> <span class="keyword">int</span>	<span class="title">readUnsignedByte</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取一个输入字节，将它左侧补零 (zero-extend) 转变为 int 类型，并返回结果，所以结果的范围是 0 到 255。</span></div><div class="line"> <span class="keyword">int</span>	<span class="title">readUnsignedShort</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读取两个输入字节，并返回 0 到 65535 范围内的一个 int 值。</span></div><div class="line"> String	<span class="title">readUTF</span><span class="params">()</span> </div><div class="line">          <span class="comment">//读入一个已使用 UTF-8 修改版格式编码的字符串。</span></div><div class="line"> <span class="keyword">int</span>	<span class="title">skipBytes</span><span class="params">(<span class="keyword">int</span> n)</span> </div><div class="line">          <span class="comment">//试图在输入流中跳过数据的 n 个字节，并丢弃跳过的字节。</span></div></pre></td></tr></table></figure></p>
-
-          
+          <h1 id="流与文件"><a href="#流与文件" class="headerlink" title="流与文件"></a>流与文件</h1>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/13/java-笔记-5/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -521,54 +441,12 @@
 
       
         
-          
-            <h1 id="12-泛型程序设计"><a href="#12-泛型程序设计" class="headerlink" title="12 泛型程序设计"></a>12 泛型程序设计</h1><p>泛型程序设计 ( Generic programming )意味着编写的代码可以被很多不同类型的对象所重用。</p>
-<p>泛型提供了 类型参数( type parameters ),泛型类有一个或多个参数来指示元素类型.<br><code>ArrayList&lt;String&gt; a= new Arraylist&lt;String&gt;();</code><br>这种参数既增加了代码的可读性,也使得编译器能够对类型进行检查,减少错误.</p>
-<h2 id="12-1-定义一个泛型类"><a href="#12-1-定义一个泛型类" class="headerlink" title="12.1 定义一个泛型类"></a>12.1 定义一个泛型类</h2><p>泛型类( generic class) 就是具有一个或多个类型变量的类。<br>1.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Public <span class="class"><span class="keyword">class</span> <span class="title">a</span>&lt;<span class="title">T</span>&gt;</span>&#123;</div><div class="line">    <span class="keyword">private</span> T object1;</div><div class="line">    <span class="keyword">private</span> T object2;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">func1</span><span class="params">(T param1)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> param1;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>上述类就将了一个类型变量 T ，用尖括号(&lt;&gt;)括起来,并放在类名的后面。在类中我们就可以把类型变量当做类型名一样使用.</p>
-<ol>
-<li>类型变量一般使用大写形式，且比较短.在 Java 库中，使用变量 E 表示集合的元素类型， K 和 V 分别表示表的关键字与值的类型。 T (需要时还可以用临近的字母 U 和 S) 表示”任意类型” 。</li>
-</ol>
-<h2 id="12-2-定义一个泛型方法"><a href="#12-2-定义一个泛型方法" class="headerlink" title="12.2 定义一个泛型方法"></a>12.2 定义一个泛型方法</h2><p>可以在普通类或是泛型类中定义泛型方法</p>
-<ol>
-<li>类型变量放在修饰符(例如 public static) 的后面，返回类型的前面。</li>
-</ol>
-<p>当调用一个泛型方法时， 在方法名前的尖括号中放入具体的类型:</p>
-<p>示例:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(T[] array, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>;</div><div class="line">Arrays.&lt;String&gt;swap(friends,<span class="number">0</span>,<span class="number">1</span>);</div></pre></td></tr></table></figure></p>
-<p>许多时候能从调用的信息看出泛型变量的类型,调用时一般无需使用尖括号.例如上面能从函数参数friends是String数组.看出类型变量一定是String.</p>
-<h2 id="12-3-类型变量限定"><a href="#12-3-类型变量限定" class="headerlink" title="12.3 类型变量限定"></a>12.3 类型变量限定</h2><p>理论上定义了类型变量,则任意的类型都可以使用泛型.但往往对泛型有一定的要求,将其限定在某个范围内.</p>
-<ol>
-<li>可以用 extends 定义上限,即对类型变量最少也要求继承自一定的类,实现自一定的接口.以便于代码使用一些特定的方法.<br>或者说T 应该是extends后元素的子类型<br><code>public  static  &lt;T  extends  Comparable&gt; T min(T a)</code><br>若使用上面的代码,类型变量没有实现comparable接口,则不会编译通过.</li>
-</ol>
-<h2 id="12-4-使用通配符类型"><a href="#12-4-使用通配符类型" class="headerlink" title="12.4 使用通配符类型"></a>12.4 使用通配符类型</h2><p>使用泛型类定义引用变量时,类型变量也可以有灵活性,<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Pair&lt;? extends Employee&gt; pair1;</div></pre></td></tr></table></figure></p>
-<p>以上定义的pair1,不止可以用来引用<code>pair&lt;Employee&gt;</code>的对象,还可以引用<code>pair&lt;Manager&gt;</code>的对象,以及Employee的任意子类.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Pair&lt;Manager&gt;  managerBuddies  =  <span class="keyword">new</span>  Pair&lt;&gt;(ceo ,  cfo); </div><div class="line">Pair&lt;?  extends  Employee&gt;  wildcardBuddies  =  manage rBuddies ;  <span class="comment">//可用</span></div><div class="line">wildαrdBuddies.setFirst(lowlyEmployee);  <span class="comment">// 使用某个更改器方法时会出现编译错误</span></div></pre></td></tr></table></figure>
-<p>因为此时编译器并不知道更改器方法参数的具体类型,只知道是Employee的子类,所以无法设置.<br>使用访问器完全可行,因为可以直接使用Employee类的引用.</p>
-<h1 id="13-集合"><a href="#13-集合" class="headerlink" title="13 集合"></a>13 集合</h1><p>java的集合与数学意义上的集合类似,指的是一类对象组织到一起,不同的组合形式就是不同的数据结构,不同操作方法产生了不同的算法.</p>
-<h2 id="13-1-接口与实现分离"><a href="#13-1-接口与实现分离" class="headerlink" title="13.1 接口与实现分离"></a>13.1 接口与实现分离</h2><ol>
-<li>Java集合类将接口（interface）与实现（impementation）分离开来,接口中只描述这种集合的性质,没有实现部分.把这一部分交给实现类去完成.<br>对于使用者来说,集合的实现无关紧要,所以可以使用接口定义引用变量,去引用实现类定义的实例<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Queue&lt; Customer&gt;  expressLane  =  <span class="keyword">new</span> CircularArrayQueue&lt;&gt;(<span class="number">100</span>);</div><div class="line">Queue&lt;Customer&gt;  expressLane  =  <span class="keyword">new</span> LinkedListQueue&lt;&gt;();</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>Queue究竟是用链表实现还是用循环数组实现对使用者来说无关紧要,都可以进行队列操作</p>
-<h2 id="13-2-迭代器"><a href="#13-2-迭代器" class="headerlink" title="13.2 迭代器"></a>13.2 迭代器</h2><p>java中将实现了iterator接口的类叫做迭代器<br>iterator接口的定义为:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span> &lt;<span class="title">E</span>&gt;</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">E <span class="title">next</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>next 方法返回泛型定义的元素</strong>，调用它可以逐个访问集合中的每个元素.<br>hasNext可以检测是否还有可供迭代的元素<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Collection&lt;String&gt; c = ...;</div><div class="line">Iterator&lt;String&gt; iter = c.iterator();<span class="comment">//定义一个对应类型的迭代器</span></div><div class="line"><span class="keyword">while</span> (iter.hasNext()) &#123;</div><div class="line">  String element = iter.next();<span class="comment">//获得这一次迭代对应的元素</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>如果一个类实现了<strong>Iterable接口</strong>,那么还可以写成<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (String element : c) &#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>Itrable 接口的定义为:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span>  <span class="class"><span class="keyword">interface</span>  <span class="title">Iterable</span>&lt;<span class="title">E</span>&gt;</span>&#123;</div><div class="line">Iterator&lt; E &gt; iterator(); </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>即返回对应元素迭代器变量的方法.</p>
-<p>remove 方法,删除上次调用 next 方法时返回的元素,删除指定位置上的元素,需要越过这个元素,ext 方法和 remove 方法的调用具有互相依赖性。 <strong>如果调用 remove 之前<br>没有调用 next 将是不合法的</strong></p>
-<h2 id="13-3-Collection接口"><a href="#13-3-Collection接口" class="headerlink" title="13.3 Collection接口"></a>13.3 Collection接口</h2><p>1.在java中,集合类公有接口时Collection接口,一个集合代表了一组对象，这组对象被称为集合的元素。<br>一些集合允许重复的元素而其他不允许；一些是有序的而一些是无序的。<br>Java类库中并未提供任何对这个接口的直接实现，而是提供了对于它的更具体的子接口的实现（比如Set接口和List接口）。</p>
-<p>2.接口内定义的方法有:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> <span class="comment">//向集合中添加一个元素，若添加元素后集合发生了变化就返回true，若没有发生变化，就返回false。(optional operation).</span></span></div><div class="line"><span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(Collection&lt;? extends E&gt; c)</span> <span class="comment">//添加给定集合c中的所有元素到该集合中(optional operation).</span></div><div class="line"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> <span class="comment">//(optional operation).</span></div><div class="line"><span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span> <span class="comment">//判断该集合中是否包含指定对象</span></div><div class="line"><span class="keyword">boolean</span> <span class="title">containsAll</span><span class="params">(Collection&lt;?&gt; c)</span></div><div class="line"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span></div><div class="line"><span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></div><div class="line"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></div><div class="line">Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span></div><div class="line"><span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span> <span class="comment">//移除给定对象的一个实例（有的具体集合类型允许重复元素） (optional operation).</span></div><div class="line"><span class="keyword">boolean</span> <span class="title">removeAll</span><span class="params">(Collection&lt;?&gt; c)</span> <span class="comment">//(optional operation).</span></div><div class="line"><span class="keyword">boolean</span> <span class="title">retainAll</span><span class="params">(Collection&lt;?&gt; c)</span> <span class="comment">//仅保留给定集合c中的元素(optional operation).</span></div><div class="line"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></div><div class="line">Object[] <span class="title">toArray</span><span class="params">()</span></div><div class="line">&lt;T&gt; T[] <span class="title">toArray</span><span class="params">(T[] a)</span></div></pre></td></tr></table></figure></p>
-<p>可以看到Collection接口也实现了Iterator<e> iterator()方法,事实上Collection接口实现了Comparable接口,所以每一种实现Collection接口的数据结构都可以使用for..each的方法迭代</e></p>
-<p>3.Collection 与 Iterator都是泛型接口，可以编写操作任何集合类型的实用方法.这些方法与元素具体类型无关,所以java将这些方法定义到一个抽象类AbstractCollection中，以减少类实现Collection接口要定义的方法数量.</p>
-<h2 id="13-4-一些集合实例"><a href="#13-4-一些集合实例" class="headerlink" title="13.4 一些集合实例"></a>13.4 一些集合实例</h2><h3 id="13-4-1-链表"><a href="#13-4-1-链表" class="headerlink" title="13.4.1 链表"></a>13.4.1 链表</h3><p>1.在java中,所有链表实际上都是双向链接的 ( doubly linked)<br>2.链表是一个有序集合( ordered collection) ，LinkedList. add 方法将对象添加到链表的尾部,插入任意位置的add方法由迭代器提供.<br>3.因为是双向的,所以链表迭代器还有向前遍历的方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">hasPrevious</span><span class="params">()</span></span>;</div><div class="line"><span class="function">E <span class="title">previous</span><span class="params">()</span></span>;</div></pre></td></tr></table></figure></p>
-<p>4.还可以使用迭代器set方法修改当前元素</p>
-<h3 id="13-4-2-数组列表"><a href="#13-4-2-数组列表" class="headerlink" title="13.4.2 数组列表"></a>13.4.2 数组列表</h3><p>和链表一样同属于List接口,不同于链表,可以使用set()和get()方法实现任意位置的读取</p>
-<h3 id="13-4-3-散列集"><a href="#13-4-3-散列集" class="headerlink" title="13.4.3 散列集"></a>13.4.3 散列集</h3><p>散列集实现了Set接口,很显然由其性质可得,其中不可能有相同的元素,故实现Set接口<br>它能够快速的监测某个元素是否在集合中及其位置</p>
-<h3 id="13-4-4-树集"><a href="#13-4-4-树集" class="headerlink" title="13.4.4 树集"></a>13.4.4 树集</h3><p>树集也能够快速的监测某个元素是否在集合中及其位置,相较于散列表它是一个有序的集合<br>要使用,元素必须实现Comparable接口</p>
-<h3 id="13-4-5-优先级队列"><a href="#13-4-5-优先级队列" class="headerlink" title="13.4.5 优先级队列"></a>13.4.5 优先级队列</h3><p>根据性质可以保证每次出队列的元素都是优先级最高的</p>
-<h3 id="13-4-6-映射表"><a href="#13-4-6-映射表" class="headerlink" title="13.4.6 映射表"></a>13.4.6 映射表</h3><p>Map接口用于存储键值对,已知键的信息可以提取到值,表有两种实现:hashmap,treemap.其区别与散列集与树集区别类似</p>
-
-          
+          <h1 id="12-泛型程序设计"><a href="#12-泛型程序设计" class="headerlink" title="12 泛型程序设计"></a>12 泛型程序设计</h1>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/13/java-笔记-4/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -666,112 +544,12 @@
 
       
         
-          
-            <h1 id="6-接口"><a href="#6-接口" class="headerlink" title="6.接口"></a>6.接口</h1><p>接口不是类，而是对类的一组需求描述，这些类要遵从接口描述的统一格式进行定义。一个类可以实现一个或多个接口，并在需要接口的地方，随时使用实现了相应接口的对象。</p>
-<h2 id="6-1-接口特性"><a href="#6-1-接口特性" class="headerlink" title="6.1 接口特性"></a>6.1 接口特性</h2><ol>
-<li><p>在接口声明中，方法自动public，可以不写修饰符。在实现接口时必须把方法声明为public,声明在接口中的内部类自动成为static和public类。一个接口中可以包含多个方法，还可以定义常量，自动设置public static final</p>
-</li>
-<li><p>接口中不能含有实例域，也不能在接口中实现方法。提供实例域和方法实现的任务应该由实现接口的那个类来完成。</p>
-</li>
-<li><p>可以将接口看成是没有实例域的抽象类。</p>
-</li>
-<li><p>接口在很多时候起到标示某一类特定方法存在与否的标志</p>
-</li>
-</ol>
-<h2 id="6-2-接口声明与使用"><a href="#6-2-接口声明与使用" class="headerlink" title="6.2 接口声明与使用"></a>6.2 接口声明与使用</h2><ol>
-<li>为了让类实现一个接口，通常需要下面两个步骤:<br>1 ) 将类声明为实现给定的接口 。<br>2 )对接口中的所有方法进行定义。(若此类为抽象类则不强制要求实现所有方法)</li>
-</ol>
-<p>要将类声明为实现某个接口，需要使用关键字 implements :<br>class  Employee  implements Comparable<br>java 5.0 以后还可以声明泛型接口<br>class  Employee  implements Comparable &lt;..&gt;</p>
-<p>2.接口不是类，不能使用new运算符实例化一个接口但是可以声明接口变量，同时接口变量必须引用实现了接口的类对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">x = <span class="keyword">new</span> Comparable(...);<span class="comment">//Error</span></div><div class="line">Comparable x ;<span class="comment">// ok</span></div><div class="line">x = <span class="keyword">new</span> Employee(...);</div></pre></td></tr></table></figure></p>
-<p>3.可以使用 isinstanceof 方法来判断某个类是否实现了接口<br>if( anObject instanceof Comparable){…}</p>
-<p>4.接口与接口之间也可以进行继承.</p>
-<p>5.只能继承一个类但是可以实现多个接口.</p>
-<p>使用接口既有多继承的好处又避免多继承带来的额外开销.</p>
-<h2 id="6-3-实现cloneable接口"><a href="#6-3-实现cloneable接口" class="headerlink" title="6.3 实现cloneable接口"></a>6.3 实现cloneable接口</h2><p>拷贝一个变量时，原始变量与拷贝变量引用同一个对象，改变一个变量所引用的对象会对另一个变量产生影响。</p>
-<ol>
-<li><p>clone方法是Object 类的一个protected方法,只有以对象为主体才可以调用它,这样做是为了让只有一个类对象本身才能克隆自己,Object类对具体的类对象一无所知，只能将各个域进行对应的拷贝。对于<strong>基本类型或数值拷贝没有问题</strong>，但如果<strong>对象包含了子对象的引用</strong>，拷贝的结果还是<strong>两个域引用同一个子对象。</strong><br>这种不拷贝包含在对象中的内部对象的模式叫浅拷贝.</p>
-</li>
-<li><p>要实现克隆子对象的深拷贝,就必须重新实现cloneable接口<br>必须重新定义clone方法，以便实现克隆子对象的深拷贝。对每个类都要做出下列判断：</p>
-<ul>
-<li><p>默认的clone方法能否满足要求</p>
-</li>
-<li><p>默认的clone方法是否能够通过调用可变子对象的clone得到修补。</p>
-</li>
-</ul>
-</li>
-</ol>
-<p>如果默认的clone方法能否满足要求,也应该实现Cloneable接口，将clone定义为public，然后调用super.clone() 即可.</p>
-<p>如果要实现深拷贝,就要在super.clone()以后,加上对应子对象的拷贝代码,<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span></div><div class="line">&#123;</div><div class="line">   ...</div><div class="line">   <span class="function"><span class="keyword">public</span> Employee <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException</span></div><div class="line">   &#123;</div><div class="line">       Employee cloned=(Employee)<span class="keyword">super</span>.clone();<span class="comment">//Object.clone()</span></div><div class="line">       cloned.hireDay=(Date)hireDay.clone();<span class="comment">//克隆子对象</span></div><div class="line">       <span class="keyword">return</span> cloned;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="7-内部类"><a href="#7-内部类" class="headerlink" title="7 内部类"></a>7 内部类</h1><p>内部类 ( inner class ) 是定义在另一个类中的类,<br>为什么需要使用内部类：</p>
-<p>1：内部类方法可以访问该类定义所在的作用域中的数据，包括私有数据</p>
-<p>2：内部类可以对同一个包中的其他类隐藏起来</p>
-<p>3：当想要定义一个回调函数而不想写大量代码时，使用匿名内部类比较便捷</p>
-<h2 id="7-1-使用内部类访问外围类的实例域"><a href="#7-1-使用内部类访问外围类的实例域" class="headerlink" title="7.1 使用内部类访问外围类的实例域"></a>7.1 使用内部类访问外围类的实例域</h2><ol>
-<li>内部类既可以访问自身的数据域，也可以访问创建它的外围类对象的数据域。</li>
-<li>内部类的对象总有一个隐式引用<strong>，指向了创建它的外部类对象</strong>。将外围类的对象的引用称为outer。</li>
-<li>外围类的引用在构造器中设置，编译器修改了所有内部类的构造器，添加了一个外围类的引用参数。</li>
-</ol>
-<h2 id="7-2-内部类的语法规则"><a href="#7-2-内部类的语法规则" class="headerlink" title="7.2 内部类的语法规则"></a>7.2 内部类的语法规则</h2><ol>
-<li>更为规范的在内部类中使用外围类的方法是,使用外围类引用：OuterClass(外部类名).this</li>
-<li>在外部类中调用内部类的构造器,outerObject.new InnerClass(contruction parameters)</li>
-<li>在外部类外部,得到外部类中内部类的引用<br>OuterClass.lnnerClass </li>
-</ol>
-<h2 id="7-3-局部内部类"><a href="#7-3-局部内部类" class="headerlink" title="7.3 局部内部类"></a>7.3 局部内部类</h2><ol>
-<li>可以在一个方法中定义局部类，并且不能用public或private访问说明符进行声明，它的作用域被限定在声明这个局部类的块中。局部类可以对外部世界完全隐藏起来，即使<strong>方法所在类中的其他代码也不能访问</strong>。</li>
-<li>局部类的另一个优势：不仅可以访问包含它们的外部类，还可以访问局部变量，<strong>但那些局部变量必须被声明为final</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(<span class="keyword">int</span> interval,<span class="keyword">final</span> <span class="keyword">boolean</span> beep)</span><span class="comment">//beep被声明为final</span></span></div><div class="line">&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">TimePrinter</span> <span class="keyword">implements</span> <span class="title">ActionListener</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent event)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(beep)<span class="comment">//局部类访问局部变量</span></div><div class="line">           Toolkit.getDefaultToolkit().beep();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    ActionListener listener = <span class="keyword">new</span> TimePrinter();</div><div class="line">    Time t = <span class="keyword">new</span> Timer(interval,listener);</div><div class="line">    t.start();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="7-4-匿名内部类"><a href="#7-4-匿名内部类" class="headerlink" title="7.4 匿名内部类"></a>7.4 匿名内部类</h2><p>如果只使用定义的类创建一次对象,可以使用”一次性”的匿名内部类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">start</span><span class="params">(<span class="keyword">int</span> interval ,  <span class="keyword">final</span>  <span class="keyword">boolean</span>  beep)</span> </span></div><div class="line">&#123;</div><div class="line">    ActionListener  listener = <span class="keyword">new</span>  ActionListener() &#123;</div><div class="line">      <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span>  <span class="title">actionPerformed</span><span class="params">(ActionEvent  event)</span> </span>&#123;</div><div class="line">        Date  now  =  <span class="keyword">new</span>  Date(); </div><div class="line">        System.out.println(<span class="string">"At  the  tone ,  the  time  is "</span>+ now); </div><div class="line">         <span class="keyword">if</span>  (beep) Toolkit.getDefaultToolkit.beep(); </div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">    Timer t  = <span class="keyword">new</span>  Timer(interval ,  listener); </div><div class="line">    t.start(); </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>通常的语法是:<br>new  SuperType (construction parameters){<br>inner class methods and data<br>} </p>
-<ol>
-<li>匿名类不能有构造器。取而代之的是，SuperType可以是接口，内部类就要实现这个接口；也可以是一个类，内部类就要扩展它。<br>因此SuperType是超类时,将构造器参数传递给超类( superclass ) 构造器。<br>SuperType是接口时,不能有任何构造参数.</li>
-</ol>
-<h2 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h2><ol>
-<li><p>有时候使用内部类仅<strong>为了把一个类隐藏在另一个类的内部</strong>，并不<strong>需要内部类引用外围类对象</strong>。为此可以将内部类声明为static，以便取消产生的引用。</p>
-</li>
-<li><p>只有内部类可以声明为static。静态内部类的对象除了没有对生成它的外围类对象的引用特权外，与其他所有内部类完全一样。如果在静态方法中构造内部类，则必须是静态内部类。</p>
-</li>
-</ol>
-<p>声明在接口中的内部类自动称为static和public类。</p>
-<h1 id="7-异常"><a href="#7-异常" class="headerlink" title="7 异常"></a>7 异常</h1><p>Java 使用一种称为异常处理( exception handing 的错误捕获机制.<br>理论上,当程序出现错误之后:</p>
-<ul>
-<li>返回到一种安全状态，并能够让用户执行一些其他的命令;  </li>
-<li>允许用户保存所有操作的结果. 并以适当的方式终止程序。</li>
-</ul>
-<h2 id="7-1-异常的分类"><a href="#7-1-异常的分类" class="headerlink" title="7.1 异常的分类"></a>7.1 异常的分类</h2><ol>
-<li>一个异常对象总是Throwable子类的实例。Throwable的子类演变成两个分支：Error和Exception。</li>
-<li>Error类体系描述了Java运行系统中的内部错误以及资源耗尽的情况，应用程序不应该抛出这种类型的对象,应该通告给用户，并尽力使程序安全地终止。</li>
-<li>Exception自身也演变成两个分支<br>一个是RuntimeException的子类，以及不从它衍生的其他异常。由编程导致的错误会导致RuntimeException异常.<br>而其他错误原因导致的异常，例如因为IO错误导致曾经运行正确的程序出错，都不会导致RuntimeException异常,而是成为其他类型的exception。<br>一般来说RuntimeException 异常,都是编码者造成的.</li>
-</ol>
-<h2 id="7-2-已检查异常和未检查异常"><a href="#7-2-已检查异常和未检查异常" class="headerlink" title="7.2 已检查异常和未检查异常"></a>7.2 已检查异常和未检查异常</h2><ol>
-<li><p>规定 派生于 Error 类或 RuntimeException 类的所有异常称为 未检查<br>( unchecked) 异常，<br>所有其他的异常称为己检查( checked ) 异常。</p>
-</li>
-<li><p>方法应该在其首部声明所有可能抛出的<strong>已检查异常</strong>。这样可以从首部反映出这个方法可能抛出哪类<strong>已检查异常</strong></p>
-</li>
-</ol>
-<p>程序运行过程中,有如下情况可能<strong>出现异常:</strong><br>      1）调用了一个会抛出“已检查异常”的方法；<br>      2）程序运行过程中发生了错误，并且用throw语句抛出一个“已检查异常”；<br>      3）程序错误，如数组下标越界；<br>      4）Java虚拟机或者运行时库出现了内部错误；</p>
-<p>如果出现前两种情况之一,则必须<strong>在方法处声明异常</strong>,抛出多个己检查异常，那么就必须在方法的首部列出所有的异常类,每个异常类之间用逗号隔开。<br>例如:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">abc</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">def</span><span class="params">()</span> <span class="keyword">throws</span> IOException,EOFException</span></div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>不需要声明 Java 的内部错误，即从 Error 继承的错误,这些由java自行处理.<br>也不需要声明untimeException 继承的那些未检查异常,这些异常<strong>都是代码错误造成</strong>,应该去修正代码.</p>
-<p><strong>总而言之,方法应该声明所有可能抛出的己检查异常，而未检查异常要么不可控制(Error )，要么就应该避免发生 ( RuntimeException ) 。</strong></p>
-<h2 id="7-3-抛出异常"><a href="#7-3-抛出异常" class="headerlink" title="7.3 抛出异常"></a>7.3 抛出异常</h2><p>抛出异常并不困难,<br>1 )找到一个合适的异常类。<br>2) 创建这个类的一个对象。<br>3 )将对象抛出 。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">abc</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">def</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</div><div class="line">        ....</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IOException();</div><div class="line">        ...</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="7-4-自定义异常类"><a href="#7-4-自定义异常类" class="headerlink" title="7.4 自定义异常类"></a>7.4 自定义异常类</h2><p>有时需要自定义异常类,只要继承Exception本身或子类即可:<br>定义的类应该包含两个构造器， 一个是默认的构造器;另一个是带有详细描述信息的构造器<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> MyIOException extends IOException&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyIOException</span><span class="params">()</span></span></div><div class="line">    &#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyIOException</span><span class="params">(String msg)</span></span>&#123;</div><div class="line">        <span class="keyword">super</span>(msg);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="7-5-捕获异常"><a href="#7-5-捕获异常" class="headerlink" title="7.5 捕获异常"></a>7.5 捕获异常</h2><ol>
-<li>有的时候,我们需要在异常发生之后进行一些必要的操作再抛出,或者直接在当前环境中处理,不抛出.此时就需要捕获异常.<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">...<span class="comment">//被捕获异常的代码块</span></div><div class="line">&#125;<span class="keyword">catch</span>(MyIOException)&#123;</div><div class="line">...<span class="comment">//处理异常的代码块</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>如果在 try 语句块中的任何代码抛出了一个在 catch,子句中说明的异常类，那么<br>1 )程序将跳过 try 语句块的其余代码。<br>2 )程序将执行 catch 子句中的处理器代码。<br>如果在 语句块中的代码没有抛出任何异常，那么程序将跳过 catch 子句。<br>如果代码抛出了一个在 catch子句中没有声明的异常类型，也不会执行catch中的语句</p>
-<p>2.可以捕获多个异常,分别处理<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    ...</div><div class="line">&#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</div><div class="line">    ...</div><div class="line">&#125; <span class="keyword">catch</span> (UnkonwHostException e) &#123;</div><div class="line">    ...</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>对于几个相同处理方法的exception还可以合并catch语句:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    ...</div><div class="line">&#125; <span class="keyword">catch</span> (FileNotFoundException | UnkonwHostException e) &#123;</div><div class="line">    ...</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>对于catch到的异常完全可以捕获之后再抛出.</p>
-<p>3.由于发生异常之后当前方法会立刻停止运行,所以可能要在发生异常之后做一些普适性的工作.可以使用finally子句<br>如下面的代码,关闭了InputStream<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">InputStream in = ...;</div><div class="line">Exception ex = <span class="keyword">null</span>;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    ...</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">    ex = e;</div><div class="line">    <span class="keyword">throw</span> e;</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        in.close();</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        <span class="keyword">if</span> (ex == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">throw</span> e;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>try <strong>语句块中是否遇到异常</strong>， finally 子句中的 in.close() 语<strong>句都会被执行。</strong></p>
-<ol>
-<li>虽然上面的方法能够完成任务,但是可以看出实现很繁琐.Java SE 7 之后,如果资源属于一个实现了 AutoCloseable 接口的类，那么可以try with resource 的方法完成上面的代码.<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>(resource res =)&#123;</div><div class="line">&#125;<span class="keyword">catch</span>(...)&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>在try子块的代码运行完成后,代码会自动调用res.close()方法.</p>
-
-          
+          <h1 id="6-接口"><a href="#6-接口" class="headerlink" title="6.接口"></a>6.接口</h1>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/13/java-笔记-3/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -869,119 +647,12 @@
 
       
         
-          
-            <h1 id="5-1-类、超类和子类-java的继承层次"><a href="#5-1-类、超类和子类-java的继承层次" class="headerlink" title="5.1  类、超类和子类,java的继承层次"></a>5.1  类、超类和子类,java的继承层次</h1><ol>
-<li><p>关键字 extends 表明正在构造的新类派生 于一个已存在的类。 已存在的类称为超类( superclass ) 、 基类 ( base class ) 或父类( parent  class) ;<br>新类称为子类 ( subclass) 、派生类( derived class) 或孩子类 ( child class ) ;</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span> <span class="keyword">extends</span> <span class="title">Employee</span></span></div><div class="line">&#123;</div><div class="line">    添加方法和域</div><div class="line">    覆盖：重写一些基类中不适合派生类的方法</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>子类继承了超类的所有方法和域,能否在子类中访问要看这些方法和域在超类中的访问权限.子类不能访问超类中的私有域和方法(尽管存在),要通过超类中提供的公有方法访问(如果有的话)<br>还可以在子类中用新的方法来覆盖( override) 超类中的这个方法:</p>
-</li>
-<li><p>super在子类构造器中的首行可以代指超类中的对应构造器,往往用来初始化超类中的私有成员:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Manager</span> <span class="params">(String  n,  <span class="keyword">double</span>  s, <span class="keyword">int</span>  year , <span class="keyword">int</span> month,  <span class="keyword">int</span>  day)</span> </span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">super</span>(n , s,  year , month ,day); <span class="comment">//</span></div><div class="line">    bonus  =  <span class="number">0</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>super是调用超类 Employee 中含有 n,s, year , month 和 day 参数的构造器的简写形式</p>
-<p>如果子类中没有显示的调用超类的构造函数,那么,会隐式地调用一个super()即无参的超类构造器,若没有这种构造器,则会报错.</p>
-<h2 id="5-1-1-继承层次"><a href="#5-1-1-继承层次" class="headerlink" title="5.1.1 继承层次"></a>5.1.1 继承层次</h2><p>继承并不限于一个层次。但不支持一个子类继承多个超类。</p>
-<p>由一个公共超类派生出来的所有类的集合被称为继承层次。</p>
-<p>从某个特定的类到其祖先的路径被称为该类的继承链。</p>
-<h2 id="5-1-2-多态"><a href="#5-1-2-多态" class="headerlink" title="5.1.2 多态"></a>5.1.2 多态</h2><p>java继承结构的一种描述是 is a 法则,即<strong>子类对象也是超类的对象</strong><br>由此可以发现两者是可以置换的.<br>由此,对象变量是多态 的 。一个 Employee 的对象变量既可以引用一个<br>Employee 类对象，也可以引用一个 Employee 类的任何一个子类的对象.</p>
-<h2 id="5-1-3-继承条件下对象方法的执行过程"><a href="#5-1-3-继承条件下对象方法的执行过程" class="headerlink" title="5.1.3 继承条件下对象方法的执行过程"></a>5.1.3 继承条件下对象方法的执行过程</h2><ol>
-<li>编译器首先获得<strong>所有可能被调用的候选方法</strong>。通过查看对象获取其声明类型C和方法名f，可能会有多个相同名字但参数不同的f方法，编译器会一一列举C类型中的f方法以及C的超类中访问属性为public的f方法。</li>
-<li>编译器查看调用方法时提供的参数列表。如果在所有名为f的方法中存在一个<strong>完全匹配的就选择这个方法</strong>，这个过程称为<strong>重载解析</strong>。</li>
-<li>如果调用的方法是private static final 方法或者构造器，编译器可以准确知道应该调用哪个方法，这种调用方式称为<strong>静态绑定</strong>。<br>当调用的方法依赖于隐式参数(调用方法的对象)的实际类型，并且在运行时绑定的称为<strong>动态绑定</strong>。</li>
-<li>当程序运行，并且采用动态绑定调用方法时，虚拟机一定调用与 x 所引用对象的实际类型最合适的那个类的方法。 假设 x 的D类的实例, 它是 C 类的子类。 如果 D 类定义了<br>方法 f(String) ， 就直接调用它; 否则.将在 D 类的超类中寻找 f(String) ，以此类推。</li>
-</ol>
-<h2 id="5-1-4-阻止继承-final-类与final方法"><a href="#5-1-4-阻止继承-final-类与final方法" class="headerlink" title="5.1.4 阻止继承, final 类与final方法"></a>5.1.4 阻止继承, final 类与final方法</h2><ol>
-<li>想要阻止为某个类定义子类,可以在类名面前加上final关键字</li>
-<li>类中的特定方法也可以使用final修饰,这样的这个方法也不能被他的子类重载.</li>
-</ol>
-<h2 id="5-1-5-继承关系下的强制类型转换"><a href="#5-1-5-继承关系下的强制类型转换" class="headerlink" title="5.1.5 继承关系下的强制类型转换"></a>5.1.5 继承关系下的强制类型转换</h2><ol>
-<li><p>进行类型转换的唯一原因是：在暂时忽略对象的实际类型之后，使用对象的全部功能。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Manager boss = (Manager)employee;</div></pre></td></tr></table></figure>
-</li>
-<li><p>将<strong>超类的引用</strong>赋给子类变量时<strong>必须进行类型转换</strong>。上面的例子中employee是超类,boss是子类.</p>
-</li>
-<li>只能在继承层次内进行类型转换。在将超类转换成子类之前，应该使用 isinstanceof 进行检查。</li>
-</ol>
-<h2 id="5-1-6-抽象类"><a href="#5-1-6-抽象类" class="headerlink" title="5.1.6 抽象类"></a>5.1.6 抽象类</h2><ol>
-<li><p>某个方法在派生类中有各不相同的覆盖实现，如果祖先类不作为特定类使用时，可以将这个方法声明为抽象方法，从而忽略在祖先类中的具体实现。</p>
-</li>
-<li><p>抽象方法充当着占位的角色，它们的具体实现在子类中。</p>
-</li>
-<li><p>扩展抽象类可以由两种选择，一是在子类中定义部分抽象方法或抽象方法也不定义，这样子类必须被标记为抽象类；二是定义全部的抽象方法，这样子类就不是抽象的了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></div><div class="line">&#123;</div><div class="line">   ....</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> String <span class="title">getDescription</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>当一个类中包含一个或多个抽象方法时类本身必须被声明为抽象的。类即使不含抽象方法也可以将类声明为抽象类。</p>
-</li>
-<li><p>抽象类不能被实例化，不能创建抽象类本身的对象，但可以引用非抽象的子类。</p>
-</li>
-<li><p>除了抽象方法以外，抽象类还可以包含具体数据和具体方法。建议尽量将通用的域和方法(不管是不是抽象的)放在超类(不管是否抽象类)中。</p>
-</li>
-</ol>
-<h2 id="5-1-7-protected-方法"><a href="#5-1-7-protected-方法" class="headerlink" title="5.1.7 protected 方法"></a>5.1.7 protected 方法</h2><p>1.超类中的某些方法允许被子类访问，或允许子类的方法访问超类的某个域，则可以将这些方法或域声明为protected。子类只能访问对应的子类对象中的受保护域，而不能访问其他超类对象中的这个域。<br>例如:<br>将超类 Employee中的 hireDay 声明为 proteced ，而不是私有的， <strong>manager 类中的方法就能够访问 Manager 对象</strong>中的 hireDay 域,但而不<strong>能访问其他Employee 对象中</strong>的这个域</p>
-<h2 id="5-1-8-访问修饰符"><a href="#5-1-8-访问修饰符" class="headerlink" title="5.1.8  访问修饰符"></a>5.1.8  访问修饰符</h2><p>private       仅对本类可见</p>
-<p>public        所有类可见</p>
-<p>protected     本包和所有子类可见</p>
-<p>无修饰         对本包可见，默认</p>
-<h1 id="5-2-Object"><a href="#5-2-Object" class="headerlink" title="5.2 Object"></a>5.2 Object</h1><p>Object类是Java所有类的始祖，每个类都由它扩展而来。如果没有明确指出超类，Object就被认为是这个类的超类。</p>
-<p><strong>只有基本类型不是对象.</strong></p>
-<p>object类有一些基本方法;</p>
-<h2 id="5-2-1-equal方法"><a href="#5-2-1-equal方法" class="headerlink" title="5.2.1 equal方法"></a>5.2.1 equal方法</h2><p>检测一个对象是否等同于另一个对象。在Object中这个方法判断两个对象变量是否引用了相同的对象</p>
-<h2 id="5-2-2-hashCode方法"><a href="#5-2-2-hashCode方法" class="headerlink" title="5.2.2 hashCode方法"></a>5.2.2 hashCode方法</h2><p>散列码是由对象导出的一个整形值。没有规律。</p>
-<h2 id="5-2-3-toString"><a href="#5-2-3-toString" class="headerlink" title="5.2.3 toString"></a>5.2.3 toString</h2><p>toString 方法，用于返回表示对象值的字符</p>
-<h1 id="5-3-泛型数组列表"><a href="#5-3-泛型数组列表" class="headerlink" title="5.3 泛型数组列表"></a>5.3 泛型数组列表</h1><p>ArrayList是一个采用类型参数的泛型类。&lt;&gt;内的类型参数不允许是基本类型。<br>它可以根据列表大小自动增加减少空间<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ArrayList&lt;Employee&gt; staff = <span class="keyword">new</span> ArrayList&lt;&gt;();</div></pre></td></tr></table></figure></p>
-<h2 id="5-3-1-基本使用-增删查改"><a href="#5-3-1-基本使用-增删查改" class="headerlink" title="5.3.1 基本使用(增删查改)"></a>5.3.1 基本使用(增删查改)</h2><ol>
-<li>使用 add 方法可以将元素添加到数组列表中</li>
-<li>size 方法将返回数组列表中包含的实际元素数目 </li>
-<li>在数组列表的尾部追加元素之外，还可以在数组列表的中间插入元素，使用带索引参数的 add 方法。</li>
-<li>remove方法可以从数组列表中间删除一个元素</li>
-<li>“for each “循环遍历数组列表<br>示例</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//构造一个空数组列表</span></div><div class="line">ArrayList&lt;Employee&gt; staff = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"></div><div class="line"><span class="comment">//添加 调用add且内部数组满了，将自动创建一个更大的数组，并将所有对象拷贝过去</span></div><div class="line">staff.add(<span class="keyword">new</span> Employee());</div><div class="line"></div><div class="line"><span class="comment">//确保数组列表在不重新分配存储的情况下就能够保存给定数量的元素</span></div><div class="line">staff.ensureCapacity(<span class="number">100</span>);</div><div class="line"></div><div class="line"><span class="comment">//返回实际的元素数目，等价于数组a的a.length</span></div><div class="line">staff.size();</div><div class="line"></div><div class="line"><span class="comment">//用指定容量构造一个空数组列表</span></div><div class="line">ArrayList&lt;Employee&gt; staff = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="number">100</span>);</div><div class="line"></div><div class="line"><span class="comment">//将数组列表的存储容量削减到当前尺寸</span></div><div class="line">staff.trimToSize();</div><div class="line"></div><div class="line"><span class="comment">//创建列表并拷贝到数组中</span></div><div class="line">ArrayList&lt;x&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"><span class="keyword">while</span>(...)&#123; x = ...; list.add(x); &#125;</div><div class="line">X[] a = <span class="keyword">new</span>  x[list.size()];</div><div class="line">list.toArray(a);</div><div class="line"></div><div class="line"><span class="comment">//在第n个位置插入，n之后的后移</span></div><div class="line">staff.add(n,e);</div><div class="line"></div><div class="line"><span class="comment">//使用get和set方法实现访问或改变数组元素的操作，而非[]方式。</span></div><div class="line"><span class="comment">//替换已存在的i元素的内容</span></div><div class="line">staff.set(i,harry);</div><div class="line"><span class="comment">// 获取第i个元素</span></div><div class="line">Employee e = staff.get(i);</div><div class="line"></div><div class="line"><span class="comment">//移除第n个元素</span></div><div class="line">Employee e = staff.remove(n);</div></pre></td></tr></table></figure>
-<h1 id="5-4-对象包装器"><a href="#5-4-对象包装器" class="headerlink" title="5.4 对象包装器"></a>5.4 对象包装器</h1><ol>
-<li>将基本类型转换为对象。所有的基本类型都有一个与之对应的类，这些类被称为包装器。</li>
-</ol>
-<p>Integer  Long  Float  Double  Short  Byte  Character  Void  Boolean<br>将基本类型变为对象叫装箱,反之叫拆箱.</p>
-<ol>
-<li>大部分装箱和拆箱操作都在编译器层面自动完成.</li>
-</ol>
-<h1 id="5-5-参数数量可变的方法"><a href="#5-5-参数数量可变的方法" class="headerlink" title="5.5 参数数量可变的方法"></a>5.5 参数数量可变的方法</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> PrintStream <span class="title">printf</span><span class="params">(String fmt ,Object... args)</span></span></div><div class="line">&#123;</div><div class="line">   <span class="keyword">return</span> format(fmt,args);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>省略号…是代码的一部分，表明这个方法可以接收任意数量的对象,这个方法中有两个参数,字符串fmt,对象数组args[].</p>
-<h1 id="5-6-反射"><a href="#5-6-反射" class="headerlink" title="5.6 反射"></a>5.6 反射</h1><p>在java中，只要给定类的名字，那么就可以通过反射机制来获得类的所有信息。 </p>
-<h2 id="5-6-1-Class-类"><a href="#5-6-1-Class-类" class="headerlink" title="5.6.1 Class 类"></a>5.6.1 Class 类</h2><p>所有的对象维护一个被称为运行时的类型标识。这个信息跟踪着每个对象所属的类。 虚拟机利用运行时类型信息选择相应的方法执行。可以通过专门的 Java 类访问这些信息。 保存这些信息的类被称为 Class </p>
-<ol>
-<li>获得Class类实例</li>
-</ol>
-<ul>
-<li>Object 类中的 getClass()方法将会返回一个 Class 类型的实例,即通过类的实例的得到类</li>
-<li>静态方法 forName 获得类名对应的 Class 对象。</li>
-<li>如果 T 是任意的 Java 类型， T.class 将代表匹<br>配的类对象。</li>
-</ul>
-<ol>
-<li>通过Class类实例创建对应的类实例<br>newInstance( ) ，可以用来快速地创建一个类的实例。<br>上面知识点的实例:<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">Employee e ;...</div><div class="line"></div><div class="line"><span class="comment">//getClass返回一个Class类的实例。</span></div><div class="line">Class c = e.getClass();</div><div class="line"></div><div class="line"><span class="comment">//返回类名字，包含包名</span></div><div class="line">c.getName();</div><div class="line"></div><div class="line"><span class="comment">//Class.forName()获得类名对应的Class对象</span></div><div class="line"><span class="comment">//这个方法只有在className是类名或接口名才能够执行。否则抛出checkedexception 已检查异常。无论何时使用这个方法都应该提供一个异常处理器</span></div><div class="line"></div><div class="line">String className=<span class="string">"java.util.Date"</span>;</div><div class="line">Class c1 = Class.forName(className);</div><div class="line"></div><div class="line"><span class="comment">//T.class代表匹配的T类对象</span></div><div class="line">Class cl1 = Date.class;</div><div class="line">Class cl2 = <span class="keyword">int</span>.class;</div><div class="line"></div><div class="line"><span class="comment">//虚拟机为每个类型管理一个Class对象，使用==实现两个类对象比较</span></div><div class="line"><span class="keyword">if</span>(e.getClass() == Employee.class )...</div><div class="line"></div><div class="line"><span class="comment">//newInstance() 创建一个类的实例 如果类没有默认构造器会抛出异常</span></div><div class="line">e.getClass().newInstance();</div><div class="line"></div><div class="line"><span class="comment">//根据类名创建一个对象</span></div><div class="line">Object o = Class.forName(<span class="string">"java.util.Date"</span>).newInstance();</div><div class="line"></div><div class="line"><span class="comment">//按名称创建构造器带参数的对象</span></div><div class="line">Constructor.newInstance( ... );</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>3.使用Class.forName()方法需要抛出一个已检查异常</p>
-<h2 id="5-6-2-利用反射分析类的结构"><a href="#5-6-2-利用反射分析类的结构" class="headerlink" title="5.6.2 利用反射分析类的结构"></a>5.6.2 利用反射分析类的结构</h2><ol>
-<li>类中元素的描述</li>
-</ol>
-<ul>
-<li>java.lang.reflect有三个类 Field 、 Method 和 Constructor 分别用于描述类的域,方法和构造器</li>
-<li>Field 类有一个 getType 方法，用来返回描述域所属类型的 Class 对象</li>
-<li>Method 和 Constructor 类有能够报告参数类型的方法</li>
-<li>Method 类还有一个可以报告返回类型的方法</li>
-<li>以上3个类都有getModifiers的方法，它将返回一个整型数值，用不同的位开关描述 public 和 static 这样的修饰符使用状况</li>
-</ul>
-<ol>
-<li>使用Class对象的方法获取类中元素的描述</li>
-</ol>
-<ul>
-<li>对象的 getFields 、 getMethods 和 getConstructors 方法将分别返回类提供的 pub1ic 域、 方<br>法和构造器数组，其中包括超类的公有成员。</li>
-<li>getDeclareFields 、 getDeclareMethods和 getDeclaredConstructors方法将分别返回类中声明的全部域,方法和构造器</li>
-</ul>
-
-          
+          <h1 id="5-1-类、超类和子类-java的继承层次"><a href="#5-1-类、超类和子类-java的继承层次" class="headerlink" title="5.1  类、超类和子类,java的继承层次"></a>5.1  类、超类和子类,java的继承层次</h1>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/13/java-笔记-2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1079,71 +750,12 @@
 
       
         
-          
-            <h1 id="对象与类"><a href="#对象与类" class="headerlink" title="对象与类"></a>对象与类</h1><h1 id="4-1-类和对象的基本概念"><a href="#4-1-类和对象的基本概念" class="headerlink" title="4.1 类和对象的基本概念"></a>4.1 类和对象的基本概念</h1><h2 id="4-1-1-类-封装-继承"><a href="#4-1-1-类-封装-继承" class="headerlink" title="4.1.1 类/封装/继承"></a>4.1.1 类/封装/继承</h2><p>类是<strong>构造对象的模板</strong>，由类构造对象的过程称<strong>为创建类的实例</strong>。</p>
-<p>封装：也称为<strong>数据隐藏</strong>。从形式上看，封装不过是将<strong>数据和行为</strong>组合在一个包中，并对对象的使用者隐藏了数据的实现方式。优点4.2.3</p>
-<p>实例域：<strong>对象中的数据</strong>。</p>
-<p>方法：<strong>操纵数据的过程。</strong></p>
-<p>对于每个特定的对象都有一组特定的实例域值。这些值的集合就是这个对象的当前状态。</p>
-<p>实现封装的关键在与绝对不能让<strong>类中的方法</strong>直接地<strong>访问其他类的实例域</strong>。程序<strong>仅通过对象的方法与对象数据进行交互</strong>。这是提高重用性和可靠性的关键。</p>
-<p>继承：通过扩展一个类来<strong>建立另外一个新的类</strong>。</p>
-<p>在扩展一个已有的类时，这个扩展后的新类<strong>具有所扩展的类的全部属性和方法</strong>。</p>
-<p>Java中一个源文件只能包含<strong>一个公有类</strong>并且文件名必须与<strong>公有类匹</strong>配。</p>
-<h2 id="4-1-2-对象的特性"><a href="#4-1-2-对象的特性" class="headerlink" title="4.1.2 对象的特性"></a>4.1.2 对象的特性</h2><p>对象的行为：对象的方法。同一个类的所有对象实例，具有相同的方法而获得家族式的相似性。</p>
-<p>对象的状态：当使用方法时对象如何响应。对象的状态描述当前对象的特征信息，状态只能通过调用方法来改变（否则说明封装性遭到了破坏）。</p>
-<p>对象标识：对象的状态并不能完全描述一个对象。每个对象都有一个唯一的身份。</p>
-<h2 id="4-1-3-类之间的关系"><a href="#4-1-3-类之间的关系" class="headerlink" title="4.1.3 类之间的关系"></a>4.1.3 类之间的关系</h2><p>依赖：use-a </p>
-<p>聚合：has-a </p>
-<p>继承：is-a </p>
-<h1 id="4-2-使用一个类"><a href="#4-2-使用一个类" class="headerlink" title="4.2 使用一个类"></a>4.2 使用一个类</h1><h2 id="4-2-1-对象与对象变量"><a href="#4-2-1-对象与对象变量" class="headerlink" title="4.2.1 对象与对象变量"></a>4.2.1 对象与对象变量</h2><ol>
-<li>我们使用constructor创建对象</li>
-<li>对象与对象变量是有区别的,对象变量可以引用对象,但他不是一个对象,刚开始定义时也并没有引用一个对象<br>只有在初始化对象变量后,才能让它引用一个对象,对象变量的值<strong>只是对存储在别处某个对象的引用</strong>。new的返回值<strong>也是一个引用</strong></li>
-</ol>
-<p>3.使用final修饰对象引用,可以让这个对象引用在初始化后,不能够改变,永远指向一个对象.</p>
-<h2 id="4-2-2-更改器方法与访问器方法"><a href="#4-2-2-更改器方法与访问器方法" class="headerlink" title="4.2.2 更改器方法与访问器方法"></a>4.2.2 更改器方法与访问器方法</h2><p>实例域做出修改的方法称为更改器方法(通常前绰为get)<br>访问实例域而不进行修改的方法称为访问器方法(通常前绰为set)</p>
-<h1 id="4-3-定义一个类"><a href="#4-3-定义一个类" class="headerlink" title="4.3 定义一个类"></a>4.3 定义一个类</h1><p>可以将多个类放在多个源文件中,java编译时可以将他们自动地连接到一起.</p>
-<h2 id="4-3-1-构造器"><a href="#4-3-1-构造器" class="headerlink" title="4.3.1 构造器"></a>4.3.1 构造器</h2><p>. 构造器与类同名<br>· 每个类可以有一个以上的构造器<br>·构造器可以有 0 个、 1 个或多个参数<br>·构造器没有返回值<br>· 构造器总是伴随着 new 操作一起调用</p>
-<h2 id="4-3-2-方法"><a href="#4-3-2-方法" class="headerlink" title="4.3.2 方法"></a>4.3.2 方法</h2><p>类中的非静态方法总有两种参数,一个是隐式参数即调用这个方法的对象,一种方法处声明的参数.<br>本类中的方法总可以访问所有当前类对象中的<strong>所有域</strong>.</p>
-<h2 id="4-3-3-封装"><a href="#4-3-3-封装" class="headerlink" title="4.3.3 封装"></a>4.3.3 封装</h2><p>要做到数据封装,要做到以下几点:<br>· 一个私有的数据域;<br>· 一个公有的域访问器方法;<br>· 一个公有的域更改器方法。</p>
-<h2 id="4-3-4-final实例域"><a href="#4-3-4-final实例域" class="headerlink" title="4.3.4 final实例域"></a>4.3.4 final实例域</h2><p>如果实例域定义为 final 构建对象时必须对其就进行初始化,也就是说， 在使用构造器时，这个域的就被设置，并且在后面的操作中，不能够再对它进行修改.</p>
-<h2 id="4-4-静态域与静态方法"><a href="#4-4-静态域与静态方法" class="headerlink" title="4.4 静态域与静态方法"></a>4.4 静态域与静态方法</h2><h2 id="4-4-1-静态域"><a href="#4-4-1-静态域" class="headerlink" title="4.4.1 静态域"></a>4.4.1 静态域</h2><p>将域定义为static，则类中只有一个这样的域，每个对象共享静态域，即使没有对象域也会存在，它属于类不属于对象。使用类名访问。<br>常常在静态域中声明静态变量:<br>静态常量：public static final double PI，就算设置为double,静态常量不会被修改.</p>
-<h2 id="4-4-2-静态方法"><a href="#4-4-2-静态方法" class="headerlink" title="4.4.2 静态方法"></a>4.4.2 静态方法</h2><p>1.通过类使用，不能对象使用。静态方法没有this引用</p>
-<p>2.因为静态方法不能操作对象，所以不能在静态方法中访问实例域。但是可以访问类中的静态域。</p>
-<p>3.当一个方法不需要访问对象状态，其参数都通过显示参数提供或只需访问类中的静态域则可设置为静态方法。</p>
-<p>设计模式中的工厂模式常常用到静态方法.<br>main方法是一种特殊的静态方法,在执行当前类的时候运行,可以看做程序入口.</p>
-<h2 id="4-4-3-函数-方法-参数"><a href="#4-4-3-函数-方法-参数" class="headerlink" title="4.4.3 函数(方法)参数"></a>4.4.3 函数(方法)参数</h2><p>java中的方法参数总是值传递.所以:</p>
-<ul>
-<li>一个方法不能修改一个基本数据类型的参数 ( 即数值型和布尔型) 。</li>
-<li>一个方法可以改变一个对象参数(这里的参数是对象变量)的状态。</li>
-<li>一个方法不能让对象参数(这里的参数是对象变量)引用一个新的对象。</li>
-</ul>
-<h1 id="4-4-对象构造"><a href="#4-4-对象构造" class="headerlink" title="4.4 对象构造"></a>4.4 对象构造</h1><h2 id="4-4-1-重载"><a href="#4-4-1-重载" class="headerlink" title="4.4.1 重载"></a>4.4.1 重载</h2><p>多个方法具有相同的名字、不同的参数。<strong>方法名与参数类型</strong>叫做方法的签名。</p>
-<p><strong>返回类型不属于方法签名</strong>，不能有两个名字相同、参数类型相同却返回不同类型值的方法。</p>
-<h2 id="4-4-2-默认域初始化"><a href="#4-4-2-默认域初始化" class="headerlink" title="4.4.2 默认域初始化"></a>4.4.2 默认域初始化</h2><p>如果在构造器中没有显式的给<strong>域</strong>赋初值，会自动为域赋为默认值。<br>数值为 0,布尔值为 false 、对象引用为 null.</p>
-<p>不同的是,<strong>局部变量</strong>必须明确初始化</p>
-<h2 id="4-4-3-无参数的构造器"><a href="#4-4-3-无参数的构造器" class="headerlink" title="4.4.3 无参数的构造器"></a>4.4.3 无参数的构造器</h2><p>对象由无参数构造器创建时，状态会设置为适当的默认值。</p>
-<p>只有类中<strong>没有提供任何构造器</strong>的时候，系统才会提供一个默认的构造器。也就是说如果提供了一个带参数的构造器而未提供不带参数的，系统不会自动提供不带参数的构造器，在使用不带参数的构造器时会报错。</p>
-<h2 id="4-4-4-显示定义实例域"><a href="#4-4-4-显示定义实例域" class="headerlink" title="4.4.4 显示定义实例域"></a>4.4.4 显示定义实例域</h2><p>可以在定义数据域时就给其一定的初值,尤其是这个数据域在每个构造器中参数都一致时.</p>
-<h2 id="4-4-5-在构造器中引用另一个构造器"><a href="#4-4-5-在构造器中引用另一个构造器" class="headerlink" title="4.4.5 在构造器中引用另一个构造器"></a>4.4.5 在构造器中引用另一个构造器</h2><p>构造器的第一个语句形如 this(…)，这个构造器将<strong>调用同一个类的另一个构造器</strong>，括号内为参数列表，根据参数选择是哪一个构造器。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Employee</span><span class="params">(<span class="keyword">double</span> s)</span></span></div><div class="line">&#123; </div><div class="line">　　<span class="comment">//calls Employee(String,double)...</span></div><div class="line">　　<span class="keyword">this</span>(<span class="string">"Employee "</span>,s);</div><div class="line">　　...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="4-4-6-初始化块"><a href="#4-4-6-初始化块" class="headerlink" title="4.4.6 初始化块"></a>4.4.6 初始化块</h2><p>在一个类的声明中，可以包含多个代码块，只要构造类的对象，这些块就会被执行。如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Class Employee</div><div class="line">&#123;</div><div class="line">　　<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> nextID;</div><div class="line">　　<span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line">　　<span class="keyword">private</span> String name;</div><div class="line">　　&#123;id=nextID&#125; <span class="comment">//初始化块</span></div><div class="line">　　<span class="function"><span class="keyword">public</span> <span class="title">Employee</span><span class="params">()</span>...</span></div><div class="line">　　<span class="keyword">public</span> <span class="title">Employee</span><span class="params">(String s,<span class="keyword">int</span> i)</span>..</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>无论执行哪个构造器，都会先执行 id=nextID代码块</p>
-<h2 id="4-4-7-类的构造器运行的一般步骤"><a href="#4-4-7-类的构造器运行的一般步骤" class="headerlink" title="4.4.7 类的构造器运行的一般步骤"></a>4.4.7 类的构造器运行的一般步骤</h2><p>4.4.7 构造器的处理步骤</p>
-<p>基于上述多个途径下的步骤：</p>
-<p>1：所有数据域被初始化为默认值。</p>
-<p>2：按照在类声明中出现的次序，依次指向所有域初始化语句和初始化块。</p>
-<p>3：如果构造器第一行调用了第二个构造器，则执行第二个构造器主体。</p>
-<p>4：执行这个构造器的主体。</p>
-<h1 id="4-5-包"><a href="#4-5-包" class="headerlink" title="4.5 包"></a>4.5 包</h1><p>包能够尽量保证类名的唯一性又不失灵活性,</p>
-<h2 id="4-5-1-包的导入"><a href="#4-5-1-包的导入" class="headerlink" title="4.5.1 包的导入"></a>4.5.1 包的导入</h2><p>一个类可以访问,所属包中的所有类，以及其他包中的公有类.<br>访问其他包中的公有类有两种方法.</p>
-<ol>
-<li>第一种方式是在每个类名之前添加完整的包名。<br><code>java.util.Date  today =  new  java.util.Date();</code></li>
-</ol>
-<p>2.使用 import 语句。 import 语句是一种引用包含在包中的类的简明描述。 一旦使用了 import 语句，在使用类时，就不必写出包的全名了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line">Date today=<span class="keyword">new</span> Date();</div></pre></td></tr></table></figure></p>
-<p>还可以导入静态方法和静态域<br>如 <code>import static java.lang.System.*;</code> 则可直接使用out.println(…);</p>
-<h2 id="4-5-2-将类放入包中"><a href="#4-5-2-将类放入包中" class="headerlink" title="4.5.2 将类放入包中"></a>4.5.2 将类放入包中</h2><p>在源文件的开头，写上  package  包名 ;</p>
-<h2 id="4-5-3-包的访问权限"><a href="#4-5-3-包的访问权限" class="headerlink" title="4.5.3 包的访问权限"></a>4.5.3 包的访问权限</h2><p>一个类中的数据域变量应当设置为private的,否则同一个包中其他任何类都可以访问并修改它</p>
-
-          
+          <h1 id="对象与类"><a href="#对象与类" class="headerlink" title="对象与类"></a>对象与类</h1>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/13/java-笔记-1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

@@ -84,19 +84,16 @@
 
 
 
-<meta name="description" content="12 泛型程序设计泛型程序设计 ( Generic programming )意味着编写的代码可以被很多不同类型的对象所重用。
-泛型提供了 类型参数( type parameters ),泛型类有一个或多个参数来指示元素类型.ArrayList&amp;lt;String&amp;gt; a= new Arraylist&amp;lt;String&amp;gt;();这种参数既增加了代码的可读性,也使得编译器能够对类型进行检查">
+<meta name="description" content="12 泛型程序设计">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java 笔记 4">
 <meta property="og:url" content="https://ly11tea.github.io/2017/02/13/java-笔记-4/index.html">
 <meta property="og:site_name" content="Luo's blog">
-<meta property="og:description" content="12 泛型程序设计泛型程序设计 ( Generic programming )意味着编写的代码可以被很多不同类型的对象所重用。
-泛型提供了 类型参数( type parameters ),泛型类有一个或多个参数来指示元素类型.ArrayList&amp;lt;String&amp;gt; a= new Arraylist&amp;lt;String&amp;gt;();这种参数既增加了代码的可读性,也使得编译器能够对类型进行检查">
-<meta property="og:updated_time" content="2017-02-13T15:04:38.999Z">
+<meta property="og:description" content="12 泛型程序设计">
+<meta property="og:updated_time" content="2017-02-13T15:08:04.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java 笔记 4">
-<meta name="twitter:description" content="12 泛型程序设计泛型程序设计 ( Generic programming )意味着编写的代码可以被很多不同类型的对象所重用。
-泛型提供了 类型参数( type parameters ),泛型类有一个或多个参数来指示元素类型.ArrayList&amp;lt;String&amp;gt; a= new Arraylist&amp;lt;String&amp;gt;();这种参数既增加了代码的可读性,也使得编译器能够对类型进行检查">
+<meta name="twitter:description" content="12 泛型程序设计">
 
 
 
@@ -339,7 +336,8 @@
       
 
       
-        <h1 id="12-泛型程序设计"><a href="#12-泛型程序设计" class="headerlink" title="12 泛型程序设计"></a>12 泛型程序设计</h1><p>泛型程序设计 ( Generic programming )意味着编写的代码可以被很多不同类型的对象所重用。</p>
+        <h1 id="12-泛型程序设计"><a href="#12-泛型程序设计" class="headerlink" title="12 泛型程序设计"></a>12 泛型程序设计</h1><a id="more"></a> 
+<p>泛型程序设计 ( Generic programming )意味着编写的代码可以被很多不同类型的对象所重用。</p>
 <p>泛型提供了 类型参数( type parameters ),泛型类有一个或多个参数来指示元素类型.<br><code>ArrayList&lt;String&gt; a= new Arraylist&lt;String&gt;();</code><br>这种参数既增加了代码的可读性,也使得编译器能够对类型进行检查,减少错误.</p>
 <h2 id="12-1-定义一个泛型类"><a href="#12-1-定义一个泛型类" class="headerlink" title="12.1 定义一个泛型类"></a>12.1 定义一个泛型类</h2><p>泛型类( generic class) 就是具有一个或多个类型变量的类。<br>1.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Public <span class="class"><span class="keyword">class</span> <span class="title">a</span>&lt;<span class="title">T</span>&gt;</span>&#123;</div><div class="line">    <span class="keyword">private</span> T object1;</div><div class="line">    <span class="keyword">private</span> T object2;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">func1</span><span class="params">(T param1)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> param1;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>上述类就将了一个类型变量 T ，用尖括号(&lt;&gt;)括起来,并放在类名的后面。在类中我们就可以把类型变量当做类型名一样使用.</p>

@@ -6,7 +6,8 @@
     <entry>
       <title><![CDATA[java 笔记 5]]></title>
       <url>https://ly11tea.github.io/2017/02/13/java-%E7%AC%94%E8%AE%B0-5/</url>
-      <content type="html"><![CDATA[<h1 id="流与文件"><a href="#流与文件" class="headerlink" title="流与文件"></a>流与文件</h1><h2 id="1-流的定义与其基本抽象方法"><a href="#1-流的定义与其基本抽象方法" class="headerlink" title="1. 流的定义与其基本抽象方法"></a>1. 流的定义与其基本抽象方法</h2><p>1.java中从其中读入一个字节序列的对象称做输入流,向其中写入一个字节序列的对象称做输出流</p>
+      <content type="html"><![CDATA[<h1 id="流与文件"><a href="#流与文件" class="headerlink" title="流与文件"></a>流与文件</h1><a id="more"></a> 
+<h2 id="1-流的定义与其基本抽象方法"><a href="#1-流的定义与其基本抽象方法" class="headerlink" title="1. 流的定义与其基本抽象方法"></a>1. 流的定义与其基本抽象方法</h2><p>1.java中从其中读入一个字节序列的对象称做输入流,向其中写入一个字节序列的对象称做输出流</p>
 <p>抽象类 InputStream 和 OutputStream 构成了输入/输出类层次结构的基础</p>
 <p>为了便于处理字符数据,抽象类 Reader 和 Writer 中继承出来了一个专门用<br>于处理 Unicode 字符的单独的类层次结构</p>
 <p>2.InputStream 类有一个抽象方法:<br><code>abstract int read()</code><br>读入一个字节，并返回读入的字节，或者在遇到输入源结尾时返回一1.<br>具体的输入流类,必须覆盖这个方法提供不同的功能</p>
@@ -95,7 +96,8 @@
     <entry>
       <title><![CDATA[java 笔记 4]]></title>
       <url>https://ly11tea.github.io/2017/02/13/java-%E7%AC%94%E8%AE%B0-4/</url>
-      <content type="html"><![CDATA[<h1 id="12-泛型程序设计"><a href="#12-泛型程序设计" class="headerlink" title="12 泛型程序设计"></a>12 泛型程序设计</h1><p>泛型程序设计 ( Generic programming )意味着编写的代码可以被很多不同类型的对象所重用。</p>
+      <content type="html"><![CDATA[<h1 id="12-泛型程序设计"><a href="#12-泛型程序设计" class="headerlink" title="12 泛型程序设计"></a>12 泛型程序设计</h1><a id="more"></a> 
+<p>泛型程序设计 ( Generic programming )意味着编写的代码可以被很多不同类型的对象所重用。</p>
 <p>泛型提供了 类型参数( type parameters ),泛型类有一个或多个参数来指示元素类型.<br><code>ArrayList&lt;String&gt; a= new Arraylist&lt;String&gt;();</code><br>这种参数既增加了代码的可读性,也使得编译器能够对类型进行检查,减少错误.</p>
 <h2 id="12-1-定义一个泛型类"><a href="#12-1-定义一个泛型类" class="headerlink" title="12.1 定义一个泛型类"></a>12.1 定义一个泛型类</h2><p>泛型类( generic class) 就是具有一个或多个类型变量的类。<br>1.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Public <span class="class"><span class="keyword">class</span> <span class="title">a</span>&lt;<span class="title">T</span>&gt;</span>&#123;</div><div class="line">    <span class="keyword">private</span> T object1;</div><div class="line">    <span class="keyword">private</span> T object2;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">func1</span><span class="params">(T param1)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> param1;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>上述类就将了一个类型变量 T ，用尖括号(&lt;&gt;)括起来,并放在类名的后面。在类中我们就可以把类型变量当做类型名一样使用.</p>
@@ -146,7 +148,8 @@
     <entry>
       <title><![CDATA[java 笔记 3]]></title>
       <url>https://ly11tea.github.io/2017/02/13/java-%E7%AC%94%E8%AE%B0-3/</url>
-      <content type="html"><![CDATA[<h1 id="6-接口"><a href="#6-接口" class="headerlink" title="6.接口"></a>6.接口</h1><p>接口不是类，而是对类的一组需求描述，这些类要遵从接口描述的统一格式进行定义。一个类可以实现一个或多个接口，并在需要接口的地方，随时使用实现了相应接口的对象。</p>
+      <content type="html"><![CDATA[<h1 id="6-接口"><a href="#6-接口" class="headerlink" title="6.接口"></a>6.接口</h1><a id="more"></a> 
+<p>接口不是类，而是对类的一组需求描述，这些类要遵从接口描述的统一格式进行定义。一个类可以实现一个或多个接口，并在需要接口的地方，随时使用实现了相应接口的对象。</p>
 <h2 id="6-1-接口特性"><a href="#6-1-接口特性" class="headerlink" title="6.1 接口特性"></a>6.1 接口特性</h2><ol>
 <li><p>在接口声明中，方法自动public，可以不写修饰符。在实现接口时必须把方法声明为public,声明在接口中的内部类自动成为static和public类。一个接口中可以包含多个方法，还可以定义常量，自动设置public static final</p>
 </li>
@@ -255,7 +258,8 @@
     <entry>
       <title><![CDATA[java 笔记 2]]></title>
       <url>https://ly11tea.github.io/2017/02/13/java-%E7%AC%94%E8%AE%B0-2/</url>
-      <content type="html"><![CDATA[<h1 id="5-1-类、超类和子类-java的继承层次"><a href="#5-1-类、超类和子类-java的继承层次" class="headerlink" title="5.1  类、超类和子类,java的继承层次"></a>5.1  类、超类和子类,java的继承层次</h1><ol>
+      <content type="html"><![CDATA[<h1 id="5-1-类、超类和子类-java的继承层次"><a href="#5-1-类、超类和子类-java的继承层次" class="headerlink" title="5.1  类、超类和子类,java的继承层次"></a>5.1  类、超类和子类,java的继承层次</h1><a id="more"></a> 
+<ol>
 <li><p>关键字 extends 表明正在构造的新类派生 于一个已存在的类。 已存在的类称为超类( superclass ) 、 基类 ( base class ) 或父类( parent  class) ;<br>新类称为子类 ( subclass) 、派生类( derived class) 或孩子类 ( child class ) ;</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span> <span class="keyword">extends</span> <span class="title">Employee</span></span></div><div class="line">&#123;</div><div class="line">    添加方法和域</div><div class="line">    覆盖：重写一些基类中不适合派生类的方法</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
@@ -371,7 +375,8 @@
     <entry>
       <title><![CDATA[java 笔记 1]]></title>
       <url>https://ly11tea.github.io/2017/02/13/java-%E7%AC%94%E8%AE%B0-1/</url>
-      <content type="html"><![CDATA[<h1 id="对象与类"><a href="#对象与类" class="headerlink" title="对象与类"></a>对象与类</h1><h1 id="4-1-类和对象的基本概念"><a href="#4-1-类和对象的基本概念" class="headerlink" title="4.1 类和对象的基本概念"></a>4.1 类和对象的基本概念</h1><h2 id="4-1-1-类-封装-继承"><a href="#4-1-1-类-封装-继承" class="headerlink" title="4.1.1 类/封装/继承"></a>4.1.1 类/封装/继承</h2><p>类是<strong>构造对象的模板</strong>，由类构造对象的过程称<strong>为创建类的实例</strong>。</p>
+      <content type="html"><![CDATA[<h1 id="对象与类"><a href="#对象与类" class="headerlink" title="对象与类"></a>对象与类</h1><a id="more"></a> 
+<h1 id="4-1-类和对象的基本概念"><a href="#4-1-类和对象的基本概念" class="headerlink" title="4.1 类和对象的基本概念"></a>4.1 类和对象的基本概念</h1><h2 id="4-1-1-类-封装-继承"><a href="#4-1-1-类-封装-继承" class="headerlink" title="4.1.1 类/封装/继承"></a>4.1.1 类/封装/继承</h2><p>类是<strong>构造对象的模板</strong>，由类构造对象的过程称<strong>为创建类的实例</strong>。</p>
 <p>封装：也称为<strong>数据隐藏</strong>。从形式上看，封装不过是将<strong>数据和行为</strong>组合在一个包中，并对对象的使用者隐藏了数据的实现方式。优点4.2.3</p>
 <p>实例域：<strong>对象中的数据</strong>。</p>
 <p>方法：<strong>操纵数据的过程。</strong></p>

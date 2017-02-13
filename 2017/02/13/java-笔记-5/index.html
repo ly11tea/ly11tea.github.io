@@ -84,25 +84,16 @@
 
 
 
-<meta name="description" content="流与文件1. 流的定义与其基本抽象方法1.java中从其中读入一个字节序列的对象称做输入流,向其中写入一个字节序列的对象称做输出流
-抽象类 InputStream 和 OutputStream 构成了输入/输出类层次结构的基础
-为了便于处理字符数据,抽象类 Reader 和 Writer 中继承出来了一个专门用于处理 Unicode 字符的单独的类层次结构
-2.InputStream 类有一个抽象">
+<meta name="description" content="流与文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java 笔记 5">
 <meta property="og:url" content="https://ly11tea.github.io/2017/02/13/java-笔记-5/index.html">
 <meta property="og:site_name" content="Luo's blog">
-<meta property="og:description" content="流与文件1. 流的定义与其基本抽象方法1.java中从其中读入一个字节序列的对象称做输入流,向其中写入一个字节序列的对象称做输出流
-抽象类 InputStream 和 OutputStream 构成了输入/输出类层次结构的基础
-为了便于处理字符数据,抽象类 Reader 和 Writer 中继承出来了一个专门用于处理 Unicode 字符的单独的类层次结构
-2.InputStream 类有一个抽象">
-<meta property="og:updated_time" content="2017-02-13T15:05:25.702Z">
+<meta property="og:description" content="流与文件">
+<meta property="og:updated_time" content="2017-02-13T15:08:10.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java 笔记 5">
-<meta name="twitter:description" content="流与文件1. 流的定义与其基本抽象方法1.java中从其中读入一个字节序列的对象称做输入流,向其中写入一个字节序列的对象称做输出流
-抽象类 InputStream 和 OutputStream 构成了输入/输出类层次结构的基础
-为了便于处理字符数据,抽象类 Reader 和 Writer 中继承出来了一个专门用于处理 Unicode 字符的单独的类层次结构
-2.InputStream 类有一个抽象">
+<meta name="twitter:description" content="流与文件">
 
 
 
@@ -345,7 +336,8 @@
       
 
       
-        <h1 id="流与文件"><a href="#流与文件" class="headerlink" title="流与文件"></a>流与文件</h1><h2 id="1-流的定义与其基本抽象方法"><a href="#1-流的定义与其基本抽象方法" class="headerlink" title="1. 流的定义与其基本抽象方法"></a>1. 流的定义与其基本抽象方法</h2><p>1.java中从其中读入一个字节序列的对象称做输入流,向其中写入一个字节序列的对象称做输出流</p>
+        <h1 id="流与文件"><a href="#流与文件" class="headerlink" title="流与文件"></a>流与文件</h1><a id="more"></a> 
+<h2 id="1-流的定义与其基本抽象方法"><a href="#1-流的定义与其基本抽象方法" class="headerlink" title="1. 流的定义与其基本抽象方法"></a>1. 流的定义与其基本抽象方法</h2><p>1.java中从其中读入一个字节序列的对象称做输入流,向其中写入一个字节序列的对象称做输出流</p>
 <p>抽象类 InputStream 和 OutputStream 构成了输入/输出类层次结构的基础</p>
 <p>为了便于处理字符数据,抽象类 Reader 和 Writer 中继承出来了一个专门用<br>于处理 Unicode 字符的单独的类层次结构</p>
 <p>2.InputStream 类有一个抽象方法:<br><code>abstract int read()</code><br>读入一个字节，并返回读入的字节，或者在遇到输入源结尾时返回一1.<br>具体的输入流类,必须覆盖这个方法提供不同的功能</p>
