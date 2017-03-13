@@ -288,6 +288,108 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/07/使用Flask-WhooshAlchemy/" itemprop="url">
+                  使用Flask-WhooshAlchemy
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-07T23:58:25+08:00" content="2016-12-07">
+              2016-12-07
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/07/使用Flask-WhooshAlchemy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/07/使用Flask-WhooshAlchemy/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>记录使用python插件的一个坑,看这个插件的官方文档,只要求在model.py(定义数据模型的地方)导入模块,在对应表中指定要搜索的栏即可,当时就觉得奇怪,这个模块怎么在后台自动做索引?<br>果然初始化后在后台shell实验时就出现了问题“Query has no attribute ‘whoosh_search” ,google了以后发现这是没有进行初始化,..搜索一番发现插件的github里有关于这个问题标记为bug的issue,但不知道官方文档为何还没有改过来:要在model.py最后加上<br>whooshalchemy.whoosh_index(app, …表名)这样可以做到每次表插入新值的时候都更新一次索引.</p>
+<p>问题还没完,由于blog的结构,app变量是无法在model.py访问到的,直接使用from .. import 也不行,因为只有同一个包内才能相对import,之后使用了绝对import,因为sys.path里面包含项目的根目录,一开始的时候将import语句放在文件开头,发现这样会出现相互import的现象,即定义app实例的文件也import了model.py,后来一想python是动态语言不一定要在开头import,所以将import放到文件末尾,问题解决.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/05/最短路径/" itemprop="url">
                   最短路径
                 </a>
@@ -1334,110 +1436,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/08/符号表的应用/" itemprop="url">
-                  符号表的应用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-08T22:53:15+08:00" content="2016-10-08">
-              2016-10-08
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/08/符号表的应用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/08/符号表的应用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote class="blockquote-center"><p>科学或是工程领域能够将运行效率提升一千亿倍的发明极少一一我们已经在几个例子中看到，符号表做到了，并且这些改进的影响非常深远。<br><em>算法 第四版</em></p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/08/符号表的应用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1483,7 +1481,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
